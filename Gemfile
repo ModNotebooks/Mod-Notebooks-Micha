@@ -5,6 +5,8 @@ gem 'pg'
 gem 'unicorn'
 gem 'redis-rails'
 
+gem 'devise'
+
 gem 'resque', require: 'resque/server'
 gem 'resque-sentry'
 gem 'resque-scheduler', github: 'resque/resque-scheduler', require: 'resque_scheduler'
