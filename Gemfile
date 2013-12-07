@@ -6,11 +6,14 @@ gem 'unicorn'
 gem 'redis-rails'
 
 gem 'devise'
+gem 'devise_invitable'
 
 gem 'resque', require: 'resque/server'
 gem 'resque-sentry'
 gem 'resque-scheduler', github: 'resque/resque-scheduler', require: 'resque_scheduler'
 gem 'resque_mailer'
+
+gem 'strip_attributes'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
