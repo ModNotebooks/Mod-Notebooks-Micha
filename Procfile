@@ -1,1 +1,1 @@
-custom_web: bundle exec puma -t ${PUMA_MIN_THREADS:-8}:${PUMA_MAX_THREADS:-12} -w ${PUMA_WORKERS:-2} -p $PORT -e ${RACK_ENV:-development} -b unix:///tmp/web_server.sock --pidfile /tmp/web_server.pid -d
+custom_web: bin/unicorn_rails -c config/unicorn.c66.rb -E $RACK_ENV -D
