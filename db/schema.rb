@@ -11,11 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131208104535) do
+ActiveRecord::Schema.define(version: 20131208112030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
+
+  create_table "notebook_events", force: true do |t|
+    t.integer  "notebook_id"
+    t.string   "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notebook_events", ["notebook_id"], name: "index_notebook_events_on_notebook_id", using: :btree
 
   create_table "notebooks", force: true do |t|
     t.string   "name"
