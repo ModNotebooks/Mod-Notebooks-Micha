@@ -1,6 +1,16 @@
+# == Schema Information
+#
+# Table name: notebook_events
+#
+#  id          :integer          not null, primary key
+#  notebook_id :integer
+#  state       :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
 class NotebookEvent < ActiveRecord::Base
   belongs_to :notebook
-  attr_accessible :state
 
   validates_presence_of :notebook_id
   validates_inclusion_of :state, in: Notebook::STATES

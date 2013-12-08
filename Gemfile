@@ -37,3 +37,13 @@ group :development do
   gem 'annotate'
   gem 'pry-rails'
 end
+
+group :development, :test do
+  gem 'factory_girl_rails'
+  gem 'rspec-rails', '~> 3.0.0.beta'
+end
+
+group :test do
+  gem 'faker'
+  gem 'database_cleaner'
+end
