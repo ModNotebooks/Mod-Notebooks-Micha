@@ -29,6 +29,7 @@
 #  invitation_limit       :integer
 #  invited_by_id          :integer
 #  invited_by_type        :string(255)
+#  api_key                :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -38,7 +39,6 @@ class User < ActiveRecord::Base
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :timeoutable, :lockable
-
   ##
   # Associations
   ##
@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
   ##
   # Validations
   ##
-  before_create :generate_api_key
+  before_save :ensure_authentication_token
 
   ##
   # Class Methods
@@ -57,14 +57,22 @@ class User < ActiveRecord::Base
   # Instance Methods
   ##
 
-  def reset_api_key!
-    generate_api_key && save!
+  def ensure_authentication_token
+    if authentication_token.blank?
+      self.authentication_token = generate_authentication_token
+    end
   end
 
-  def generate_api_key
-    begin
-      self.api_key = SecureRandom.hex(16)
-    end while self.class.exists?(api_key: api_key)
+  def reset_authentication_token!
+    self.authentication_token = generate_authentication_token && save!
   end
+
+  private
+    def generate_authentication_token
+      loop do
+        token = Devise.friendly_token
+        break token unless self.class.where(authentication_token: token).first
+      end
+    end
 
 end

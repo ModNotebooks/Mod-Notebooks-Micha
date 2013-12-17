@@ -5,8 +5,17 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def authenticate_with_api_key
-    api_key = request.headers["Authorization"] || params[:api_key]
-    sign_in User.find_by_api_key(api_key)
-  end
+    def authenticate_user_from_token!
+      Rails.logger.info "THIS WAS CALLED!"
+      email = params[:email].presence
+      user  = email && User.find_by_email(email)
+
+      token = request.headers["Authorization"] || params[:token]
+      if user && Devise.secure_compare(user.authentication_token, token)
+        Rails.logger.info "Signing in"
+        sign_in user, store: false
+      else
+        render json: { error: "Not Found" }, status: :not_found
+      end
+    end
 end

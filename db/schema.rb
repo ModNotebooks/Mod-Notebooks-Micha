@@ -67,10 +67,10 @@ ActiveRecord::Schema.define(version: 20131217012141) do
     t.integer  "invitation_limit"
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
-    t.string   "api_key"
+    t.string   "authentication_token"
   end
 
-  add_index "users", ["api_key"], name: "index_users_on_api_key", using: :btree
+  add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", using: :btree
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", using: :btree
