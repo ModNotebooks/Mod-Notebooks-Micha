@@ -29,42 +29,28 @@
 #  invitation_limit       :integer
 #  invited_by_id          :integer
 #  invited_by_type        :string(255)
+#  api_key                :string(255)
 #
 
-class User < ActiveRecord::Base
+# spec/models/notebook_spec.rb
+require 'spec_helper'
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :invitable, :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable, :timeoutable, :lockable
+describe User do
 
-  ##
-  # Associations
-  ##
-  has_many :notebooks
-
-  ##
-  # Validations
-  ##
-  before_create :generate_api_key
-
-  ##
-  # Class Methods
-  ##
-
-  ##
-  # Instance Methods
-  ##
-
-  def reset_api_key!
-    generate_api_key && save!
+  context "associations" do
+    it { should have_many(:notebooks) }
   end
 
-  def generate_api_key
-    begin
-      self.api_key = SecureRandom.hex(16)
-    end while self.class.exists?(api_key: api_key)
+  context "validations" do
+
+  end
+
+  context "with a user" do
+    let(:user) { create(:user) }
+
+    it "should have an API key" do
+      user.api_key.should_not be_nil
+    end
   end
 
 end

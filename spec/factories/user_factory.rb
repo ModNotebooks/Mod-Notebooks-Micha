@@ -29,42 +29,17 @@
 #  invitation_limit       :integer
 #  invited_by_id          :integer
 #  invited_by_type        :string(255)
+#  api_key                :string(255)
 #
 
-class User < ActiveRecord::Base
+require 'faker'
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :invitable, :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable, :timeoutable, :lockable
+FactoryGirl.define do
+  factory :user do
+    email Faker::Internet.email
+    password Faker::Internet.password
 
-  ##
-  # Associations
-  ##
-  has_many :notebooks
-
-  ##
-  # Validations
-  ##
-  before_create :generate_api_key
-
-  ##
-  # Class Methods
-  ##
-
-  ##
-  # Instance Methods
-  ##
-
-  def reset_api_key!
-    generate_api_key && save!
+    after(:build) { |user| user.password_confirmation = user.password }
+    after(:create) { |user| user.confirm! }
   end
-
-  def generate_api_key
-    begin
-      self.api_key = SecureRandom.hex(16)
-    end while self.class.exists?(api_key: api_key)
-  end
-
 end
