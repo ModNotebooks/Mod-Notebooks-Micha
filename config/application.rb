@@ -29,5 +29,13 @@ module Mod
       DeviseController.respond_to :json
       DeviseController.protect_from_forgery with: :null_session
     end
+
+    config.middleware.insert_before Warden::Manager, Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', headers: :any, methods: [:get, :put, :patch, :create, :delete]
+      end
+    end
+
   end
 end

@@ -37,7 +37,7 @@ require 'faker'
 FactoryGirl.define do
   factory :user do
     email Faker::Internet.email
-    password Faker::Internet.password
+    password Faker::Lorem.characters(10)
 
     after(:build) { |user| user.password_confirmation = user.password }
     after(:create) { |user| user.confirm! }

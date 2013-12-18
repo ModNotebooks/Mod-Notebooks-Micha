@@ -38,6 +38,12 @@ describe Notebook do
       it { should allow_value("1234").for(:carrier_identifier) }
       it { should validate_uniqueness_of(:carrier_identifier).case_insensitive }
     end
+
+    describe "notebook_identifier" do
+      it { should allow_value("02-01-1234").for(:notebook_identifier) }
+      it { should_not allow_value("0201-1234", "02011234").for(:notebook_identifier) }
+      it { should validate_uniqueness_of(:notebook_identifier).case_insensitive }
+    end
   end
 
   context "with a newly created notebook" do
@@ -45,14 +51,8 @@ describe Notebook do
     subject { notebook }
 
     describe "#current_state" do
-      it "has a default state of :with_user" do
-        notebook.current_state.with_user?.should be
-      end
-    end
-
-    describe "#upload" do
-      it "cannot be uploaded" do
-        notebook.upload.should be_nil
+      it "has a default state of submitted" do
+        notebook.current_state.submitted?.should be
       end
     end
 
@@ -62,10 +62,10 @@ describe Notebook do
       end
     end
 
-    describe "#submit" do
-      it "can be submitted" do
-        notebook.submit
-        expect(notebook.submitted?).to eq(true)
+    describe "#upload" do
+      it "can be uploaded" do
+        notebook.upload.should be
+        expect(notebook.uploaded?).to eq(true)
       end
     end
   end

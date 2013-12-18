@@ -19,8 +19,6 @@ require 'faker'
 FactoryGirl.define do
   factory :notebook do
     name "My Notebook"
-    color Notebook::COLORS.values.sample
-    paper_type Notebook::PAPER_TYPES.values.sample
-    carrier_identifier Faker::Number.number(6)
+    notebook_identifier "#{Notebook::COLORS.keys.sample}-#{Notebook::PAPER_TYPES.keys.sample}-#{Faker::Number.number(6)}"
   end
 end

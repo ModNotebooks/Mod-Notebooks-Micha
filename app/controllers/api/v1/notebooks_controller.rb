@@ -11,12 +11,9 @@ class Api::V1::NotebooksController < Api::BaseController
   end
 
   def create
-    notebook = current_user.notebooks.build
-    parsed = Notebook.parse_notebook_identifier(notebook_create_params.fetch(:notebook_identifier))
-    notebook.attributes = parsed.merge(notebook_create_params)
+    notebook = current_user.notebooks.build(notebook_create_params)
 
     if notebook.save
-      notebook.submit
       respond_with notebook, status: :created
     else
       respond_with notebook, status: :conflict
@@ -39,6 +36,6 @@ class Api::V1::NotebooksController < Api::BaseController
   end
 
   def find_notebook
-    @notebook = current_user.notebooks.find_by_carrier_identifier!(params[:carrier_identifier])
+    @notebook = current_user.notebooks.find_by_id!(params[:id])
   end
 end

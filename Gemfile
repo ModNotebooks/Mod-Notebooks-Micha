@@ -17,6 +17,7 @@ gem 'strip_attributes'
 gem 'active_model_serializers'
 
 gem 'jquery-rails'
+gem 'rack-cors', require: 'rack/cors'
 
 
 group :doc do

@@ -16,8 +16,8 @@
 
 class Notebook < ActiveRecord::Base
 
-  STATES = %w[with_user submitted uploaded processed]
-  delegate :with_user?, :submitted?, :uploaded?, :processed?, to: :current_state
+  STATES = %w[submitted uploaded processed]
+  delegate :submitted?, :uploaded?, :processed?, to: :current_state
 
   COLORS      = { "01" => "red", "02" => "green", "03" => "tan" }
   PAPER_TYPES = { "01" => "blank", "02" => "lined", "03" => "dotgrid" }
@@ -25,19 +25,16 @@ class Notebook < ActiveRecord::Base
   ##
   # Associations
   ##
-  has_many :events, -> { order 'created_at ASC' }, class_name: "NotebookEvent"
   belongs_to :user
+  has_many :events, -> { order 'created_at ASC' }, class_name: "NotebookEvent"
 
   ##
   # Validations
   ##
-
-  # to_s so validations pass
   validates :color,
     presence: true,
     inclusion: { in: COLORS.values }
 
-  # to_s so validations pass
   validates :paper_type,
     presence: true,
     inclusion: { in: PAPER_TYPES.values }
@@ -47,17 +44,19 @@ class Notebook < ActiveRecord::Base
     uniqueness: { case_sensitive: false }
 
   validates :notebook_identifier,
+    format: { with: Patterns::NOTEBOOK_IDENTIFIER_PATTERN },
     presence: true,
     uniqueness: { case_sensitive: false }
+
+  ##
+  # Callbacks
+  ##
+  before_validation :attributes_from_notebook_identifier, on: :create
 
   ##
   # Class Methods
   ##
   class << self
-    def with_user_notebooks
-      join(:events).merge NotebookEvent.with_last_state("processed")
-    end
-
     def submitted_notebooks
       join(:events).merge NotebookEvent.with_last_state("processed")
     end
@@ -70,7 +69,7 @@ class Notebook < ActiveRecord::Base
       join(:events).merge NotebookEvent.with_last_state("processed")
     end
 
-    def parse_notebook_identifier(identifier)
+    def parse_notebook_identifier(identifier = "")
       parts = identifier.split('-')
 
       if parts.count == 3
@@ -89,16 +88,20 @@ class Notebook < ActiveRecord::Base
     (events.last.try(:state) || STATES.first).inquiry
   end
 
-  def submit
-    events.create! state: "submitted" if with_user?
-  end
-
   def upload
     events.create! state: "uploaded" if submitted?
   end
 
   def process
-    events.create! state: "processed" if submitted?
+    events.create! state: "processed" if uploaded?
   end
+
+  private
+    def attributes_from_notebook_identifier
+      parts = self.class.parse_notebook_identifier(self.notebook_identifier || "")
+      self.color              ||= parts[:color]
+      self.paper_type         ||= parts[:paper_type]
+      self.carrier_identifier ||= parts[:carrier_identifier]
+    end
 
 end
