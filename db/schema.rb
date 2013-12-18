@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131217012141) do
+ActiveRecord::Schema.define(version: 20131218000615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,9 +35,11 @@ ActiveRecord::Schema.define(version: 20131217012141) do
     t.hstore   "meta"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "notebook_identifier"
   end
 
   add_index "notebooks", ["carrier_identifier"], name: "index_notebooks_on_carrier_identifier", using: :btree
+  add_index "notebooks", ["notebook_identifier"], name: "index_notebooks_on_notebook_identifier", unique: true, using: :btree
   add_index "notebooks", ["user_id"], name: "index_notebooks_on_user_id", using: :btree
 
   create_table "users", force: true do |t|

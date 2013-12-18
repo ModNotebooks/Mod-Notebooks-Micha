@@ -36,7 +36,7 @@ group :development do
   gem 'jazz_hands'
   gem 'bullet'
   gem 'quiet_assets'
-  gem 'rack-mini-profiler'
+  # gem 'rack-mini-profiler'
   gem 'annotate'
   gem 'pry-rails'
 end

@@ -29,7 +29,7 @@
 #  invitation_limit       :integer
 #  invited_by_id          :integer
 #  invited_by_type        :string(255)
-#  api_key                :string(255)
+#  authentication_token   :string(255)
 #
 
 # spec/models/notebook_spec.rb
@@ -48,8 +48,8 @@ describe User do
   context "with a user" do
     let(:user) { create(:user) }
 
-    it "should have an API key" do
-      user.api_key.should_not be_nil
+    it "should have an authentication token" do
+      user.authentication_token.should_not be_nil
     end
   end
 

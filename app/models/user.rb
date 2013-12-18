@@ -29,7 +29,7 @@
 #  invitation_limit       :integer
 #  invited_by_id          :integer
 #  invited_by_type        :string(255)
-#  api_key                :string(255)
+#  authentication_token   :string(255)
 #
 
 class User < ActiveRecord::Base

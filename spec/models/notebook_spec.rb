@@ -2,15 +2,16 @@
 #
 # Table name: notebooks
 #
-#  id                 :integer          not null, primary key
-#  name               :string(255)
-#  color              :string(255)
-#  paper_type         :string(255)
-#  carrier_identifier :string(255)
-#  user_id            :integer
-#  meta               :hstore
-#  created_at         :datetime
-#  updated_at         :datetime
+#  id                  :integer          not null, primary key
+#  name                :string(255)
+#  color               :string(255)
+#  paper_type          :string(255)
+#  carrier_identifier  :string(255)
+#  user_id             :integer
+#  meta                :hstore
+#  created_at          :datetime
+#  updated_at          :datetime
+#  notebook_identifier :string(255)
 #
 
 # spec/models/notebook_spec.rb
