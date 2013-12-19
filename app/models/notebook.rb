@@ -27,6 +27,8 @@ class Notebook < ActiveRecord::Base
   ##
   belongs_to :user
   has_many :events, -> { order 'created_at ASC' }, class_name: "NotebookEvent"
+  mount_uploader :pdf, NotebookPDFUploader
+  store_accessor :meta, :pdf_secure_token
 
   ##
   # Validations
@@ -48,10 +50,14 @@ class Notebook < ActiveRecord::Base
     presence: true,
     uniqueness: { case_sensitive: false }
 
+  validates :pdf_secure_token,
+    presence: true
+
   ##
   # Callbacks
   ##
   before_validation :attributes_from_notebook_identifier, on: :create
+  before_validation :generate_pdf_secure_token, on: :create
 
   ##
   # Class Methods
@@ -102,6 +108,10 @@ class Notebook < ActiveRecord::Base
       self.color              ||= parts[:color]
       self.paper_type         ||= parts[:paper_type]
       self.carrier_identifier ||= parts[:carrier_identifier]
+    end
+
+    def generate_pdf_secure_token
+      self.pdf_secure_token = SecureRandom.uuid
     end
 
 end

@@ -6,7 +6,7 @@ class CreateNotebooks < ActiveRecord::Migration
       t.string :paper_type
       t.string :carrier_identifier
       t.belongs_to :user
-      t.hstore :meta
+      t.hstore :meta, {}
 
       t.timestamps
     end

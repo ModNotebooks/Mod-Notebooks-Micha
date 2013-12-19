@@ -19,6 +19,8 @@ gem 'active_model_serializers'
 gem 'jquery-rails'
 gem 'rack-cors', require: 'rack/cors'
 
+gem 'carrierwave'
+gem 'fog'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
