@@ -21,3 +21,4 @@
 Procfile.dev
 
 .env
+dump.rdb

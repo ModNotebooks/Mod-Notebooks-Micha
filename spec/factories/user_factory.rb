@@ -38,8 +38,8 @@ FactoryGirl.define do
   factory :user do
     email Faker::Internet.email
     password Faker::Lorem.characters(10)
+    password_confirmation { |u| u.password }
 
-    after(:build) { |user| user.password_confirmation = user.password }
     after(:create) { |user| user.confirm! }
   end
 end
