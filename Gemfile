@@ -23,6 +23,7 @@ gem 'carrierwave'
 gem 'fog'
 gem 'grim'
 gem 'mini_magick'
+gem 'doorkeeper', '~> 0.7.0'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

@@ -1,5 +1,4 @@
 class Api::V1::NotebooksController < Api::BaseController
-  before_filter :authenticate_user_from_token!
   before_filter :find_notebook, only: [:show, :update]
 
   def index

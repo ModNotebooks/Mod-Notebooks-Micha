@@ -13,6 +13,7 @@
 #  updated_at          :datetime
 #  notebook_identifier :string(255)
 #  pdf                 :string(255)
+#  pages_count         :integer          default(0)
 #
 
 class Notebook < ActiveRecord::Base

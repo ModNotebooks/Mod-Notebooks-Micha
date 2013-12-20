@@ -1,5 +1,4 @@
 class Api::V1::PagesController < Api::BaseController
-  before_filter :authenticate_user_from_token!
   before_filter :find_notebook, only: [:index]
   before_filter :find_page, only: [:show]
 

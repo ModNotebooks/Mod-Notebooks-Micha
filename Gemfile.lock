@@ -85,6 +85,9 @@ GEM
       devise (>= 3.1.0)
     diff-lcs (1.2.5)
     diffy (3.0.1)
+    doorkeeper (0.7.4)
+      jquery-rails (>= 2.0.2)
+      railties (>= 3.1)
     erubis (2.7.0)
     excon (0.31.0)
     execjs (2.0.2)
@@ -324,6 +327,7 @@ DEPENDENCIES
   database_cleaner
   devise
   devise_invitable
+  doorkeeper (~> 0.7.0)
   factory_girl_rails
   faker
   fog
