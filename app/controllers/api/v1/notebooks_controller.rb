@@ -26,16 +26,11 @@ class Api::V1::NotebooksController < Api::BaseController
   end
 
   private
+    def notebook_update_params
+      params.require(:notebook).permit(:name)
+    end
 
-  def notebook_update_params
-    params.require(:notebook).permit(:name)
-  end
-
-  def notebook_create_params
-    params.require(:notebook).permit(:notebook_identifier, :name)
-  end
-
-  def find_notebook
-    @notebook = current_user.notebooks.find_by_id!(params[:id])
-  end
+    def notebook_create_params
+      params.require(:notebook).permit(:notebook_identifier, :name)
+    end
 end

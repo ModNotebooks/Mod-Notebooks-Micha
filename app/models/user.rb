@@ -43,6 +43,7 @@ class User < ActiveRecord::Base
   # Associations
   ##
   has_many :notebooks
+  has_many :pages, through: :notebooks
 
   ##
   # Validations

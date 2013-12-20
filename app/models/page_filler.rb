@@ -22,7 +22,7 @@ class PageFiller
     @pdf ||= Grim.reap(file.path)
   end
 
-  def fill_pages
+  def fill_pages(refill=false)
     pages = []
 
     FileUtils.mkdir_p(tmp_dir)
@@ -34,7 +34,7 @@ class PageFiller
       pages << page_model
 
       begin
-        if !page_model.image? && page.save(filepath)
+        if (!page_model.image? || refill) && page.save(filepath)
           page_model.image.store!(File.open(filepath))
           File.delete(filepath)
         end

@@ -17,7 +17,11 @@ Mod::Application.routes.draw do
 
   constraints subdomain: 'api', defaults: { format: :json } do
     scope module: 'api/v1', constraints: ApiConstraints.new(version: 1, default: :true) do
-      resources :notebooks, only: [:index, :create, :show, :update]
+      resources :notebooks, only: [:index, :create, :show, :update] do
+        resources :pages, only: [:index]
+      end
+
+      resources :pages, only: [:show]
     end
   end
 

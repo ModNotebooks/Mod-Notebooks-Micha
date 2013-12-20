@@ -22,6 +22,7 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'carrierwave'
 gem 'fog'
 gem 'grim'
+gem 'mini_magick'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

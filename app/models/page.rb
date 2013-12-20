@@ -19,7 +19,7 @@ class Page < ActiveRecord::Base
   # Relationships
   #-----------------------------------------------------------------------------
 
-  belongs_to :notebook
+  belongs_to :notebook, counter_cache: true
   has_one :user, through: :notebook
 
   #-----------------------------------------------------------------------------
