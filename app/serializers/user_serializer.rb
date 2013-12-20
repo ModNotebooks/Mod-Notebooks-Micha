@@ -1,4 +1,7 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :email, :authentication_token, :confirmed_at,
-    :last_sign_in_at, :meta
+  attributes :id, :email, :notebooks_count
+
+  def notebooks_count
+    object.notebooks.count
+  end
 end
