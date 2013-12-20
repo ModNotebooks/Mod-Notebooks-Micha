@@ -108,6 +108,7 @@ GEM
       nokogiri (~> 1.5)
       ruby-hmac
     formatador (0.2.4)
+    grim (0.3.0)
     grit (2.5.0)
       diff-lcs (~> 1.1)
       mime-types (~> 1.15)
@@ -323,6 +324,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   fog
+  grim
   jazz_hands
   jquery-rails
   pg

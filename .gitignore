@@ -19,6 +19,6 @@
 .DS_Store
 
 Procfile.dev
-
+tmp
 .env
 dump.rdb

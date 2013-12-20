@@ -8,10 +8,11 @@
 #  paper_type          :string(255)
 #  carrier_identifier  :string(255)
 #  user_id             :integer
-#  meta                :hstore
+#  meta                :hstore           default({}), not null
 #  created_at          :datetime
 #  updated_at          :datetime
 #  notebook_identifier :string(255)
+#  pdf                 :string(255)
 #
 
 class Notebook < ActiveRecord::Base
@@ -22,17 +23,20 @@ class Notebook < ActiveRecord::Base
   COLORS      = { "01" => "red", "02" => "green", "03" => "tan" }
   PAPER_TYPES = { "01" => "blank", "02" => "lined", "03" => "dotgrid" }
 
-  ##
-  # Associations
-  ##
-  belongs_to :user
-  has_many :events, -> { order 'created_at ASC' }, class_name: "NotebookEvent"
-  mount_uploader :pdf, NotebookPDFUploader
   store_accessor :meta, :pdf_secure_token
 
-  ##
+  #-----------------------------------------------------------------------------
+  # Relationships
+  #-----------------------------------------------------------------------------
+
+  belongs_to :user
+  has_many :events, -> { order 'created_at ASC' }, class_name: "NotebookEvent"
+  has_many :pages, -> { order 'number ASC' }
+
+  #-----------------------------------------------------------------------------
   # Validations
-  ##
+  #-----------------------------------------------------------------------------
+
   validates :color,
     presence: true,
     inclusion: { in: COLORS.values }
@@ -50,18 +54,23 @@ class Notebook < ActiveRecord::Base
     presence: true,
     uniqueness: { case_sensitive: false }
 
-  validates :pdf_secure_token,
-    presence: true
+  #-----------------------------------------------------------------------------
+  # Uploaders
+  #-----------------------------------------------------------------------------
 
-  ##
+  mount_uploader :pdf, NotebookPDFUploader
+
+  #-----------------------------------------------------------------------------
   # Callbacks
-  ##
+  #-----------------------------------------------------------------------------
+
   before_validation :attributes_from_notebook_identifier, on: :create
   before_validation :generate_pdf_secure_token, on: :create
 
-  ##
+  #-----------------------------------------------------------------------------
   # Class Methods
-  ##
+  #-----------------------------------------------------------------------------
+
   class << self
     def submitted_notebooks
       join(:events).merge NotebookEvent.with_last_state("processed")
@@ -79,16 +88,16 @@ class Notebook < ActiveRecord::Base
       parts = identifier.split('-')
 
       if parts.count == 3
-        { color: COLORS[parts[0]], paper_type: PAPER_TYPES[parts[1]], carrier_identifier: parts[2] }
+        { color: parts[0], paper_type: parts[1], carrier_identifier: parts[2] }
       else
         {}
       end
     end
   end
 
-  ##
+  #-----------------------------------------------------------------------------
   # Instance Methods
-  ##
+  #-----------------------------------------------------------------------------
 
   def current_state
     (events.last.try(:state) || STATES.first).inquiry
@@ -105,13 +114,13 @@ class Notebook < ActiveRecord::Base
   private
     def attributes_from_notebook_identifier
       parts = self.class.parse_notebook_identifier(self.notebook_identifier || "")
-      self.color              ||= parts[:color]
-      self.paper_type         ||= parts[:paper_type]
+      self.color              ||= COLORS[parts[:color]]
+      self.paper_type         ||= PAPER_TYPES[parts[:paper_type]]
       self.carrier_identifier ||= parts[:carrier_identifier]
     end
 
-    def generate_pdf_secure_token
-      self.pdf_secure_token = SecureRandom.uuid
+    def mark_as_uploaded
+      self.upload
     end
 
 end

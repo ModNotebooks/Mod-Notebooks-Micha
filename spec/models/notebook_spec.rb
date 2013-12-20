@@ -8,10 +8,11 @@
 #  paper_type          :string(255)
 #  carrier_identifier  :string(255)
 #  user_id             :integer
-#  meta                :hstore
+#  meta                :hstore           default({}), not null
 #  created_at          :datetime
 #  updated_at          :datetime
 #  notebook_identifier :string(255)
+#  pdf                 :string(255)
 #
 
 # spec/models/notebook_spec.rb
@@ -26,23 +27,31 @@ describe Notebook do
   context "validations" do
     describe "color" do
       it { should allow_value(*Notebook::COLORS.values).for(:color) }
+      it { should validate_presence_of(:color) }
       it { should_not allow_value("100", "99", "xy", "abc", "").for(:color) }
     end
 
     describe "paper_type" do
       it { should allow_value(*Notebook::PAPER_TYPES.values).for(:paper_type) }
+      it { should validate_presence_of(:paper_type) }
       it { should_not allow_value("100", "99", "xy", "abc", "").for(:paper_type) }
     end
 
     describe "carrier_identifier" do
       it { should allow_value("1234").for(:carrier_identifier) }
+      it { should validate_presence_of(:carrier_identifier) }
       it { should validate_uniqueness_of(:carrier_identifier).case_insensitive }
     end
 
     describe "notebook_identifier" do
       it { should allow_value("02-01-1234").for(:notebook_identifier) }
+      it { should validate_presence_of(:notebook_identifier) }
       it { should_not allow_value("0201-1234", "02011234").for(:notebook_identifier) }
       it { should validate_uniqueness_of(:notebook_identifier).case_insensitive }
+    end
+
+    describe "pdf_secure_token" do
+      it { should_not allow_value("").for(:pdf_secure_token) }
     end
   end
 

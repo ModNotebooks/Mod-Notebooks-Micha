@@ -8,10 +8,11 @@
 #  paper_type          :string(255)
 #  carrier_identifier  :string(255)
 #  user_id             :integer
-#  meta                :hstore
+#  meta                :hstore           default({}), not null
 #  created_at          :datetime
 #  updated_at          :datetime
 #  notebook_identifier :string(255)
+#  pdf                 :string(255)
 #
 
 require 'faker'

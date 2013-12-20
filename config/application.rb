@@ -27,7 +27,7 @@ module Mod
 
     config.to_prepare do
       DeviseController.respond_to :json
-      DeviseController.protect_from_forgery with: :null_session
+      # DeviseController.protect_from_forgery with: :null_session
     end
 
     config.middleware.insert_before Warden::Manager, Rack::Cors do
