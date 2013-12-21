@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
   ##
   # Associations
   ##
-  has_many :notebooks
+  has_many :notebooks, dependent: :nullify
   has_many :pages, through: :notebooks
 
   ##

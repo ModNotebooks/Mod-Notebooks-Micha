@@ -24,6 +24,7 @@ gem 'fog'
 gem 'grim'
 gem 'mini_magick'
 gem 'doorkeeper', '~> 0.7.0'
+gem 'paranoia', '~> 2.0'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

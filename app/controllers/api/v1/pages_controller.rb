@@ -6,7 +6,11 @@ class Api::V1::PagesController < Api::BaseController
   doorkeeper_for :all, scopes: ['admin'], if: :not_for_me
 
   def index
-    respond_with @notebook.pages
+    if requester.admin?
+      respond_with @notebook.pages.with_deleted
+    else
+      respond_with @notebook.pages
+    end
   end
 
   def show
@@ -16,7 +20,11 @@ class Api::V1::PagesController < Api::BaseController
   private
 
     def find_page
-      @page = @notebook.pages.find_by_id!(params[:id])
+      if requester.admin?
+        @page = @notebook.pages.with_deleted.find_by_id!(params[:id])
+      else
+        @page = @notebook.pages.find_by_id!(params[:id])
+      end
     end
 
 end

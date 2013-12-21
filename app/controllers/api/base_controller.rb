@@ -13,7 +13,7 @@ class Api::BaseController < ApplicationController
       if @user
         @notebook = @user.notebooks.find_by_id!(params[:notebook_id] || params[:id])
       else
-        @notebook = Notebook.find_by_id!(params[:notebook_id] || params[:id])
+        @notebook = Notebook.with_deleted.find_by_id!(params[:notebook_id] || params[:id])
       end
     end
 

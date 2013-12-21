@@ -17,6 +17,7 @@
 #
 
 class Notebook < ActiveRecord::Base
+  acts_as_paranoid
 
   STATES = %w[submitted uploaded processed]
   delegate :submitted?, :uploaded?, :processed?, to: :current_state
@@ -31,8 +32,8 @@ class Notebook < ActiveRecord::Base
   #-----------------------------------------------------------------------------
 
   belongs_to :user
-  has_many :events, -> { order 'created_at ASC' }, class_name: "NotebookEvent"
-  has_many :pages, -> { order 'number ASC' }
+  has_many :events, -> { order 'created_at ASC' }, class_name: "NotebookEvent", dependent: :destroy
+  has_many :pages, -> { order 'number ASC' }, dependent: :destroy
 
   #-----------------------------------------------------------------------------
   # Validations

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131220234359) do
+ActiveRecord::Schema.define(version: 20131221105133) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20131220234359) do
     t.string   "state"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "deleted_at"
   end
 
   add_index "notebook_events", ["notebook_id"], name: "index_notebook_events_on_notebook_id", using: :btree
@@ -38,6 +39,7 @@ ActiveRecord::Schema.define(version: 20131220234359) do
     t.string   "notebook_identifier"
     t.string   "pdf"
     t.integer  "pages_count",         default: 0
+    t.datetime "deleted_at"
   end
 
   add_index "notebooks", ["carrier_identifier"], name: "index_notebooks_on_carrier_identifier", using: :btree
@@ -90,6 +92,7 @@ ActiveRecord::Schema.define(version: 20131220234359) do
     t.integer  "notebook_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "deleted_at"
   end
 
   add_index "pages", ["notebook_id"], name: "index_pages_on_notebook_id", using: :btree

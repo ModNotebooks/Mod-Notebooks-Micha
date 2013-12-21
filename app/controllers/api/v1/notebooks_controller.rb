@@ -9,7 +9,7 @@ class Api::V1::NotebooksController < Api::BaseController
     if @user
       respond_with @user.notebooks
     else
-      respond_with Notebook.all
+      respond_with Notebook.with_deleted.all
     end
   end
 

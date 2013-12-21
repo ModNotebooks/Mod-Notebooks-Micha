@@ -12,6 +12,7 @@
 #
 
 class Page < ActiveRecord::Base
+  acts_as_paranoid
 
   store_accessor :meta, :image_secure_token
 

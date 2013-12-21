@@ -10,6 +10,8 @@
 #
 
 class NotebookEvent < ActiveRecord::Base
+  acts_as_paranoid
+
   belongs_to :notebook
 
   validates_presence_of :notebook_id
