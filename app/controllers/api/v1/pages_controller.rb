@@ -2,6 +2,9 @@ class Api::V1::PagesController < Api::BaseController
   before_filter :find_notebook, only: [:index]
   before_filter :find_page, only: [:show]
 
+  doorkeeper_for :all, scopes: ['public'], if: :for_me
+  doorkeeper_for :all, scopes: ['admin'], if: :not_for_me
+
   def index
     respond_with @notebook.pages
   end
@@ -13,7 +16,7 @@ class Api::V1::PagesController < Api::BaseController
   private
 
     def find_page
-      @page = current_user.pages.find_by_id!(params[:id])
+      @page = @notebook.pages.find_by_id!(params[:id])
     end
 
 end

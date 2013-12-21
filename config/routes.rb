@@ -14,7 +14,7 @@ Mod::Application.routes.draw do
 
   end
 
-  constraints subdomain: 'api', defaults: { format: :json } do
+  constraints subdomain: 'api', defaults: { format: 'json' } do
 
     use_doorkeeper do
       # The only thing allowed through the API oauth wise is requesting access tokens
@@ -22,13 +22,31 @@ Mod::Application.routes.draw do
     end
 
     scope module: 'api/v1', constraints: ApiConstraints.new(version: 1, default: :true) do
-      resources :notebooks, only: [:index, :create, :show, :update] do
-        resources :pages, only: [:index]
+
+      def user_resources
+        resources :notebooks, only: [:index, :create, :show, :update] do
+          resources :pages, only: [:index, :show]
+        end
       end
 
-      resources :pages, only: [:show]
-      resources :users, only: [:show, :update, :create, :destroy]
+      resources :notebooks, only: [:index, :create, :show, :update] do
+        resources :pages, only: [:index, :show]
+      end
+
+      resources :users, only: [:show, :update, :create, :destroy] do
+        user_resources
+      end
+
+      scope '/:user_id', constraints: { user_id: 'me' }, as: 'me' do
+        user_resources
+        get    '/', to: 'users#show'
+        put    '/', to: 'users#update'
+        patch  '/', to: 'users#update'
+        delete '/', to: 'users#destroy'
+      end
+
     end
+
   end
 
 end

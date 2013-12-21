@@ -1,6 +1,9 @@
 class Api::V1::UsersController < Api::BaseController
   before_filter :find_user, only: [ :update, :delete, :show ]
 
+  doorkeeper_for :show, :update, :destroy, scopes: ['public'], if: :for_me
+  doorkeeper_for :show, :update, :destroy, scopes: ['admin'], if: :not_for_me
+
   def create
     user = User.new(create_params)
 
@@ -16,7 +19,7 @@ class Api::V1::UsersController < Api::BaseController
   end
 
   def update
-    if @user.update(update_params)
+    if @user.update_without_password(update_params)
       head :no_content
     else
       respond_with @user
@@ -29,10 +32,6 @@ class Api::V1::UsersController < Api::BaseController
   end
 
   private
-
-    def find_user
-      @user = User.find!(params[:id])
-    end
 
     def create_params
       params.require(:user).permit(:email, :password, :password_confirmation)

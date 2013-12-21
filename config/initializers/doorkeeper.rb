@@ -5,23 +5,25 @@ Doorkeeper.configure do
 
   # This block will be called to check whether the resource owner is authenticated or not.
   resource_owner_authenticator do
-    current_user || warden.authenticate!(:scope => :user)
+    current_user || warden.authenticate!(scope: :user)
     # Put your resource owner authentication logic here.
     # Example implementation:
     #   User.find_by_id(session[:user_id]) || redirect_to(new_user_session_url)
   end
 
   resource_owner_from_credentials do |routes|
-    u = User.find_for_database_authentication(:email => params[:username])
-    u if u && u.valid_password?(params[:password])
+    user = User.find_for_database_authentication(email: params[:username])
+    user if user && user.valid_password?(params[:password])
   end
 
   # If you want to restrict access to the web interface for adding oauth authorized applications, you need to declare the block below.
   admin_authenticator do
-    # Put your admin authentication logic here.
-    # Example implementation:
-    # Admin.find_by_id(session[:admin_id]) || redirect_to(new_admin_session_url)
-    nil
+    if current_user.try(:admin?)
+      current_user
+    else
+      user = warden.authenticate!(scope: :user)
+      user if user.try(:admin?)
+    end
   end
 
   # Authorization Code expiration time (default 10 minutes).
@@ -42,8 +44,8 @@ Doorkeeper.configure do
 
   # Define access token scopes for your provider
   # For more information go to https://github.com/applicake/doorkeeper/wiki/Using-Scopes
-  # default_scopes  :public
-  # optional_scopes :write, :update
+  default_scopes  :public
+  optional_scopes :admin
 
   # Change the way client credentials are retrieved from the request object.
   # By default it retrieves first from the `HTTP_AUTHORIZATION` header, then
@@ -68,6 +70,6 @@ Doorkeeper.configure do
   # so that the user skips the authorization step.
   # For example if dealing with trusted a application.
   skip_authorization do |resource_owner, client|
-    client.uid == '3bb761a843711dad62fea243a4674843310f474fc8a757c714992cdd0f39d681'
+    # resource_owner.admin?
   end
 end

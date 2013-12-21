@@ -1,8 +1,15 @@
 class Api::V1::NotebooksController < Api::BaseController
   before_filter :find_notebook, only: [:show, :update]
 
+  doorkeeper_for :all, scopes: ['public'], if: :for_me
+  doorkeeper_for :all, scopes: ['admin'], if: :not_for_me
+
   def index
-    respond_with current_user.notebooks
+    if @user
+      respond_with @user.notebooks
+    else
+      respond_with Notebook.all
+    end
   end
 
   def show
@@ -10,7 +17,7 @@ class Api::V1::NotebooksController < Api::BaseController
   end
 
   def create
-    notebook = current_user.notebooks.build(notebook_create_params)
+    notebook = @user.notebooks.build(notebook_create_params)
 
     if notebook.save
       respond_with notebook, status: :created
