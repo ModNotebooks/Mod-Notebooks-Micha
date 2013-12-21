@@ -27,6 +27,10 @@ class Api::BaseController < ApplicationController
       end
     end
 
+    def requester
+      @requester ||= User.find_by_id!(doorkeeper_token.resource_owner_id) if doorkeeper_token
+    end
+
     def for_me
       request.params[:user_id] == "me"
     end

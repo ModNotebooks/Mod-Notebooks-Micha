@@ -65,8 +65,7 @@ class Notebook < ActiveRecord::Base
   # Callbacks
   #-----------------------------------------------------------------------------
 
-  before_validation :attributes_from_notebook_identifier, on: :create
-  before_validation :generate_pdf_secure_token, on: :create
+  before_validation :attributes_from_notebook_identifier, if: :notebook_identifier_changed?
 
   #-----------------------------------------------------------------------------
   # Class Methods
@@ -115,13 +114,8 @@ class Notebook < ActiveRecord::Base
   private
     def attributes_from_notebook_identifier
       parts = self.class.parse_notebook_identifier(self.notebook_identifier || "")
-      self.color              ||= COLORS[parts[:color]]
-      self.paper_type         ||= PAPER_TYPES[parts[:paper_type]]
-      self.carrier_identifier ||= parts[:carrier_identifier]
+      self.color              = COLORS[parts[:color]]
+      self.paper_type         = PAPER_TYPES[parts[:paper_type]]
+      self.carrier_identifier = parts[:carrier_identifier]
     end
-
-    def mark_as_uploaded
-      self.upload
-    end
-
 end

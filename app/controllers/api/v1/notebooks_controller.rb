@@ -1,8 +1,9 @@
 class Api::V1::NotebooksController < Api::BaseController
   before_filter :find_notebook, only: [:show, :update]
 
-  doorkeeper_for :all, scopes: ['public'], if: :for_me
-  doorkeeper_for :all, scopes: ['admin'], if: :not_for_me
+  doorkeeper_for :upload, :process, scopes: ['admin'] # Never Public
+  doorkeeper_for :index, :show, :create, :update, scopes: ['public'], if: :for_me
+  doorkeeper_for :index, :show, :create, :update, scopes: ['admin'], if: :not_for_me
 
   def index
     if @user
@@ -17,7 +18,7 @@ class Api::V1::NotebooksController < Api::BaseController
   end
 
   def create
-    notebook = @user.notebooks.build(notebook_create_params)
+    notebook = @user.notebooks.build(create_params)
 
     if notebook.save
       respond_with notebook, status: :created
@@ -27,16 +28,22 @@ class Api::V1::NotebooksController < Api::BaseController
   end
 
   def update
-    @notebook.update(notebook_update_params)
+    @notebook.update(update_params)
     respond_with @notebook
   end
 
   private
-    def notebook_update_params
-      params.require(:notebook).permit(:name)
+    def update_params
+      p = params.require(:notebook)
+
+      if requester.try?(:admin)
+        p.permit(:name, :notebook_identifier)
+      else
+        p.permit(:name)
+      end
     end
 
-    def notebook_create_params
+    def create_params
       params.require(:notebook).permit(:notebook_identifier, :name)
     end
 end
