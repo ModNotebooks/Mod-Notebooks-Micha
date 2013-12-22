@@ -30,6 +30,9 @@ Mod::Application.routes.draw do
       end
 
       resources :notebooks, only: [:index, :create, :show, :update] do
+        collection do
+          post 'upload'
+        end
         resources :pages, only: [:index, :show]
       end
 

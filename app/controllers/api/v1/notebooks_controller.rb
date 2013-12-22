@@ -17,13 +17,25 @@ class Api::V1::NotebooksController < Api::BaseController
     respond_with @notebook
   end
 
+  def upload
+    attributes = { notebook_identifier: upload_params.fetch(:notebook_identifier) }
+    notebook = Notebook.find_or_create_by(attributes)
+
+    if notebook.update(upload_params)
+      notebook.upload
+      head :no_content
+    else
+      head :unprocessable_entity
+    end
+  end
+
   def create
     notebook = @user.notebooks.build(create_params)
 
     if notebook.save
-      respond_with notebook, status: :created
+      respond_with :created
     else
-      respond_with notebook, status: :conflict
+      respond_with notebook, status: :unprocessable_entity
     end
   end
 
@@ -41,6 +53,10 @@ class Api::V1::NotebooksController < Api::BaseController
       else
         p.permit(:name)
       end
+    end
+
+    def upload_params
+      params.require(:notebook).permit(:notebook_identifier, :name, :pdf)
     end
 
     def create_params
