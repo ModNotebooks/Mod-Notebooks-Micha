@@ -17,6 +17,9 @@
 #
 
 class Notebook < ActiveRecord::Base
+  # Resque needs a queue
+  @queue = :default
+
   acts_as_paranoid
 
   STATES = %w[submitted uploaded processed]
@@ -74,15 +77,15 @@ class Notebook < ActiveRecord::Base
 
   class << self
     def submitted_notebooks
-      join(:events).merge NotebookEvent.with_last_state("processed")
+      join(:events).where state_query("submitted")
     end
 
     def uploaded_notebooks
-      join(:events).merge NotebookEvent.with_last_state("processed")
+      joins(:events).where state_query('uploaded')
     end
 
     def processed_notebooks
-      join(:events).merge NotebookEvent.with_last_state("processed")
+      joins(:events).where state_query('processed')
     end
 
     def parse_notebook_identifier(identifier = "")
@@ -94,6 +97,19 @@ class Notebook < ActiveRecord::Base
         {}
       end
     end
+
+    # Resque async helper
+    # https://github.com/resque/resque/blob/1-x-stable/examples/async_helper.rb
+    def perform(id, method, *args)
+      find(id).send(method, *args)
+    end
+
+    private
+      def state_query(name = "")
+        query = <<-SQL
+          notebook_events.id IN (SELECT MAX(id) FROM notebook_events GROUP BY notebook_id) AND state = '#{name}'
+        SQL
+      end
   end
 
   #-----------------------------------------------------------------------------
@@ -110,6 +126,19 @@ class Notebook < ActiveRecord::Base
 
   def process
     events.create! state: "processed" if uploaded?
+  end
+
+  def process!(reprocess=false)
+    PageFiller.new(self).fill_pages(reprocess) do |pages|
+      process
+      pages
+    end
+  end
+
+  # Resque async helper
+  # https://github.com/resque/resque/blob/1-x-stable/examples/async_helper.rb
+  def async(method, *args)
+    Resque.enqueue(Notebook, id, method, *args)
   end
 
   private

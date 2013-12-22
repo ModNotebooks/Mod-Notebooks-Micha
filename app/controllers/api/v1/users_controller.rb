@@ -10,7 +10,7 @@ class Api::V1::UsersController < Api::BaseController
     if user.save
       respond_with user, status: :created
     else
-      respond_with user, status :unprocessable_entity
+      respond_with user, status: :unprocessable_entity
     end
   end
 
@@ -22,7 +22,7 @@ class Api::V1::UsersController < Api::BaseController
     if @user.update_without_password(update_params)
       head :no_content
     else
-      respond_with @user, status :unprocessable_entity
+      respond_with @user, status: :unprocessable_entity
     end
   end
 

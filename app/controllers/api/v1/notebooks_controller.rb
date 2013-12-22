@@ -33,7 +33,7 @@ class Api::V1::NotebooksController < Api::BaseController
     notebook = @user.notebooks.build(create_params)
 
     if notebook.save
-      respond_with :created
+      head :created
     else
       respond_with notebook, status: :unprocessable_entity
     end

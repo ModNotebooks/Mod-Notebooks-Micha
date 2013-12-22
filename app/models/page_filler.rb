@@ -3,7 +3,7 @@ class PageFiller
   attr_reader :notebook
 
   def initialize(notebook)
-    unless notebook.uploaded? && notebook.pdf?
+    unless notebook.pdf?
       raise ArgumentError, 'Notebook is not uploaded or does not have a PDF'
     end
 
@@ -27,6 +27,10 @@ class PageFiller
 
     FileUtils.mkdir_p(tmp_dir)
 
+    # Delete pages that already exsist that are higher then the page number
+    # of the current PDF
+    notebook.pages.where('number > ?', pdf.count + 1).map(&:destroy!)
+
     pdf.each do |page|
       page_model = notebook.pages.find_or_create_by(number: page.number)
       filepath = "#{tmp_dir}/#{notebook.id}-p#{page.number}.png"
@@ -43,7 +47,7 @@ class PageFiller
       end
     end
 
-    pages
+    yield pages
   end
 
   private

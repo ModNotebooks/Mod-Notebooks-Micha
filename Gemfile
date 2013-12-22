@@ -9,7 +9,10 @@ gem 'devise'
 gem 'devise_invitable'
 
 gem 'resque', require: 'resque/server'
+gem 'resque-loner'
+gem 'resque-queue-priority'
 gem 'resque-sentry'
+gem 'resque-timeout'
 gem 'resque-scheduler', github: 'resque/resque-scheduler', require: 'resque_scheduler'
 gem 'resque_mailer'
 
