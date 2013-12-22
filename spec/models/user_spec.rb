@@ -29,6 +29,7 @@
 #  invitation_limit       :integer
 #  invited_by_id          :integer
 #  invited_by_type        :string(255)
+#  admin                  :boolean          default(FALSE)
 #
 
 # spec/models/notebook_spec.rb

@@ -7,6 +7,7 @@
 #  state       :string(255)
 #  created_at  :datetime
 #  updated_at  :datetime
+#  deleted_at  :datetime
 #
 
 class NotebookEvent < ActiveRecord::Base

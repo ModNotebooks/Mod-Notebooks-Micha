@@ -3,12 +3,13 @@
 # Table name: pages
 #
 #  id          :integer          not null, primary key
-#  number      :integer
+#  index       :integer
 #  image       :string(255)
 #  meta        :hstore           default({})
 #  notebook_id :integer
 #  created_at  :datetime
 #  updated_at  :datetime
+#  deleted_at  :datetime
 #
 
 class Page < ActiveRecord::Base
@@ -27,7 +28,7 @@ class Page < ActiveRecord::Base
   # Validations
   #-----------------------------------------------------------------------------
 
-  validates :number,
+  validates :index,
     presence: true,
     numericality: true,
     uniqueness: { scope: :notebook_id }

@@ -14,6 +14,7 @@
 #  notebook_identifier :string(255)
 #  pdf                 :string(255)
 #  pages_count         :integer          default(0)
+#  deleted_at          :datetime
 #
 
 require 'faker'

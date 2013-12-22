@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131221105133) do
+ActiveRecord::Schema.define(version: 20131222222833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 20131221105133) do
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
 
   create_table "pages", force: true do |t|
-    t.integer  "number"
+    t.integer  "index"
     t.string   "image"
     t.hstore   "meta",        default: {}
     t.integer  "notebook_id"

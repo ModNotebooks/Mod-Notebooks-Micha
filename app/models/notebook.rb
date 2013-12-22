@@ -14,6 +14,7 @@
 #  notebook_identifier :string(255)
 #  pdf                 :string(255)
 #  pages_count         :integer          default(0)
+#  deleted_at          :datetime
 #
 
 class Notebook < ActiveRecord::Base
@@ -36,7 +37,7 @@ class Notebook < ActiveRecord::Base
 
   belongs_to :user
   has_many :events, -> { order 'created_at ASC' }, class_name: "NotebookEvent", dependent: :destroy
-  has_many :pages, -> { order 'number ASC' }, dependent: :destroy
+  has_many :pages, -> { order 'index ASC' }, dependent: :destroy
 
   #-----------------------------------------------------------------------------
   # Validations

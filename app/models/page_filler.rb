@@ -29,11 +29,11 @@ class PageFiller
 
     # Delete pages that already exsist that are higher then the page number
     # of the current PDF
-    notebook.pages.where('number > ?', pdf.count + 1).map(&:destroy!)
+    notebook.pages.where('index > ?', pdf.count).map(&:destroy!)
 
     pdf.each do |page|
-      page_model = notebook.pages.find_or_create_by(number: page.number)
-      filepath = "#{tmp_dir}/#{notebook.id}-p#{page.number}.png"
+      page_model = notebook.pages.find_or_create_by(index: page.index)
+      filepath = "#{tmp_dir}/#{notebook.id}-p#{page.index}.png"
 
       pages << page_model
 
