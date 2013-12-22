@@ -56,7 +56,7 @@ class Api::V1::NotebooksController < Api::BaseController
     end
 
     def upload_params
-      params.require(:notebook).permit(:notebook_identifier, :name, :pdf)
+      params.require(:notebook).permit(:notebook_identifier, :pdf)
     end
 
     def create_params
