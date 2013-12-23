@@ -23,8 +23,9 @@ class Notebook < ActiveRecord::Base
 
   acts_as_paranoid
 
-  STATES = %w[submitted uploaded processed]
-  delegate :submitted?, :uploaded?, :processed?, to: :current_state
+  STATES = %w[submitted received uploaded processed returned recycled]
+  delegate :submitted?, :uploaded?, :returned?, :received?, :recycled?, to: :current_state
+  delegate :processed?, to: :current_process_state
 
   COLORS        = { "01" => "red", "02" => "green", "03" => "tan" }
   PAPER_TYPES   = { "01" => "blank", "02" => "lined", "03" => "dotgrid" }
@@ -84,7 +85,7 @@ class Notebook < ActiveRecord::Base
     end
 
     def processed_notebooks
-      joins(:events).where state_query('processed')
+      joins(:events).where state_query('processed', :process)
     end
 
     def parse_notebook_identifier(identifier = "")
@@ -104,9 +105,11 @@ class Notebook < ActiveRecord::Base
     end
 
     private
-      def state_query(name = "")
+      def state_query(name = "", scope = :default)
         query = <<-SQL
-          notebook_events.id IN (SELECT MAX(id) FROM notebook_events GROUP BY notebook_id) AND state = '#{name}'
+          notebook_events.id IN (SELECT MAX(id)
+            FROM notebook_events
+            GROUP BY notebook_id) AND state = '#{name}' AND scope = '#{scope}'
         SQL
       end
   end
@@ -115,25 +118,42 @@ class Notebook < ActiveRecord::Base
   # Instance Methods
   #-----------------------------------------------------------------------------
 
+  def ever_uploaded?
+    events.where(state: :uploaded).exists?
+  end
+
+  def ever_returned?
+    events.where(state: :returned).exists?
+  end
+
+  def ever_recycled?
+    events.where(state: :recycled).exists?
+  end
+
   def current_state
     (events.last.try(:state) || STATES.first).inquiry
+  end
+
+  def current_process_state
+    (events.where(scope: :process).last.try(:state) ||  STATES.first).inquiry
   end
 
   def upload
     events.create! state: "uploaded" if submitted?
   end
 
-  def process
-    events.create! state: "processed" if uploaded?
-  end
-
   def return
-    # A notebook can be return only
-    # if it has been uploaded before
+    # A notebook can be return only if it has been uploaded before
+    events.create! state: "returned", if ever_uploaded? && !ever_recycled?
   end
 
   def recycle
-    # A notebook can be rec
+    # A notebook can be recycled only if it has been uploaded before
+    events.create! state: "recycled", if ever_uploaded? && !ever_returned?
+  end
+
+  def process
+    events.create! state: "processed", scope: :process if uploaded?
   end
 
   def process!(reprocess=false)

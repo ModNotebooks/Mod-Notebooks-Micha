@@ -18,9 +18,10 @@ class NotebookEvent < ActiveRecord::Base
   validates_presence_of :notebook_id
   validates_inclusion_of :state, in: Notebook::STATES
 
-  class << self
-    def with_last_state(state)
-      order("id desc").group("notebook_id").having(state: state)
+  before_validation :default_scope
+
+  private
+    def default_scope
+      self.scope ||= :default
     end
-  end
 end
