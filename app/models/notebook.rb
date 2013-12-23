@@ -29,6 +29,7 @@ class Notebook < ActiveRecord::Base
 
   COLORS        = { "01" => "red", "02" => "green", "03" => "tan" }
   PAPER_TYPES   = { "01" => "blank", "02" => "lined", "03" => "dotgrid" }
+  HANDLE_METHOD = ["return", "recycle"]
 
   #-----------------------------------------------------------------------------
   # Relationships
@@ -54,6 +55,10 @@ class Notebook < ActiveRecord::Base
     presence: true,
     uniqueness: { case_sensitive: false }
 
+  validates :handle_method,
+    presence: true,
+    inclusion: { in: HANDLE_METHOD }
+
   validates :notebook_identifier,
     format: { with: Patterns::NOTEBOOK_IDENTIFIER_PATTERN },
     presence: true,
@@ -70,6 +75,7 @@ class Notebook < ActiveRecord::Base
   #-----------------------------------------------------------------------------
 
   before_validation :attributes_from_notebook_identifier, if: :notebook_identifier_changed?
+  before_validation :default_handle_method, on: :create
 
   #-----------------------------------------------------------------------------
   # Class Methods
@@ -144,12 +150,16 @@ class Notebook < ActiveRecord::Base
 
   def return
     # A notebook can be return only if it has been uploaded before
-    events.create! state: "returned", if ever_uploaded? && !ever_recycled?
+    if ever_uploaded? && !ever_recycled? && handle_method == "return"
+      events.create! state: "returned"
+    end
   end
 
   def recycle
     # A notebook can be recycled only if it has been uploaded before
-    events.create! state: "recycled", if ever_uploaded? && !ever_returned?
+    if ever_uploaded? && !ever_returned? && handle_method == "recycle"
+      events.create! state: "recycled"
+    end
   end
 
   def process
@@ -170,6 +180,10 @@ class Notebook < ActiveRecord::Base
   end
 
   private
+    def default_handle_method
+      self.handle_method ||= "recycle"
+    end
+
     def attributes_from_notebook_identifier
       parts = self.class.parse_notebook_identifier(self.notebook_identifier || "")
       self.color              = COLORS[parts[:color]]

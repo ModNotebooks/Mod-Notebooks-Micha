@@ -18,8 +18,7 @@ class Api::V1::NotebooksController < Api::BaseController
   end
 
   def upload
-    attributes = { notebook_identifier: upload_params.fetch(:notebook_identifier) }
-    notebook = Notebook.find_or_create_by(attributes)
+    notebook = Notebook.find_by_notebook_identifier!(upload_params.fetch(:notebook_identifier))
 
     if notebook.update(upload_params)
       notebook.upload
@@ -60,6 +59,6 @@ class Api::V1::NotebooksController < Api::BaseController
     end
 
     def create_params
-      params.require(:notebook).permit(:notebook_identifier, :name)
+      params.require(:notebook).permit(:notebook_identifier, :name, :handle_method)
     end
 end
