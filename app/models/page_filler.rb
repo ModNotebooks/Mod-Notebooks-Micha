@@ -4,7 +4,7 @@ class PageFiller
 
   def initialize(notebook)
     unless notebook.pdf?
-      raise ArgumentError, 'Notebook is not uploaded or does not have a PDF'
+      raise ArgumentError, 'Notebook does not have a PDF'
     end
 
     @notebook = notebook

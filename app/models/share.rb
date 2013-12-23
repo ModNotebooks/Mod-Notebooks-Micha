@@ -5,6 +5,6 @@ class Share < ActiveRecord::Base
 
   private
     def generate_token
-      self.token = SecureRandom.hex(4)
+      self.token = SecureRandom.hex(8)
     end
 end
