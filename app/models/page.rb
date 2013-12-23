@@ -23,6 +23,7 @@ class Page < ActiveRecord::Base
 
   belongs_to :notebook, counter_cache: true
   has_one :user, through: :notebook
+  has_many :shares, as: :shareable
 
   #-----------------------------------------------------------------------------
   # Validations

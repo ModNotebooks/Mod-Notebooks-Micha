@@ -1,6 +1,6 @@
 class Api::V1::PagesController < Api::BaseController
   before_filter :find_notebook, only: [:index]
-  before_filter :find_page, only: [:show]
+  before_filter :find_page, only: [:show, :share]
 
   doorkeeper_for :all, scopes: ['public'], if: :for_me
   doorkeeper_for :all, scopes: ['admin'], if: :not_for_me
@@ -15,6 +15,10 @@ class Api::V1::PagesController < Api::BaseController
 
   def show
     respond_with @page
+  end
+
+  def share
+    respond_with @page.shares.create
   end
 
   private

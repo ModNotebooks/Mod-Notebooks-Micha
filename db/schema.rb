@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131223004153) do
+ActiveRecord::Schema.define(version: 20131223020021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,6 +98,17 @@ ActiveRecord::Schema.define(version: 20131223004153) do
   end
 
   add_index "pages", ["notebook_id"], name: "index_pages_on_notebook_id", using: :btree
+
+  create_table "shares", force: true do |t|
+    t.string   "token"
+    t.integer  "shareable_id"
+    t.string   "shareable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "shares", ["shareable_id", "shareable_type"], name: "index_shares_on_shareable_id_and_shareable_type", using: :btree
+  add_index "shares", ["token"], name: "index_shares_on_token", using: :btree
 
   create_table "users", force: true do |t|
     t.hstore   "meta",                              default: {},    null: false

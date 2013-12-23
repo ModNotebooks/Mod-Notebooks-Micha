@@ -1,9 +1,9 @@
 class Api::V1::NotebooksController < Api::BaseController
-  before_filter :find_notebook, only: [:show, :update]
+  before_filter :find_notebook, only: [:show, :update, :share]
 
   doorkeeper_for :upload, :process, scopes: ['admin'] # Never Public
-  doorkeeper_for :index, :show, :create, :update, scopes: ['public'], if: :for_me
-  doorkeeper_for :index, :show, :create, :update, scopes: ['admin'], if: :not_for_me
+  doorkeeper_for :index, :show, :create, :update, :share, scopes: ['public'], if: :for_me
+  doorkeeper_for :index, :show, :create, :update, :share, scopes: ['admin'], if: :not_for_me
 
   def index
     if @user
@@ -26,6 +26,10 @@ class Api::V1::NotebooksController < Api::BaseController
     else
       head :unprocessable_entity
     end
+  end
+
+  def share
+    respond_with @notebook.shares.create
   end
 
   def create

@@ -12,6 +12,7 @@ Mod::Application.routes.draw do
     get '/login', to: 'home#index', as: :new_user_session
     get '/register', to: 'home#index', as: :new_user_registration
 
+    get '/s/:token', to: 'home#index', as: :share
   end
 
   constraints subdomain: 'api', defaults: { format: 'json' } do
@@ -28,6 +29,8 @@ Mod::Application.routes.draw do
           resources :pages, only: [:index, :show]
         end
       end
+
+      resources :shares, param: :token, only: [:create, :show, :destroy]
 
       resources :notebooks, only: [:index, :create, :show, :update] do
         collection do
