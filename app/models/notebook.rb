@@ -26,10 +26,8 @@ class Notebook < ActiveRecord::Base
   STATES = %w[submitted uploaded processed]
   delegate :submitted?, :uploaded?, :processed?, to: :current_state
 
-  COLORS      = { "01" => "red", "02" => "green", "03" => "tan" }
-  PAPER_TYPES = { "01" => "blank", "02" => "lined", "03" => "dotgrid" }
-
-  store_accessor :meta, :pdf_secure_token
+  COLORS        = { "01" => "red", "02" => "green", "03" => "tan" }
+  PAPER_TYPES   = { "01" => "blank", "02" => "lined", "03" => "dotgrid" }
 
   #-----------------------------------------------------------------------------
   # Relationships
@@ -37,7 +35,7 @@ class Notebook < ActiveRecord::Base
 
   belongs_to :user
   has_many :events, -> { order 'created_at ASC' }, class_name: "NotebookEvent", dependent: :destroy
-  has_many :pages, -> { order 'index ASC' }, dependent: :destroy
+  has_many :pages,  -> { order 'index ASC' }, dependent: :destroy
 
   #-----------------------------------------------------------------------------
   # Validations
@@ -127,6 +125,15 @@ class Notebook < ActiveRecord::Base
 
   def process
     events.create! state: "processed" if uploaded?
+  end
+
+  def return
+    # A notebook can be return only
+    # if it has been uploaded before
+  end
+
+  def recycle
+    # A notebook can be rec
   end
 
   def process!(reprocess=false)

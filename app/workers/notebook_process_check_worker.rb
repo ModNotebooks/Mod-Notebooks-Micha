@@ -1,4 +1,4 @@
-class NotebookCheckToProcessWorker < BaseWorker
+class NotebookProcessCheckWorker < BaseWorker
   @queue = :default
 
   def self.perform

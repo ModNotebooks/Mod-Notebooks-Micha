@@ -1,1 +1,5 @@
-[]
+refresh_configurations:
+  every:
+    - "10m"
+    - :first_in: "20s"
+  class: NotebookProcessCheckWorker
