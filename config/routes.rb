@@ -7,12 +7,11 @@ Mod::Application.routes.draw do
     devise_for :users,
       skip: [:sessions, :registrations]
 
-    # Routes handled by ember app
-    root to: 'home#index'
-    get '/login', to: 'home#index', as: :new_user_session
+    get '/login',    to: 'home#index', as: :new_user_session
     get '/register', to: 'home#index', as: :new_user_registration
-
     get '/s/:token', to: 'home#index', as: :share
+
+    root to: 'home#index'
   end
 
   constraints subdomain: 'api', defaults: { format: 'json' } do
