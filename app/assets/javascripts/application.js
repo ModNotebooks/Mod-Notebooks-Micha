@@ -11,16 +11,14 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
-//= require turbolinks
-//= require jquery
 //= require handlebars
 //= require ember
 //= require ember-data
+//= require ember-simple-auth
 //= require_self
-//= require mod
+//= require app
 
 // for more details see: http://emberjs.com/guides/application/
-Mod = Ember.Application.create();
+App = Ember.Application.create();
 
 //= require_tree .

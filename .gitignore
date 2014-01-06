@@ -22,3 +22,5 @@ Procfile.dev
 tmp
 .env
 dump.rdb
+
+vendor/assets/bower
