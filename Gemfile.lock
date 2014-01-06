@@ -42,6 +42,10 @@ GEM
     arel (4.0.1)
     atomic (1.1.14)
     awesome_print (1.2.0)
+    barber (0.4.2)
+      ember-source
+      execjs
+      handlebars-source
     bcrypt-ruby (3.1.2)
     better_errors (1.0.1)
       coderay (>= 1.0.0)
@@ -88,6 +92,19 @@ GEM
     doorkeeper (0.7.4)
       jquery-rails (>= 2.0.2)
       railties (>= 3.1)
+    ember-data-source (0.14)
+      ember-source
+    ember-rails (0.14.1)
+      active_model_serializers
+      barber (>= 0.4.1)
+      ember-data-source
+      ember-source
+      execjs (>= 1.2)
+      handlebars-source
+      jquery-rails (>= 1.0.17)
+      railties (>= 3.1)
+    ember-source (1.2.0)
+      handlebars-source (= 1.1.1)
     erubis (2.7.0)
     excon (0.31.0)
     execjs (2.0.2)
@@ -116,6 +133,7 @@ GEM
       diff-lcs (~> 1.1)
       mime-types (~> 1.15)
       posix-spawn (~> 0.3.6)
+    handlebars-source (1.1.1)
     hashie (2.0.5)
     hike (1.2.3)
     hirb (0.7.1)
@@ -336,6 +354,8 @@ DEPENDENCIES
   devise
   devise_invitable
   doorkeeper (~> 0.7.0)
+  ember-rails
+  ember-source (= 1.2.0)
   factory_girl_rails
   faker
   fog

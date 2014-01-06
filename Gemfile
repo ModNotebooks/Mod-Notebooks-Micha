@@ -29,6 +29,9 @@ gem 'mini_magick'
 gem 'doorkeeper', '~> 0.7.0'
 gem 'paranoia', '~> 2.0'
 
+gem 'ember-rails'
+gem 'ember-source', '1.2.0' # or the version you need
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
