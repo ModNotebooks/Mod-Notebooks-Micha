@@ -30,10 +30,12 @@ module Mod
       # DeviseController.protect_from_forgery with: :null_session
     end
 
-    config.middleware.insert_before Warden::Manager, Rack::Cors do
+    config.middleware.insert 0, Rack::Cors do
       allow do
         origins '*'
-        resource '*', headers: :any, methods: [:get, :put, :patch, :create, :delete]
+        resource '*',
+          headers: :any,
+          methods: [:get, :post, :put, :delete, :options]
       end
     end
 

@@ -6,11 +6,19 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  YES
-
   <%= yield %>
 
   <%= javascript_include_tag "application" %>
+
+  <script type="text/x-handlebars">
+    {{#if session.isAuthenticated}}
+      <a {{ action 'logout' }}>Logout</a>
+    {{else}}
+      <a {{ action 'login' }}>Login</a>
+    {{/if}}
+
+    {{outlet}}
+  </script>
 
 </body>
 </html>

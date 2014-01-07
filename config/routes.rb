@@ -1,5 +1,8 @@
 Mod::Application.routes.draw do
 
+  use_doorkeeper
+
+
   constraints subdomain: 'app' do
     # Login, signup, and settings are all handled through the API so ignore those controllers
     # the only things that happens outside of the API are confirming, unlocking,

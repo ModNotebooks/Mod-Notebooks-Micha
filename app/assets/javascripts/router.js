@@ -2,4 +2,5 @@
 
 App.Router.map(function() {
   // this.resource('posts');
+  this.route('login');
 });
