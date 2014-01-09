@@ -1,5 +1,4 @@
 App.ApplicationView = Ember.View.extend({
-
   layoutName: function() {
     var path = this.get('controller.currentPath');
 
@@ -16,6 +15,17 @@ App.ApplicationView = Ember.View.extend({
 
   updateLayout: function() {
     this.rerender();
-  }.observes('layoutName')
+  }.observes('layoutName'),
 
+  isAuthenticated: function() {
+    if (this.get('session.isAuthenticated')) {
+      Ember.$(document.body)
+        .removeClass('asleep')
+        .addClass('awake');
+    } else {
+      Ember.$(document.body)
+        .removeClass('awake')
+        .addClass('asleep');
+    }
+  }.observes('session.isAuthenticated').on('init')
 });
