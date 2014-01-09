@@ -1,11 +1,16 @@
 App.SignupController = Ember.ObjectController.extend(App.LoginMixin, {
+  buttonText: "Sign Up",
+  isLoading: false,
+
   actions: {
     submit: function() {
       var _this = this;
 
-      var identification = this.get('model.email');
-      var password       = this.get('model.password');
-      this.get('model').save()
+      var model = this.get('model')
+      var identification = model.get('email');
+      var password       = model.get('password');
+
+      model.save()
         .then(function() {
           // This is shitty to do right here
           // but lets log them in
@@ -18,6 +23,7 @@ App.SignupController = Ember.ObjectController.extend(App.LoginMixin, {
             Ember.run(function() {
               _this.get('session').setup(response);
               _this.send('loginSucceeded');
+              _this.set('isLoading', false);
             });
           }, function(xhr, status, error) {
             _this.transitionTo(Ember.SimpleAuth.loginRoute);
@@ -25,6 +31,8 @@ App.SignupController = Ember.ObjectController.extend(App.LoginMixin, {
         }, function() {
           // TODO: ERRORS
           console.log('FAIL!');
+          model.send("becameValid");
+          _this.set('isLoading', false);
         });
     }
   }

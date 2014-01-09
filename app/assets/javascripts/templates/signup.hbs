@@ -13,5 +13,5 @@
     {{input-field passwordConfirmation as="password" placeholder="Verify Password"}}
     {{error-field passwordConfirmation}}
   {{/input}}
-  <button type="submit" class="clearform__button">Sign Up</button>
+  {{spin-button isLoading=isLoading buttonText=buttonText action="submit" class="clearform__button" }}
 {{/form-for}}

@@ -1,7 +1,7 @@
-<form {{action login on='submit'}} class="clearform">
+<form class="clearform">
   {{loginErrorMessage}}
   {{view Ember.TextField valueBinding='identification' placeholder='Email'}}
   <hr/>
   {{view Ember.TextField type='password' valueBinding='password' placeholder='Password'}}
-  <button type="submit" class="clearform__button">Login</button>
+  {{spin-button isLoading=isLoading buttonText=buttonText action="login" class="clearform__button" }}
 </form>

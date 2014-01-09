@@ -83,7 +83,8 @@ input[type="submit"] {
   }
 }
 
-.clearform__button {
+button.clearform__button,
+.clearform__button button {
   display: block;
   width: 100%;
   @extend .button;

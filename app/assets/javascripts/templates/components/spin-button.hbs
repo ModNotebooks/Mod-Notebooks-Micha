@@ -1,0 +1,7 @@
+<button {{bind-attr id=id}} {{action 'showLoading'}}>
+  {{#if isLoading}}
+    <img src="http://i639.photobucket.com/albums/uu116/pksjce/spiffygif_18x18.gif">
+  {{else}}
+    {{buttonText}}
+  {{/if}}
+</button>

@@ -15,7 +15,6 @@
 //= require ember
 //= require ember-data
 //= require ember-simple-auth
-//= require ember-easyForm/validations/ember-validations-1.0.0.beta.1
 //= require ember-easyForm/easyForm/ember-easyForm-1.0.0.beta.1
 //= require_self
 //= require app
