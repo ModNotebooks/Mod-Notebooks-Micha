@@ -14,6 +14,7 @@ Mod::Application.routes.draw do
     get '/register', to: 'home#index', as: :new_user_registration
     get '/s/:token', to: 'home#index', as: :share
 
+    get '/styleguide', to: "home#guide"
     root to: 'home#index'
   end
 

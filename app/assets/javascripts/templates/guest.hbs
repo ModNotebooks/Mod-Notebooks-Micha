@@ -1,0 +1,9 @@
+<header class="l-guest-header">
+  {{ outlet header }}
+</header>
+<main class="l-guest-main">
+  {{#link-to 'notebooks' class="logo--guest"}}{{/link-to}}
+  <section class="l-guest-content">
+    {{ outlet }}
+  </section>
+</main>

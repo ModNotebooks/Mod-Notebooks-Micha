@@ -30,13 +30,15 @@ gem 'doorkeeper', '~> 0.7.0'
 gem 'paranoia', '~> 2.0'
 
 gem 'ember-rails'
-gem 'ember-source', '1.2.0' # or the version you need
+gem 'ember-source', '1.3.0' # or the version you need
+gem 'ember-data-source', '1.0.0.beta.4'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
 
+gem 'bourbon'
 group :assets do
   gem 'sass-rails', '~> 4.0.0'
   gem 'uglifier', '>= 1.3.0'
@@ -52,6 +54,8 @@ group :development do
   # gem 'rack-mini-profiler'
   gem 'annotate'
   gem 'pry-rails'
+  gem 'guard-livereload', require: false
+  gem 'rack-livereload'
 end
 
 group :development, :test do

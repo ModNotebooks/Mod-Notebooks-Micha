@@ -2,23 +2,14 @@
 <html>
 <head>
   <title>Mod</title>
+
+  <%= stylesheet_link_tag "http://fast.fonts.net/cssapi/e792a0f8-7d5f-454a-83f8-cfc683cc5a2e.css" %>
   <%= stylesheet_link_tag "application", media: "all" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class="asleep">
   <%= yield %>
 
   <%= javascript_include_tag "application" %>
-
-  <script type="text/x-handlebars">
-    {{#if session.isAuthenticated}}
-      <a {{ action 'logout' }}>Logout</a>
-    {{else}}
-      <a {{ action 'login' }}>Login</a>
-    {{/if}}
-
-    {{outlet}}
-  </script>
-
 </body>
 </html>

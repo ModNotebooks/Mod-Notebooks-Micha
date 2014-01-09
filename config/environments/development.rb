@@ -31,4 +31,6 @@ Mod::Application.configure do
 
   BetterErrors.use_pry!
   AwesomePrint.defaults = { plain: true }
+
+  config.middleware.use Rack::LiveReload
 end

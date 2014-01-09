@@ -1,0 +1,17 @@
+{{#form-for model class="clearform"}}
+  {{#input email}}
+    {{input-field email placeholder="Email"}}
+    {{error-field email}}
+  {{/input}}
+  <hr/>
+  {{#input password}}
+    {{input-field password as="password" placeholder="Password"}}
+    {{error-field password}}
+  {{/input}}
+  <hr/>
+  {{#input passwordConfirmation}}
+    {{input-field passwordConfirmation as="password" placeholder="Verify Password"}}
+    {{error-field passwordConfirmation}}
+  {{/input}}
+  <button type="submit" class="clearform__button">Sign Up</button>
+{{/form-for}}
