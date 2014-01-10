@@ -1,61 +1,61 @@
 .l-app-main {
-  position: relative;
-  height: auto !important;
-  min-height: 100%;
-  width: 100%;
-
-  @include media($screen-br-md) { display: table; }
+  height: 100%;
 }
 
 .l-app-header {
   background: green;
-  padding: 20px;
-  vertical-align: top;
-  position: relative;
+  padding: 15px;
   display: table;
   width: 100%;
 
-  @include media($screen-br-sm) {
-    padding: 30px;
+  @include media($screen-br-md) {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 110px;
+    padding: 30px 0;
+    text-align: center;
   }
+}
+
+.l-app-logo {
+  display: table-cell;
+  vertical-align: middle;
 
   @include media($screen-br-md) {
-    width: auto;
+    display: block;
+  }
+}
+
+.l-app-nav {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: right;
+
+  @include media($screen-br-md) {
+    text-align: center;
+    display: block;
+    position: absolute;
+    bottom: 30px;
+    background: pink;
+    width: 100%;
   }
 }
 
 .l-app-content {
   background: red;
-  width: 100%;
-  vertical-align: middle;
-  text-align: center;
+
+  @include media($screen-br-md) {
+    padding-left: 110px;
+    height: 100%;
+    width: 100%;
+    display: table;
+  }
 }
 
-.l-app-header,
-.l-app-content {
-  @include media($screen-br-md) { display: table-cell; }
-}
-
-.l-app-logo,
-.l-app-nav {
+.l-app-innercontent {
   display: table-cell;
   vertical-align: middle;
-
-  @include media($screen-br-md) { display: block; }
-}
-
-.l-app-nav {
-  width: 100%;
-  text-align: right;
-  background: blue;
-
-  @include media($screen-br-md) { width: auto; }
-}
-
-.l-app-nav {
-  @include media($screen-br-md) {
-    position: absolute;
-    bottom: 30px;
-    left: 30px;
-  }
 }
