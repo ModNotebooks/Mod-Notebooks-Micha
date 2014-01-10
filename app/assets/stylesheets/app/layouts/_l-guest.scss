@@ -1,54 +1,68 @@
 .l-guest-main {
   min-height: 100%;
-  width: 100%;
-  display: table;
 }
 
 .l-guest-header {
-  display: table-row;
-  vertical-align: middle;
-}
-
-.l-guest-headerinner {
-  text-align: right;
-  padding: 15px;
-  color: #DFE2E2;
+  width: 100%;
+  background: red;
+  padding: 13px;
   position: relative;
   z-index: $zindex-guest-header;
-  margin-bottom: 100px;
+  text-align: right;
 
   @include media($screen-br-sm) {
     padding: 18px;
   }
+
+  .button--guest-header {
+    margin-left: 50px;
+  }
+}
+
+.l-guest-header-left {
+  display: inline-block;
+  vertical-align: middle;
+  float: left;
+  position: relative;
+  top: 5px;
+
+  @include media($screen-br-sm) {
+    float: none;
+    position: static;
+  }
 }
 
 .l-guest-content {
-  height: 100%;
-  display: table-row;
-  vertical-align: middle;
+  background: blue;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  display: table;
+  padding: 130px 0 0;
+  z-index: $zindex-guest-content;
+
+  @include media($screen-br-sm) {
+    padding-bottom: 120px;
+  }
 }
 
 .l-guest-innercontent {
   display: table-cell;
-  vertical-align: middle;
+  vertical-align: bottom;
   text-align: center;
-  height: 100%;
 
   @include media($screen-br-sm) {
     vertical-align: middle;
-    position: relative;
-    bottom: 100px;
-    z-index: $zindex-guest-content;
   }
 }
 
 .l-guest-form {
-  width: 100%;
-  margin: 60px auto 0 auto;
+  max-width: 100%;
+  margin: 100px auto 0 auto;
 
   @include media($screen-br-sm) {
-    margin: 80px auto 0 auto;
     max-width: 300px;
-    padding: 0 10px;
   }
 }
