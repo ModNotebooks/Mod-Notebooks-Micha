@@ -18,20 +18,20 @@
 /////////////////////////////////////////////////////////
 // Type
 ////////////////////////////////////////////////////////
-$avenir-roman: "Avenir LT W02 55 Roman";
-$avenir-medium: "Avenir LT W02 65 Medium";
+$avenir: "Avenir W02";
+
 
 $base-font-size:    16px!default;
 $base-line-height:  30px!default;
 $line-height-ratio: $base-line-height / $base-font-size;
 
-$base-font-weight: normal;
-$base-font-family: $avenir-roman, $helvetica;
+$base-font-weight: 400;
+$base-font-family: $avenir, $helvetica;
 $base-text-color: #fff;
 
 // Using font mixinxs instead of these
-$headings-font-family: $avenir-medium, $helvetica;
-$headings-font-weight: normal;
+$headings-font-family: $avenir, $helvetica;
+$headings-font-weight: 500;
 $headings-color: #fff;
 
 /*------------------------------------*\
@@ -59,6 +59,9 @@ $micro-size:        10px!default;
 // -------------------------
 // Used for a bird's eye view of components dependent on the z-axis
 // Try to avoid customizing these :)
+
+$zindex-guest-content:     900;
+$zindex-guest-header:      910;
 
 $zindex-navbar:            1000;
 $zindex-dropdown:          1000;

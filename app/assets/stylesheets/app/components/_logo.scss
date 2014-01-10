@@ -1,0 +1,23 @@
+.logo {
+  $size: 40px 49px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  @include size($size);
+  @include retina-image("logo-small", $size, $asset-pipeline: true);
+}
+
+.logo--app {
+  @extend .logo;
+  @include media($screen-br-sm) {
+    $size: 62px 75px;
+    @include size($size);
+    @include retina-image("logo", $size, $asset-pipeline: true);
+  }
+}
+
+.logo--guest {
+  display: inline-block;
+  $size: 62px 75px;
+  @include size($size);
+  @include retina-image("logo", $size, $asset-pipeline: true);
+}

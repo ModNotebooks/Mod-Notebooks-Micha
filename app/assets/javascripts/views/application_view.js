@@ -1,4 +1,7 @@
 App.ApplicationView = Ember.View.extend({
+  tagName: 'main',
+  classNameBindings: ['session.isAuthenticated:l-app-main:l-guest-main'],
+
   layoutName: function() {
     var path = this.get('controller.currentPath');
 

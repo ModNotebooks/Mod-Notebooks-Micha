@@ -38,7 +38,9 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-gem 'bourbon'
+gem 'bourbon', '~> 3.2.0.beta.1'
+gem 'neat'
+
 group :assets do
   gem 'sass-rails', '~> 4.0.0'
   gem 'uglifier', '>= 1.3.0'

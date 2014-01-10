@@ -1,9 +1,11 @@
 <header class="l-guest-header">
-  {{ outlet header }}
+  <div class="l-guest-headerinner">
+    {{ outlet header }}
+  </div>
 </header>
-<main class="l-guest-main">
-  {{#link-to 'notebooks' class="logo--guest"}}{{/link-to}}
-  <section class="l-guest-content">
+<section class="l-guest-content">
+  <div class="l-guest-innercontent">
+    {{#link-to 'notebooks' class="logo--guest"}}{{/link-to}}
     {{ outlet }}
-  </section>
+  </div>
 </main>

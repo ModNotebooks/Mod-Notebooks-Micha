@@ -15,6 +15,7 @@ Mod::Application.routes.draw do
     get '/s/:token', to: 'home#index', as: :share
 
     get '/styleguide', to: "home#guide"
+    get '/layout', to: "home#layout"
     root to: 'home#index'
   end
 

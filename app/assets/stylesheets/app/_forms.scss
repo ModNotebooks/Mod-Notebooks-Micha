@@ -48,7 +48,7 @@ select {
 
 button,
 input[type="submit"] {
-  @extend %button;
+  @extend .button;
   @include appearance(none);
   cursor: pointer;
   user-select: none;

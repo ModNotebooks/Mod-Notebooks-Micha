@@ -10,7 +10,7 @@ html {
 }
 
 html, body {
-  min-height: 100%;
+  height: 100%;
 }
 
 body {
@@ -21,6 +21,8 @@ body {
   color:       $base-text-color;
   text-rendering: optimizeLegibility;
   @include font-smoothing;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 
   &.asleep {
     background-color: #233236;
@@ -31,17 +33,4 @@ body {
     background-color: #385158;
     @include background-image( linear-gradient(141deg, #385158 0%, #88a9ab 62.89%, #99bcbe 100%) );
   }
-}
-
-.logo {
-  $size: 62px 75px;
-  display: block;
-  background-repeat: no-repeat;
-  @include size($size);
-  @include retina-image("logo", $size, $asset-pipeline: true);
-}
-
-.logo--guest {
-  @extend .logo;
-  margin: 0 auto;
 }

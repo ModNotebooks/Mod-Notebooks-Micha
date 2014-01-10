@@ -30,14 +30,22 @@
   margin: auto;
 }
 
+%book-font {
+  font-family: $avenir, $helvetica;
+  font-weight: 300;
+  font-style: normal;
+}
+
 %roman-font {
   font-family: $base-font-family;
-  font-weight: normal;
+  font-weight: 400;
+  font-style: normal;
 }
 
 %medium-font {
-  font-family: $avenir-medium, $helvetica;
-  font-weight: normal;
+  font-family: $avenir, $helvetica;
+  font-weight: 500;
+  font-style: normal;
 }
 
 
