@@ -1,8 +1,15 @@
-<form class="l-guest-form clearform">
-  {{loginErrorMessage}}
-  <hr/>
-  {{view Ember.TextField valueBinding='identification' placeholder='Email'}}
-  <hr/>
-  {{view Ember.TextField type='password' valueBinding='password' placeholder='Password'}}
-  {{spin-button isLoading=isLoading buttonText=buttonText action="login" class="clearform__button" }}
+<form class="l-guest-form form">
+  {{#if loginErrorMessage }}
+    <span class="form__error">{{loginErrorMessage}}</span>
+  {{/if}}
+  <div class="form__control flush">
+    {{view Ember.TextField valueBinding='identification' placeholder='Email'}}
+  </div>
+  <div class="form__control flush">
+    {{view Ember.TextField type='password' valueBinding='password' placeholder='Password'}}
+    <a href="#" class="form__input__altaction">?</a>
+  </div>
+  <div class="form__actions">
+    {{spin-button isLoading=isLoading buttonText=buttonText action="login" buttonClass="button--medium" }}
+  </div>
 </form>

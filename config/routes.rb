@@ -11,6 +11,7 @@ Mod::Application.routes.draw do
       skip: [:sessions, :registrations]
 
     get '/login',    to: 'home#index', as: :new_user_session
+    get '/signup',    to: 'home#index', as: :new_user
     get '/register', to: 'home#index', as: :new_user_registration
     get '/s/:token', to: 'home#index', as: :share
 

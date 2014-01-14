@@ -56,38 +56,109 @@ input[type="submit"] {
   white-space: nowrap;
 }
 
-.clearform {
-  #{$all-text-inputs} {
-    @include appearance(none);
-    border: none;
-    width: 100%;
-    display: block;
-    padding: 26px 2px;
-    background: none;
-    color: #DFE2E2;
+#{$all-text-inputs} {
+  @include appearance(none);
+  border: none;
+  outline: none;
+  background: none;
+  padding: 26px 20px;
+  color: #fff;
+  border-top: 1px solid rgba(255, 255, 255, 0);
+  border-bottom: 1px solid rgba(255, 255, 255, 0);
+  @include placeholder { color: #afb4b4; }
+  width: 100%;
+}
 
-    @include placeholder {
-      color: #9EB4B6;
+#{$all-text-inputs-focus} {
+  background: rgba(#dadee0, .15);
+  border-color: rgba(255, 255, 255, .10);
+}
+
+form {
+  width: 100%;
+  @extend .clearfix;
+  text-align: left;
+}
+
+.form__control {
+  width: 100%;
+  position: relative;
+
+  #{$all-text-inputs} {
+    border-top-color: rgba(255, 255, 255, .08);
+  }
+
+  &:first-of-type {
+    #{$all-text-inputs} {
+      &:not(:focus) { border-top-color: rgba(255, 255, 255, 0); }
     }
   }
 
-  #{$all-text-inputs-focus} {
-    outline: none;
+  &.is-error {
+    #{$all-text-inputs} { background: rgba(#ff0000, .14); }
   }
 
-  hr {
-    outline: none;
-    margin: 0;
-    border: none;
-    border-top: 1px solid rgba(#fff, 0.12);
+  &:first-of-type.flush {
+    #{$all-text-inputs-focus} { border-top-color: rgba(255, 255, 255, 0); }
+  }
+
+  &.flush {
+    @include media($screen-br-sm) {
+      #{$all-text-inputs} {
+        padding-left: 0px;
+        border-bottom: none;
+      }
+
+      #{$all-text-inputs-focus} { background: none; }
+    }
   }
 }
 
-button.clearform__button,
-.clearform__button button {
+.form__control--half {
+  @extend .form__control;
+  width: 50%;
+  float: left;
+}
+
+.form__control--half + .form__control--half {
+  #{$all-text-inputs} { border-left: 1px solid rgba(255, 255, 255, .08); }
+}
+
+.form__error {
   display: block;
   width: 100%;
-  @extend .button;
-  @extend .button--medium;
-  margin-top: 20px;
+  background: #9b3539;
+  @include font-size(14px, $line-height: false);
+  line-height: 1.4;
+  padding: 8px 18px;
+  color: #cdadad;
+}
+
+.form__actions {
+  button {
+    border-radius: 0;
+    width: 100%;
+    @include media($screen-br-md) { border-radius: 3px; }
+  }
+}
+
+.form__input__altaction {
+  display: block;
+  position: absolute;
+  width: 33px;
+  height: 28px;
+  top: 50%;
+  right: 20px;
+  margin-top: -14px;
+  color: #3f595b;
+  text-align: center;
+  text-decoration: none;
+  background: rgba(255, 255, 255, .18);
+  padding: 0px 8px;
+  border-radius: 3px;
+
+  @include media($screen-br-sm) { right: 0; }
+
+  &:hover { background: rgba(255, 255, 255, .24); }
+  &:active { @include transform(translateY(1px)); }
 }

@@ -3,16 +3,16 @@
   vertical-align: middle;
   @include font-size(15px);
   text-decoration: none;
-  background: #A2B0B1;
+  background: rgba(#fff, .5);
   border: none;
   outline: none;
   padding: 4px 23px;
   border-radius: 3px;
-  color: #496266;
+  color: #466265;
+  @extend %book-font;
 
-  &:active {
-    @include transform(translateY(1px));
-  }
+  &:hover { background: rgba(#fff, .6); }
+  &:active { @include transform(translateY(1px)); }
 }
 
 .button--outline {
@@ -20,7 +20,6 @@
   color: #DFE2E2;
   background: none;
   border: 1px solid #7E9295;
-
   &:hover { border-color: #DFE2E2; }
 }
 
@@ -30,6 +29,12 @@
 
 .button--medium {
   @include font-size(16px);
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.button--large {
+  @include font-size(18px);
   padding-top: 8px;
   padding-bottom: 8px;
 }

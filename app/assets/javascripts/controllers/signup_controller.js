@@ -29,8 +29,6 @@ App.SignupController = Ember.ObjectController.extend(App.LoginMixin, {
             _this.transitionTo(Ember.SimpleAuth.loginRoute);
           });
         }, function() {
-          // TODO: ERRORS
-          console.log('FAIL!');
           model.send("becameValid");
           _this.set('isLoading', false);
         });

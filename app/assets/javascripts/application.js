@@ -15,7 +15,6 @@
 //= require ember
 //= require ember-data
 //= require ember-simple-auth
-//= require ember-easyForm/easyForm/ember-easyForm-1.0.0.beta.1
 //= require_self
 //= require app
 
@@ -25,6 +24,10 @@ App = Ember.Application.create({
   LOG_ACTIVE_GENERATION: true,
   OAUTH_ID: "3bb761a843711dad62fea243a4674843310f474fc8a757c714992cdd0f39d681",
   OAUTH_SECRET: "32dfc56b1e0d32a14bfa2ffcc97e5d7409485d1a268ede11f8fa83713092f539"
+});
+
+App.Router.reopen({
+  location: 'history'
 });
 
 //= require_tree .
