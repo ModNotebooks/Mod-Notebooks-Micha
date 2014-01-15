@@ -28,34 +28,12 @@ Mod::Application.routes.draw do
     end
 
     scope module: 'api/v1', constraints: ApiConstraints.new(version: 1, default: :true) do
-
-      def user_resources
-        resources :notebooks, only: [:index, :create, :show, :update] do
-          resources :pages, only: [:index, :show]
-        end
-      end
-
       resources :shares, param: :token, only: [:create, :show, :destroy]
-
       resources :notebooks, only: [:index, :create, :show, :update] do
-        collection do
-          post 'upload'
-        end
-        resources :pages, only: [:index, :show]
+        post 'upload', on: :collection
       end
-
-      resources :users, only: [:show, :update, :create, :destroy] do
-        user_resources
-      end
-
-      scope '/:user_id', constraints: { user_id: 'me' }, as: 'me' do
-        user_resources
-        get    '/', to: 'users#show'
-        put    '/', to: 'users#update'
-        patch  '/', to: 'users#update'
-        delete '/', to: 'users#destroy'
-      end
-
+      resources :pages, only: [:index, :show]
+      resources :users, only: [:show, :update, :create, :destroy]
     end
 
   end

@@ -1,31 +1,15 @@
 class Api::V1::NotebooksController < Api::BaseController
+  before_filter :find_notebooks
   before_filter :find_notebook, only: [:show, :update, :share]
 
-  doorkeeper_for :upload, :process, scopes: ['admin'] # Never Public
-  doorkeeper_for :index, :show, :create, :update, :share, scopes: ['public'], if: :for_me
-  doorkeeper_for :index, :show, :create, :update, :share, scopes: ['admin'], if: :not_for_me
+  doorkeeper_for :all
 
   def index
-    if @user
-      respond_with @user.notebooks
-    else
-      respond_with Notebook.with_deleted.all
-    end
+
   end
 
   def show
     respond_with @notebook
-  end
-
-  def upload
-    notebook = Notebook.find_by_notebook_identifier!(upload_params.fetch(:notebook_identifier))
-
-    if notebook.update(upload_params)
-      notebook.upload
-      head :no_content
-    else
-      head :unprocessable_entity
-    end
   end
 
   def share
@@ -33,7 +17,7 @@ class Api::V1::NotebooksController < Api::BaseController
   end
 
   def create
-    notebook = @user.notebooks.build(create_params)
+    notebook = @notebooks.build(create_params)
 
     if notebook.save
       head :created
@@ -49,20 +33,18 @@ class Api::V1::NotebooksController < Api::BaseController
 
   private
     def update_params
-      p = params.require(:notebook)
-
-      if requester.try?(:admin)
-        p.permit(:name, :notebook_identifier)
-      else
-        p.permit(:name)
-      end
-    end
-
-    def upload_params
-      params.require(:notebook).permit(:notebook_identifier, :pdf)
+      params.require(:notebook).permit(:name)
     end
 
     def create_params
       params.require(:notebook).permit(:notebook_identifier, :name, :handle_method)
+    end
+
+    def find_notebooks
+      @notebooks = @user.notebooks
+    end
+
+    def find_notebook
+      @notebook = @notebooks.find_by_id!(params[:id])
     end
 end

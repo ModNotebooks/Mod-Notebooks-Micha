@@ -19,6 +19,7 @@ body {
   @include font-smoothing;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  @include transition(all 300ms ease-in-out);
 
   &.asleep {
     background-color: #233236;

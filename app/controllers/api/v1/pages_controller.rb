@@ -1,16 +1,19 @@
 class Api::V1::PagesController < Api::BaseController
-  before_filter :find_notebook, only: [:index]
+  before_filter :find_pages
   before_filter :find_page, only: [:show, :share]
 
-  doorkeeper_for :all, scopes: ['public'], if: :for_me
-  doorkeeper_for :all, scopes: ['admin'], if: :not_for_me
+  doorkeeper_for :all
 
   def index
-    if requester.admin?
-      respond_with @notebook.pages.with_deleted
-    else
-      respond_with @notebook.pages
+    if index_params.has_key?(:ids)
+      @pages = @pages.where(id: index_params.fetch(:ids))
     end
+
+    if index_params.has_key?(:notebook_id)
+      @pages = @pages.where(notebook_id: index_params.fetch(:notebook_id))
+    end
+
+    respond_with @pages
   end
 
   def show
@@ -22,13 +25,16 @@ class Api::V1::PagesController < Api::BaseController
   end
 
   private
+    def index_params
+      params.permit(:id, :notebook_id, ids: [])
+    end
+
+    def find_pages
+      @pages = @user.pages
+    end
 
     def find_page
-      if requester.admin?
-        @page = @notebook.pages.with_deleted.find_by_id!(params[:id])
-      else
-        @page = @notebook.pages.find_by_id!(params[:id])
-      end
+      @page = @pages.find_by_id!(params[:id])
     end
 
 end

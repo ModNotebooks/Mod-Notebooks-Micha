@@ -3,64 +3,47 @@
 }
 
 .l-app-header {
-  background: green;
-  padding: 15px;
-  display: table;
-  width: 100%;
+  display: inline-block;
+  padding: 30px;
+  background: blue;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: $zindex-app-header;
+}
 
-  @include media($screen-br-md) {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 110px;
-    padding: 30px 0;
-    text-align: center;
-    z-index: $zindex-app-header;
-  }
+.l-app-footer {
+  display: inline-block;
+  padding: 30px;
+  background: blue;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: $zindex-app-header;
 }
 
 .l-app-logo {
   display: table-cell;
   vertical-align: middle;
 
-  @include media($screen-br-md) {
-    display: block;
-  }
+  @include media($screen-br-md) { display: block; }
 }
 
 .l-app-nav {
   display: table-cell;
   vertical-align: middle;
   text-align: right;
-
-  @include media($screen-br-md) {
-    text-align: center;
-    display: block;
-    position: absolute;
-    bottom: 30px;
-    background: pink;
-    width: 100%;
-  }
 }
 
 .l-app-content {
   background: red;
-
-  @include media($screen-br-md) {
-    padding-left: 110px;
-    min-height: 100%;
-    width: 100%;
-    display: table;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: $zindex-app-content;
-  }
+  position: absolute;
+  min-width: 100%;
+  min-height: 100%;
+  padding-left: 122px;
+  z-index: $zindex-app-content;
 }
 
 .l-app-innercontent {
-  display: table-cell;
-  vertical-align: middle;
+
 }

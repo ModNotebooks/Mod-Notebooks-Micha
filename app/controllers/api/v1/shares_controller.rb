@@ -2,7 +2,7 @@ class Api::V1::SharesController < Api::BaseController
   before_filter :find_shareable, only: [:create]
   before_filter :find_share, only: [:show, :destroy]
 
-  doorkeeper_for :destroy, :create, scopes: ['public', 'admin']
+  doorkeeper_for :all, except: [:show]
 
   def destroy
     @share.destroy!
@@ -37,11 +37,7 @@ class Api::V1::SharesController < Api::BaseController
       klass = type.classify.constantize
       association = type.pluralize
 
-      if requester.admin?
-        @shareable = klass.find_by_id!(create_params.fetch(:shareable_id))
-      else
-        @shareable = requester.try(:association).try(:find_by_id!, create_params.fetch(:shareable_id))
-      end
+      @shareable = @user.try(association.to_sym).try(:find_by_id!, create_params.fetch(:shareable_id))
     end
 
 end

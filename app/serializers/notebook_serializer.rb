@@ -5,4 +5,5 @@ class NotebookSerializer < ActiveModel::Serializer
     :pages_count
 
   has_one :user
+  has_many :pages, embed: :ids
 end

@@ -9,6 +9,8 @@ App.User = (function() {
     createdAt:            attr('date'),
     updatedAt:            attr('date'),
     confirmedAt:          attr('date'),
+
+    notebooks: DS.hasMany('notebook')
   });
 
 }());

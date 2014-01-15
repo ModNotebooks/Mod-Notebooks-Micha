@@ -1,8 +1,5 @@
 class Api::V1::UsersController < Api::BaseController
-  before_filter :find_user, only: [ :update, :delete, :show ]
-
-  doorkeeper_for :show, :update, :destroy, scopes: ['public'], if: :for_me
-  doorkeeper_for :show, :update, :destroy, scopes: ['admin'], if: :not_for_me
+  doorkeeper_for :all, except: [:create]
 
   def create
     user = User.new(create_params)
