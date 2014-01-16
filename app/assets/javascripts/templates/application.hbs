@@ -1,4 +1,16 @@
-{{outlet}}
+<header class="l-app-header">
+  <div class="l-app-logo">
+    {{#link-to "index" class="logo--app"}}{{/link-to}}
+  </div>
+</header>
+
+<section class="l-app-content">
+  {{outlet}}
+</section>
+
+<footer class="l-app-footer">
+  Footer
+</footer>
 
 {{#if session.isAuthenticated}}
   <a {{ action 'logout' }}>Logout</a>

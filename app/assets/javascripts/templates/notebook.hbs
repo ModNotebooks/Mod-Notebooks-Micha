@@ -1,3 +1,16 @@
-{{#each pages}}
-  <h2>page {{index}}</h2>
-{{/each}}
+<section class="l-notebook">
+  <div class="l-notebook-list">
+    <div class="l-notebook-listitem">
+      <div class="notebook">
+        {{partial 'partials/notebook'}}
+      </div>
+    </div>
+    {{#each pages}}
+      <div class="l-notebook-listitem">
+        <div class="page--grid">
+          <img {{bindAttr src="image.small"}} class="page__image">
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</section>

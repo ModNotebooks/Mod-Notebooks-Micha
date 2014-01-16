@@ -1,0 +1,19 @@
+.l-notebook {
+  display: table-cell;
+  vertical-align: top;
+}
+
+.l-notebook-list {
+  width: 100%;
+  padding: 90px 100px 60px 40px;
+}
+
+.l-notebook-listitem {
+  display: inline-block;
+  margin-right: 44px;
+  margin-bottom: 44px;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+}
