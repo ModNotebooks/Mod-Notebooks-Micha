@@ -5,14 +5,7 @@ Doorkeeper.configure do
 
   # This block will be called to check whether the resource owner is authenticated or not.
   resource_owner_authenticator do
-    scope = Doorkeeper::OAuth::Scopes.from_string(params[:scope])
-    user = current_user || warden.authenticate!(scope: :user)
-
-    if scope.exists? 'admin'
-      user if user.try(:admin?)
-    else
-      user
-    end
+    current_user || warden.authenticate!(scope: :user)
 
     # Put your resource owner authentication logic here.
     # Example implementation:
@@ -20,14 +13,9 @@ Doorkeeper.configure do
   end
 
   resource_owner_from_credentials do |routes|
-    scope = Doorkeeper::OAuth::Scopes.from_string(params[:scope])
     user = User.find_for_database_authentication(email: params[:username])
     if user && user.valid_password?(params[:password])
-      if scope.exists? 'admin'
-        user if user.try(:admin?)
-      else
-        user
-      end
+      user
     end
   end
 
@@ -42,11 +30,11 @@ Doorkeeper.configure do
   end
 
   # Authorization Code expiration time (default 10 minutes).
-  # authorization_code_expires_in 10.minutes
+  authorization_code_expires_in 10.minutes
 
   # Access token expiration time (default 2 hours).
   # If you want to disable expiration, set this to nil.
-  # access_token_expires_in 2.hours
+  access_token_expires_in 2.hours
 
   # Issue access tokens with refresh token (disabled by default)
   # use_refresh_token
@@ -60,7 +48,6 @@ Doorkeeper.configure do
   # Define access token scopes for your provider
   # For more information go to https://github.com/applicake/doorkeeper/wiki/Using-Scopes
   default_scopes  :public
-  optional_scopes :admin
 
   # Change the way client credentials are retrieved from the request object.
   # By default it retrieves first from the `HTTP_AUTHORIZATION` header, then

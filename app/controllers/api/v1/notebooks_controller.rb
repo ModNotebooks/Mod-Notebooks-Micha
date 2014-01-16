@@ -5,7 +5,11 @@ class Api::V1::NotebooksController < Api::BaseController
   doorkeeper_for :all
 
   def index
+    if index_params.has_key?(:ids)
+      @notebooks = @notebooks.where(id: index_params.fetch(:ids))
+    end
 
+    respond_with @notebooks
   end
 
   def show
@@ -32,6 +36,10 @@ class Api::V1::NotebooksController < Api::BaseController
   end
 
   private
+    def index_params
+      params.permit(ids: [])
+    end
+
     def update_params
       params.require(:notebook).permit(:name)
     end

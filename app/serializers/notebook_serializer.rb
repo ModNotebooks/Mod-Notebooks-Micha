@@ -4,6 +4,6 @@ class NotebookSerializer < ActiveModel::Serializer
     :updated_at, :current_state, :notebook_identifier,
     :pages_count
 
-  has_one :user
+  has_one :user, embed: :ids, include: true
   has_many :pages, embed: :ids
 end

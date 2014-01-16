@@ -8,6 +8,8 @@ App.Notebook = (function() {
     paperType:          attr('string'),
     carrierIdentifier:  attr('string'),
     notebookIdentifier: attr('string'),
+    currState:          attr('string'), // currentState clashes with ember
+    pagesCount:         attr('string'),
     createdAt:          attr('date'),
     updatedAt:          attr('date'),
 

@@ -26,7 +26,7 @@ class Api::V1::PagesController < Api::BaseController
 
   private
     def index_params
-      params.permit(:id, :notebook_id, ids: [])
+      params.permit(:notebook_id, ids: [])
     end
 
     def find_pages

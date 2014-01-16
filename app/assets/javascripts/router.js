@@ -3,5 +3,6 @@
 App.Router.map(function() {
   this.route('login');
   this.route('signup');
-  this.resource('notebooks.index', { path: '/' } );
+  this.resource('notebooks');
+  this.resource('notebook', { path: '/notebooks/:notebook_id' });
 });

@@ -14,6 +14,8 @@ Mod::Application.routes.draw do
     get '/signup',    to: 'home#index', as: :new_user
     get '/register', to: 'home#index', as: :new_user_registration
     get '/s/:token', to: 'home#index', as: :share
+    get '/notebooks', to: 'home#index', as: :notebooks
+    get '/notebooks/:id', to: 'home#index', as: :notebook_show
 
     get '/styleguide', to: "home#guide"
     get '/layout', to: "home#layout"

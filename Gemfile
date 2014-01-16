@@ -31,7 +31,7 @@ gem 'paranoia', '~> 2.0'
 
 gem 'ember-rails'
 gem 'ember-source', '1.3.0' # or the version you need
-gem 'ember-data-source', '1.0.0.beta.4'
+gem 'ember-data-source', '1.0.0.beta.5'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

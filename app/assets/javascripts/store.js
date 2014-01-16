@@ -9,12 +9,12 @@ App.ApplicationAdapter = DS.ActiveModelAdapter.extend({
   }
 });
 
-App.MeScopedAdapter = App.ApplicationAdapter.extend({
-  host: 'http://api.lvh.me:3000/me'
+App.NotebookSerializer = DS.ActiveModelSerializer.extend({
+  normalizeHash: {
+    notebooks: function(hash) {
+      hash.currState = hash.current_state;
+      delete hash.current_state;
+      return hash;
+    }
+  }
 });
-
-
-App.Store = DS.Store.extend({});
-
-App.NotebookAdapter = App.MeScopedAdapter;
-App.PageAdapter     = App.MeScopedAdapter
