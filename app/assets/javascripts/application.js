@@ -10,6 +10,7 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require environment
 //= require jquery
 //= require handlebars
 //= require ember
@@ -20,10 +21,11 @@
 
 // for more details see: http://emberjs.com/guides/application/
 App = Ember.Application.create({
-  LOG_TRANSITIONS: true,
   LOG_ACTIVE_GENERATION: true,
-  OAUTH_ID: "3bb761a843711dad62fea243a4674843310f474fc8a757c714992cdd0f39d681",
-  OAUTH_SECRET: "32dfc56b1e0d32a14bfa2ffcc97e5d7409485d1a268ede11f8fa83713092f539"
+  LOG_MODULE_RESOLVER: true,
+  LOG_TRANSITIONS: true,
+  LOG_TRANSITIONS_INTERNAL: true,
+  LOG_VIEW_LOOKUPS: true
 });
 
 App.Router.reopen({

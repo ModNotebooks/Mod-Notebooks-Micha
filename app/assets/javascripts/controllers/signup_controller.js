@@ -16,7 +16,7 @@ App.SignupController = Ember.ObjectController.extend(App.LoginMixin, {
           // but lets log them in
           var requestOptions = _this.tokenRequestOptions(
             identification, password,
-            App.OAUTH_ID, App.OAUTH_SECRET
+            window.ENV.OAUTH_ID, window.ENV.OAUTH_SECRET
           );
 
           Ember.$.ajax(Ember.SimpleAuth.serverTokenEndpoint, requestOptions).then(function(response) {

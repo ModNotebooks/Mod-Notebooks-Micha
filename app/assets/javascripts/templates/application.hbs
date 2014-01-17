@@ -9,10 +9,8 @@
 </section>
 
 <footer class="l-app-footer">
-  Footer
+  {{#if session.isAuthenticated}}
+    <a {{ action 'logout' }}>Logout</a>
+  {{/if}}
 </footer>
-
-{{#if session.isAuthenticated}}
-  <a {{ action 'logout' }}>Logout</a>
-{{/if}}
 

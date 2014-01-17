@@ -30,7 +30,7 @@ gem 'doorkeeper', '~> 0.7.0'
 gem 'paranoia', '~> 2.0'
 
 gem 'ember-rails'
-gem 'ember-source', '1.3.0' # or the version you need
+gem 'ember-source', '1.4.0.beta.2' # or the version you need
 gem 'ember-data-source', '1.0.0.beta.5'
 
 group :doc do
