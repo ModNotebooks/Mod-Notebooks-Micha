@@ -1,8 +1,8 @@
 <section class="l-notebooks">
   <div class="l-notebooks-list">
-    {{#each model}}
+    {{#each arrangedContent}}
       <div class="l-notebooks-listitem">
-        {{#link-to 'notebook' this class="notebook"}}
+        {{#link-to 'notebook' this class="notebook" disabled=notProcessed}}
           {{partial 'partials/notebook'}}
         {{/link-to}}
       </div>

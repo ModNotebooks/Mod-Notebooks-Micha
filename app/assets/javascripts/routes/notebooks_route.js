@@ -4,6 +4,6 @@ App.NotebooksRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin
   },
 
   setupController: function(controller, notebooks) {
-    controller.set('model', notebooks);
+    controller.set('content', notebooks);
   }
 });

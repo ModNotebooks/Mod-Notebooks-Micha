@@ -8,7 +8,11 @@
           Untitled
         {{/if}}
       </h2>
-      <span class="notebook__status">{{humanize currState}}</span>
+      {{#if processed}}
+        <span class="notebook__date">{{format-date currentProcessStateAt 'MMM. D, YYYY'}}</span>
+      {{else}}
+        <span class="notebook__status">{{humanize currState}}</span>
+      {{/if}}
     </div>
   </div>
 </div>

@@ -27,7 +27,7 @@ class Notebook < ActiveRecord::Base
   delegate :submitted?, :uploaded?, :returned?, :received?, :recycled?, to: :current_state
   delegate :processed?, to: :current_process_state
 
-  COLORS        = { "01" => "red", "02" => "green", "03" => "tan" }
+  COLORS        = { "01" => "black", "02" => "sea", "03" => "red", "04" => "gold", "05" => "gray" }
   PAPER_TYPES   = { "01" => "blank", "02" => "lined", "03" => "dotgrid" }
   HANDLE_METHOD = ["return", "recycle"]
 
@@ -137,8 +137,16 @@ class Notebook < ActiveRecord::Base
     events.where(state: :recycled).exists?
   end
 
+  def current_state_at
+    events.last.try(:created_at) || created_at
+  end
+
   def current_state
     (events.last.try(:state) || STATES.first).inquiry
+  end
+
+  def current_process_state_at
+    events.where(scope: :process).last.try(:created_at)
   end
 
   def current_process_state
