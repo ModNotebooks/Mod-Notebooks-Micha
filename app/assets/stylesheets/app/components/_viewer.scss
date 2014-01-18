@@ -1,0 +1,38 @@
+.viewer {
+  background: pink;
+  overflow: hidden;
+  box-shadow: 0 2px 3px rgba(0,0,0,.16);
+  border-radius: 20px;
+
+  // Prevents the pages from seperating.
+  // Very shitty we have to do this.
+  max-width: 1570px;
+  width: auto;
+
+  margin: 0 auto;
+}
+
+.viewer__panes {
+  @extend .clearfix;
+  height: 100%;
+}
+
+.viewer__pane {
+  width: 50%;
+  float: left;
+  position: relative;
+  overflow: hidden;
+  max-height: 100%;
+  background: #ffffe7;
+  text-align: center;
+}
+
+.viewer__pane--left, .viewer__pane--right {
+  @extend .viewer__pane;
+}
+
+.viewer__image {
+  width: auto;
+  max-height: 100%;
+  vertical-align: middle;
+}
