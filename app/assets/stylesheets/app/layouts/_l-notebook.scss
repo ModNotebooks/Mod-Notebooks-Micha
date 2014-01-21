@@ -1,11 +1,12 @@
 .l-notebook {
-  display: table-cell;
-  vertical-align: top;
+  text-align: center;
+  padding: 108px 50px;
 }
 
 .l-notebook-list {
-  width: 100%;
-  padding: 90px 100px 60px 40px;
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
 }
 
 .l-notebook-listitem {
@@ -13,7 +14,5 @@
   margin-right: 44px;
   margin-bottom: 44px;
 
-  &:last-of-type {
-    margin-right: 0;
-  }
+  &:last-of-type { margin-right: 0; }
 }

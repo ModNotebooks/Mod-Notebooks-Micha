@@ -10,11 +10,12 @@ Mod::Application.routes.draw do
     devise_for :users,
       skip: [:sessions, :registrations]
 
-    get '*path',    to: 'home#index'
 
     get '/styleguide', to: "home#guide"
     get '/layout', to: "home#layout"
     root to: 'home#index'
+
+    get '*path',    to: 'home#index'
   end
 
   constraints subdomain: 'api', defaults: { format: 'json' } do

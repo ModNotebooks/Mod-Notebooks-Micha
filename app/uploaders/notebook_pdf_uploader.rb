@@ -1,7 +1,5 @@
 class NotebookPDFUploader < PDFUploader
 
-  after :store, :persist_secure_token
-
   def filename
     "#{secure_token}.#{file.extension}" if original_filename.present?
   end

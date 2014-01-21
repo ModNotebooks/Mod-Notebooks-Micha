@@ -2,7 +2,7 @@
   <div class="l-notebooks-list">
     {{#each arrangedContent}}
       <div class="l-notebooks-listitem">
-        {{#link-to 'notebook' this class="notebook" disabled=notProcessed}}
+        {{#link-to 'notebook' this class="notebook" classNameBindings="color" disabled=notProcessed}}
           {{partial 'partials/notebook'}}
         {{/link-to}}
       </div>

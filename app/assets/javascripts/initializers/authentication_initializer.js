@@ -5,7 +5,8 @@ Ember.Application.initializer({
       routeAfterLogin: 'notebooks',
       routeAfterLogout: 'login',
       crossOriginWhitelist: ['http://api.lvh.me:3000'],
-      serverTokenEndpoint: 'http://api.lvh.me:3000/oauth/token'
+      serverTokenEndpoint: 'http://api.lvh.me:3000/oauth/token',
+      autoRefreshToken: true
     });
   }
 });
