@@ -11,25 +11,31 @@
   position: fixed;
   top: 0;
   left: 0;
+  z-index: $zindex-app-side;
 }
 
 .l-app-logo {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   padding: 30px;
+  z-index: $zindex-app-logo;
 }
 
 .l-app-navtoggle {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
-  width: 100%;
   padding: 30px;
   text-align: center;
+  z-index: $zindex-app-logo;
 }
 
 .l-app-content {
   height: 100%;
   padding-left: 108px;
+
+  &.blurred {
+    @include filter(blur(40px));
+  }
 }

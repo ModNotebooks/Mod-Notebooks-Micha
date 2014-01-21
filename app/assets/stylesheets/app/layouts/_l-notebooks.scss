@@ -1,17 +1,14 @@
 .l-notebooks {
-  text-align: center;
+  // background: blue;
+  width: 100%;
   height: 100%;
-  // background: yellow;
-  padding: 108px 50px;
+  padding: 100px 50px;
+  display: table;
+}
 
-
-  &:before {
-    content: '';
-    display: inline-block;
-    height: 100%;
-    vertical-align: middle;
-    margin-right: -0.25em; /* Adjusts for spacing */
-  }
+.l-notebooks-wrap {
+  display: table-cell;
+  vertical-align: middle;
 }
 
 .l-notebooks-list {

@@ -1,16 +1,20 @@
 <section class="l-notebooks">
-  <div class="l-notebooks-list">
-    {{#each arrangedContent}}
+  <div class="l-notebooks-wrap">
+
+    <div class="l-notebooks-list">
+      {{#each arrangedContent}}
+        <div class="l-notebooks-listitem">
+          {{#link-to 'notebook' this class="notebook" classNameBindings="color" disabled=notProcessed}}
+            {{partial 'partials/notebook'}}
+          {{/link-to}}
+        </div>
+      {{/each}}
       <div class="l-notebooks-listitem">
-        {{#link-to 'notebook' this class="notebook" classNameBindings="color" disabled=notProcessed}}
-          {{partial 'partials/notebook'}}
-        {{/link-to}}
-      </div>
-    {{/each}}
-    <div class="l-notebooks-listitem">
-      <div class="notebook--standin">
-        <span class="notebook--standin__plus"></span>
+        <div class="notebook--standin">
+          <span class="notebook--standin__plus"></span>
+        </div>
       </div>
     </div>
+
   </div>
 </section>

@@ -1,15 +1,19 @@
-<header class="l-app-side">
-  <div class="l-app-logo">
-    {{#link-to "index" class="logo--app"}}{{/link-to}}
-  </div>
-  <div class="l-app-navtoggle">
-    {{#if session.isAuthenticated}}
-      <a {{ action 'logout' }}>Logout</a>
-    {{/if}}
-  </div>
-</header>
+<div class="l-app-logo">
+  {{#link-to "index" class="logo--app"}}{{/link-to}}
+</div>
+
+<aside class="l-app-side">
+  Side
+</aside>
+
+<div class="l-app-navtoggle">
+  {{#if session.isAuthenticated}}
+    <a {{ action 'logout' }}>Logout</a>
+  {{/if}}
+</div>
 
 <section class="l-app-content">
   {{outlet}}
 </section>
 
+{{!-- <div class="overlay"></div> --}}
