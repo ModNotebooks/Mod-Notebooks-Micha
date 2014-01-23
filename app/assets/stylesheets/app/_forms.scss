@@ -120,7 +120,20 @@ form {
   float: left;
 }
 
-.form__control--half + .form__control--half {
+.form__control--onethird {
+  @extend .form__control;
+  width: 33.33%;
+  float: left;
+}
+
+.form__control--twothird {
+  @extend .form__control;
+  width: 66.66%;
+  float: left;
+}
+
+.form__control--half + .form__control--half,
+.form__control--twothird + .form__control--onethird {
   #{$all-text-inputs} { border-left: 1px solid rgba(255, 255, 255, .08); }
 }
 

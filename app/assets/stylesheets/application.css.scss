@@ -1,10 +1,11 @@
-@import "normalize-scss/normalize";
+@import "normalize-scss/normalize.scss";
 @import "bourbon";
 @import "neat";
 @import "app/variables";
 @import "app/mixins";
 
 @import "app/base";
+@import "app/icons";
 @import "app/forms";
 
 @import "app/layouts/l-guest";
@@ -12,12 +13,15 @@
 @import "app/layouts/l-notebooks";
 @import "app/layouts/l-notebook";
 @import "app/layouts/l-viewer";
+@import "app/layouts/l-settings";
 
 @import "app/components/logo";
 @import "app/components/button";
 @import "app/components/notebook";
 @import "app/components/page";
 @import "app/components/viewer";
-@import "app/components/overlay";
+@import "app/components/modal";
+@import "app/components/settingsnav";
+
 
 

@@ -1,0 +1,49 @@
+.settingsnav {
+  color: rgba(255, 255, 255, .2);
+  @include font-size(16px);
+}
+
+.settingsnav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.settingsnav__link {
+  display: table;
+  color: inherit;
+  text-decoration: none;
+
+  &:hover, &:active, &.is-active {
+    color: #fff;
+  }
+}
+
+.settingsnav__linkicon,
+.settingsnav__linklabel {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.settingsnav__linkicon {
+  text-align: center;
+  padding-right: 24px;
+  padding-left: 4px;
+  width: 100px;
+
+  i { opacity: .2; }
+
+  .settingsnav__link:hover &,
+  .settingsnav__link:active &,
+  .settingsnav__link.is-active & {
+    i { opacity: 1; }
+  }
+}
+
+.settingsnav__linklabel {
+  padding: 24px 24px 24px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, .05);
+  width: 100%;
+
+  .setttingsnav__item:last-of-type & { border-bottom: none; }
+}

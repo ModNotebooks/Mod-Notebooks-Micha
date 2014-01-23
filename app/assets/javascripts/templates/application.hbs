@@ -8,7 +8,7 @@
 
 <div class="l-app-navtoggle">
   {{#if session.isAuthenticated}}
-    <a {{ action 'logout' }}>Logout</a>
+    <a {{ action 'openModal' 'settings' model }}>Settings</a>
   {{/if}}
 </div>
 
@@ -16,4 +16,4 @@
   {{outlet}}
 </section>
 
-{{!-- <div class="overlay"></div> --}}
+{{outlet modal}}

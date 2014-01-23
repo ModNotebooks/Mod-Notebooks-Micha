@@ -34,6 +34,9 @@
 .l-app-content {
   height: 100%;
   padding-left: 108px;
+  @include transition(all 400ms ease-in-out);
+  @include transform(translate3d(0, 0, 0));
+  @include backface-visibility(hidden);
 
   &.blurred {
     @include filter(blur(40px));

@@ -1,0 +1,36 @@
+@import "neat-helpers";
+
+.l-settings {
+  // background: red;
+  width: 100%;
+  display: table;
+}
+
+.l-settings-menu, .l-settings-content {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.l-settings-menu {
+  padding: 0 36px;
+  min-width: 290px;
+}
+
+.l-settings-content {
+  text-align: center;
+  width: 100%;
+  padding: 0px 20px;
+}
+
+.l-settings-pane {
+  margin: 0 auto;
+  display: inline-block;
+  // background: blue;
+  width: 100%;
+  max-width: 500px;
+  text-align: left;
+
+  @include media(new-breakpoint(min-width 1060px)) {
+    margin-left: -230px;
+  }
+}

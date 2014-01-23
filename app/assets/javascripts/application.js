@@ -17,6 +17,8 @@
 //= require ember
 //= require ember-data
 //= require ember-simple-auth
+//= require tweenjs/examples/js/RequestAnimationFrame
+//= require tweenjs/build/tween.min
 //= require_self
 //= require app
 

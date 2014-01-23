@@ -33,18 +33,13 @@ gem 'ember-rails'
 gem 'ember-source', '1.4.0.beta.2' # or the version you need
 gem 'ember-data-source', '1.0.0.beta.5'
 
-group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', require: false
-end
-
-gem 'bourbon', '~> 3.2.0.beta.1'
-gem 'neat'
+gem 'compass-rails', '1.1.0.pre'
+gem 'sass-rails', '>= 4.0.0'
 
 group :assets do
-  gem 'sass-rails', '~> 4.0.0'
+  # gem 'sass-rails', '>= 4.0.0'
   gem 'uglifier', '>= 1.3.0'
-  gem 'coffee-rails', '~> 4.0.0'
+  # gem 'compass-rails', '1.1.0.pre'
 end
 
 group :development do
