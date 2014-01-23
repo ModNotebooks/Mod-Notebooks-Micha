@@ -1,4 +1,4 @@
-@import "neat-helpers";
+@import "neat/app/assets/stylesheets/neat-helpers";
 
 .l-settings {
   // background: red;
@@ -32,5 +32,16 @@
 
   @include media(new-breakpoint(min-width 1060px)) {
     margin-left: -230px;
+  }
+}
+
+.l-settings-tab {
+  opacity: 0;
+  display: none;
+  @include transition(all 400ms ease-in-out);
+
+  &.is-active {
+    opacity: 1;
+    display: block;
   }
 }

@@ -1,4 +1,4 @@
-@import "neat-helpers";
+@import "neat/app/assets/stylesheets/neat-helpers";
 
 /////////////////////////////////////////////////////////
 // Grid
@@ -10,10 +10,10 @@
 // $visual-grid: false;
 
 
-$prefix-for-mozilla:   true;
-$prefix-for-webkit:    true;
-$prefix-for-microsoft: true;
-$prefix-for-spec:      true;
+// $prefix-for-mozilla:   true;
+// $prefix-for-webkit:    true;
+// $prefix-for-microsoft: true;
+// $prefix-for-spec:      true;
 
 /////////////////////////////////////////////////////////
 // Colors

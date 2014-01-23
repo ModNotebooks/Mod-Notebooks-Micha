@@ -3,32 +3,19 @@
     <aside class="l-settings-menu">
       <nav class="settingsnav">
         <ul class="settingsnav__list">
+
+          {{#each tabs}}
+            <li class="setttingsnav__item">
+              <a {{action 'setActiveTab' tabId bubbles=false}} {{bind-attr class=":settingsnav__link active:is-active"}}>
+                <div class="settingsnav__linkicon">
+                  <i class="{{unbound iconClass}}"></i>
+                </div>
+                <div class="settingsnav__linklabel">{{name}}</div>
+              </a>
+            </li>
+          {{/each}}
           <li class="setttingsnav__item">
-            <a href="javascript:void(0);" class="settingsnav__link">
-              <div class="settingsnav__linkicon">
-                <i class="i-settings-account"></i>
-              </div>
-              <div class="settingsnav__linklabel">Account</div>
-            </a>
-          </li>
-          <li class="setttingsnav__item">
-            <a href="javascript:void(0);" class="settingsnav__link">
-              <div class="settingsnav__linkicon">
-                <i class="i-settings-address"></i>
-              </div>
-              <div class="settingsnav__linklabel">Shipping Address</div>
-            </a>
-          </li>
-          <li class="setttingsnav__item">
-            <a href="javascript:void(0);" class="settingsnav__link">
-              <div class="settingsnav__linkicon">
-                <i class="i-settings-sync"></i>
-              </div>
-              <div class="settingsnav__linklabel">Sync</div>
-            </a>
-          </li>
-          <li class="setttingsnav__item">
-            <a {{ action 'invalidateSession' }} class="settingsnav__link is-active">
+            <a {{ action 'invalidateSession' }} class="settingsnav__link">
               <div class="settingsnav__linkicon">
                 <i class="i-settings-logout"></i>
               </div>
@@ -40,27 +27,11 @@
     </aside>
     <section class="l-settings-content">
       <div class="l-settings-pane">
-        <form>
-          <div class="form__control">
-            <input type="text" placeholder="Full Name">
+        {{#each tab in tabs}}
+          <div {{bind-attr class=":l-settings-tab tab.active:is-active"}}>
+           {{renderSettingsTab this tab}}
           </div>
-          <div class="form__control">
-            <input type="text" placeholder="Address">
-          </div>
-          <div class="form__control--twothird">
-            <input type="text" placeholder="State">
-          </div>
-          <div class="form__control--onethird">
-            <input type="text" placeholder="Postal Code">
-          </div>
-          <div class="clearfix"></div>
-          <div class="form__control">
-            <input type="text" placeholder="Country">
-          </div>
-          <div class="form__actions">
-            <button type="submit" class="button--medium">Save</button>
-          </div>
-        </form>
+        {{/each}}
       </div>
     </section>
   </section>
