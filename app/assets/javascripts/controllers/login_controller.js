@@ -1,11 +1,11 @@
-App.LoginController = Ember.Controller.extend(Ember.SimpleAuth.LoginControllerMixin, App.LoginMixin, {
+App.LoginController = Ember.Controller.extend(Ember.SimpleAuth.LoginControllerMixin, {
   client_id: window.ENV.OAUTH_ID,
   client_secret: window.ENV.OAUTH_SECRET,
   buttonText: "Login",
   isLoading: false,
 
   actions: {
-    login: function() {
+    authenticate: function() {
       var data = this.getProperties('identification', 'password');
 
       if (!Ember.isEmpty(data.identification) && !Ember.isEmpty(data.password)) {

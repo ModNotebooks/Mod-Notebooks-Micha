@@ -1,6 +1,8 @@
-App.SignupController = Ember.ObjectController.extend(App.LoginMixin, {
+App.SignupController = Ember.ObjectController.extend({
   buttonText: "Sign Up",
   isLoading: false,
+
+  authenticator: Ember.SimpleAuth.Authenticators.OAuth2,
 
   actions: {
     submit: function() {
@@ -12,21 +14,17 @@ App.SignupController = Ember.ObjectController.extend(App.LoginMixin, {
 
       model.save()
         .then(function() {
-          // This is shitty to do right here
-          // but lets log them in
-          var requestOptions = _this.tokenRequestOptions(
-            identification, password,
-            window.ENV.OAUTH_ID, window.ENV.OAUTH_SECRET
-          );
 
-          Ember.$.ajax(Ember.SimpleAuth.serverTokenEndpoint, requestOptions).then(function(response) {
-            Ember.run(function() {
-              _this.get('session').setup(response);
-              _this.send('loginSucceeded');
-              _this.set('isLoading', false);
-            });
-          }, function(xhr, status, error) {
-            _this.transitionTo(Ember.SimpleAuth.loginRoute);
+          options = {
+            identification: identification,
+            password: password
+          };
+
+          _this.get('session').authenticate(_this.get('authenticator').create(), options).then(function() {
+            _this.set('isLoading', false);
+            _this.send('sessionAuthenticationSucceeded');
+          }, function(error) {
+            _this.transitionTo(Ember.SimpleAuth.authenticationRoute);
           });
         }, function() {
           model.send("becameValid");
