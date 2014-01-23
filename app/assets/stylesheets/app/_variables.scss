@@ -10,6 +10,11 @@
 // $visual-grid: false;
 
 
+$prefix-for-mozilla:   true;
+$prefix-for-webkit:    true;
+$prefix-for-microsoft: true;
+$prefix-for-spec:      true;
+
 /////////////////////////////////////////////////////////
 // Colors
 ////////////////////////////////////////////////////////
@@ -19,7 +24,6 @@
 // Type
 ////////////////////////////////////////////////////////
 $avenir: "Avenir W02";
-
 
 $base-font-size:    16px!default;
 $base-line-height:  30px!default;

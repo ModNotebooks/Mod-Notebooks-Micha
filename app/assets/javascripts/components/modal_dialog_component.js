@@ -1,51 +1,42 @@
 App.ModalDialogComponent = Ember.Component.extend({
+  classNames: "modal",
+
   actions: {
     close: function() {
-      return this.sendAction();
+      this.animateOut().then(this.sendAction.bind(this));
     }
   },
 
+  eventManager: Ember.Object.create({
+    click: function(evt, view) {
+      if (view.$(evt.target).hasClass('modal__content')) {
+        view.send('close');
+      }
+    }
+  }),
+
   didInsertElement: function() {
-    var element = this.get('element');
-
-    // Ember.$('.l-app-content').addClass('blurred');
-    var contentElement = Ember.$('.l-app-content').get(0);
-    var filterProperty = Modernizr.testProp('webkitFilter') ? "webkitFilter" : Modernizr.prefixed('filter');
-
-    var tween = new TWEEN.Tween({ blur: 0 })
-      .to({ blur: 44 }, 2000)
-      .easing( TWEEN.Easing.Quadratic.InOut )
-      .onUpdate(function() {
-        contentElement.style[filterProperty] = "blur(" + this.blur + "px)";
-      })
-      .start();
-
-    var tween2 = new TWEEN.Tween({ opacity: 0 })
-      .to({ opacity: 1 }, 2000)
-      .easing( TWEEN.Easing.Quadratic.InOut )
-      .onUpdate(function() {
-        element.style.opacity = this.opacity;
-      })
-      .start();
-
-
+    var _this = this;
     Ember.$(document.documentElement).addClass('no-scroll');
+    Ember.$('.l-app-content').addClass('modal-open');
+
+    Ember.run.later(function() {
+      _this.$().addClass('is-visible');
+    }, 100);
+  },
+
+  animateOut: function() {
+    var _this = this;
+
+    return new Ember.RSVP.Promise(function(resolve) {
+      _this.$().removeClass('is-visible').one(App.utils.transitionEnd, function() {
+        Ember.$('.l-app-content').removeClass('modal-open');
+        resolve();
+      });
+    });
   },
 
   willDestroyElement: function() {
-    // Ember.$('.l-app-content').removeClass('blurred');
-
-    var contentElement = Ember.$('.l-app-content').get(0);
-    var filterProperty = Modernizr.testProp('webkitFilter') ? "webkitFilter" : Modernizr.prefixed('filter');
-
-    var tween = new TWEEN.Tween({ blur: 44 })
-      .to({ blur: 0 }, 2000)
-      .easing( TWEEN.Easing.Quadratic.InOut )
-      .onUpdate(function() {
-        contentElement.style[filterProperty] = "blur(" + this.blur + "px)";
-      })
-      .start();
-
     Ember.$(document.documentElement).removeClass('no-scroll');
   }
 });

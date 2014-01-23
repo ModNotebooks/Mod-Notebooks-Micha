@@ -34,11 +34,12 @@
 .l-app-content {
   height: 100%;
   padding-left: 108px;
-  @include transition(all 400ms ease-in-out);
-  @include transform(translate3d(0, 0, 0));
+  @include transition(opacity 400ms ease-in-out);
   @include backface-visibility(hidden);
+  @include transform(translate3d(0, 0, 0));
 
-  &.blurred {
+  &.modal-open {
     @include filter(blur(40px));
+    opacity: .5;
   }
 }
