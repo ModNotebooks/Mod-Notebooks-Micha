@@ -29,8 +29,8 @@ App.ModalDialogComponent = Ember.Component.extend({
     var _this = this;
 
     return new Ember.RSVP.Promise(function(resolve) {
+      Ember.$('.l-app-content').removeClass('modal-open');
       _this.$().removeClass('is-visible').one(App.utils.transitionEnd, function() {
-        Ember.$('.l-app-content').removeClass('modal-open');
         resolve();
       });
     });

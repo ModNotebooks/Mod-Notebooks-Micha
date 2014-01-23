@@ -34,9 +34,13 @@
 .l-app-content {
   height: 100%;
   padding-left: 108px;
-  @include transition(opacity 400ms ease-in-out);
+  @include transition-property(all);
+  @include transition-timing-function(ease-in-out);
   @include backface-visibility(hidden);
   @include transform(translate3d(0, 0, 0));
+
+  .cssfilters & { @include transition-duration(400ms); }
+  .no-cssfilters & { @include transition-duration(800ms); }
 
   &.modal-open {
     .cssfilters & {

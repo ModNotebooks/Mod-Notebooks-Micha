@@ -12,7 +12,7 @@
   overflow-x: auto;
   overflow-y: scroll;
 
-  @include transition(all 400ms ease-in-out);
+  @include transition(all 800ms ease-in-out);
   opacity: 0;
 
   &.is-visible {
