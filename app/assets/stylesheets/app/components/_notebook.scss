@@ -60,7 +60,11 @@ a.notebook:not(.is-disabled) {
   &:after {
     content: "";
     @include size(3px 31px);
-    @extend %absolute-center;
+    position: absolute;
+    top: 50%;
+    margin-top: -15px;
+    left: 50%;
+    margin-left: -2px;
     background: #fff;
   }
 }

@@ -39,7 +39,13 @@
   @include transform(translate3d(0, 0, 0));
 
   &.modal-open {
-    @include filter(blur(40px));
-    opacity: .5;
+    .cssfilters & {
+      @include filter(blur(40px));
+      opacity: .5;
+    }
+
+    .no-cssfilters & {
+      opacity: .05;
+    }
   }
 }
