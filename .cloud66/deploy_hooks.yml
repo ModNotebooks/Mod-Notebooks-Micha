@@ -1,5 +1,5 @@
 staging:
-  last_thing:
+  after_bundle:
     - source: /.cloud66/scripts/bower.sh
       destination: /tmp/bower.sh
       target: rails
