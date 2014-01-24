@@ -7,6 +7,7 @@ App.ApplicationRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRouteMixin
 
   setupController: function(controller, currentUser) {
     this.controllerFor('currentUser').set('model', currentUser);
+    App.inject('controller', 'currentUser', 'controller:currentUser');
   },
 
   actions: {
@@ -22,7 +23,7 @@ App.ApplicationRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRouteMixin
       this.controllerFor('login').set('loginErrorMessage');
 
       this.model().then(function(user) {
-        _this.controllerFor('currentUser').set('model', user);
+        this.setupController(this, user);
         _this.controllerFor('login').set('isLoading', false);
         _super();
       });

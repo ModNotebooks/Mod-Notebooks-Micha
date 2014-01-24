@@ -8,6 +8,7 @@
 #  created_at  :datetime
 #  updated_at  :datetime
 #  deleted_at  :datetime
+#  scope       :string(255)
 #
 
 class NotebookEvent < ActiveRecord::Base

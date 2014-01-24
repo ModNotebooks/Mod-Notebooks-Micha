@@ -39,24 +39,29 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :timeoutable, :lockable #, :invitable
-  ##
-  # Associations
-  ##
+
+  #-----------------------------------------------------------------------------
+  # Relationships
+  #-----------------------------------------------------------------------------
+
   has_many :notebooks, dependent: :nullify
   has_many :pages, through: :notebooks
   has_many :notebook_shares, through: :notebooks, source: :shares
   has_many :page_shares, through: :pages, source: :shares
+  has_one :address, as: :addressable
 
-  ##
+  accepts_nested_attributes_for :address
+
+  #-----------------------------------------------------------------------------
   # Validations
-  ##
+  #-----------------------------------------------------------------------------
 
-  ##
+  #-----------------------------------------------------------------------------
   # Class Methods
-  ##
+  #-----------------------------------------------------------------------------
 
-  ##
+  #-----------------------------------------------------------------------------
   # Instance Methods
-  ##
+  #-----------------------------------------------------------------------------
 
 end

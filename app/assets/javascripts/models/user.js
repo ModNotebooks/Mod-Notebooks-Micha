@@ -9,6 +9,7 @@ App.User = (function() {
     createdAt:            attr('date'),
     updatedAt:            attr('date'),
     confirmedAt:          attr('date'),
+    address:              attr(),
 
     notebooks: DS.hasMany('notebook')
   });

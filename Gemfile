@@ -42,15 +42,18 @@ group :assets do
   # gem 'compass-rails', '1.1.0.pre'
 end
 
-group :development do
+group :development, :staging do
   gem 'better_errors'
   gem 'binding_of_caller'
+  # gem 'rack-mini-profiler'
+  gem 'pry-rails'
+end
+
+group :development do
   gem 'jazz_hands'
   gem 'bullet'
   gem 'quiet_assets'
-  # gem 'rack-mini-profiler'
   gem 'annotate'
-  gem 'pry-rails'
   gem 'guard-livereload', require: false
   gem 'rack-livereload'
 end

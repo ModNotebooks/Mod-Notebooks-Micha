@@ -15,6 +15,7 @@
 #  pdf                 :string(255)
 #  pages_count         :integer          default(0)
 #  deleted_at          :datetime
+#  handle_method       :string(255)
 #
 
 # spec/models/notebook_spec.rb
