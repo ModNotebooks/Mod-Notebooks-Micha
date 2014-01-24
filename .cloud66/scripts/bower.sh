@@ -1,4 +1,4 @@
-cd $STACK_PATH
+cd $STACK_BASE/cached-copy
 if ! type "bower" > /dev/null; then
   npm install -g bower --silent
 fi
