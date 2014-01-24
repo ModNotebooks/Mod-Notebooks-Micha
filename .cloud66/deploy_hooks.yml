@@ -1,0 +1,7 @@
+staging:
+  after_bundle:
+    - source: /.cloud66/scripts/bower.sh
+      destination: <%= ENV['STACK_PATH'] %>
+      target: rails
+      execute: true
+      halt_on_error: true
