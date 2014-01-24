@@ -5,4 +5,5 @@ staging:
       target: rails
       execute: true
       halt_on_error: true
+      run_as: nginx
       sudo: false
