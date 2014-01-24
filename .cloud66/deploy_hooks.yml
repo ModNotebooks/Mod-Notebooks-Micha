@@ -1,5 +1,5 @@
 staging:
-  after_bundle:
+  after_symlink:
     - source: /.cloud66/scripts/bower.sh
       destination: /tmp/bower.sh
       target: rails
