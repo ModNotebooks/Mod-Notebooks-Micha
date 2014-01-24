@@ -5,3 +5,4 @@ staging:
       target: rails
       execute: true
       halt_on_error: true
+      sudo: false
