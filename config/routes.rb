@@ -31,7 +31,8 @@ Mod::Application.routes.draw do
         post 'upload', on: :collection
       end
       resources :pages, only: [:index, :show]
-      resources :users, only: [:show, :update, :create, :destroy]
+      resources :users, only: [:create]
+      resources :users, only: [:show, :update, :destroy], constraints: { id: 'me' }, as: 'me'
     end
 
   end
