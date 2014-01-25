@@ -23,7 +23,7 @@ App.ApplicationRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRouteMixin
       this.controllerFor('login').set('loginErrorMessage');
 
       this.model().then(function(user) {
-        this.setupController(this, user);
+        _this.setupController(null, user);
         _this.controllerFor('login').set('isLoading', false);
         _super();
       });
@@ -37,9 +37,19 @@ App.ApplicationRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRouteMixin
       this._super();
     },
 
+    // This is not getting called for some reason so lets do it ourselves
+    // https://github.com/simplabs/ember-simple-auth/blob/master/packages/ember-simple-auth/lib/mixins/application_route_mixin.js#L160
+    error: function(reason) {
+      var _this = this;
+      if (reason.status === 401) {
+        this.get('session').invalidate().then(function() {
+          _this.transitionTo(Ember.SimpleAuth.routeAfterInvalidation);
+        });
+      }
+    },
+
     openModal: function(modalName, model) {
       this.controllerFor(modalName).set('model', model);
-
       return this.render(modalName, {
         into: 'application',
         outlet: 'modal'

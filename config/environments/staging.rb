@@ -79,5 +79,4 @@ Mod::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   BetterErrors.use_pry!
-  AwesomePrint.defaults = { plain: true }
 end
