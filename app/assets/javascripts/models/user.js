@@ -10,7 +10,7 @@ App.User = (function() {
     updatedAt:            attr('date'),
     confirmedAt:          attr('date'),
 
-    notebooks: DS.hasMany('notebook')
+    notebooks: DS.hasMany('notebook'),
   });
 
 }());

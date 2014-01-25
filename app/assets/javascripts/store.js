@@ -19,7 +19,7 @@ App.NotebookSerializer = DS.ActiveModelSerializer.extend({
   }
 });
 
-App.UserSerializer = DS.ActiveModelSerializer.extend({
+App.UserSerializer = DS.ActiveModelSerializer.extend(DS.EmbeddedRecordsMixin, {
   serialize: function(record, options) {
     var json = this._super.apply(this, arguments);
 
@@ -27,27 +27,5 @@ App.UserSerializer = DS.ActiveModelSerializer.extend({
     delete json.address;
 
     return json;
-  },
-
-  extractSingle: function(store, type, payload, id, requestType) {
-    console.log(payload);
-
-    var address   = payload.user.address,
-        addressId = [address.id];
-
-    payload.addresses = [address];
-    payload.user.address = addressId;
-
-    return this._super.apply(this, arguments);
   }
-});
-
-App.AddressSerialize = DS.ActiveModelSerializer.extend({
-  serializePolymorphicType: function(record, json, relationship) {
-    console.log('HERE', record, json, relationship);
-     var key = relationship.key,
-         belongsTo = get(record, key);
-     key = this.keyForAttribute ? this.keyForAttribute(key) : key;
-     json[key + "_type"] = belongsTo.constructor.typeKey;
-   }
 });
