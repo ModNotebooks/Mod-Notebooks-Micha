@@ -8,12 +8,13 @@
 
 <div class="l-app-navtoggle">
   {{#if session.isAuthenticated}}
-    <a {{ action 'openModal' 'settings' model }}>Settings</a>
+    {{!-- <a {{ action 'openModal' 'settings' model }}>Settings</a> --}}
+    {{#link-to "settings"}}Settings{{/link-to}}
   {{/if}}
 </div>
 
 <section class="l-app-content">
-  {{outlet}}
+  {{outlet content}}
 </section>
 
 {{outlet modal}}

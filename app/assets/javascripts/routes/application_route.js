@@ -33,7 +33,6 @@ App.ApplicationRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRouteMixin
       // Reset the store
       // http://www.kaspertidemann.com/how-to-clear-the-ember-data-store-in-ember-js/
       this.store.init();
-
       this._super();
     },
 

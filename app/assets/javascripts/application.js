@@ -23,7 +23,11 @@
 //= require app
 
 // for more details see: http://emberjs.com/guides/application/
-App = Ember.Application.create({
+App = Ember.Namespace.create({ name: "App" });
+
+Main = App.Main = Ember.Application.extend()
+
+Main.create({
   LOG_ACTIVE_GENERATION: true,
   LOG_MODULE_RESOLVER: true,
   LOG_TRANSITIONS: true,
@@ -31,8 +35,18 @@ App = Ember.Application.create({
   LOG_VIEW_LOOKUPS: true
 });
 
-App.Router.reopen({
-  location: 'history'
+Settings = Ember.Application.create({
+  LOG_ACTIVE_GENERATION: true,
+  LOG_MODULE_RESOLVER: true,
+  LOG_TRANSITIONS: true,
+  LOG_TRANSITIONS_INTERNAL: true,
+  LOG_VIEW_LOOKUPS: true
+});
+
+Main.Router.reopen({
+  location: 'none',
+
+  rootElement: ''
 });
 
 Ember.LinkView.reopen({
