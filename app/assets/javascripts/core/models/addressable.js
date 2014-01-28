@@ -1,4 +1,4 @@
-App.Addressable = (function() {
+Core.Addressable = (function() {
 
   var attr = DS.attr;
 

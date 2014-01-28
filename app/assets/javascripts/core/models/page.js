@@ -1,4 +1,4 @@
-App.Page = (function() {
+Core.Page = (function() {
 
   var attr = DS.attr;
 

@@ -1,9 +1,35 @@
 @import "neat/app/assets/stylesheets/neat-helpers";
 
 .l-settings {
-  // background: red;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
   display: table;
+  @include transform(translate3d(0, 0, 0));
+  z-index: $zindex-modal;
+  overflow-x: auto;
+  overflow-y: scroll;
+  // display: none;
+
+  @include transition(all 400ms ease-in-out);
+  opacity: 0;
+  visibility: hidden;
+
+  &.is-visible {
+    opacity: 1;
+    // display: block;
+    visibility: visible;
+  }
+}
+
+.l-settings-inner {
+  width: 100%;
+  height: 100%;
+  display: table;
+  position: relative;
+  z-index: $zindex-modal;
 }
 
 .l-settings-menu, .l-settings-content {

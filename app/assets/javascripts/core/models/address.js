@@ -1,4 +1,4 @@
-App.Address = (function() {
+Core.Address = (function() {
 
   var attr = DS.attr;
 

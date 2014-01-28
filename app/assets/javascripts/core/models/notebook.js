@@ -1,4 +1,4 @@
-App.Notebook = (function() {
+Core.Notebook = (function() {
 
   var attr = DS.attr;
 

@@ -1,8 +1,8 @@
-App.User = (function() {
+Core.User = (function() {
 
   var attr = DS.attr;
 
-  return App.Addressable.extend({
+  return Core.Addressable.extend({
     email:                attr('string'),
     password:             attr('string'),
     passwordConfirmation: attr('string'),

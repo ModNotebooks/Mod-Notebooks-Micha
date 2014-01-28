@@ -20,38 +20,66 @@
 //= require tweenjs/examples/js/RequestAnimationFrame
 //= require tweenjs/build/tween.min
 //= require_self
-//= require app
+//= require core/core
+//= require app/app
+//= require settings/settings
+//= require store
 
 // for more details see: http://emberjs.com/guides/application/
-App = Ember.Namespace.create({ name: "App" });
 
-Main = App.Main = Ember.Application.extend()
+(function() {
 
-Main.create({
-  LOG_ACTIVE_GENERATION: true,
-  LOG_MODULE_RESOLVER: true,
-  LOG_TRANSITIONS: true,
-  LOG_TRANSITIONS_INTERNAL: true,
-  LOG_VIEW_LOOKUPS: true
-});
+  Ember.LinkView.reopen({
+    activeClass: "is-active",
+    disabledClass: "is-disabled"
+  });
 
-Settings = Ember.Application.create({
-  LOG_ACTIVE_GENERATION: true,
-  LOG_MODULE_RESOLVER: true,
-  LOG_TRANSITIONS: true,
-  LOG_TRANSITIONS_INTERNAL: true,
-  LOG_VIEW_LOOKUPS: true
-});
+  Ember.DefaultResolver.reopen({
+    templateNamespace: '',
 
-Main.Router.reopen({
-  location: 'none',
+    resolveTemplate: function(parsedName) {
+      parsedName.fullNameWithoutType = this.get('templateNamespace') + parsedName.fullNameWithoutType;
+      var resolvedTemplate = this._super(parsedName);
+      if (resolvedTemplate) { return resolvedTemplate; }
+      return Ember.TEMPLATES['not_found'];
+    }
+  });
 
-  rootElement: ''
-});
+  Ember.Application.reopen({
+    LOG_ACTIVE_GENERATION: true,
+    LOG_MODULE_RESOLVER: true,
+    LOG_TRANSITIONS: true,
+    LOG_TRANSITIONS_INTERNAL: true,
+    LOG_VIEW_LOOKUPS: true,
+  });
 
-Ember.LinkView.reopen({
-  activeClass: "is-active",
-  disabledClass: "is-disabled"
-});
+  var MainApp = Ember.Application.create({
+    name: 'mod',
+    rootElement: '#main',
+    Resolver: Ember.DefaultResolver.extend({ templateNamespace: 'app/' })
+  });
+
+  var SettingsApp = Ember.Application.create({
+    name: 'mod-settings',
+    rootElement: '#settings',
+    Resolver: Ember.DefaultResolver.extend({ templateNamespace: 'settings/' }),
+
+    // Such a shitty hack!
+    isVisible: function() {
+      return this.__container__.lookup('controller:application').get('isVisible');
+    }
+  });
+
+  MainApp.Router.reopen({
+    location: 'history',
+  });
+
+  SettingsApp.Router.reopen({
+    location: 'none',
+  });
+
+  window.App = MainApp;
+  window.Settings = SettingsApp;
+}());
 
 //= require_tree .
