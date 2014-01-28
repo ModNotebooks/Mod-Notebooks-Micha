@@ -62,12 +62,7 @@
   var SettingsApp = Ember.Application.create({
     name: 'mod-settings',
     rootElement: '#settings',
-    Resolver: Ember.DefaultResolver.extend({ templateNamespace: 'settings/' }),
-
-    // Such a shitty hack!
-    isVisible: function() {
-      return this.__container__.lookup('controller:application').get('isVisible');
-    }
+    Resolver: Ember.DefaultResolver.extend({ templateNamespace: 'settings/' })
   });
 
   MainApp.Router.reopen({

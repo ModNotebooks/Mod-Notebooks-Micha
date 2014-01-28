@@ -1,15 +1,4 @@
 App.ApplicationRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRouteMixin, {
-  model: function() {
-    if (this.get('session.isAuthenticated')) {
-      return this.store.find('user', 'me');
-    }
-  },
-
-  setupController: function(controller, currentUser) {
-    this.controllerFor('currentUser').set('model', currentUser);
-    App.inject('controller', 'currentUser', 'controller:currentUser');
-  },
-
   actions: {
     sessionAuthenticationFailed: function(error) {
       this.controllerFor('login').set('isLoading', false);
