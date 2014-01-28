@@ -48,6 +48,7 @@ class User < ActiveRecord::Base
   has_many :pages, through: :notebooks
   has_many :notebook_shares, through: :notebooks, source: :shares
   has_many :page_shares, through: :pages, source: :shares
+  has_one  :preferences, dependent: :destroy
 
   #-----------------------------------------------------------------------------
   # Validations
@@ -60,5 +61,9 @@ class User < ActiveRecord::Base
   #-----------------------------------------------------------------------------
   # Instance Methods
   #-----------------------------------------------------------------------------
+
+  def preferences
+    super || build_preferences
+  end
 
 end

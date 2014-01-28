@@ -33,6 +33,7 @@ Mod::Application.routes.draw do
       resources :pages, only: [:index, :show]
       resources :users, only: [:create]
       resources :users, only: [:show, :update, :destroy], constraints: { id: 'me' }, as: 'me'
+      resources :preferences, only: [:show, :update], constraints: { id: 'me' }, as: 'me'
     end
 
   end

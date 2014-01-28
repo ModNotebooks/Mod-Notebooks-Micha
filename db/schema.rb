@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140124022658) do
+ActiveRecord::Schema.define(version: 20140128201629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,6 +114,15 @@ ActiveRecord::Schema.define(version: 20140124022658) do
   end
 
   add_index "pages", ["notebook_id"], name: "index_pages_on_notebook_id", using: :btree
+
+  create_table "preferences", force: true do |t|
+    t.hstore   "properties"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "preferences", ["user_id"], name: "index_preferences_on_user_id", unique: true, using: :btree
 
   create_table "shares", force: true do |t|
     t.string   "token"
