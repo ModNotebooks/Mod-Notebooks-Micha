@@ -3,6 +3,8 @@
 //= require_tree ./templates
 //= require ./router
 //= require_tree ./routes
-//= require_self//= require_self
+//= require_self
 
-Core.registerModels(Settings);
+Settings.ApplicationAdapter = Core.ApplicationAdapter;
+Settings.NotebookSerializer = Core.NotebookSerializer;
+Settings.PreferencesSerializer  = Core.PreferencesSerializer;

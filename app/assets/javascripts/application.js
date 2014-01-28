@@ -22,8 +22,7 @@
 //= require_self
 //= require core/core
 //= require app/app
-//= require settings/settings
-//= require store
+// require settings/settings
 
 // for more details see: http://emberjs.com/guides/application/
 
@@ -42,6 +41,13 @@
       var resolvedTemplate = this._super(parsedName);
       if (resolvedTemplate) { return resolvedTemplate; }
       return Ember.TEMPLATES['not_found'];
+    },
+
+    resolveModel: function(parsedName) {
+      var className = Ember.String.classify(parsedName.name),
+            factory = Core.get(className);
+
+      if (factory) { return factory; }
     }
   });
 
@@ -59,22 +65,22 @@
     Resolver: Ember.DefaultResolver.extend({ templateNamespace: 'app/' })
   });
 
-  var SettingsApp = Ember.Application.create({
-    name: 'mod-settings',
-    rootElement: '#settings',
-    Resolver: Ember.DefaultResolver.extend({ templateNamespace: 'settings/' })
-  });
+  // var SettingsApp = Ember.Application.create({
+  //   name: 'mod-settings',
+  //   rootElement: '#settings',
+  //   Resolver: Ember.DefaultResolver.extend({ templateNamespace: 'settings/' })
+  // });
 
   MainApp.Router.reopen({
     location: 'history',
   });
 
-  SettingsApp.Router.reopen({
-    location: 'none',
-  });
+  // SettingsApp.Router.reopen({
+  //   location: 'none',
+  // });
 
   window.App = MainApp;
-  window.Settings = SettingsApp;
+  window.Settings = {};
 }());
 
 //= require_tree .

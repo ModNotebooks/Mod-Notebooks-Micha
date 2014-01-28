@@ -6,16 +6,8 @@ App.ApplicationRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRouteMixin
     },
 
     sessionAuthenticationSucceeded: function() {
-      var _this = this;
-      var _super = this._super.bind(this);
-
-      this.controllerFor('login').set('loginErrorMessage');
-
-      this.model().then(function(user) {
-        _this.setupController(null, user);
-        _this.controllerFor('login').set('isLoading', false);
-        _super();
-      });
+      this.controllerFor('login').set('isLoading', false);
+      this._super();
     },
 
     sessionInvalidationSucceeded: function() {

@@ -10,4 +10,8 @@
 //= require_tree ./initializers
 //= require_self
 
-Core.registerModels(App);
+// http://emberjs.com/guides/models/using-the-store/
+
+App.ApplicationAdapter = Core.ApplicationAdapter;
+App.NotebookSerializer = Core.NotebookSerializer;
+App.PreferencesSerializer = Core.PreferencesSerializer;

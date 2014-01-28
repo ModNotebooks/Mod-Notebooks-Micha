@@ -2,7 +2,7 @@ Core.User = (function() {
 
   var attr = DS.attr;
 
-  return Core.Addressable.extend({
+  return DS.Model.extend({
     email:                attr('string'),
     password:             attr('string'),
     passwordConfirmation: attr('string'),
