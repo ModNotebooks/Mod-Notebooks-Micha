@@ -42,7 +42,7 @@
   .cssfilters & { @include transition-duration(400ms); }
   .no-cssfilters & { @include transition-duration(800ms); }
 
-  &.modal-open {
+  &.is-blurred {
     .cssfilters & {
       @include filter(blur(40px));
       opacity: .5;

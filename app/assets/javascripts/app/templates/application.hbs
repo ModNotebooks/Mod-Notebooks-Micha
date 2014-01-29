@@ -18,7 +18,7 @@
   {{/if}}
 </div>
 
-<section class="l-app-content">
+<section {{bind-attr class=":l-app-content settingsVisible:is-blurred"}}>
   {{outlet content}}
 </section>
 

@@ -30,5 +30,5 @@ App.ApplicationView = Ember.View.extend({
         .removeClass('awake')
         .addClass('asleep');
     }
-  }.observes('session.isAuthenticated').on('init')
+  }.observes('controller.currentPath').on('init')
 });
