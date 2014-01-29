@@ -15,3 +15,5 @@
 App.ApplicationAdapter = Core.ApplicationAdapter;
 App.NotebookSerializer = Core.NotebookSerializer;
 App.PreferencesSerializer = Core.PreferencesSerializer;
+App.AddressableSerializer  = Core.AddressSerializer;
+App.UserSerializer = Core.UserSerializer

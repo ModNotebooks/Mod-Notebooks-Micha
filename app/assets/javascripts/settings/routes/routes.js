@@ -28,8 +28,25 @@ Settings.IndexRoute = Ember.Route.extend({
   }
 });
 
-Settings.SettingsAccountRoute = Ember.Route.extend({});
+Settings.SettingsAccountRoute = Ember.Route.extend({
+  model: function() {
+    return this.store.find('user', 'me');
+  },
 
-Settings.SettingsAddressRoute = Ember.Route.extend({});
+  setupController: function(controller, model) {
+    controller.set('model', model);
+  }
+});
+
+Settings.SettingsAddressRoute = Ember.Route.extend({
+  model: function() {
+    return this.store.find('preferences', 'me');
+  },
+
+  setupController: function(controller, model) {
+    controller.set('model', model);
+    controller.set('address', model.get('address'));
+  }
+});
 
 Settings.SettingsSyncRoute = Ember.Route.extend({});

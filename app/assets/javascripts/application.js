@@ -22,11 +22,13 @@
 //= require_self
 //= require core/core
 //= require app/app
-// require settings/settings
+//= require settings/settings
 
 // for more details see: http://emberjs.com/guides/application/
 
 (function() {
+
+  window.Core = Ember.Namespace.create({});
 
   Ember.LinkView.reopen({
     activeClass: "is-active",
@@ -34,18 +36,9 @@
   });
 
   Ember.DefaultResolver.reopen({
-    templateNamespace: '',
-
-    resolveTemplate: function(parsedName) {
-      parsedName.fullNameWithoutType = this.get('templateNamespace') + parsedName.fullNameWithoutType;
-      var resolvedTemplate = this._super(parsedName);
-      if (resolvedTemplate) { return resolvedTemplate; }
-      return Ember.TEMPLATES['not_found'];
-    },
-
     resolveModel: function(parsedName) {
       var className = Ember.String.classify(parsedName.name),
-            factory = Core.get(className);
+            factory = Ember.get(Core, className);
 
       if (factory) { return factory; }
     }
@@ -60,27 +53,25 @@
   });
 
   var MainApp = Ember.Application.create({
-    name: 'mod',
     rootElement: '#main',
-    Resolver: Ember.DefaultResolver.extend({ templateNamespace: 'app/' })
+    Resolver: Ember.DefaultResolver.extend()
   });
 
-  // var SettingsApp = Ember.Application.create({
-  //   name: 'mod-settings',
-  //   rootElement: '#settings',
-  //   Resolver: Ember.DefaultResolver.extend({ templateNamespace: 'settings/' })
-  // });
+  var SettingsApp = Ember.Application.create({
+    rootElement: '#settings',
+    Resolver: Ember.DefaultResolver.extend()
+  });
 
   MainApp.Router.reopen({
     location: 'history',
   });
 
-  // SettingsApp.Router.reopen({
-  //   location: 'none',
-  // });
+  SettingsApp.Router.reopen({
+    location: 'none',
+  });
 
   window.App = MainApp;
-  window.Settings = {};
+  window.Settings = SettingsApp;
 }());
 
 //= require_tree .

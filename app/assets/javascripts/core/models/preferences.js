@@ -2,8 +2,8 @@ Core.Preferences = (function() {
 
   var attr = DS.attr;
 
-  return Core.Addressable.extend({
-
+  return DS.Model.extend({
+    address: DS.belongsTo('address')
   });
 
 }());

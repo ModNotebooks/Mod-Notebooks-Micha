@@ -19,8 +19,32 @@ Core.NotebookSerializer = DS.ActiveModelSerializer.extend({
   }
 });
 
-Core.PreferencesSerializer = DS.ActiveModelSerializer.extend(DS.EmbeddedRecordsMixin, {
-  attrs: {
-    address: { embedded: 'always' }
+Core.PreferencesSerializer = DS.ActiveModelSerializer.extend({
+  normalizeId: function(hash) {
+    this._super();
+    hash.id = 'me';
+  },
+
+  serializeBelongsTo: function(record, json, relationship) {
+    var key = relationship.key;
+
+    if (key === "address") {
+      json['address_attributes'] = record.get('address').toJSON();
+    }
+  }
+});
+
+Core.AddressSerializer = DS.ActiveModelSerializer.extend({
+  normalize: function(type, hash, prop) {
+    var hash = this._super(type, hash, prop);
+    hash.addressable.id = 'me';
+    return hash;
+  }
+});
+
+Core.UserSerializer = DS.ActiveModelSerializer.extend({
+  normalizeId: function(hash) {
+    this._super();
+    hash.id = 'me';
   }
 });

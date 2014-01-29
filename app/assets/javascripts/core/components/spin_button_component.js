@@ -1,4 +1,4 @@
-App.SpinButtonComponent = Ember.Component.extend({
+Core.SpinButtonComponent = Ember.Component.extend({
   buttonText: "Send",
   buttonClass: "button--large",
   actions: {

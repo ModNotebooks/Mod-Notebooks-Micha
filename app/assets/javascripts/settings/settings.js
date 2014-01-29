@@ -8,3 +8,6 @@
 Settings.ApplicationAdapter = Core.ApplicationAdapter;
 Settings.NotebookSerializer = Core.NotebookSerializer;
 Settings.PreferencesSerializer  = Core.PreferencesSerializer;
+Settings.AddressSerializer  = Core.AddressSerializer
+Settings.UserSerializer = Core.UserSerializer
+Settings.SpinButtonComponent = Core.SpinButtonComponent;
