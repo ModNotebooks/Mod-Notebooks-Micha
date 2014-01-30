@@ -40,12 +40,7 @@ Settings.SettingsAccountRoute = Ember.Route.extend({
 
 Settings.SettingsAddressRoute = Ember.Route.extend({
   model: function() {
-    return this.store.find('preferences', 'me');
-  },
-
-  setupController: function(controller, model) {
-    controller.set('model', model);
-    controller.set('address', model.get('address'));
+    return this.store.find('address', 'me');
   }
 });
 

@@ -1,4 +1,4 @@
-App.utils = (function() {
+Core.utils = (function() {
 
   var Utils = {};
 

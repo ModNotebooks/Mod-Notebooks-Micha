@@ -27,7 +27,7 @@ App.SignupController = Ember.ObjectController.extend({
             _this.transitionTo(Ember.SimpleAuth.authenticationRoute);
           });
         }, function() {
-          model.send("becameValid");
+          // model.send("becameValid");
           _this.set('isLoading', false);
         });
     }

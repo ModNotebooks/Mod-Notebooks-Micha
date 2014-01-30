@@ -4,5 +4,6 @@
 //= require_tree ./models
 //= require_tree ./templates
 //= require_tree ./components
+//= require_tree ./helpers
 
 Ember.Inflector.inflector.irregular('preferences', 'preferences');

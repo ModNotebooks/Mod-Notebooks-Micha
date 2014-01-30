@@ -35,6 +35,11 @@ Core.PreferencesSerializer = DS.ActiveModelSerializer.extend({
 });
 
 Core.AddressSerializer = DS.ActiveModelSerializer.extend({
+  normalizeId: function(hash) {
+    this._super();
+    hash.id = 'me';
+  },
+
   normalize: function(type, hash, prop) {
     var hash = this._super(type, hash, prop);
     hash.addressable.id = 'me';

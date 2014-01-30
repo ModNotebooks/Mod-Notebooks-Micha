@@ -1,9 +1,12 @@
 <form class="form">
-  <div class="form__control">
-    {{input type="text" value="" placeholder="Full Name"}}
+  <div {{bind-attr class=":form__control errors.email:is-error"}}>
+    {{input type="text" value=email placeholder="Email Address"}}
+    {{#if errors.email }}
+      <span class="form__error">{{{format-errors errors.email}}}</span>
+    {{/if}}
   </div>
   <div class="form__actions">
-    {{spin-button isLoading=isLoading buttonText="Save" action="save" buttonClass="button--medium"}}
+    {{spin-button isLoading=isLoading isEnabled=isValid buttonText="Save" action="save" buttonClass="button--medium"}}
   </div>
 </form>
 

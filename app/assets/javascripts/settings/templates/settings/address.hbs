@@ -1,21 +1,42 @@
 <form class="form">
-  <div class="form__control">
-    {{input type="text" value=address.name placeholder="Full Name"}}
+  <div {{bind-attr class=":form__control errors.name:is-error"}}>
+    {{input type="text" value=name placeholder="Full Name"}}
+    {{#if errors.name }}
+      <span class="form__error">{{format-errors errors.name}}</span>
+    {{/if}}
   </div>
-  <div class="form__control">
-    {{input type="text" value=address.line_1 placeholder="Address"}}
+  <div {{bind-attr class=":form__control errors.line_1:is-error"}}>
+    {{input type="text" value=line_1 placeholder="Address"}}
+    {{#if errors.line_1 }}
+      <span class="form__error">{{format-errors errors.line_1}}</span>
+    {{/if}}
   </div>
-  <div class="form__control--twothird">
-    {{input type="text" value=address.region placeholder="State"}}
+  <div {{bind-attr class=":form__control--onethird errors.city:is-error"}}>
+    {{input type="text" value=city placeholder="City"}}
+    {{#if errors.city }}
+      <span class="form__error">{{format-errors errors.city}}</span>
+    {{/if}}
   </div>
-  <div class="form__control--onethird">
-    {{input type="text" value=address.postalCode placeholder="Postal Code"}}
+  <div {{bind-attr class=":form__control--onethird errors.region:is-error"}}>
+    {{input type="text" value=region placeholder="State"}}
+    {{#if errors.region }}
+      <span class="form__error">{{format-errors errors.region}}</span>
+    {{/if}}
+  </div>
+  <div {{bind-attr class=":form__control--onethird errors.postalCode:is-error"}}>
+    {{input type="text" value=postalCode placeholder="Postal Code"}}
+    {{#if errors.postalCode }}
+      <span class="form__error">{{format-errors errors.postalCode}}</span>
+    {{/if}}
   </div>
   <div class="clearfix"></div>
-  <div class="form__control">
-    {{input type="text" value=address.country placeholder="Country"}}
+  <div {{bind-attr class=":form__control errors.country:is-error"}}>
+    {{input type="text" value=country placeholder="Country"}}
+    {{#if errors.country }}
+      <span class="form__error">{{format-errors errors.country}}</span>
+    {{/if}}
   </div>
   <div class="form__actions">
-    {{spin-button isLoading=isLoading buttonText="Save" action="save" buttonClass="button--medium"}}
+    {{spin-button isLoading=isLoading isEnabled=isValid buttonText="Save" action="save" buttonClass="button--medium"}}
   </div>
 </form>

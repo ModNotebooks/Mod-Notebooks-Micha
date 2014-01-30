@@ -16,11 +16,10 @@ class Preferences < ActiveRecord::Base
   #-----------------------------------------------------------------------------
 
   belongs_to :user
-  has_one :address, as: :addressable, dependent: :destroy
+  has_one :address, as: :addressable, dependent: :destroy, validate: false
   store_accessor :properties, :test
 
   accepts_nested_attributes_for :address, update_only: true
-
 
   #-----------------------------------------------------------------------------
   # Validations
@@ -29,6 +28,8 @@ class Preferences < ActiveRecord::Base
   validates :user,
     presence: true
 
+  validates_associated :address
+
   #-----------------------------------------------------------------------------
   # Class Methods
   #-----------------------------------------------------------------------------
@@ -36,5 +37,9 @@ class Preferences < ActiveRecord::Base
   #-----------------------------------------------------------------------------
   # Instance Methods
   #-----------------------------------------------------------------------------
+
+  def address
+    super || build_address
+  end
 
 end
