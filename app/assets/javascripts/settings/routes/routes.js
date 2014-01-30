@@ -1,4 +1,4 @@
-Settings.ApplicationRoute = Ember.Route.extend({
+Settings.ApplicationRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRouteMixin, {
   setupController: function(controller) {
     this._super(controller);
 
@@ -44,4 +44,6 @@ Settings.SettingsAddressRoute = Ember.Route.extend({
   }
 });
 
-Settings.SettingsSyncRoute = Ember.Route.extend({});
+Settings.SettingsSyncRoute = Ember.Route.extend({
+
+});

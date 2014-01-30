@@ -56,6 +56,7 @@ group :development do
   gem 'annotate'
   gem 'guard-livereload', require: false
   gem 'rack-livereload'
+  gem 'letter_opener'
 end
 
 group :development, :test do

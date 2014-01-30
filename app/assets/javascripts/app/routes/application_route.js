@@ -1,4 +1,11 @@
 App.ApplicationRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRouteMixin, {
+
+  setupController: function() {
+    if (this.get('session.isAuthenticated')) {
+      Ember.Instrumentation.instrument("app.isAuthenticated", {}, Ember.K);
+    }
+  },
+
   actions: {
     sessionAuthenticationFailed: function(error) {
       this.controllerFor('login').set('isLoading', false);
@@ -8,6 +15,7 @@ App.ApplicationRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRouteMixin
     sessionAuthenticationSucceeded: function() {
       this.controllerFor('login').set('isLoading', false);
       this._super();
+      Ember.Instrumentation.instrument("app.isAuthenticated", {}, Ember.K);
     },
 
     sessionInvalidationSucceeded: function() {
@@ -29,12 +37,12 @@ App.ApplicationRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRouteMixin
     },
 
     openSettings: function() {
-      Ember.Instrumentation.instrument("app.openSettings");
+      Ember.Instrumentation.instrument("app.openSettings", {}, Ember.K);
       this.controller.set('settingsVisible', true);
     },
 
     closeSettings: function() {
-      Ember.Instrumentation.instrument("app.closeSettings");
+      Ember.Instrumentation.instrument("app.closeSettings", {}, Ember.K);
       this.controller.set('settingsVisible', false);
     },
 

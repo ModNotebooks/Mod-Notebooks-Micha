@@ -10,6 +10,8 @@ Mod::Application.routes.draw do
     devise_for :users,
       skip: [:sessions, :registrations]
 
+    get '/login', to: 'home#index', as: :new_user_session
+    get '/signup', to: 'home#index', as: :new_user_registration
 
     get '/styleguide', to: "home#guide"
     get '/layout', to: "home#layout"
