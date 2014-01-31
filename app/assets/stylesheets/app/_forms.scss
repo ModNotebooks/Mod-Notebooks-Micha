@@ -1,6 +1,6 @@
 fieldset {
-  margin: 0 0 ($base-line-height / 2) 0;
-  padding: $base-line-height;
+  margin: 0;
+  padding: 0;
 }
 
 #{$all-text-inputs} {
@@ -112,6 +112,13 @@ form {
       #{$all-text-inputs-focus} { background: none; }
     }
   }
+}
+
+.form__control--passwordreset {
+  @extend .form__control;
+  padding: 26px 20px;
+
+  button { margin-left: 20px; }
 }
 
 .form__control--half {

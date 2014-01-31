@@ -8,7 +8,7 @@ Ember.Handlebars.registerBoundHelper('format-date', function(date, format) {
 
 Ember.Handlebars.registerBoundHelper('format-errors', function(errors) {
   errors = errors.reduce(function(memo, item) {
-    memo.push(item.attribute + " " + item.message);
+    memo.push(item.attribute.decamelize().humanize() + " " + item.message);
     return memo;
   }, []);
 

@@ -6,11 +6,10 @@ Core.User = (function() {
     email:                attr('string'),
     password:             attr('string'),
     passwordConfirmation: attr('string'),
-    createdAt:            attr('date'),
-    updatedAt:            attr('date'),
+    currentPassword:      attr('string'),
     confirmedAt:          attr('date'),
 
-    notebooks: DS.hasMany('notebook'),
+    notebooks: DS.hasMany('notebook')
   });
 
 }());

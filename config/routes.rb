@@ -10,14 +10,16 @@ Mod::Application.routes.draw do
     devise_for :users,
       skip: [:sessions, :registrations]
 
-    get '/login', to: 'home#index', as: :new_user_session
-    get '/signup', to: 'home#index', as: :new_user_registration
+    scope module: 'app' do
+      get '/login', to: 'base#index', as: :new_user_session
+      get '/signup', to: 'base#index', as: :new_user_registration
 
-    get '/styleguide', to: "home#guide"
-    get '/layout', to: "home#layout"
-    root to: 'home#index'
+      get '/styleguide', to: "base#guide"
+      get '/layout', to: "base#layout"
+      root to: 'base#index'
 
-    get '*path',    to: 'home#index'
+      get '*path',    to: 'base#index'
+    end
   end
 
   constraints subdomain: 'api', defaults: { format: 'json' } do
@@ -37,6 +39,8 @@ Mod::Application.routes.draw do
       resources :users, only: [:show, :update, :destroy], constraints: { id: 'me' }, as: 'me'
       resources :preferences, only: [:show, :update], constraints: { id: 'me' }, as: 'me'
       resources :addresses, only: [:show, :update], constraints: { id: 'me' }, as: 'me'
+
+      post 'passwords/reset', to: 'passwords#reset'
     end
 
   end

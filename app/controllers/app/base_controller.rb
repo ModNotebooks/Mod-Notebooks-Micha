@@ -1,4 +1,7 @@
-class HomeController < ApplicationController
+class App::BaseController < ApplicationController
+
+  layout "singlepage"
+
   def index; end
 
   def guide

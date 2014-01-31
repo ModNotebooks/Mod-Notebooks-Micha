@@ -9,6 +9,16 @@ Core.ApplicationAdapter = DS.ActiveModelAdapter.extend({
   }
 });
 
+Core.ApplicationSerializer = DS.ActiveModelSerializer.extend({
+  serializeAttribute: function(record, json, key, attribute) {
+    var value = Ember.get(record, key);
+
+    if (!Ember.isEmpty(value)) {
+      return this._super(record, json, key, attribute);
+    }
+  }
+});
+
 Core.NotebookSerializer = DS.ActiveModelSerializer.extend({
   normalizeHash: {
     notebooks: function(hash) {
@@ -47,7 +57,7 @@ Core.AddressSerializer = DS.ActiveModelSerializer.extend({
   }
 });
 
-Core.UserSerializer = DS.ActiveModelSerializer.extend({
+Core.UserSerializer = Core.ApplicationSerializer.extend({
   normalizeId: function(hash) {
     this._super();
     hash.id = 'me';

@@ -16,7 +16,9 @@ class Api::V1::UsersController < Api::BaseController
   end
 
   def update
-    if @user.update_without_password(update_params)
+    method = update_params.has_key?(:current_password) ? :update_with_password : :update_without_password
+
+    if @user.send(method, update_params)
       head :no_content
     else
       respond_with @user, status: :unprocessable_entity
@@ -35,7 +37,7 @@ class Api::V1::UsersController < Api::BaseController
     end
 
     def update_params
-      params.require(:user).permit(:email, :password, :password_confirmation, address: {})
+      params.require(:user).permit(:email, :password, :password_confirmation, :current_password)
     end
 
 end
