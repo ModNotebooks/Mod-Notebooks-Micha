@@ -80,3 +80,33 @@
     display: block;
   }
 }
+
+.l-sync-service {
+  display: table;
+  width: 100%;
+  padding: 20px 10px;
+  border-bottom: 1px solid rgba(#ebebe9, .11);
+  color: rgba(#fff, .47);
+
+  &:last-of-type { border-bottom: none; }
+
+  &.is-connected {
+    color: #fff;
+  }
+}
+
+.l-sync-service-col {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.l-sync-service-left,
+.l-sync-service-center,
+.l-sync-service-right {
+  @extend .l-sync-service-col;
+}
+
+.l-sync-service-center {
+  width: 100%;
+  padding: 0 20px;
+}

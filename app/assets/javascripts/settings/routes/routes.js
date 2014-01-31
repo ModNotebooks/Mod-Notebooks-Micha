@@ -45,5 +45,7 @@ Settings.SettingsAddressRoute = Ember.Route.extend({
 });
 
 Settings.SettingsSyncRoute = Ember.Route.extend({
-
+  model: function() {
+    return this.store.find('service');
+  }
 });
