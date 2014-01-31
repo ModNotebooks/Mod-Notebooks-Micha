@@ -1,6 +1,12 @@
 fieldset {
-  margin: 0;
+  margin: $base-line-height 0 0 0;
   padding: 0;
+  border: none;
+}
+
+legend {
+  text-transform: uppercase;
+  margin-left: 20px;
 }
 
 #{$all-text-inputs} {

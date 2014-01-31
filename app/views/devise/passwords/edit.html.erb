@@ -1,0 +1,19 @@
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: 'l-guest-form form' }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <%= f.hidden_field :reset_password_token %>
+
+  <div class="form__control flush">
+    <%= f.password_field :password, autofocus: true, placeholder: "New Password" %>
+  </div>
+
+  <div class="form__control flush">
+    <%= f.password_field :password_confirmation, placeholder: "Confirm Password" %>
+  </div>
+
+  <div class="form__actions">
+    <button type="submit" class="button--medium">Change my password</button>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>
