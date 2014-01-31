@@ -34,9 +34,7 @@ label {
   }
 }
 
-input[type="search"] {
-  @include appearance(none);
-}
+input[type="search"] { @include appearance(none); }
 
 input[type="checkbox"], input[type="radio"] {
   display: inline;
