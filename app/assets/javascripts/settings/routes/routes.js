@@ -46,6 +46,29 @@ Settings.SettingsAddressRoute = Ember.Route.extend({
 
 Settings.SettingsSyncRoute = Ember.Route.extend({
   model: function() {
-    return this.store.find('service');
+    var _this = this;
+
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      _this.store.find('service').then(function(services) {
+
+        var defaultServices = ['dropbox', 'evernote', 'onenote'];
+
+        services = defaultServices.map(function(item, index, enumerable) {
+          var existingService = services.findBy('provider', item);
+          if (existingService)
+            return existingService;
+
+          return _this.store.createRecord('service', {
+            provider: item
+          });
+        });
+
+        resolve(services);
+      }, function(error) { reject(error); });
+    });
+  },
+
+  setupController: function(controller, models) {
+    console.log('models', models);
   }
 });

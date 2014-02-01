@@ -1,0 +1,9 @@
+<html>
+<head></head>
+<body>
+  <script>
+    window.opener.Core.ServiceConnector.serviceConnectionSucceeded(<%= raw @auth_hash.to_json %>);
+    window.opener.close();
+  </script>
+</body>
+</html>

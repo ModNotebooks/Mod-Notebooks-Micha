@@ -201,6 +201,15 @@ GEM
     net-ssh (2.7.0)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
+    oauth (0.4.7)
+    omniauth (1.2.1)
+      hashie (>= 1.2, < 3)
+      rack (~> 1.0)
+    omniauth-dropbox (0.2.0)
+      omniauth-oauth (~> 1.0)
+    omniauth-oauth (1.0.1)
+      oauth
+      omniauth (~> 1.0)
     orm_adapter (0.5.0)
     paranoia (2.0.2)
       activerecord (~> 4.0)
@@ -398,6 +407,8 @@ DEPENDENCIES
   jquery-rails
   letter_opener
   mini_magick
+  omniauth
+  omniauth-dropbox
   paranoia (~> 2.0)
   pg
   pry-rails

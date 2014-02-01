@@ -16,6 +16,9 @@ gem 'resque-timeout'
 gem 'resque-scheduler', github: 'resque/resque-scheduler', require: 'resque_scheduler'
 gem 'resque_mailer'
 
+gem 'omniauth'
+gem 'omniauth-dropbox'
+
 gem 'strip_attributes'
 gem 'active_model_serializers'
 

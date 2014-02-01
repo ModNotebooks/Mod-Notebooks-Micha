@@ -1,5 +1,6 @@
 //= require_self
 //= require ./store
+//= require ./service_connector
 //= require ./models/addressable
 //= require_tree ./models
 //= require_tree ./templates
