@@ -7,9 +7,8 @@ Settings.SyncServiceController = Ember.ObjectController.extend({
       this.send('openAuthWindow', service);
     } else {
       var provider = service.get('provider');
-      service.destroyRecord()
+      service.destroyRecord();
     }
-
   }.observes('isEnabled')
 
 });

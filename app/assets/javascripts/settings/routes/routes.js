@@ -68,6 +68,11 @@ Settings.SettingsSyncRoute = Ember.Route.extend({
 
       }, function(err) { reject(err); });
     });
+  },
 
+  actions: {
+    connectionSucceeded: function(data) {
+      this.controllerFor('settings.sync').send('connectionSucceeded', data);
+    }
   }
 });

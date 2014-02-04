@@ -2,8 +2,10 @@
 <head></head>
 <body>
   <script>
-    window.opener.Core.ServiceConnector.serviceConnectionFailed(<%= raw @auth_hash.to_json %>);
-    window.close();
+    try {
+      window.opener.Core.ServiceConnector.serviceConnectionFailed(<%= raw @auth_hash.to_json %>);
+    } catch(e) { window.opener.console.error(e); }
+    finally { window.close(); }
   </script>
 </body>
 </html>
