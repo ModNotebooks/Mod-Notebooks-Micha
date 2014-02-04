@@ -16,10 +16,16 @@ Settings.SettingsSyncController = Ember.ArrayController.extend({
 
     connectionSucceeded: function(data) {
       var provider = data.provider,
-          subControllers = this.get('_subControllers'),
-          serviceController = subControllers.findBy('content.service.provider', provider);
+          serviceController = this.findBy('content.service.provider', provider);
 
       serviceController.send('connectionSucceeded', data);
+    },
+
+    connectionFailed: function(error) {
+      var provider = error.provider,
+          serviceController = this.findBy('content.service.provider', provider);
+
+      serviceController.send('connectionFailed', error);
     }
   }
 });

@@ -7,16 +7,19 @@ class App::ServicesController < ApplicationController
   end
 
   def failure
-    @auth_hash = auth_hash
-    respond_with @auth_hash do |format|
-      format.html { render layout: false }
-    end
+    @error_hash = error_hash
+    respond_with @error_hash, layout: false
   end
 
   protected
 
     def auth_hash
       request.env['omniauth.auth']
+    end
+
+    def error_hash
+      { provider: request.env['omniauth.error.strategy'].name,
+        error: request.env['omniauth.error.type'] }
     end
 
 end

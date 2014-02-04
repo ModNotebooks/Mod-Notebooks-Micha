@@ -5,7 +5,9 @@ class Api::V1::ServicesController < Api::BaseController
   doorkeeper_for :all
 
   def index
-    respond_with @user.services
+    respond_with @user.services do |f|
+      f.json { render json: @user.services, each_serializer: ServiceSerializer}
+    end
   end
 
   def show
@@ -25,7 +27,7 @@ class Api::V1::ServicesController < Api::BaseController
       service.assign_attributes(create_params.slice(:token, :secret, :refresh_token))
       service.expires_at = expires_at
       service.restore! if service.deleted?
-    elsif current_user.services.provider(provider).blank?
+    elsif @user.services.provider(provider).blank?
       service      = service_klass.new(create_params)
       service.user = @user
     end
@@ -69,7 +71,7 @@ class Api::V1::ServicesController < Api::BaseController
     end
 
     def find_service
-      @service = @user.service.find_by_id!(params[:id])
+      @service = @user.services.find_by_id!(params[:id])
     end
 
     def expires_at

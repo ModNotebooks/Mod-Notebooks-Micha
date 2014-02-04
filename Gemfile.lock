@@ -113,6 +113,7 @@ GEM
       handlebars-source (~> 1.3.0)
     erubis (2.7.0)
     eventmachine (1.0.3)
+    evernote-thrift (1.25.1)
     excon (0.31.0)
     execjs (2.0.2)
     factory_girl (4.3.0)
@@ -206,6 +207,10 @@ GEM
       hashie (>= 1.2, < 3)
       rack (~> 1.0)
     omniauth-dropbox (0.2.0)
+      omniauth-oauth (~> 1.0)
+    omniauth-evernote (1.2.0)
+      evernote-thrift
+      multi_json (~> 1.0)
       omniauth-oauth (~> 1.0)
     omniauth-oauth (1.0.1)
       oauth
@@ -409,6 +414,7 @@ DEPENDENCIES
   mini_magick
   omniauth
   omniauth-dropbox
+  omniauth-evernote
   paranoia (~> 2.0)
   pg
   pry-rails

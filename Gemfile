@@ -18,6 +18,7 @@ gem 'resque_mailer'
 
 gem 'omniauth'
 gem 'omniauth-dropbox'
+gem 'omniauth-evernote'
 
 gem 'strip_attributes'
 gem 'active_model_serializers'

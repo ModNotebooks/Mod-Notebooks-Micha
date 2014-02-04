@@ -9,7 +9,8 @@ Core.User = (function() {
     currentPassword:      attr('string'),
     confirmedAt:          attr('date'),
 
-    notebooks: DS.hasMany('notebook')
+    notebooks: DS.hasMany('notebook'),
+    services: DS.hasMany('service')
   });
 
 }());

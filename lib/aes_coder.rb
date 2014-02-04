@@ -13,7 +13,6 @@ class AESCoder
     aes.key = KEY
     aes.iv = value.slice!(0, 16)
     decrypted = aes.update(value) + aes.final
-
   end
 
   def self.dump(value)

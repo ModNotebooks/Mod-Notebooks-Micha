@@ -19,13 +19,12 @@ Core.Service = (function() {
     disabledData:   attr(),
     createdAt:      attr('date'),
     updatedAt:      attr('date'),
-    connectionToggle: attr('boolean'),
 
     user: DS.belongsTo('user'),
 
     isConnected: function() {
-      return !Ember.isEmpty(this.get('token')) && !Ember.isEmpty(this.get('secret'));
-    }.property('token', 'secret'),
+      return !Ember.isEmpty(this.get('createdAt')) && !Ember.isEmpty(this.get('uid'));
+    }.property('createdAt', 'uid'),
 
     authURL: function() {
       var host = window.location.host,

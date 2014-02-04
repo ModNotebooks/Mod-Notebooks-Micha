@@ -19,7 +19,7 @@ Core.ApplicationSerializer = DS.ActiveModelSerializer.extend({
   }
 });
 
-Core.NotebookSerializer = DS.ActiveModelSerializer.extend({
+Core.NotebookSerializer = Core.ApplicationSerializer.extend({
   normalizeHash: {
     notebooks: function(hash) {
       hash.currState = hash.current_state;
@@ -29,22 +29,14 @@ Core.NotebookSerializer = DS.ActiveModelSerializer.extend({
   }
 });
 
-Core.PreferencesSerializer = DS.ActiveModelSerializer.extend({
+Core.PreferencesSerializer = Core.ApplicationSerializer.extend({
   normalizeId: function(hash) {
     this._super();
     hash.id = 'me';
-  },
-
-  serializeBelongsTo: function(record, json, relationship) {
-    var key = relationship.key;
-
-    if (key === "address") {
-      json['address_attributes'] = record.get('address').toJSON();
-    }
   }
 });
 
-Core.AddressSerializer = DS.ActiveModelSerializer.extend({
+Core.AddressSerializer = Core.ApplicationSerializer.extend({
   normalizeId: function(hash) {
     this._super();
     hash.id = 'me';
@@ -61,5 +53,13 @@ Core.UserSerializer = Core.ApplicationSerializer.extend({
   normalizeId: function(hash) {
     this._super();
     hash.id = 'me';
+  }
+});
+
+Core.ServiceSerializer = Core.ApplicationSerializer.extend({
+  normalize: function(type, hash, prop) {
+    var hash = this._super(type, hash, prop);
+    hash.user = 'me';
+    return hash;
   }
 });

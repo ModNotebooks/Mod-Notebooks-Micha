@@ -3,7 +3,7 @@
 <body>
   <script>
     try {
-      window.opener.Core.ServiceConnector.serviceConnectionFailed(<%= raw @auth_hash.to_json %>);
+      window.opener.Core.ServiceConnector.serviceConnectionFailed(<%= raw @error_hash.to_json %>);
     } catch(e) { window.opener.console.error(e); }
     finally { window.close(); }
   </script>

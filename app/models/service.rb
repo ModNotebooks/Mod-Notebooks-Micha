@@ -30,9 +30,9 @@ class Service < ActiveRecord::Base
   PROVIDERS = %w(dropbox evernote)
   DISABLED_REASONS = []
 
-  serialize :token         , AESCoder
-  serialize :secret        , AESCoder
-  serialize :refresh_token , AESCoder
+  serialize :token        , AESCoder
+  serialize :secret       , AESCoder
+  serialize :refresh_token, AESCoder
 
   acts_as_paranoid
 
@@ -54,11 +54,13 @@ class Service < ActiveRecord::Base
     presence: true,
     inclusion: { in: PROVIDERS }
 
-  validates :token,
-    presence: true
+  # validates :token,
+  #   presence: true,
+  #   allow_nil: true
 
-  validates :secret,
-    presence: true
+  # validates :secret,
+  #   presence: true,
+  #   allow_nil: true
 
   validates :uid,
     presence: true,
@@ -92,7 +94,7 @@ class Service < ActiveRecord::Base
   end
 
   def destroy_cleanup
-    update_attributes(token: nil, secret: nil, refresh_token: nil, expires_at: nil)
+    update(token: nil, secret: nil, refresh_token: nil, expires_at: nil)
   end
 
 end
