@@ -13,7 +13,7 @@ Settings.SettingsSyncController = Ember.ArrayController.extend({
 
   actions: {
     openAuthWindow: function(service) {
-      window.open(service.get('authURL'), service.get('provider'), 'width=972,height=660,modal=yes,alwaysRaised=yes');
+      var authWindow = window.open(service.get('authURL'), service.get('provider'), 'width=972,height=660,modal=yes,alwaysRaised=yes');
     },
 
     connectionSucceeded: function(data) {

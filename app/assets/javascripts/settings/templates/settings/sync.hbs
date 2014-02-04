@@ -1,5 +1,5 @@
 {{#each}}
-<div class="l-sync-service">
+<div {{bind-attr class=":l-sync-service isEnabled:is-connected"}}>
   <div class="l-sync-service-left">&#10003;</div>
   <div class="l-sync-service-center">{{unbound name}}</div>
   <div class="l-sync-service-right">
