@@ -25,9 +25,6 @@
 #  updated_at      :datetime
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+class EvernoteService < Service
 
-FactoryGirl.define do
-  factory :service do
-  end
 end

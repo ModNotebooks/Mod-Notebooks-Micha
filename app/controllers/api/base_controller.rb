@@ -2,7 +2,7 @@ class Api::BaseController < ApplicationController
   respond_to :json
   before_filter :find_user
 
-  protect_from_forgery with: :null_session
+  skip_before_filter :verify_authenticity_token
 
   rescue_from ActiveRecord::RecordNotFound do
     head :not_found

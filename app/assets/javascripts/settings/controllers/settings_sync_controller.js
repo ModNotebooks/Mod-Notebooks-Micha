@@ -1,8 +1,10 @@
 Settings.SettingsSyncController = Ember.ArrayController.extend({
+  providers: ['dropbox', 'evernote'],
+
   lookupItemController: function(object) {
     var provider = object.get('service.provider');
 
-    if (provider === "dropbox") {
+    if (this.get('providers').contains(provider)) {
       return provider + "SyncService";
     } else {
       return "syncService";

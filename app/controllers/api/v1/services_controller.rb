@@ -11,7 +11,9 @@ class Api::V1::ServicesController < Api::BaseController
   end
 
   def show
-    respond_with :service
+    respond_with @service do |f|
+      f.json { render json: @service, status: :unprocessable_entity, serializer: ServiceSerializer }
+    end
   end
 
   def create
@@ -33,15 +35,21 @@ class Api::V1::ServicesController < Api::BaseController
     end
 
     if service.save
-      head :created
+      respond_with service do |f|
+        f.json { render json: service, status: :created, serializer: ServiceSerializer }
+      end
     else
-      respond_with service, status: :unprocessable_entity
+      respond_with do |f|
+        f.json { render json: service, status: :unprocessable_entity, serializer: ServiceSerializer }
+      end
     end
   end
 
   def update
     @service.update(update_params)
-    respond_with @service
+    respond_with @service do |f|
+      f.json { render json: @service, serializer: ServiceSerializer }
+    end
   end
 
   def destroy
