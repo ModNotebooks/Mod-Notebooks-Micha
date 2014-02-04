@@ -106,6 +106,15 @@
   @extend .l-sync-service-col;
 }
 
+.l-sync-service-left {
+  min-width: 35px;
+  i { opacity: .37; }
+
+  .is-connected & {
+    i { opacity: 1; }
+  }
+}
+
 .l-sync-service-center {
   width: 100%;
   padding: 0 20px;

@@ -1,6 +1,8 @@
 {{#each}}
 <div {{bind-attr class=":l-sync-service isEnabled:is-connected"}}>
-  <div class="l-sync-service-left">&#10003;</div>
+  <div class="l-sync-service-left">
+    <i class="i-{{unbound service.provider}}-white"></i>
+  </div>
   <div class="l-sync-service-center">{{unbound name}}</div>
   <div class="l-sync-service-right">
     {{input type="checkbox" name="isEnabled" class="switch" id=name checked=isEnabled}}
