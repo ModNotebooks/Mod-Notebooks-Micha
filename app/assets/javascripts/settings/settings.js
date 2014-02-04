@@ -1,3 +1,4 @@
+//= require ./controllers/sync_service_controller
 //= require_tree ./controllers
 //= require_tree ./views
 //= require_tree ./templates

@@ -1,23 +1,17 @@
-App.SettingsSyncController = Ember.ArrayController.extend({
+Settings.SettingsSyncController = Ember.ArrayController.extend({
   lookupItemController: function(object) {
-    // Implement
+    var provider = object.get('service.provider');
+
+    if (provider === "dropbox") {
+      return provider + "SyncService";
+    } else {
+      return "syncService";
+    }
   },
 
   actions: {
-    toggleConnect: function(service) {
-      if (service.get('disabled')) {
-        this.send('connect', service);
-      } else {
-        this.send('disconnect', service);
-      }
-    },
-
-    connect: function(service) {
-      window.open(service.get('authURL'));
-    },
-
-    disconnect: function(service) {
-      console.log('disconnecting service');
+    openAuthWindow: function(service) {
+      window.open(service.get('authURL'), service.get('provider'), 'width=972,height=660,modal=yes,alwaysRaised=yes');
     }
   }
 });

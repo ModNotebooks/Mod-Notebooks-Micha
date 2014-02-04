@@ -3,7 +3,7 @@
 <body>
   <script>
     window.opener.Core.ServiceConnector.serviceConnectionSucceeded(<%= raw @auth_hash.to_json %>);
-    window.opener.close();
+    window.close();
   </script>
 </body>
 </html>

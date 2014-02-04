@@ -1,24 +1,10 @@
+{{#each}}
 <div class="l-sync-service">
   <div class="l-sync-service-left">&#10003;</div>
-  <div class="l-sync-service-center">Dropbox</div>
+  <div class="l-sync-service-center">{{unbound name}}</div>
   <div class="l-sync-service-right">
-    <input type="checkbox" class="switch" id="s1" />
-    <label class="switch" for="s1"></label>
+    {{input type="checkbox" name="isEnabled" class="switch" id=name checked=isEnabled}}
+    <label class="switch" for="{{unbound name}}"></label>
   </div>
 </div>
-<div class="l-sync-service">
-  <div class="l-sync-service-left">&#10003;</div>
-  <div class="l-sync-service-center">Dropbox</div>
-  <div class="l-sync-service-right">
-    <input type="checkbox" class="switch" id="s2" />
-    <label class="switch" for="s2"></label>
-  </div>
-</div>
-<div class="l-sync-service is-connected">
-  <div class="l-sync-service-left">&#10003;</div>
-  <div class="l-sync-service-center">Dropbox</div>
-  <div class="l-sync-service-right">
-    <input type="checkbox" class="switch" id="s3" />
-    <label class="switch" for="s3"></label>
-  </div>
-</div>
+{{/each}}

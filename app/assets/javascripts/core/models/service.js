@@ -19,17 +19,13 @@ Core.Service = (function() {
     disabledData:   attr(),
     createdAt:      attr('date'),
     updatedAt:      attr('date'),
-
+    connectionToggle: attr('boolean'),
 
     user: DS.belongsTo('user'),
 
-    disabled: function() {
-      return !Ember.isEmpty(this.get('disabledAt'));
-    }.property('disabledAt'),
-
-    enabled: function() {
-      return Ember.isEmpty(this.get('disabledAt'));
-    }.property('disabledAt'),
+    isConnected: function() {
+      return !Ember.isEmpty(this.get('token')) && !Ember.isEmpty(this.get('secret'));
+    }.property('token', 'secret'),
 
     authURL: function() {
       var host = window.location.host,
