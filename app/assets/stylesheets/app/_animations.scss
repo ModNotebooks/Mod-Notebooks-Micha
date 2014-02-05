@@ -1,0 +1,10 @@
+@include keyframes(notebookIn) {
+  from {
+    @include transform(scale(.75));
+    opacity: 0;
+  }
+  to {
+    @include transform(scale(1));
+    opacity: 1;
+  }
+}
