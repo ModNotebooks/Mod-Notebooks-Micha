@@ -1,22 +1,14 @@
 Settings.ApplicationRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRouteMixin, {
   setupController: function(controller) {
     this._super(controller);
-
-    Ember.Instrumentation.subscribe("app.openSettings", {
-      before: function(name, timestamp, payload) {
-        controller.set('isVisible', true);
-      }, after: Ember.K
-    });
-
-    Ember.Instrumentation.subscribe("app.closeSettings", {
-      before: function(name, timestamp, payload) {
-        controller.set('isVisible', false);
-      }, after: Ember.K
-    });
   },
 
   actions: {
-    close: function() {
+    openSettings: function() {
+      this.controllerFor('application').set('isVisible', true);
+    },
+
+    closeSettings: function() {
       this.controllerFor('application').set('isVisible', false);
     }
   }

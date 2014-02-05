@@ -71,13 +71,6 @@
     location: 'none',
   });
 
-  SettingsApp.deferReadiness();
-  Ember.Instrumentation.subscribe("app.isAuthenticated", {
-    before: function(name, timestamp, payload) {
-      SettingsApp.advanceReadiness();
-    }, after: Ember.K
-  });
-
   window.App = MainApp;
   window.Settings = SettingsApp;
 }());
