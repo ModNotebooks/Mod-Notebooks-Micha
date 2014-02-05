@@ -11,6 +11,28 @@ Core.utils = (function() {
     return transEndEventNames[ Modernizr.prefixed('transition') ];
   }());
 
+  Utils.popup = function(url, name, options) {
+    options = $.extend({
+      location:   "no",
+      resizable:  "no",
+      scrollbars: "no",
+      status:     "no",
+      width:      1024,
+      height:     768
+    }, options);
+
+    if (!options.top && !options.left) {
+      options.left = ($(window).width() / 2) - (options.width / 2) + window.screenX;
+      options.top  = ($(window).height() / 2) - (options.height / 2) + window.screenY;
+    }
+
+    options = Ember.keys(options).map(function(key, index) {
+      return key + "=" + options[key];
+    }).join(',');
+
+    return window.open(url, name, options);
+  };
+
   return Utils;
 
 }());
