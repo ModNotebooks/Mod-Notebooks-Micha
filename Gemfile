@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.0.0'
 
 gem 'rails', '4.0.2'
 gem 'pg'
@@ -39,6 +40,8 @@ gem 'ember-data-source', '1.0.0.beta.6'
 
 gem 'compass-rails', '1.1.0.pre'
 gem 'sass-rails', '>= 4.0.0'
+
+gem 'rails_12factor', group: :production
 
 group :assets do
   # gem 'sass-rails', '>= 4.0.0'

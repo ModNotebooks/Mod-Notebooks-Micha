@@ -10,20 +10,5 @@ test:
   host: localhost
   database: mod_test
 
-staging:
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
-  database: d4srrsedkbjo9d
-  username: bnpzcwcjohlbuy
-  password: 7ZPgTdsqZD7S9Vey4fIFmMxmea
-  host: ec2-107-22-234-129.compute-1.amazonaws.com
-  port: 5432
-
-production:
-  adapter: postgresql
-  encoding: unicode
-  database: mod_production
-  pool: 5
-  username: mod
-  password:
+# staging:
+# https://postgres.heroku.com/databases/heroku-postgres-73fb7fda-copper
