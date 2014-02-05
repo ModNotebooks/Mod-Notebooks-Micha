@@ -53,6 +53,7 @@ module Mod
 
     config.to_prepare do
       DeviseController.respond_to :json
+      DeviseController.layout "application-guest"
       # DeviseController.protect_from_forgery with: :null_session
     end
 

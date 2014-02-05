@@ -13,14 +13,14 @@ Mod::Application.routes.draw do
       match 'auth/:provider/callback' , to: 'services#success', via: [:get, :post]
       match '/auth/failure'           , to: 'services#failure', via: [:get, :post]
 
-      get '/login', to: 'base#index', as: :new_user_session
-      get '/signup', to: 'base#index', as: :new_user_registration
+      get '/login', to: 'home#index', as: :new_user_session
+      get '/signup', to: 'home#index', as: :new_user_registration
 
-      get '/styleguide', to: "base#guide"
-      get '/layout', to: "base#layout"
-      root to: 'base#index'
+      get '/styleguide', to: "home#guide"
+      get '/layout', to: "home#layout"
+      root to: 'home#index'
 
-      get '*path',    to: 'base#index'
+      get '*path',    to: 'home#index'
     end
   end
 
