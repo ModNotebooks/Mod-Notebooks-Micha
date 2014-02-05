@@ -9,9 +9,11 @@
       </div>
       {{#each pages}}
         <div class="l-notebook-listitem">
-          <div class="page--grid">
-            <img {{bind-attr src="image.small"}} class="page__image">
-          </div>
+          {{#view App.GridPageView contentBinding="this"}}
+            <div {{bind-attr class=":page--grid view.isLoading view.isError"}}>
+              <img {{bind-attr src="image.small"}} class="page__image">
+            </div>
+          {{/view}}
         </div>
       {{/each}}
     </div>

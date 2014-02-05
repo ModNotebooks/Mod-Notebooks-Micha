@@ -11,13 +11,33 @@
   width: 190px;
   height: 270px;
   @include animation(notebookIn 500ms $ease-out-circ);
+
+
+  &.is-loading {
+
+  }
+
+  &.is-error {
+
+  }
 }
 
 .page__image {
+  opacity: 1;
+  @include transition(opacity 300ms ease-out);
+
   .page--grid & {
     max-width:  100%;
     max-height: 100%;
     min-width:  100%;
     min-height: 100%;
+  }
+
+  .is-loading & {
+    opacity: 0;
+  }
+
+  .is-error & {
+    display: none;
   }
 }
