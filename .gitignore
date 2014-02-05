@@ -26,3 +26,4 @@ dump.rdb
 vendor/assets/bower
 
 node_modules
+public/assets
