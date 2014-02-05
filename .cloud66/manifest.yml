@@ -1,4 +1,0 @@
-staging:
-  rails:
-    configuration:
-      asset_pipeline_precompile: false
