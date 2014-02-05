@@ -4,6 +4,20 @@ Settings.ApplicationRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRoute
   },
 
   actions: {
+    sessionAuthenticationSucceeded: function() {
+      console.log("sessionAuthenticationSucceeded");
+    },
+
+    sessionInvalidationSucceeded: function() {
+      Ember.Instrumentation.instrument("closeSettings", {}, Ember.K);
+      var _super = this._super.bind(this);
+
+      Ember.run.later(function() {
+        Ember.Instrumentation.instrument("sessionInvalidationSucceeded", {}, Ember.K)
+        _super();
+      }, 750);
+    },
+
     openSettings: function() {
       this.controllerFor('application').set('isVisible', true);
     },
@@ -20,7 +34,7 @@ Settings.IndexRoute = Ember.Route.extend({
   }
 });
 
-Settings.SettingsAccountRoute = Ember.Route.extend({
+Settings.SettingsAccountRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
   model: function() {
     return this.store.find('user', 'me');
   },
@@ -30,13 +44,13 @@ Settings.SettingsAccountRoute = Ember.Route.extend({
   }
 });
 
-Settings.SettingsAddressRoute = Ember.Route.extend({
+Settings.SettingsAddressRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
   model: function() {
     return this.store.find('address', 'me');
   }
 });
 
-Settings.SettingsSyncRoute = Ember.Route.extend({
+Settings.SettingsSyncRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
   model: function() {
     var store = this.store;
 

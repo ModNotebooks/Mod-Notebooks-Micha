@@ -15,12 +15,11 @@ App.ApplicationRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRouteMixin
     sessionAuthenticationSucceeded: function() {
       this.controllerFor('login').set('isLoading', false);
       this._super();
+      Ember.Instrumentation.instrument("sessionAuthenticationSucceeded", {}, Ember.K)
     },
 
     sessionInvalidationSucceeded: function() {
-      // Reset the store
-      // http://www.kaspertidemann.com/how-to-clear-the-ember-data-store-in-ember-js/
-      this.store.init();
+      // TODO: Reset the store
       this._super();
     },
 
@@ -45,9 +44,9 @@ App.ApplicationRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRouteMixin
 
     toggleSettings: function() {
       if (this.controller.get('settingsVisible')) {
-        Ember.Instrumentation.instrument("app.closeSettings", {}, Ember.K);
+        Ember.Instrumentation.instrument("closeSettings", {}, Ember.K);
       } else {
-        Ember.Instrumentation.instrument("app.openSettings", {}, Ember.K);
+        Ember.Instrumentation.instrument("openSettings", {}, Ember.K);
       }
     }
   }

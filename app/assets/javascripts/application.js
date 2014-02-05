@@ -54,11 +54,13 @@
   });
 
   var MainApp = Ember.Application.create({
+    name: 'main',
     rootElement: '#main',
     Resolver: Ember.DefaultResolver.extend()
   });
 
   var SettingsApp = Ember.Application.create({
+    name: 'settings',
     rootElement: '#settings',
     Resolver: Ember.DefaultResolver.extend()
   });
