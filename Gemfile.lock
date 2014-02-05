@@ -41,6 +41,9 @@ GEM
       activerecord (>= 2.3.0)
       rake (>= 0.8.7)
     arel (4.0.1)
+    asset_sync (1.0.0)
+      activemodel
+      fog (>= 1.8.0)
     atomic (1.1.14)
     awesome_print (1.2.0)
     barber (0.4.2)
@@ -396,6 +399,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   annotate
+  asset_sync
   better_errors
   binding_of_caller
   bullet
