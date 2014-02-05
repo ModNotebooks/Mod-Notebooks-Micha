@@ -1,22 +1,28 @@
 Settings.ApplicationRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRouteMixin, {
   setupController: function(controller) {
     this._super(controller);
-
-    Ember.Instrumentation.subscribe("app.openSettings", {
-      before: function(name, timestamp, payload) {
-        controller.set('isVisible', true);
-      }, after: Ember.K
-    });
-
-    Ember.Instrumentation.subscribe("app.closeSettings", {
-      before: function(name, timestamp, payload) {
-        controller.set('isVisible', false);
-      }, after: Ember.K
-    });
   },
 
   actions: {
-    close: function() {
+    sessionAuthenticationSucceeded: function() {
+      console.log("sessionAuthenticationSucceeded");
+    },
+
+    sessionInvalidationSucceeded: function() {
+      Ember.Instrumentation.instrument("closeSettings", {}, Ember.K);
+      var _super = this._super.bind(this);
+
+      Ember.run.later(function() {
+        Ember.Instrumentation.instrument("sessionInvalidationSucceeded", {}, Ember.K)
+        _super();
+      }, 750);
+    },
+
+    openSettings: function() {
+      this.controllerFor('application').set('isVisible', true);
+    },
+
+    closeSettings: function() {
       this.controllerFor('application').set('isVisible', false);
     }
   }
@@ -28,7 +34,7 @@ Settings.IndexRoute = Ember.Route.extend({
   }
 });
 
-Settings.SettingsAccountRoute = Ember.Route.extend({
+Settings.SettingsAccountRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
   model: function() {
     return this.store.find('user', 'me');
   },
@@ -38,13 +44,13 @@ Settings.SettingsAccountRoute = Ember.Route.extend({
   }
 });
 
-Settings.SettingsAddressRoute = Ember.Route.extend({
+Settings.SettingsAddressRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
   model: function() {
     return this.store.find('address', 'me');
   }
 });
 
-Settings.SettingsSyncRoute = Ember.Route.extend({
+Settings.SettingsSyncRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
   model: function() {
     var store = this.store;
 

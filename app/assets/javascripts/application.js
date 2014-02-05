@@ -54,11 +54,13 @@
   });
 
   var MainApp = Ember.Application.create({
+    name: 'main',
     rootElement: '#main',
     Resolver: Ember.DefaultResolver.extend()
   });
 
   var SettingsApp = Ember.Application.create({
+    name: 'settings',
     rootElement: '#settings',
     Resolver: Ember.DefaultResolver.extend()
   });
@@ -69,13 +71,6 @@
 
   SettingsApp.Router.reopen({
     location: 'none',
-  });
-
-  SettingsApp.deferReadiness();
-  Ember.Instrumentation.subscribe("app.isAuthenticated", {
-    before: function(name, timestamp, payload) {
-      SettingsApp.advanceReadiness();
-    }, after: Ember.K
   });
 
   window.App = MainApp;
