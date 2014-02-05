@@ -11,7 +11,6 @@
 // about supported directives.
 //
 //= require environment
-//= require jquery
 //= require handlebars
 //= require momentjs/moment
 //= require ember
