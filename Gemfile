@@ -16,6 +16,10 @@ gem 'resque-timeout'
 gem 'resque-scheduler', github: 'resque/resque-scheduler', require: 'resque_scheduler'
 gem 'resque_mailer'
 
+gem 'omniauth'
+gem 'omniauth-dropbox'
+gem 'omniauth-evernote'
+
 gem 'strip_attributes'
 gem 'active_model_serializers'
 
@@ -30,8 +34,8 @@ gem 'doorkeeper', '~> 0.7.0'
 gem 'paranoia', '~> 2.0'
 
 gem 'ember-rails'
-gem 'ember-source', '1.4.0.beta.2' # or the version you need
-gem 'ember-data-source', '1.0.0.beta.5'
+gem 'ember-source', '1.4.0.beta.3' # or the version you need
+gem 'ember-data-source', '1.0.0.beta.6'
 
 gem 'compass-rails', '1.1.0.pre'
 gem 'sass-rails', '>= 4.0.0'
@@ -56,6 +60,7 @@ group :development do
   gem 'annotate'
   gem 'guard-livereload', require: false
   gem 'rack-livereload'
+  gem 'letter_opener'
 end
 
 group :development, :test do

@@ -1,0 +1,44 @@
+@include keyframes(switchPulse) {
+  0%   { background-color: rgba(235, 235, 233, .34); }
+  50%  { background-color: rgba(235, 235, 233, .18); }
+  100% { background-color: rgba(235, 235, 233, .34); }
+}
+
+input[type=checkbox].switch {
+  position: absolute;
+  left: -9999px;
+}
+
+label.switch {
+  position: relative;
+  display: block;
+  width: 50px;
+  height: 28px;
+  cursor: pointer;
+  border-radius: 1.5em;
+  @include transition(all 350ms);
+  border: 2px solid rgba(255,255,255,.17);
+}
+
+input[type=checkbox].switch:checked + label.switch {
+  background-color: rgba(235,235,233,.34);
+  border: 2px solid rgba(235,235,233,0);
+}
+
+label.switch::after {
+  position: absolute; content:'';
+  width: 26px;
+  height: 26px;
+  top: -1px;
+  left: -1px;
+  border-radius: 26px;
+  @include transition(left 150ms $ease-in-out-cubic);
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,.44);
+}
+
+input[type=checkbox].switch:checked + label.switch::after {
+  width: 26px;
+  height: 26px;
+  left: 24px;
+}

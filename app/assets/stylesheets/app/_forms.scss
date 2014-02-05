@@ -1,6 +1,12 @@
 fieldset {
-  margin: 0 0 ($base-line-height / 2) 0;
-  padding: $base-line-height;
+  margin: $base-line-height 0 0 0;
+  padding: 0;
+  border: none;
+}
+
+legend {
+  text-transform: uppercase;
+  margin-left: 20px;
 }
 
 #{$all-text-inputs} {
@@ -28,9 +34,7 @@ label {
   }
 }
 
-input[type="search"] {
-  @include appearance(none);
-}
+input[type="search"] { @include appearance(none); }
 
 input[type="checkbox"], input[type="radio"] {
   display: inline;
@@ -112,6 +116,13 @@ form {
       #{$all-text-inputs-focus} { background: none; }
     }
   }
+}
+
+.form__control--passwordreset {
+  @extend .form__control;
+  padding: 26px 20px;
+
+  button { margin-left: 20px; }
 }
 
 .form__control--half {

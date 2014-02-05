@@ -13,7 +13,7 @@ class Api::V1::SharesController < Api::BaseController
     share = Share.new(shareable: @shareable)
 
     if share.save
-      respond_with share
+      respond_with share, status: :created
     else
       respond_with share, status: :unprocessable_entity
     end

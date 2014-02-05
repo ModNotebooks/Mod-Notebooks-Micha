@@ -8,7 +8,7 @@ App.ApplicationView = Ember.View.extend({
     switch(path) {
       case "login":
       case "signup":
-      case "reset":
+      case "password_reset":
         return "guest";
       default:
         return "application";
@@ -30,5 +30,5 @@ App.ApplicationView = Ember.View.extend({
         .removeClass('awake')
         .addClass('asleep');
     }
-  }.observes('controller.currentPath').on('init')
+  }.observes('layoutName').on('init')
 });

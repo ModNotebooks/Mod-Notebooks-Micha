@@ -9,7 +9,17 @@ Core.ApplicationAdapter = DS.ActiveModelAdapter.extend({
   }
 });
 
-Core.NotebookSerializer = DS.ActiveModelSerializer.extend({
+Core.ApplicationSerializer = DS.ActiveModelSerializer.extend({
+  serializeAttribute: function(record, json, key, attribute) {
+    var value = Ember.get(record, key);
+
+    if (!Ember.isEmpty(value)) {
+      return this._super(record, json, key, attribute);
+    }
+  }
+});
+
+Core.NotebookSerializer = Core.ApplicationSerializer.extend({
   normalizeHash: {
     notebooks: function(hash) {
       hash.currState = hash.current_state;
@@ -19,22 +29,19 @@ Core.NotebookSerializer = DS.ActiveModelSerializer.extend({
   }
 });
 
-Core.PreferencesSerializer = DS.ActiveModelSerializer.extend({
+Core.PreferencesSerializer = Core.ApplicationSerializer.extend({
+  normalizeId: function(hash) {
+    this._super();
+    hash.id = 'me';
+  }
+});
+
+Core.AddressSerializer = Core.ApplicationSerializer.extend({
   normalizeId: function(hash) {
     this._super();
     hash.id = 'me';
   },
 
-  serializeBelongsTo: function(record, json, relationship) {
-    var key = relationship.key;
-
-    if (key === "address") {
-      json['address_attributes'] = record.get('address').toJSON();
-    }
-  }
-});
-
-Core.AddressSerializer = DS.ActiveModelSerializer.extend({
   normalize: function(type, hash, prop) {
     var hash = this._super(type, hash, prop);
     hash.addressable.id = 'me';
@@ -42,9 +49,17 @@ Core.AddressSerializer = DS.ActiveModelSerializer.extend({
   }
 });
 
-Core.UserSerializer = DS.ActiveModelSerializer.extend({
+Core.UserSerializer = Core.ApplicationSerializer.extend({
   normalizeId: function(hash) {
     this._super();
     hash.id = 'me';
+  }
+});
+
+Core.ServiceSerializer = Core.ApplicationSerializer.extend({
+  normalize: function(type, hash, prop) {
+    var hash = this._super(type, hash, prop);
+    hash.user = 'me';
+    return hash;
   }
 });

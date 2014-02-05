@@ -13,6 +13,11 @@
 
   &:hover { background: rgba(#fff, .6); }
   &:active { @include transform(translateY(1px)); }
+
+  &.is-disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
 }
 
 .button--outline {

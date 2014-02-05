@@ -8,9 +8,9 @@ App.SignupController = Ember.ObjectController.extend({
     submit: function() {
       var _this = this;
 
-      var model = this.get('model')
-      var identification = model.get('email');
-      var password       = model.get('password');
+      var model = this.get('model'),
+          identification = model.get('email'),
+          password       = model.get('password');
 
       model.save()
         .then(function() {
@@ -27,7 +27,7 @@ App.SignupController = Ember.ObjectController.extend({
             _this.transitionTo(Ember.SimpleAuth.authenticationRoute);
           });
         }, function() {
-          model.send("becameValid");
+          // model.send("becameValid");
           _this.set('isLoading', false);
         });
     }

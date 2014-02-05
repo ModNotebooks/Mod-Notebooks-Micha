@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/resque/resque-scheduler.git
-  revision: f90eaababd71f331504e8b5312beff1739a66016
+  revision: 8de60ae687d06f3c1185014933e2de5e329a2feb
   specs:
-    resque-scheduler (3.0.0)
+    resque-scheduler (2.4.0)
       redis (>= 3.0.0)
       resque (~> 1.25)
       rufus-scheduler (~> 2.0)
@@ -36,6 +36,7 @@ GEM
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
+    addressable (2.3.5)
     annotate (2.6.1)
       activerecord (>= 2.3.0)
       rake (>= 0.8.7)
@@ -97,7 +98,7 @@ GEM
     em-websocket (0.5.0)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.5.3)
-    ember-data-source (1.0.0.beta.5)
+    ember-data-source (1.0.0.beta.6)
       ember-source
     ember-rails (0.14.1)
       active_model_serializers
@@ -108,10 +109,11 @@ GEM
       handlebars-source
       jquery-rails (>= 1.0.17)
       railties (>= 3.1)
-    ember-source (1.4.0.beta.2)
+    ember-source (1.4.0.beta.3)
       handlebars-source (~> 1.3.0)
     erubis (2.7.0)
     eventmachine (1.0.3)
+    evernote-thrift (1.25.1)
     excon (0.31.0)
     execjs (2.0.2)
     factory_girl (4.3.0)
@@ -169,11 +171,15 @@ GEM
       pry-remote (>= 0.1.7)
       pry-stack_explorer (~> 0.4.9)
       railties (>= 3.0, < 5.0)
-    jquery-rails (3.0.4)
+    jquery-rails (3.1.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.8.1)
     kgio (2.8.1)
+    launchy (2.4.2)
+      addressable (~> 2.3)
+    letter_opener (1.2.0)
+      launchy (~> 2.2)
     listen (2.4.0)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
@@ -196,13 +202,26 @@ GEM
     net-ssh (2.7.0)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
+    oauth (0.4.7)
+    omniauth (1.2.1)
+      hashie (>= 1.2, < 3)
+      rack (~> 1.0)
+    omniauth-dropbox (0.2.0)
+      omniauth-oauth (~> 1.0)
+    omniauth-evernote (1.2.0)
+      evernote-thrift
+      multi_json (~> 1.0)
+      omniauth-oauth (~> 1.0)
+    omniauth-oauth (1.0.1)
+      oauth
+      omniauth (~> 1.0)
     orm_adapter (0.5.0)
     paranoia (2.0.2)
       activerecord (~> 4.0)
     pg (0.17.1)
     polyglot (0.3.3)
     posix-spawn (0.3.8)
-    pry (0.9.12.4)
+    pry (0.9.12.6)
       coderay (~> 1.0)
       method_source (~> 0.8)
       slop (~> 3.4)
@@ -218,7 +237,7 @@ GEM
       pry (>= 0.9.8)
     pry-rails (0.3.2)
       pry (>= 0.9.10)
-    pry-remote (0.1.7)
+    pry-remote (0.1.8)
       pry (~> 0.9)
       slop (~> 3.0)
     pry-stack_explorer (0.4.9.1)
@@ -310,7 +329,7 @@ GEM
     ruby-hmac (0.4.0)
     rufus-scheduler (2.0.24)
       tzinfo (>= 0.3.22)
-    sass (3.2.13)
+    sass (3.2.14)
     sass-rails (4.0.1)
       railties (>= 4.0.0, < 5.0)
       sass (>= 3.1.10)
@@ -354,7 +373,7 @@ GEM
     uglifier (2.4.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    unicorn (4.8.0)
+    unicorn (4.8.1)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
@@ -381,9 +400,9 @@ DEPENDENCIES
   devise
   devise_invitable
   doorkeeper (~> 0.7.0)
-  ember-data-source (= 1.0.0.beta.5)
+  ember-data-source (= 1.0.0.beta.6)
   ember-rails
-  ember-source (= 1.4.0.beta.2)
+  ember-source (= 1.4.0.beta.3)
   factory_girl_rails
   faker
   fog
@@ -391,7 +410,11 @@ DEPENDENCIES
   guard-livereload
   jazz_hands
   jquery-rails
+  letter_opener
   mini_magick
+  omniauth
+  omniauth-dropbox
+  omniauth-evernote
   paranoia (~> 2.0)
   pg
   pry-rails

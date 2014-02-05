@@ -30,9 +30,11 @@
 
 .viewer__pane--left, .viewer__pane--right {
   @extend .viewer__pane;
+  background: red;
 }
 
 .viewer__pane--left {
+  background: blue;
   .is-single & {
     float: none;
     width: 100%;
