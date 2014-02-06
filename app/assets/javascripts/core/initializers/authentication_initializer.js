@@ -12,7 +12,7 @@ Ember.Application.initializer({
     });
 
     Ember.SimpleAuth.setup(application, {
-      crossOriginWhitelist: [window.ENV.API_ENDPOINT]
+      crossOriginWhitelist: [window.location.protocol + window.ENV.API_ENDPOINT]
     });
   }
 });
