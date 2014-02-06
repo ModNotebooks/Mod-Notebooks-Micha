@@ -40,7 +40,7 @@ class PageFiller
 
       begin
         if (!page_model.image? || refill) && page.save(filepath)
-          page_model.image.store!(File.open(filepath))
+          page_model.update(image: File.open(filepath))
           File.delete(filepath)
         end
       rescue
