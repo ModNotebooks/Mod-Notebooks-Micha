@@ -39,7 +39,7 @@ class Preferences < ActiveRecord::Base
   #-----------------------------------------------------------------------------
 
   def address
-    super || build_address
+    super || build_address.save(validate: false); super
   end
 
 end

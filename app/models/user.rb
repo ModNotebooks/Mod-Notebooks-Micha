@@ -64,7 +64,7 @@ class User < ActiveRecord::Base
   #-----------------------------------------------------------------------------
 
   def preferences
-    super || build_preferences
+    super || build_preferences.save(validate: false); super
   end
 
 end

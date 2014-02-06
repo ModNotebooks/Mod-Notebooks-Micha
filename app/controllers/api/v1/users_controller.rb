@@ -5,7 +5,9 @@ class Api::V1::UsersController < Api::BaseController
     user = User.new(create_params)
 
     if user.save
-      respond_with user, status: :created
+      respond_with user do |f|
+        f.json { render json: user, status: :created }
+      end
     else
       respond_with user, status: :unprocessable_entity
     end

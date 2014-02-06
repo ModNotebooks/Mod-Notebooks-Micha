@@ -8,6 +8,11 @@ Ember.Application.initializer({
           this.router.one('didTransition', function() {
             NProgress.done();
           });
+        },
+
+        error: function() {
+          NProgress.done();
+          return this._super.apply(this, Array.prototype.slice.apply(arguments));
         }
       }
     });
