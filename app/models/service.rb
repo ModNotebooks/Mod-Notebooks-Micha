@@ -27,7 +27,7 @@
 
 class Service < ActiveRecord::Base
 
-  PROVIDERS = %w(dropbox evernote)
+  PROVIDERS = %w(dropbox evernote live_connect)
   DISABLED_REASONS = []
 
   acts_as_paranoid
