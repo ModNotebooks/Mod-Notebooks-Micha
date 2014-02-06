@@ -4,10 +4,6 @@ Settings.ApplicationRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRoute
   },
 
   actions: {
-    sessionAuthenticationSucceeded: function() {
-      console.log("sessionAuthenticationSucceeded");
-    },
-
     sessionInvalidationSucceeded: function() {
       Ember.instrument("closeSettings", {}, Ember.K);
       var _super = this._super.bind(this);
