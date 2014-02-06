@@ -1,32 +1,41 @@
 Ember.Application.initializer({
   name: 'settings',
   initialize: function(container, application) {
-    Ember.Instrumentation.subscribe("openSettings", {
+    Ember.subscribe("openSettings", {
       before: function(name, timestamp, payload) {
         container.lookup('route:application').send('openSettings');
       }, after: Ember.K
     });
 
-    Ember.Instrumentation.subscribe("closeSettings", {
+    Ember.subscribe("closeSettings", {
       before: function(name, timestamp, payload) {
         container.lookup('route:application').send('closeSettings');
       }, after: Ember.K
     });
 
-    Ember.Instrumentation.subscribe('sessionAuthenticationSucceeded', {
-      before: function(name, timestamp, payload) {
-        if (application.name === "settings") {
-          application.reset();
-        }
-      }, after: Ember.K
-    });
+    if (application.name === "settings") {
+      // If we have done this before we need to unsubscribe from it.
+      var authenticationSubscriber = application.get('authenticationSubscriber');
 
-    Ember.Instrumentation.subscribe('sessionInvalidationSucceeded', {
-      before: function(name, timestamp, payload) {
-        if (application.name === "main") {
+      if (!Ember.isEmpty(authenticationSubscriber)) {
+        Ember.Instrumentation.unsubscribe(authenticationSubscriber);
+      }
+
+      authenticationSubscriber = Ember.subscribe('sessionAuthenticationSucceeded', {
+        before: function(name, timestamp, payload) {
+          application.reset();
+        }, after: Ember.K
+      });
+
+      application.set('authenticationSubscriber', authenticationSubscriber);
+    }
+
+    if (application.name === "main") {
+      Ember.subscribe('sessionInvalidationSucceeded', {
+        before: function(name, timestamp, payload) {
           container.lookup('route:application').send('invalidateSession');
-        }
-      }, after: Ember.K
-    });
+        }, after: Ember.K
+      });
+    }
   }
 });
