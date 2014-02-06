@@ -55,16 +55,20 @@ Settings.SettingsSyncRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRo
     var store = this.store;
 
     return new Ember.RSVP.Promise(function(resolve, reject) {
+      var providers = [
+        ['Dropbox', 'dropbox'],
+        ['Evernote', 'evernote'],
+        ['OneNote', 'live_connect']];
+
       store.find('service').then(function(models) {
 
-        var connections = ['Dropbox', 'Evernote', 'OneNote'].map(function(name) {
-          var provider = name.toLowerCase(),
-              service = models.findBy('provider', provider) || store.createRecord('service', {
-                provider: provider
+        var connections = providers.map(function(provider) {
+          var service = models.findBy('provider', provider[1]) || store.createRecord('service', {
+                provider: provider[1]
               });
 
           return Core.ServiceConnection.create({
-            name: name,
+            name: provider[0],
             service: service,
             isEnabled: service.get('isConnected')
           });

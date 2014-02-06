@@ -39,9 +39,7 @@ class Api::V1::ServicesController < Api::BaseController
         f.json { render json: service, status: :created, serializer: ServiceSerializer }
       end
     else
-      respond_with do |f|
-        f.json { render json: service, status: :unprocessable_entity, serializer: ServiceSerializer }
-      end
+      respond_with service, status: :unprocessable_entity
     end
   end
 
