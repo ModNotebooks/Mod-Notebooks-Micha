@@ -79,7 +79,7 @@ Mod::Application.configure do
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
   # config.assets.precompile += %w( search.js )
 
-  config.middleware.insert_after(::Rack::Lock, ::Rack::Auth::Basic, "Staging") do |u, p|
+  config.middleware.insert_after(::Rack::Runtime, ::Rack::Auth::Basic, "Staging") do |u, p|
     [u, p] == [ENV['HTTP_BASIC_AUTH_USERNAME'], ENV['HTTP_BASIC_AUTH_PASSWORD']]
   end
 
