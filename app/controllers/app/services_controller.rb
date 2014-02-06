@@ -1,4 +1,4 @@
-class App::ServicesController < ApplicationController
+class App::ServicesController < App::BaseController
   respond_to :html
 
   def success
