@@ -1,16 +1,22 @@
 <section class="l-notebook">
-  <div class="l-notebook-list">
-    <div class="l-notebook-listitem">
-      <div {{bind-attr class=":notebook color"}}>
-        {{partial 'partials/notebook'}}
-      </div>
-    </div>
-    {{#each pages}}
+  <div class="l-notebook-wrap">
+
+    <div class="l-notebook-list">
       <div class="l-notebook-listitem">
-        <div class="page--grid">
-          <img {{bind-attr src="image.small"}} class="page__image">
+        <div {{bind-attr class=":notebook color"}}>
+          {{partial 'partials/notebook'}}
         </div>
       </div>
-    {{/each}}
+      {{#each pages}}
+        <div class="l-notebook-listitem">
+          {{#view App.GridPageView contentBinding="this"}}
+            <div {{bind-attr class=":page--grid view.isLoading view.isError"}}>
+              <img {{bind-attr src="image.small"}} class="page__image">
+            </div>
+          {{/view}}
+        </div>
+      {{/each}}
+    </div>
+
   </div>
 </section>

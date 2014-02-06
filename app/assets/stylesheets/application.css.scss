@@ -1,6 +1,7 @@
 @import "normalize-scss/normalize.scss";
 @import "bourbon/app/assets/stylesheets/bourbon";
 @import "neat/app/assets/stylesheets/neat";
+// @import "ember-animated-outlet/dist/ember-animated-outlet";
 @import "app/variables";
 @import "app/mixins";
 
@@ -8,6 +9,7 @@
 @import "app/icons";
 @import "app/forms";
 @import "app/shared";
+@import "app/animations";
 
 @import "app/layouts/l-guest";
 @import "app/layouts/l-app";
