@@ -40,24 +40,26 @@ class PageFiller
 
       begin
         if (!page_model.image? || refill) && page.save(filepath)
-          page_model.image.store!(File.open(filepath))
+          page_model.update(image: File.open(filepath))
           File.delete(filepath)
         end
       rescue
+        puts "ERROR processing page #{page.index}"
         next
       end
     end
 
-    yield pages
+    if block_given?
+      yield(pages, self)
+    end
   end
 
-  private
-    def file
-      if @file.blank?
-        @file = Kernel.open(uri)
-        @file = @file.is_a?(String) ? StringIO.new(@file) : @file
-      end
-      @file
+  def file
+    if @file.blank?
+      @file = Kernel.open(uri)
+      @file = @file.is_a?(String) ? StringIO.new(@file) : @file
     end
+    @file
+  end
 
 end

@@ -1,8 +1,8 @@
 Mod::Application.routes.draw do
 
-  use_doorkeeper
-
   constraints subdomain: 'app' do
+    use_doorkeeper
+
     # Login, signup, and settings are all handled through the API so ignore those controllers
     # the only things that happens outside of the API are confirming, unlocking,
     # and resetting passwords on accounts
@@ -10,17 +10,20 @@ Mod::Application.routes.draw do
       skip: [:sessions, :registrations]
 
     scope module: 'app' do
-      match 'auth/:provider/callback' , to: 'services#success', via: [:get, :post]
-      match '/auth/failure'           , to: 'services#failure', via: [:get, :post]
+      match 'auth/:provider/callback', to: 'services#success', via: [:get, :post]
+      match '/auth/failure', to: 'services#failure', via: [:get, :post]
 
       get '/login', to: 'home#index', as: :new_user_session
       get '/signup', to: 'home#index', as: :new_user_registration
+      get '/password_reset', to:'home#index', as: :new_user_registration
+      get '/notebooks', to: 'home#index'
+      get '/notebooks/:id', to: 'home#index'
+      get '/notebooks/:id/view', to: 'home#index'
 
       get '/styleguide', to: "home#guide"
       get '/layout', to: "home#layout"
-      root to: 'home#index'
 
-      get '*path',    to: 'home#index'
+      root to: 'home#index'
     end
   end
 

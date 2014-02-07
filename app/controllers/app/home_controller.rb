@@ -1,4 +1,4 @@
-class App::HomeController < ApplicationController
+class App::HomeController < App::BaseController
 
   layout "application-app"
 

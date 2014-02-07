@@ -177,7 +177,7 @@ class Notebook < ActiveRecord::Base
   end
 
   def process!(reprocess=false)
-    PageFiller.new(self).fill_pages(reprocess) do |pages|
+    PageFiller.new(self).fill_pages(reprocess) do |pages, filler|
       process
       pages
     end

@@ -14,9 +14,6 @@ Mod::Application.configure do
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 
-  # Log error messages when you accidentally call methods on nil.
-  config.whiny_nils = true
-
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
   # For large-scale production use, consider using a caching reverse proxy like nginx, varnish or squid.
@@ -60,6 +57,17 @@ Mod::Application.configure do
   # Use a different logger for distributed setups.
   config.logger       = Logger.new(STDOUT)
   config.logger.level = Logger.const_get(ENV['LOG_LEVEL'] ? ENV['LOG_LEVEL'].upcase : 'INFO')
+
+  config.action_mailer.smtp_settings = {
+    :port           => ENV['MAILGUN_SMTP_PORT'],
+    :address        => ENV['MAILGUN_SMTP_SERVER'],
+    :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
+    :password       => ENV['MAILGUN_SMTP_PASSWORD'],
+    :domain         => 'artsy.io',
+    :authentication => :plain
+  }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { host: 'artsy.io' }
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store

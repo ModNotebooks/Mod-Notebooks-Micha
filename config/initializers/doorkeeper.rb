@@ -21,11 +21,8 @@ Doorkeeper.configure do
 
   # If you want to restrict access to the web interface for adding oauth authorized applications, you need to declare the block below.
   admin_authenticator do
-    if current_user.try(:admin?)
-      current_user
-    else
-      user = warden.authenticate!(scope: :user)
-      user if user.try(:admin?)
+    authenticate_or_request_with_http_basic do |username, password|
+      username == ENV['HTTP_BASIC_AUTH_USERNAME'] && password == ENV['HTTP_BASIC_AUTH_PASSWORD']
     end
   end
 
