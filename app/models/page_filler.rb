@@ -10,8 +10,8 @@ class PageFiller
     @notebook = notebook
   end
 
-  def uri
-    notebook.pdf.url
+  def pdf_data
+    notebook.pdf.read
   end
 
   def tmp_dir
@@ -48,16 +48,23 @@ class PageFiller
       end
     end
 
-    yield pages
+    if block_given?
+      yield(pages, self)
+    else
   end
 
-  private
-    def file
-      if @file.blank?
-        @file = Kernel.open(uri)
-        @file = @file.is_a?(String) ? StringIO.new(@file) : @file
-      end
+  def done
+    file.close!
+    @file = nil
+  end
+
+  def file
+    if @file.blank?
+      @file = Tempfile.new(["#{notebook.id}-", '.pdf'], tmp_dir, encoding: 'ascii-8bit')
+      @file.write(pdf_data)
       @file
     end
+    @file
+  end
 
 end
