@@ -16,3 +16,4 @@ App.PreferencesSerializer = Core.PreferencesSerializer;
 App.AddressSerializer  = Core.AddressSerializer;
 App.UserSerializer = Core.UserSerializer;
 App.SpinButtonComponent = Core.SpinButtonComponent;
+App.ModalDialogComponent = Core.ModalDialogComponent;

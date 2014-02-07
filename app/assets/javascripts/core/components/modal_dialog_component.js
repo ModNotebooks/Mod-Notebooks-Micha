@@ -1,6 +1,4 @@
-App.ModalDialogComponent = Ember.Component.extend({
-  classNames: "modal",
-
+Core.ModalDialogComponent = Ember.Component.extend({
   actions: {
     close: function() {
       this.animateOut().then(this.sendAction.bind(this));

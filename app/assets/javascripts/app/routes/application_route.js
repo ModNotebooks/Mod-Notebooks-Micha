@@ -34,6 +34,20 @@ App.ApplicationRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRouteMixin
       }
     },
 
+    openModal: function(name) {
+      return this.render(name, {
+        into: 'application',
+        outlet: 'modal'
+      });
+    },
+
+    closeModal: function() {
+      return this.disconnectOutlet({
+        outlet: 'modal',
+        parentView: 'application'
+      });
+    },
+
     openSettings: function() {
       this.controller.set('settingsVisible', true);
     },
