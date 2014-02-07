@@ -180,7 +180,6 @@ class Notebook < ActiveRecord::Base
     PageFiller.new(self).fill_pages(reprocess) do |pages, filler|
       process
       pages
-      filler.done
     end
   end
 
