@@ -44,6 +44,7 @@ class PageFiller
           File.delete(filepath)
         end
       rescue
+        puts "ERROR processing page #{page.index}"
         next
       end
     end
