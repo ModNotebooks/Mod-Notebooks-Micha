@@ -50,7 +50,7 @@ class PageFiller
 
     if block_given?
       yield(pages, self)
-    else
+    end
   end
 
   def done
