@@ -24,10 +24,8 @@ App.ApplicationView = Ember.View.extend({
     if (this.get('session.isAuthenticated')) {
       Ember.$(document.body)
         .removeClass('asleep')
-        .addClass('awake');
     } else {
       Ember.$(document.body)
-        .removeClass('awake')
         .addClass('asleep');
     }
   }.observes('layoutName').on('init')

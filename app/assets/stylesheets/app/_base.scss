@@ -25,14 +25,12 @@ body {
   background-attachment: fixed;
   @include transition(all 300ms ease-in-out);
 
-  &.asleep {
-    background-color: #233236;
-    @include background-image( linear-gradient(141deg, #233236 0%, #658d8f 100%) );
-  }
+  background-color: #79989b;
+  @include linear-gradient(145deg, #385158 0%, #88a9ab 50%, #99bcbe 100%);
 
-  &.awake {
-    background-color: #385158;
-    @include background-image( linear-gradient(141deg, #385158 0%, #88a9ab 62.89%, #99bcbe 100%) );
+  &.asleep {
+    background-color: #465d60;
+    @include linear-gradient(145deg, #233236 0%, #658d8f 100%);
   }
 }
 

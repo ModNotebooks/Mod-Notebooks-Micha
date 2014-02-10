@@ -15,7 +15,7 @@ Mod::Application.routes.draw do
 
       get '/login', to: 'home#index', as: :new_user_session
       get '/signup', to: 'home#index', as: :new_user_registration
-      get '/password_reset', to:'home#index', as: :new_user_registration
+      get '/password_reset', to:'home#index'
       get '/notebooks', to: 'home#index'
       get '/notebooks/:id', to: 'home#index'
       get '/notebooks/:id/view', to: 'home#index'
