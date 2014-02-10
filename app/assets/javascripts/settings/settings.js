@@ -13,4 +13,4 @@ Settings.AddressSerializer  = Core.AddressSerializer;
 Settings.UserSerializer = Core.UserSerializer;
 Settings.ServiceSerializer = Core.ServiceSerializer;
 Settings.SpinButtonComponent = Core.SpinButtonComponent;
-
+Settings.ModalDialogComponent = Core.ModalDialogComponent;

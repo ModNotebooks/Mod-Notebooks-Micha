@@ -34,16 +34,36 @@ App.ApplicationRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRouteMixin
       }
     },
 
+    modalChange: function(visible) {
+      this.controller.set('modalVisible', visible);
+    },
+
+    openModal: function(name) {
+      return this.render(name, {
+        into: 'application',
+        outlet: 'modal'
+      });
+    },
+
+    closeModal: function() {
+      return this.disconnectOutlet({
+        outlet: 'modal',
+        parentView: 'application'
+      });
+    },
+
     openSettings: function() {
+      this.controller.set('modalVisible', true);
       this.controller.set('settingsVisible', true);
     },
 
     closeSettings: function() {
+      this.controller.set('modalVisible', false);
       this.controller.set('settingsVisible', false);
     },
 
     toggleSettings: function() {
-      if (this.controller.get('settingsVisible')) {
+      if (this.controller.get('modalVisible')) {
         Ember.instrument("closeSettings", {}, Ember.K);
       } else {
         Ember.instrument("openSettings", {}, Ember.K);

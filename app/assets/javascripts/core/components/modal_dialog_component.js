@@ -1,6 +1,4 @@
-App.ModalDialogComponent = Ember.Component.extend({
-  classNames: "modal",
-
+Core.ModalDialogComponent = Ember.Component.extend({
   actions: {
     close: function() {
       this.animateOut().then(this.sendAction.bind(this));
@@ -9,7 +7,7 @@ App.ModalDialogComponent = Ember.Component.extend({
 
   eventManager: Ember.Object.create({
     click: function(evt, view) {
-      if (view.$(evt.target).hasClass('modal__content')) {
+      if (view.$(evt.target).hasClass('modal__center')) {
         view.send('close');
       }
     }
@@ -17,8 +15,7 @@ App.ModalDialogComponent = Ember.Component.extend({
 
   didInsertElement: function() {
     var _this = this;
-    Ember.$(document.documentElement).addClass('no-scroll');
-    Ember.$('.l-app-content').addClass('modal-open');
+    this.sendAction('change', true);
 
     Ember.run.later(function() {
       _this.$().addClass('is-visible');
@@ -29,7 +26,7 @@ App.ModalDialogComponent = Ember.Component.extend({
     var _this = this;
 
     return new Ember.RSVP.Promise(function(resolve) {
-      Ember.$('.l-app-content').removeClass('modal-open');
+      _this.sendAction('change', false);
       _this.$().removeClass('is-visible').one(Core.utils.transitionEnd, function() {
         resolve();
       });

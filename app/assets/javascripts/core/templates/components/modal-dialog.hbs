@@ -1,0 +1,11 @@
+<div class="modal">
+  <div class="modal__center">
+    <a href="javascript:void(0);" {{action 'close'}} class="modal__close">
+      <i class="i-chevron-left"></i>
+    </a>
+    <div class="modal__content">
+      {{yield}}
+    </div>
+  </div>
+</div>
+<div class="modal-background"></div>

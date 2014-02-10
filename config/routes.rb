@@ -28,7 +28,6 @@ Mod::Application.routes.draw do
   end
 
   constraints subdomain: 'api', defaults: { format: 'json' } do
-
     use_doorkeeper do
       # The only thing allowed through the API oauth wise is requesting access tokens
       skip_controllers :applications, :authorized_applications, :authorizations

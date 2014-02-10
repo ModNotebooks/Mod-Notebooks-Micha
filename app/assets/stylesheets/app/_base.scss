@@ -37,3 +37,15 @@ body {
 .clearfix { @include clearfix; }
 
 #main { height: 100%; }
+
+a {
+  outline: none;
+  text-decoration: none;
+}
+
+
+hr {
+  border: none;
+  outline: none;
+  border-top: 1px solid;
+}

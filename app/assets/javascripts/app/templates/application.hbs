@@ -8,17 +8,15 @@
 
 <div class="l-app-navtoggle">
   {{#if session.isAuthenticated}}
-    <a {{ action 'toggleSettings' }}>
-      {{#if settingsVisible}}
-        Close Settings
-      {{else}}
-        Open Settings
-      {{/if}}
+    <a href="javascript:void(0);"
+      {{action 'toggleSettings'}}
+      {{bind-attr class=":settingstoggle settingsVisible:is-close"}}>
+      <span class="settingstoggle__inner"></span>
     </a>
   {{/if}}
 </div>
 
-<section {{bind-attr class=":l-app-content settingsVisible:is-blurred"}}>
+<section {{bind-attr class=":l-app-content modalVisible:is-blurred"}}>
   {{outlet content}}
 </section>
 
