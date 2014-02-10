@@ -54,10 +54,12 @@ App.ApplicationRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRouteMixin
 
     openSettings: function() {
       this.controller.set('modalVisible', true);
+      this.controller.set('settingsVisible', true);
     },
 
     closeSettings: function() {
       this.controller.set('modalVisible', false);
+      this.controller.set('settingsVisible', false);
     },
 
     toggleSettings: function() {
