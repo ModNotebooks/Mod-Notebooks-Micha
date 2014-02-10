@@ -1,6 +1,15 @@
-{{#modal-dialog action="close"}}
-  <h3 class="flush--top">Name Change Modal</h5>
-  <p>Enter a new name:</p>
-  <p>{{input value=name}}</p>
-  <button {{action "close"}}>Done</button>
+{{#modal-dialog action="close" change="modalChange"}}
+  <div class="l-digitize-modal">
+    <div class="l-digitize-modal-notebook">
+      <div class="notebook--standin">
+        <span class="notebook--standin__plus"></span>
+      </div>
+    </div>
+    <div class="l-digitize-modal-options">
+      <a class="digitize-modal-option" href="javascript:void(0);">Digitize your notebook</a>
+      <hr/>
+      <!-- TODO: Implement a route that redirects to the shopify page. -->
+      <a class="digitize-modal-option" href="/order">Order a new notebook</a>
+    </div>
+  </div>
 {{/modal-dialog}}

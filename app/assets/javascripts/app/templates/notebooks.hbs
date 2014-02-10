@@ -2,6 +2,11 @@
   <div class="l-notebooks-wrap">
 
     <div class="l-notebooks-list">
+      <div class="l-notebooks-listitem">
+        <a href="javascript:void(0);" {{action 'openModal' 'digitize-modal'}} class="notebook--standin">
+          <span class="notebook--standin__plus"></span>
+        </a>
+      </div>
       {{#each arrangedContent}}
         <div class="l-notebooks-listitem">
           {{#link-to 'notebook' this class="notebook" classNameBindings="color" disabled=notProcessed}}
@@ -9,11 +14,6 @@
           {{/link-to}}
         </div>
       {{/each}}
-      <div class="l-notebooks-listitem">
-        <a href="javascript:void(0);" {{action 'openModal' 'digitize-modal'}} class="notebook--standin">
-          <span class="notebook--standin__plus"></span>
-        </a>
-      </div>
     </div>
 
   </div>

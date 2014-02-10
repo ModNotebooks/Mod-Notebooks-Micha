@@ -1,0 +1,24 @@
+.l-digitize-modal {
+  text-align: center;
+}
+
+.l-digitize-modal-notebook,
+.l-digitize-modal-options {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.l-digitize-modal-options {
+  padding-left: 70px;
+}
+
+.digitize-modal-option {
+  @include font-size(21px);
+  color: #fff;
+  padding: 0 8px;
+
+  & + hr {
+    border-color: rgba(#fff, .18);
+    margin: 45px 0;
+  }
+}

@@ -42,13 +42,14 @@ i[class^="i-"] {
   vertical-align: middle;
 }
 
-.i-settings-account { @include icon-with-retina(icon-settings-account); }
-.i-settings-address { @include icon-with-retina(icon-settings-address); }
-.i-settings-sync    { @include icon-with-retina(icon-settings-sync); }
-.i-settings-logout  { @include icon-with-retina(icon-settings-logout); }
-.i-dropbox-white    { @include icon-with-retina(icon-dropbox-white); }
-.i-evernote-white   { @include icon-with-retina(icon-evernote-white); }
-.i-live_connect-white    { @include icon-with-retina(icon-onenote-white); }
+.i-settings-account   { @include icon-with-retina(icon-settings-account); }
+.i-settings-address   { @include icon-with-retina(icon-settings-address); }
+.i-settings-sync      { @include icon-with-retina(icon-settings-sync); }
+.i-settings-logout    { @include icon-with-retina(icon-settings-logout); }
+.i-dropbox-white      { @include icon-with-retina(icon-dropbox-white); }
+.i-evernote-white     { @include icon-with-retina(icon-evernote-white); }
+.i-live_connect-white { @include icon-with-retina(icon-onenote-white); }
+.i-chevron-left       { @include icon-with-retina(icon-chevron-left); }
 
 
 

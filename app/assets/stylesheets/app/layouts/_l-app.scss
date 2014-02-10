@@ -45,11 +45,6 @@
   &.is-blurred {
     .cssfilters & {
       @include filter(blur(40px));
-      opacity: .5;
-    }
-
-    .no-cssfilters & {
-      opacity: .05;
     }
   }
 }
