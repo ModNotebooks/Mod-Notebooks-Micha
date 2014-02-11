@@ -9,7 +9,7 @@ App.ApplicationView = Ember.View.extend({
       case "login":
       case "signup":
       case "password_reset":
-        return "guest";
+        return "application-guest";
       default:
         return "application";
     }

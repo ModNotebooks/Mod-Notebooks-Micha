@@ -10,7 +10,7 @@
       {{#each pages}}
         <div class="l-notebook-listitem">
           {{#view App.GridPageView contentBinding="this"}}
-            {{#link-to 'notebook.view' notebook (query-params page=pageNumber) class="page--grid" classNameBindings="view.isLoading view.isError"}}
+            {{#link-to 'pages.show' notebook this class="page--grid" classNameBindings="view.isLoading view.isError"}}
               <img {{bind-attr src="image.small"}} class="page__image">
             {{/link-to}}
           {{/view}}

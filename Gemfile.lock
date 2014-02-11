@@ -1,11 +1,4 @@
 GIT
-  remote: git://github.com/emberjs/ember.js.git
-  revision: a139700172f752b64ebfb6f9bd207276a43c282f
-  specs:
-    ember-source (1.5.0.beta.1.canary)
-      handlebars-source (~> 1.0)
-
-GIT
   remote: git://github.com/erickreutz/omniauth-live_connect.git
   revision: 36fca99c162f82ab7ca9254b9e06a312b0bc4194
   specs:
@@ -130,6 +123,8 @@ GEM
       handlebars-source
       jquery-rails (>= 1.0.17)
       railties (>= 3.1)
+    ember-source (1.4.0.beta.6)
+      handlebars-source (~> 1.0)
     erubis (2.7.0)
     eventmachine (1.0.3)
     evernote-thrift (1.25.1)
@@ -441,7 +436,7 @@ DEPENDENCIES
   doorkeeper (~> 0.7.0)
   ember-data-source (= 1.0.0.beta.6)
   ember-rails
-  ember-source!
+  ember-source (= 1.4.0.beta.6)
   factory_girl_rails
   faker
   fog

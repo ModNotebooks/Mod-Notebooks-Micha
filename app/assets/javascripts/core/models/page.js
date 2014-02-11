@@ -10,7 +10,7 @@ Core.Page = (function() {
     notebook: DS.belongsTo('notebook'),
 
     pageNumber: function() {
-      return this.get('index') + 1;
+      return parseInt(this.get('index'), 10) + 1;
     }.property('index')
   });
 
