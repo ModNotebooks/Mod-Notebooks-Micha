@@ -1,5 +1,5 @@
 Ember.Handlebars.registerBoundHelper('humanize', function(value) {
-  return Ember.String.humanize(value);
+  return value.humanize();
 });
 
 Ember.Handlebars.registerBoundHelper('format-date', function(date, format) {

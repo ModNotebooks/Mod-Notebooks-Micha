@@ -33,6 +33,18 @@ Core.utils = (function() {
     return window.open(url, name, options);
   };
 
+  Utils.humanize = function(str) {
+    return str.replace(/_id$/, '').
+      replace(/_/g, ' ').
+      replace(/^\w/g, function(s){
+        return s.toUpperCase();
+      });
+  };
+
+  String.prototype.humanize = function() {
+    return Utils.humanize(this);
+  };
+
   return Utils;
 
 }());

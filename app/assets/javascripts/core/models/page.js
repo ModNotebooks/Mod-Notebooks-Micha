@@ -7,7 +7,11 @@ Core.Page = (function() {
     image: attr(),
 
     user: DS.belongsTo('user'),
-    notebook: DS.belongsTo('notebook')
+    notebook: DS.belongsTo('notebook'),
+
+    pageNumber: function() {
+      return this.get('index') + 1;
+    }.property('index')
   });
 
 }());
