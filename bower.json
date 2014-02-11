@@ -9,6 +9,7 @@
     "tweenjs": "*",
     "modernizr": "~2.7.1",
     "nprogress": "~0.1.2",
-    "ember-animated-outlet": "~1.0.0-beta"
+    "ember-animated-outlet": "~1.0.0-beta",
+    "swipe": "~2.0.0"
   }
 }
