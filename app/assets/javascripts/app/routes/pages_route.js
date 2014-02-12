@@ -1,16 +1,26 @@
 App.PagesRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
   model: function(params) {
-    return this.store.find('notebook', params.notebook_id);
-  }
+    var store = this.store;
+    return Ember.RSVP.hash({
+      notebook: store.find('notebook', params.notebook_id),
+      pages: store.find('page', { notebook_id: params.notebook_id })
+    });
+  },
+
+  setupController: function(controller, model) {
+    controller.set('notebook', model.notebook);
+    controller.set('content', model.pages);
+  },
 });
 
 App.PagesShowRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
   model: function(params) {
-    console.log("PARMS", params);
-  },
+    var pages = this.modelFor('pages').pages;
 
-  setupController: function(controller, model) {
-    console.log('MODEL', model);
+    return [
+      pages.findBy('pageNumber', parseInt(params.left_page_number)),
+      pages.findBy('pageNumber', parseInt(params.right_page_number))
+    ]
   },
 
   serialize: function(model) {

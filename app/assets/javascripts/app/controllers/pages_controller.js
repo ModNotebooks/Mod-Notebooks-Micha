@@ -1,1 +1,3 @@
-App.PagesController = Ember.ObjectController.extend({});
+App.PagesController = Ember.ArrayController.extend({
+  sortProperties: ['pageNumber']
+});
