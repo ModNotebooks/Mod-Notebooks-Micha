@@ -28,8 +28,8 @@ class Notebook < ActiveRecord::Base
   delegate :submitted?, :uploaded?, :returned?, :received?, :recycled?, to: :current_state
   delegate :processed?, to: :current_process_state
 
-  COLORS        = { "01" => "black", "02" => "sea", "03" => "red", "04" => "gold", "05" => "gray" }
-  PAPER_TYPES   = { "01" => "blank", "02" => "lined", "03" => "dotgrid" }
+  COLORS        = { "01" => "gray" }
+  PAPER_TYPES   = { "01" => "plain", "02" => "lined", "03" => "dotgrid" }
   HANDLE_METHOD = ["return", "recycle"]
 
   #-----------------------------------------------------------------------------
@@ -106,10 +106,32 @@ class Notebook < ActiveRecord::Base
       end
     end
 
+    def generate(color, paper, count=100)
+      color = COLORS.invert[color.to_s]
+      paper = PAPER_TYPES.invert[paper.to_s]
+
+      if paper && color
+        notebook_identifiers = (0...count).collect { generate_notebook_identifier(color, paper) }
+        create(notebook_identifiers.collect { |nid| { notebook_identifier: nid } })
+        notebook_identifiers
+      end
+    end
+
     # Resque async helper
     # https://github.com/resque/resque/blob/1-x-stable/examples/async_helper.rb
     def perform(id, method, *args)
       find(id).send(method, *args)
+    end
+
+    def generate_notebook_identifier(color, paper)
+      "#{color}-#{paper}-#{generate_carrier_identifier}"
+    end
+
+    def generate_carrier_identifier
+      loop do
+        identifier = SecureRandom.hex(3)
+        break identifier unless Notebook.exists?(carrier_identifier: identifier)
+      end
     end
 
     private
@@ -188,6 +210,7 @@ class Notebook < ActiveRecord::Base
   def async(method, *args)
     Resque.enqueue(Notebook, id, method, *args)
   end
+
 
   private
     def default_handle_method

@@ -11,7 +11,7 @@
 <body class="asleep">
   <div style="padding: 100px;">
 
-<!--     <p>
+    <p>
       <div class="notebook">
         <div class="notebook__inner">
           <div class="notebook__sleevewrap">
@@ -34,7 +34,7 @@
       <div class="page--grid">
         <img class="page__image" src="https://mod-development.s3.amazonaws.com/uploads/page/image/53/9ea6b6b6-6887-4bd0-a9d7-9824ec9d37ef.png?AWSAccessKeyId=AKIAIWY5U6CTI5NA655Q&Signature=zLaCbiAbADRPdlOMXFbr/nDLYSw%3D&Expires=1389911162">
       </div>
-    </p> -->
+    </p>
 
 <!--     <p>
       <div class="viewer">
@@ -73,46 +73,56 @@
  -->
     <!-- <hr/> -->
 
-<!--     <form  class="form" style="max-width: 500px;">
+    <form  class="form" style="max-width: 500px;">
       <div class="form__control">
-        <input type="text" placeholder="Email">
-        <span class="form__error">I am an error</span>
+        <input type="text" class="form__control__input">
+        <label for="field" class="form__control__label">Full Name</label>
+        <!-- <span class="form__error">I am an error</span> -->
       </div>
       <div class="form__control">
-        <input type="text" placeholder="Email">
-        <span class="form__input__error">I am an error</span>
+        <input type="text" class="form__control__input">
+        <label for="field" class="form__control__label">Address</label>
       </div>
-      <div class="form__control--half">
-        <input type="text" placeholder="Email">
+      <div class="form__controlgroup">
+        <div class="form__control--onethird">
+          <input type="text" class="form__control__input">
+          <label for="field" class="form__control__label">City</label>
+          <!-- <span class="form__error">I am an error</span> -->
+        </div>
+        <div class="form__control--onethird">
+          <input type="text" class="form__control__input">
+          <label for="field" class="form__control__label">State</label>
+          <!-- <span class="form__error">I am an error</span> -->
+        </div>
+        <div class="form__control--onethird">
+          <input type="text" class="form__control__input">
+          <label for="field" class="form__control__label">Postal Code</label>
+        </div>
       </div>
-      <div class="form__control--half is-error">
-        <input type="text" placeholder="Email">
-        <span class="form__error">I am an error that is multi-line and very very long</span>
-      </div>
-      <div class="clearfix"></div>
       <div class="form__control">
-        <input type="text" placeholder="Email">
+        <input type="text" class="form__control__input">
+        <label for="field" class="form__control__label">Country</label>
       </div>
       <div class="form__actions">
-        <button type="submit" class="button--medium">Save</button>
+        <button type="submit" class="button--form">Save</button>
       </div>
     </form>
 
     <hr/>
 
-    <form  class="form is-error" style="max-width: 300px;">
-      <span class="form__error">Invalid email or password</span>
-      <div class="form__control flush">
-        <input type="text" placeholder="Email">
+    <form  class="form--flush" style="max-width: 300px;">
+      <div class="form__control">
+        <input type="text" class="form__control__input">
+        <label for="field" class="form__control__label">Email</label>
       </div>
-      <div class="form__control flush">
-        <input type="password" placeholder="Password">
-        <a href="#" class="form__input__altaction">?</a>
+      <div class="form__control">
+        <input type="text" class="form__control__input">
+        <label for="field" class="form__control__label">Password</label>
       </div>
       <div class="form__actions">
-        <button type="submit" class="button--medium">Save</button>
+        <button type="submit" class="button--form">Login</button>
       </div>
-    </form> -->
+    </form>
 
   </div>
 </body>
