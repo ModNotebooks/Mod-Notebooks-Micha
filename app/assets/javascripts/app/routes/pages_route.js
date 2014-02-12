@@ -1,36 +1,36 @@
-App.PagesRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
+App.ViewerRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
   model: function(params) {
     return this.store.find('notebook', params.notebook_id);
   },
 
+  afterModel: function(model, transition) {
+
+  },
+
   setupController: function(controller, model) {
     controller.set('notebook', model);
-    controller.set('content', model.get('pages'));
   }
 });
 
-// App.PagesIndexRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
-//   redirect: function() {
-//     var notebook = this.modelFor('pages');
-//     var page     = this.controllerFor('pages').get('arrangedContent').get('firstObject');
-//     this.transitionTo('pages.show', notebook, page);
-//   }
-// });
+App.ViewerPagesRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
 
-App.PagesShowRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
   model: function(params) {
-    var pages = this.modelFor('pages').get('pages');
+    var notebook = this.modelFor('viewer');
 
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      pages.then(function(pages) {
+      notebook.get('pages').then(function(pages) {
         resolve([
-          pages.findBy('pageNumber', parseInt(params.left_page_number)),
-          pages.findBy('pageNumber', parseInt(params.right_page_number))
+          pages.findBy('pageNumber', parseInt(params.left_page_number, 10)),
+          pages.findBy('pageNumber', parseInt(params.right_page_number, 10)),
         ]);
       }, function(err) {
         reject(err);
-      });
+      })
     });
+  },
+
+  setupController: function(controller, model) {
+    console.log('setupController', model);
   },
 
   serialize: function(model) {
@@ -41,5 +41,5 @@ App.PagesShowRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin
     } else {
       return { left_page_number: page, right_page_number: page + 1 }
     }
-  },
+  }
 });

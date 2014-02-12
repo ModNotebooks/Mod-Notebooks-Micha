@@ -19,7 +19,7 @@ Mod::Application.routes.draw do
       get '/notebooks', to: 'home#index'
       get '/notebooks/:id', to: 'home#index'
       get '/notebooks/:id/pages', to: 'home#index'
-      get '/notebooks/:id/pages/:left_page_number/:right_page_number', to: 'home#index'
+      get '/notebooks/:id/view/:left_page_number/:right_page_number', to: 'home#index'
 
       get '/styleguide', to: "home#guide"
       get '/layout', to: "home#layout"
