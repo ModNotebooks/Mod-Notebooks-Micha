@@ -8,6 +8,10 @@ class App::HomeController < App::BaseController
     redirect_to 'https://shopify.com'
   end
 
+  def store
+    redirect_to 'https://shopify.com'
+  end
+
   def guide
     render 'guide', layout: false
   end

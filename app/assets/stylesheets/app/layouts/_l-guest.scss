@@ -4,36 +4,36 @@
 
 .l-guest-header {
   width: 100%;
-  // background: red;
-  padding: 13px;
+  display: table;
+  padding: 16px 24px;
   position: relative;
   z-index: $zindex-guest-header;
-  text-align: right;
-
-  @include media($screen-br-sm) {
-    padding: 18px;
-  }
-
-  .button--guest-header {
-    margin-left: 50px;
-  }
 }
 
-.l-guest-header-left {
-  display: inline-block;
+.l-guest-header-left,
+.l-guest-header-right {
+  display: table-cell;
   vertical-align: middle;
-  float: left;
-  position: relative;
-  top: 5px;
+}
 
-  @include media($screen-br-sm) {
-    float: none;
-    position: static;
+.l-guest-header-right {
+  text-align: right;
+
+  .button { margin-left: 40px; }
+}
+
+.l-guest-header-back {
+  color: #fff;
+  @include font-size(15px);
+
+  i {
+    margin-right: 12px;
+    position: relative;
+    top: -1px;
   }
 }
 
 .l-guest-content {
-  // background: blue;
   position: absolute;
   top: 0;
   left: 0;
