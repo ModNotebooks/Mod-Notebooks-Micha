@@ -1,4 +1,6 @@
 Core.ModalDialogComponent = Ember.Component.extend({
+  background: "under",
+
   actions: {
     close: function() {
       this.animateOut().then(this.sendAction.bind(this));
@@ -35,5 +37,9 @@ Core.ModalDialogComponent = Ember.Component.extend({
 
   willDestroyElement: function() {
     Ember.$(document.documentElement).removeClass('no-scroll');
-  }
+  },
+
+  backgroundClass: function() {
+    return this.get('background') === "over" ? "modal-background--over" : "modal-background";
+  }.property('background')
 });

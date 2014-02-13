@@ -14,6 +14,12 @@
   .is-visible & { opacity: .95; }
 }
 
+// Display over the logo and settings menu
+.modal-background--over {
+  @extend .modal-background;
+  z-index: $zindex-modal-background-over;
+}
+
 .modal {
   position: fixed;
   top: 0;
@@ -28,36 +34,39 @@
 
   @include transition(all 600ms ease-in-out);
   opacity: 0;
+  @include transform(translateY(20px));
 
 
   &.is-visible,
-  .is-visible & { opacity: 1; }
-}
-
-.modal__center {
-  vertical-align: middle;
-  display: table-cell;
-
-  @include transition(all 600ms ease-in-out);
-  opacity: 0;
-  @include transform(translateY(20px));
-
   .is-visible & {
     opacity: 1;
     @include transform(translateY(0px));
   }
+
+  .is-over & {
+    z-index: $zindex-modal-over;
+  }
 }
 
 .modal__close {
+  @extend .i-base;
+  @extend .i-chevron-left;
+  display: inline-block;
   vertical-align: middle;
-  display: table-cell;
-  padding: 0 42px;
+  position: absolute;
+  margin: auto 0;
+  top: 0;
+  left: 40px;
+  bottom: 0;
+  right: 0;
+  z-index: $zindex-modal-close;
 
-  &:active { @include transform(translateY(1px)); }
+  .is-over & {
+    z-index: $zindex-modal-close-over;
+  }
 }
 
 .modal__content {
   vertical-align: middle;
   display: table-cell;
-  width: 100%;
 }
