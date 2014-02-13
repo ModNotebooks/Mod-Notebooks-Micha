@@ -10,9 +10,13 @@
   border-radius: 3px;
   color: #466265;
   @include transition(150ms ease);
+  @include box-sizing(border-box);
 
   &:hover  { background: rgba(#fff, .8); }
-  &:active { background: rgba(#000, .2); }
+  &:active {
+    background: rgba(#000, .2);
+    @include transform(translateY(1px));
+  }
   &.is-disabled {
     opacity: .2;
     pointer-events: none;
@@ -25,4 +29,22 @@
   @include font-size(17px);
   font-weight: 400;
   padding: 8px 23px;
+}
+
+.button--guest {
+  @extend .button;
+  color: rgba(#fff, .8);
+  font-weight: 800;
+  border: 2px solid rgba(#fff, .5);
+  background: none;
+
+  &:hover {
+    border-color: rgba(#fff, 0);
+    background: rgba(#fff, .8);
+    color: #4f696b;
+  }
+
+  &:active {
+    background: rgba(#000, .2);
+  }
 }
