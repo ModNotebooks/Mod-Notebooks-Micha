@@ -1,14 +1,14 @@
-<section class="l-notebook">
-  <div class="l-notebook-wrap">
+<section class="l-notebooks">
+  <div class="l-notebooks-wrap">
 
-    <div class="l-notebook-list">
-      <div class="l-notebook-listitem">
-        <div {{bind-attr class=":notebook color"}}>
+    {{#view App.GridLayoutView}}
+      <div class="l-grid-item--page js-grid-item">
+        {{#link-to 'notebooks' class="notebook" classNameBindings="color"}}
           {{partial 'partials/notebook'}}
-        </div>
+        {{/link-to}}
       </div>
       {{#each pages}}
-        <div class="l-notebook-listitem">
+        <div class="l-grid-item--page js-grid-item">
           {{#view App.GridPageView contentBinding="this"}}
             {{#link-to 'viewer.pages' notebook.id this class="page--grid" classNameBindings="view.isLoading view.isError"}}
               <img {{bind-attr src="image.small"}} class="page__image">
@@ -16,7 +16,7 @@
           {{/view}}
         </div>
       {{/each}}
-    </div>
+    {{/view}}
 
   </div>
 </section>

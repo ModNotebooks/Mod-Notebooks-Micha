@@ -1,0 +1,24 @@
+.l-grid-wrap { max-width: 100%; }
+
+.l-grid {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.l-grid-item {
+  display: inline-block;
+  text-align: left;
+}
+
+.l-grid-item--notebook {
+  @extend .l-grid-item;
+  padding-right: 60px;
+  margin-bottom: 60px;
+}
+
+.l-grid-item--page {
+  @extend .l-grid-item;
+  padding-right: 44px;
+  margin-bottom: 44px;
+}
