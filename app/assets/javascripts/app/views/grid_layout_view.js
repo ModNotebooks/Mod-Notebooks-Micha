@@ -4,8 +4,8 @@ App.GridLayoutView = Ember.View.extend({
 
   didInsertElement: function() {
     this._super();
-    Ember.$(window).on('resize', Ember.$.proxy(this.debouncedResize, this));
     this.resize();
+    Ember.$(window).on('resize', Ember.$.proxy(this.debouncedResize, this));
   },
 
   willDestroy: function() {
