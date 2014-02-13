@@ -9,42 +9,20 @@
   padding: 4px 23px;
   border-radius: 3px;
   color: #466265;
-  @extend %book-font;
+  @include transition(150ms ease);
 
-  &:hover { background: rgba(#fff, .6); }
-  &:active { @include transform(translateY(1px)); }
-
+  &:hover  { background: rgba(#fff, .8); }
+  &:active { background: rgba(#000, .2); }
   &.is-disabled {
+    opacity: .2;
     pointer-events: none;
-    opacity: 0.5;
   }
 }
 
-.button--outline {
+.button--form {
   @extend .button;
-  color: #DFE2E2;
-  background: none;
-  border: 1px solid #7E9295;
-  &:hover { border-color: #DFE2E2; }
-}
-
-.button--small {
-  @include font-size(15px);
-}
-
-.button--medium {
-  @include font-size(16px);
-  padding-top: 8px;
-  padding-bottom: 8px;
-}
-
-.button--large {
-  @include font-size(18px);
-  padding-top: 8px;
-  padding-bottom: 8px;
-}
-
-.button--guest-header {
-  @extend .button--outline;
-  @extend .button--small;
+  width: 100%;
+  @include font-size(17px);
+  font-weight: 400;
+  padding: 8px 23px;
 }

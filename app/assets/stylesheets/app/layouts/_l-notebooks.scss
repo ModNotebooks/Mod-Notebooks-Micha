@@ -25,4 +25,5 @@
   margin-bottom: 60px;
 
   &:last-of-type { margin-right: 0; }
+  &:only-child   { margin-right: 0; }
 }

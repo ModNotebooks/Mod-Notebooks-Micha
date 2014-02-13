@@ -7,5 +7,7 @@ App.Router.map(function() {
 
   this.resource('notebooks');
   this.resource('notebook', { path: '/notebooks/:notebook_id' });
-  this.resource('notebook.view', { path: '/notebooks/:notebook_id/view' });
+  this.resource('viewer', { path: '/notebooks/:notebook_id/view' }, function() {
+    this.route('pages', { path: ':left_page_number/:right_page_number' });
+  });
 });

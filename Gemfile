@@ -37,7 +37,7 @@ gem 'paranoia', '~> 2.0'
 
 gem 'asset_sync'
 gem 'ember-rails'
-gem 'ember-source', '1.4.0.beta.3' # or the version you need
+gem 'ember-source', '1.4.0.beta.6' # or the version you need
 gem 'ember-data-source', '1.0.0.beta.6'
 
 gem 'compass-rails', '1.1.0.pre'

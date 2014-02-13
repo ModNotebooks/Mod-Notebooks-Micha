@@ -10,9 +10,9 @@
       {{#each pages}}
         <div class="l-notebook-listitem">
           {{#view App.GridPageView contentBinding="this"}}
-            <div {{bind-attr class=":page--grid view.isLoading view.isError"}}>
+            {{#link-to 'viewer.pages' notebook.id this class="page--grid" classNameBindings="view.isLoading view.isError"}}
               <img {{bind-attr src="image.small"}} class="page__image">
-            </div>
+            {{/link-to}}
           {{/view}}
         </div>
       {{/each}}

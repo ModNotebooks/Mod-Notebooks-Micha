@@ -1,0 +1,16 @@
+<div class="viewer">
+  {{outlet}}
+  <nav class="viewer__nav">
+    <ul class="viewer__navlist">
+      <li class="viewer__navitem--prev">
+        <a href="javascript:void(0)">Prev</a>
+      </li>
+      <li class="viewer__navitem--back">
+        {{#link-to 'notebook' notebook}}Back{{/link-to}}
+      </li>
+      <li class="viewer__navitem--next">
+        <a href="javascript:void(0)">Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>
