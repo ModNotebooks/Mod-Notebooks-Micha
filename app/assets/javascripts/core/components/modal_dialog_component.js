@@ -9,7 +9,7 @@ Core.ModalDialogComponent = Ember.Component.extend({
 
   eventManager: Ember.Object.create({
     click: function(evt, view) {
-      if (view.$(evt.target).hasClass('modal__center')) {
+      if (view.$(evt.target).hasClass('modal__content')) {
         view.send('close');
       }
     }
