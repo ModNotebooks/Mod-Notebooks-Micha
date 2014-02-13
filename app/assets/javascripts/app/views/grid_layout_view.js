@@ -14,11 +14,10 @@ App.GridLayoutView = Ember.View.extend({
   },
 
   debouncedResize: function() {
-    Ember.run.throttle(this, this.resize, 100);
+    Ember.run.debounce(this, this.resize, 100);
   },
 
   resize: function() {
-    console.log(this, this.$());
     var $item           = this.$('.js-grid-item');
     var itemCount       = Math.floor(this.$().width() / $item.outerWidth());
     var $grid           = this.$('.l-grid');
@@ -27,7 +26,6 @@ App.GridLayoutView = Ember.View.extend({
     var padding         = itemWidth - innerChildWidth;
     var newWidth        = itemCount * itemWidth + itemCount * 5;
 
-    // multiply the box amount with the box width to get the new width to hold the box amount + padding
     if(itemCount <= $item.length) {
       $item.attr('style', '');
       this.$('.js-grid-item:nth-of-type(' + itemCount + 'n)').css('padding-right', '0');
