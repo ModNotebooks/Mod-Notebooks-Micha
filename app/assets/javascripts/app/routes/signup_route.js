@@ -1,4 +1,4 @@
-App.SignupRoute = Ember.Route.extend(App.RequireUnauthenticatedRouteMixin, {
+App.SignupRoute = Ember.Route.extend(Core.RequireUnauthenticatedRouteMixin, {
   model: function() {
     return this.store.createRecord('user')
   },

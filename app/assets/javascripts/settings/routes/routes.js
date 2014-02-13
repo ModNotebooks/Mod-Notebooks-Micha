@@ -24,6 +24,8 @@ Settings.ApplicationRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRoute
   }
 });
 
+Settings.LoginRoute = Ember.Route.extend({});
+
 Settings.IndexRoute = Ember.Route.extend({
   redirect: function() {
     this.transitionTo('settings.account');

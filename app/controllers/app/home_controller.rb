@@ -4,6 +4,10 @@ class App::HomeController < App::BaseController
 
   def index; end
 
+  def order
+    redirect_to 'https://shopify.com'
+  end
+
   def guide
     render 'guide', layout: false
   end

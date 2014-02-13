@@ -31,7 +31,13 @@ Ember.Application.initializer({
     }
 
     if (application.name === "main") {
-      Ember.subscribe('sessionInvalidationSucceeded', {
+      var invalidationSubscriber = application.get('invalidationSubscriber');
+
+      if (!Ember.isEmpty(invalidationSubscriber)) {
+        Ember.Instrumentation.unsubscribe(invalidationSubscriber);
+      }
+
+      invalidationSubscriber = Ember.subscribe('sessionInvalidationSucceeded', {
         before: function(name, timestamp, payload) {
           container.lookup('route:application').send('invalidateSession');
         }, after: Ember.K
