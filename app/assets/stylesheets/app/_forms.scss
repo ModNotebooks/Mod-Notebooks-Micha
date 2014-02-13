@@ -87,6 +87,12 @@ input[type="submit"] {
   position: relative;
 }
 
+.form__control--onehalf {
+  @extend .form__control;
+  float: left;
+  width: 50%;
+}
+
 .form__control--twothirds {
   @extend .form__control;
   float: left;
@@ -118,7 +124,7 @@ input.form__control__input {
 
   .is-error & {
     background: rgba(#ff0000, .14);
-    border-color: rgba(#9b3539, .34);
+    border-color: rgba(#9b3539, 0);
   }
 }
 
@@ -150,6 +156,7 @@ input.form__control__input:focus + .form__control__label {
   line-height: 1.4;
   padding: 8px 12px;
   color: #cdadad;
+  text-align: left;
 }
 
 .form__controlgroup {
