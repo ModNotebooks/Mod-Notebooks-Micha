@@ -10,6 +10,7 @@ App.ApplicationView = Ember.View.extend({
       case "signup":
       case "password_reset":
       case "digitize.index":
+      case "digitize.code":
         return "application-guest";
       case "viewer":
       case "viewer.pages":
@@ -17,20 +18,23 @@ App.ApplicationView = Ember.View.extend({
       default:
         return "application";
     }
-
   }.property('controller.currentPath'),
 
   updateLayout: function() {
     this.rerender();
   }.observes('layoutName'),
 
-  isAuthenticated: function() {
-    if (this.get('session.isAuthenticated')) {
+  bodyClass: function() {
+    var isAuthenticated = this.get('session.isAuthenticated');
+    var path = this.get('controller.currentPath') || window.location.pathname;
+    var isDigitize = path && path.match(/digitize/i);
+
+    if (isAuthenticated && !isDigitize) {
       Ember.$(document.body)
-        .removeClass('asleep')
+        .removeClass('dark')
     } else {
       Ember.$(document.body)
-        .addClass('asleep');
+        .addClass('dark');
     }
   }.observes('layoutName').on('init')
 });
