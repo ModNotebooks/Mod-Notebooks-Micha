@@ -20,6 +20,11 @@ Mod::Application.routes.draw do
       get '/notebooks/:id', to: 'home#index'
       get '/notebooks/:id/pages', to: 'home#index'
       get '/notebooks/:id/view/:left_page_number/:right_page_number', to: 'home#index'
+      get '/digitize', to: 'home#index'
+      get '/digitize/code', to: 'home#index'
+      get '/digitize/scan', to: 'home#index'
+      get '/digitize/address', to: 'home#index'
+      get '/digitize/confirm', to: 'home#index'
 
       get '/order', to: 'home#order'
       get '/store', to: 'home#store'

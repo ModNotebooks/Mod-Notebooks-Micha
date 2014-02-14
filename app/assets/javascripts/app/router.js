@@ -10,4 +10,11 @@ App.Router.map(function() {
   this.resource('viewer', { path: '/notebooks/:notebook_id/view' }, function() {
     this.route('pages', { path: ':left_page_number/:right_page_number' });
   });
+
+  this.resource('digitize', { path: '/digitize' }, function() {
+    this.route('code');
+    this.route('scan');
+    this.route('address');
+    this.route('confirm');
+  });
 });
