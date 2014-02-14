@@ -11,7 +11,7 @@
 
 .digitize-modal-option {
   @include font-size(21px);
-  color: #fff;
+  color: rgba(#fff, .3);
   padding: 0 6px;
   width: 100%;
   display: inline-block;
@@ -27,5 +27,11 @@
     position: absolute;
     right: 6px;
     top: 5px;
+    opacity: .3;
+  }
+
+  &:hover {
+    color: #fff;
+    i { opacity: 1; }
   }
 }
