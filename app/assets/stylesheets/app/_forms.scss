@@ -171,17 +171,13 @@ input.form__control__input:focus + .form__control__label {
 }
 
 .form__radio {
-  display: table;
+  position: relative;
   width: 100%;
   @include font-size(17px);
   padding: 24px 0;
   border-top: 1px solid rgba(#fff, .11);
 
   &:last-of-type { border-bottom: 1px solid rgba(#fff, .11); }
-}
-
-.form__radio__inputwrap {
-  position: relative;
 }
 
 .form__radio__input {
@@ -191,42 +187,54 @@ input.form__control__input:focus + .form__control__label {
   display: none;
 }
 
+.form__radio__labelwrap {
+  display: table;
+  width: 100%;
+  opacity: .27;
+  font-weight: 400;
+  @include font-size(17px);
+  cursor: pointer;
+}
+
+.form__radio__input:checked + .form__radio__labelwrap {
+  opacity: 1;
+}
+
 .form__radio__label,
-.form__radio__inputwrap {
+.form__radio__custominput {
   display: table-cell;
   vertical-align: middle;
 }
 
-.form__radio__input + label {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  opacity: .27;
-  position: relative;
-  cursor: pointer;
-
-  &:after {
-    content: "";
-    position: absolute;
-    width: 12px;
-    height: 12px;
-    background: #fff;
-    top: 2px;
-    left: 2px;
-    border-radius: 50%;
-    opacity: 0;
-  }
-}
-
 .form__radio__label {
-  font-weight: 400;
   width: 100%;
 }
 
-.form__radio__input:checked + label {
-  opacity: 1;
-  &:after { opacity: 1; }
+.form__radio__custominput {
+  span {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    position: relative;
+  }
+
+  span:after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    border-radius: 50%;
+    opacity: 0;
+  }
+
+  .form__radio__input:checked + .form__radio__labelwrap & {
+    span:after { opacity: 1; }
+  }
 }
 
 .form__actions { margin-top: 3px; }
