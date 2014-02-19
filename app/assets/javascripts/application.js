@@ -64,11 +64,11 @@
   });
 
   MainApp.Router.reopen({
-    location: 'history',
+    location: 'history'
   });
 
   SettingsApp.Router.reopen({
-    location: 'none',
+    location: 'none'
   });
 
   window.App = MainApp;

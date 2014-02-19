@@ -1,6 +1,8 @@
 Ember.Application.initializer({
   name: 'authentication',
   initialize: function(container, application) {
+    var loc = window.location;
+
     Ember.SimpleAuth.Authenticators.OAuth2.reopen({
       serverTokenEndpoint: window.ENV.API_ENDPOINT + '/oauth/token',
 
@@ -12,7 +14,7 @@ Ember.Application.initializer({
     });
 
     Ember.SimpleAuth.setup(application, {
-      crossOriginWhitelist: [window.location.protocol + window.ENV.API_ENDPOINT],
+      crossOriginWhitelist: [loc.protocol + window.ENV.API_ENDPOINT],
       routeAfterInvalidation: 'login'
     });
   }
