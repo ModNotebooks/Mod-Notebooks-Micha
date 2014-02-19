@@ -46,6 +46,7 @@ Mod::Application.routes.draw do
       resources :shares, param: :token, only: [:create, :show, :destroy]
       resources :notebooks, only: [:index, :create, :show, :update] do
         post 'upload', on: :collection
+        post 'exists', on: :collection
       end
       resources :services, only: [:index, :create, :show, :update, :destroy]
       resources :pages, only: [:index, :show]

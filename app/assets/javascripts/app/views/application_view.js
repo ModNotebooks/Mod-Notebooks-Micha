@@ -14,7 +14,7 @@ App.ApplicationView = Ember.View.extend({
         return "application-guest";
       case "viewer":
       case "viewer.pages":
-        return "application-viewer";
+        return "application-blank";
       default:
         return "application";
     }

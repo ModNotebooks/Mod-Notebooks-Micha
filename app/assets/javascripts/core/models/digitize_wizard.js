@@ -1,21 +1,16 @@
 Core.DigitizeWizard = Ember.Object.extend({
-  curStep: 0,
-  steps: ['join', 'code', 'scan', 'address', 'confirm'],
+  steps: ['auth', 'code', 'scan', 'address', 'confirm'],
+  completedSteps: [],
 
   advance: function() {
-    if (this.get('curStep') < this.get('totalSteps').length) {
-      this.incrementProperty('curStep');
-      return true;
-    } else {
-      return false;
-    }
+    this.get('completedSteps').pushObject( this.get('steps').popObject() );
   },
 
   currentStep: function() {
-    return this.get('totalSteps')[this.get('curStep')];
-  },
+    return this.get('steps').get('firstObject');
+  }.property('steps', 'completedSteps'),
 
   hasCompletedStep: function(step) {
-    return this.get('curStep') > step;
+    return this.get('completedSteps').contains(step);
   }
 });
