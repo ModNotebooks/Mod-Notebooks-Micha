@@ -25,8 +25,11 @@
 
 .l-settings-inner {
   width: 100%;
-  display: table-row;
+  height: 100%;
+  display: table-cell;
   vertical-align: middle;
+  position: relative;
+  z-index: $zindex-modal;
 
   @include transition(all 600ms ease-in-out);
   opacity: 0;
@@ -41,8 +44,6 @@
 .l-settings-menu, .l-settings-content {
   display: table-cell;
   vertical-align: middle;
-  position: relative;
-  z-index: $zindex-modal;
 }
 
 .l-settings-menu {
