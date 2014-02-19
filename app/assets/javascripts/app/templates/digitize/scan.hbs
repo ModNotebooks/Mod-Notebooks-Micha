@@ -1,0 +1,15 @@
+<h1 class="digitize-header">
+  Your notebook, Your choice <br>
+  <small>What would you like us to do after digitization?</small>
+</h1>
+<div class="l-digitize-step">
+  <form class="form">
+    <div {{bind-attr class=":form__radio error:is-error"}}>
+      {{input type="radio" valueBinding="handleMethod" name="handleMethod" autofocus="autofocus"}}
+    </div>
+    <div class="form__actions">
+      <button class="button--text" {{action 'advance'}}>Next</button>
+    </div>
+  </form>
+</div>
+
