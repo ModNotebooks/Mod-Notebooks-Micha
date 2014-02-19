@@ -7,29 +7,26 @@
   width: 100%;
   height: 100%;
   display: table;
-  @include transform(translate3d(0, 0, 0));
   z-index: $zindex-modal;
   overflow-x: auto;
   overflow-y: scroll;
-  // display: none;
 
   @include transition(all 600ms ease-in-out);
   opacity: 0;
+  @include transform(translateY(20px));
   visibility: hidden;
 
   &.is-visible {
     opacity: 1;
-    // display: block;
+    @include transform(translateY(0px));
     visibility: visible;
   }
 }
 
 .l-settings-inner {
   width: 100%;
-  height: 100%;
-  display: table;
-  position: relative;
-  z-index: $zindex-modal;
+  display: table-row;
+  vertical-align: middle;
 
   @include transition(all 600ms ease-in-out);
   opacity: 0;
@@ -44,6 +41,8 @@
 .l-settings-menu, .l-settings-content {
   display: table-cell;
   vertical-align: middle;
+  position: relative;
+  z-index: $zindex-modal;
 }
 
 .l-settings-menu {
