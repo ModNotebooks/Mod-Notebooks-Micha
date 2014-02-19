@@ -11,6 +11,9 @@ App.ApplicationView = Ember.View.extend({
       case "password_reset":
       case "digitize.index":
       case "digitize.code":
+      case "digitize.scan":
+      case "digitize.address":
+      case "digitize.confirmation":
         return "application-guest";
       case "viewer":
       case "viewer.pages":

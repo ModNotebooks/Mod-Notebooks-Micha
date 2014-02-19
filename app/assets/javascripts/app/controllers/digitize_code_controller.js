@@ -6,13 +6,14 @@ App.DigitizeCodeController = Ember.ObjectController.extend({
   completed: false,
 
   actions: {
-    next: function() {
+    advance: function() {
       var _this = this;
-
       this.canAdvance().then(function() {
-        _this.send('advance');
+        _this.set('error', null);
+        _this.set('completed', true);
+        _this.transitionToRoute('digitize.scan')
       }, function() {
-        _this.set("error", "Could not find notebook with the given code.");
+        _this.set('error', 'Invalid code.');
       });
     },
   },
@@ -36,7 +37,10 @@ App.DigitizeCodeController = Ember.ObjectController.extend({
         });
       }
     });
+  },
 
-  }
+  codeChanged: function() {
+    this.set('error', null);
+  }.observes('code')
 
 });

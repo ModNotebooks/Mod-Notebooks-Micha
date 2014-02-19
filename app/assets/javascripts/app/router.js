@@ -15,6 +15,6 @@ App.Router.map(function() {
     this.route('code');
     this.route('scan');
     this.route('address');
-    this.route('confirm');
+    this.route('confirmation');
   });
 });
