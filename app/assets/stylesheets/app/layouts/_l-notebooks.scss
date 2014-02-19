@@ -4,11 +4,11 @@
   padding: 100px 85px 100px 0;
 
   &:before {
-    content: '';
+    content: "";
     display: inline-block;
     height: 100%;
     vertical-align: middle;
-    margin-right: -0.25em; /* Adjusts for spacing */
+    margin-right: -1em; /* Adjusts for spacing */
   }
 }
 
