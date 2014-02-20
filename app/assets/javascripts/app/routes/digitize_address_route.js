@@ -1,11 +1,5 @@
-App.DigitizeAddressRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
+App.DigitizeAddressRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, App.DigitizeRouteMixin, {
 
-  beforeModel: function(transition) {
-    var previousStepCompleted = this.controllerFor('digitize.scan').get('completed');
-    if (!previousStepCompleted) {
-      transition.abort();
-      this.transitionTo('digitize.scan');
-    }
-  }
+  previousStep: 'digitize.scan'
 
 });

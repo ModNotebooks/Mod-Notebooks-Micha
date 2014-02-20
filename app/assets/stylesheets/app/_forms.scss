@@ -190,25 +190,25 @@ input.form__control__input:focus + .form__control__label {
 .form__radio__labelwrap {
   display: table;
   width: 100%;
-  opacity: .27;
   font-weight: 400;
   @include font-size(17px);
   cursor: pointer;
-}
-
-.form__radio__input:checked + .form__radio__labelwrap {
-  opacity: 1;
+  text-align: left;
 }
 
 .form__radio__label,
 .form__radio__custominput {
   display: table-cell;
   vertical-align: middle;
+  opacity: .27;
 }
 
-.form__radio__label {
-  width: 100%;
+.form__radio__input:checked ~ .form__radio__label,
+.form__radio__input:checked ~ .form__radio__custominput {
+  opacity: 1;
 }
+
+.form__radio__label { width: 100%; }
 
 .form__radio__custominput {
   span {
@@ -231,10 +231,13 @@ input.form__control__input:focus + .form__control__label {
     border-radius: 50%;
     opacity: 0;
   }
+}
 
-  .form__radio__input:checked + .form__radio__labelwrap & {
-    span:after { opacity: 1; }
-  }
+
+.form__radio__input:checked ~ .form__radio__label,
+.form__radio__input:checked ~ .form__radio__custominput {
+  opacity: 1;
+  span:after { opacity: 1; }
 }
 
 .form__actions { margin-top: 3px; }

@@ -4,8 +4,20 @@
 </h1>
 <div class="l-digitize-step">
   <form class="form">
-    <div {{bind-attr class=":form__radio error:is-error"}}>
-      {{input type="radio" valueBinding="handleMethod" name="handleMethod" autofocus="autofocus"}}
+    <div class="form__radiogroup">
+      {{#radiogroup name="handleMethod" value=controller.handleMethod}}
+        {{#each radioContent}}
+          <div class="form__radio">
+            <label class="form__radio__labelwrap">
+              {{radio value=value class="form__radio__input"}}
+              <div class="form__radio__label">{{label}}</div>
+              <div class="form__radio__custominput">
+                <span></span>
+              </div>
+            </label>
+          </div>
+        {{/each}}
+      {{/radiogroup}}
     </div>
     <div class="form__actions">
       <button class="button--text" {{action 'advance'}}>Next</button>

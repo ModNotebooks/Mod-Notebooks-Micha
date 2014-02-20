@@ -1,11 +1,3 @@
-App.DigitizeCodeRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
-
-  beforeModel: function(transition) {
-    var previousStepCompleted = this.controllerFor('digitize.index').get('completed');
-    if (!previousStepCompleted) {
-      transition.abort();
-      this.transitionTo('digitize.index');
-    }
-  }
-
+App.DigitizeCodeRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, App.DigitizeRouteMixin, {
+  previousStep: 'digitize.index'
 });
