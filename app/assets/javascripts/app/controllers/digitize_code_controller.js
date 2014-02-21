@@ -1,4 +1,4 @@
-App.DigitizeCodeController = Ember.ObjectController.extend({
+App.DigitizeCodeController = Ember.Controller.extend({
   needs: ['digitize', 'digitizeIndex'],
 
   code: null,

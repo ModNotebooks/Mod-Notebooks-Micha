@@ -1,5 +1,5 @@
-App.DigitizeScanController = Ember.ObjectController.extend({
-  needs: ['digitize', 'digitizeCode'],
+App.DigitizeScanController = Ember.Controller.extend({
+  needs: ['digitize', 'digitizeCode', 'digitizeAddress'],
 
   handleMethod: '1',
   completed: false,
@@ -12,16 +12,26 @@ App.DigitizeScanController = Ember.ObjectController.extend({
 
   actions: {
     advance: function() {
-      var handleMethod = this.get('handleMethod');
-      this.set('hasCompleted', true);
+      var handleMethod = this.get('handleMethodName');
+      this.set('completed', true);
 
-      if (handleMethod === '2' || handleMethod === '3') {
+      if (handleMethod === 'return') {
         this.transitionToRoute('digitize.address');
       } else {
-        this.controllerFor('digitize.address').set('hasCompleted', true);
-        this.transitionToRoute('digitize.comfirmation');
+        this.get('controllers.digitizeAddress').set('completed', true);
+        this.transitionToRoute('digitize.confirmation');
       }
     },
   },
+
+  handleMethodName: function() {
+    var handleMethod = this.get('handleMethod');
+
+    if (handleMethod === '3') {
+      return "return";
+    } else {
+      return  "recycle";
+    }
+  }.property('handleMethod')
 
 });

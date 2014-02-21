@@ -2,7 +2,6 @@ App.DigitizeAddressController = Ember.ObjectController.extend({
   needs: ['digitize', 'digitizeScan'],
 
   completed: false,
-  handleMethod: null,
   isLoading: false,
 
   actions: {
@@ -12,7 +11,7 @@ App.DigitizeAddressController = Ember.ObjectController.extend({
 
       content.save().then(function() {
         _this.set('isLoading', false);
-        _this.set('hasCompleted', true);
+        _this.set('completed', true);
         _this.transitionToRoute('digitize.confirmation');
       }, function(errors) {
         _this.set('isLoading', false);
