@@ -51,3 +51,13 @@
   max-width: 375px;
   margin: 0 auto;
 }
+
+.l-digitize-address {
+  @extend .l-digitize-step;
+  max-width: 500px;
+}
+
+.l-digitize-confirmation {
+  @extend .l-digitize-step;
+  max-width: 530px;
+}

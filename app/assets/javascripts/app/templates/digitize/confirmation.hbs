@@ -1,0 +1,33 @@
+<h1 class="digitize-header">
+  {{heading}} <br>
+  <small>So here is what is going to happen next</small>
+</h1>
+<div class="l-digitize-confirmation">
+  <ol class="biglist">
+    <li class="biglist__item">
+      <div class="biglist__itemcounter">
+        <span class="biglist__counter"></span>
+      </div>
+      <div class="biglist__itemlabel">{{stepOne}}</div>
+    </li>
+    <li class="biglist__item">
+      <div class="biglist__itemcounter">
+        <span class="biglist__counter"></span>
+      </div>
+      <div class="biglist__itemlabel">{{stepTwo}}</div>
+    </li>
+    <li class="biglist__item">
+      <div class="biglist__itemcounter">
+        <span class="biglist__counter"></span>
+      </div>
+      <div class="biglist__itemlabel">{{stepThree}}</div>
+    </li>
+    <li class="biglist__item">
+      <div class="biglist__itemcounter">
+        <span class="biglist__counter"></span>
+      </div>
+      <div class="biglist__itemlabel">{{stepFour}}</div>
+    </li>
+  </ol>
+  {{spin-button isLoading=isLoading buttonText="Lets Roll!" action="advance" buttonClass="button--form"}}
+</div>
