@@ -15,7 +15,8 @@ Ember.Application.initializer({
 
     Ember.SimpleAuth.setup(application, {
       crossOriginWhitelist: [loc.protocol + window.ENV.API_ENDPOINT],
-      routeAfterInvalidation: 'login'
+      routeAfterInvalidation: 'login',
+      store: window.ENV.IE ? Ember.SimpleAuth.Stores.Cookie : Ember.SimpleAuth.Stores.LocalStorage
     });
   }
 });
