@@ -13,6 +13,10 @@ class Api::V1::PagesController < Api::BaseController
       @pages = @pages.where(notebook_id: index_params.fetch(:notebook_id))
     end
 
+    if index_params.has_key?(:index)
+      @pages = @pages.where(index: index_params.fetch(:index))
+    end
+
     respond_with @pages
   end
 
@@ -26,7 +30,7 @@ class Api::V1::PagesController < Api::BaseController
 
   private
     def index_params
-      params.permit(:notebook_id, ids: [])
+      params.permit(:notebook_id, :index, ids: [])
     end
 
     def find_pages

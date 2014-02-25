@@ -38,7 +38,7 @@ class Notebook < ActiveRecord::Base
 
   belongs_to :user
   has_many :events, -> { order 'created_at ASC' }, class_name: "NotebookEvent", dependent: :destroy
-  has_many :pages,  -> { order 'index ASC' }, dependent: :destroy
+  has_many :pages,  -> { order("position ASC") }, dependent: :destroy
   has_many :shares, as: :shareable
 
   #-----------------------------------------------------------------------------

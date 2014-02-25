@@ -2,7 +2,7 @@ App.ApplicationView = Ember.View.extend({
   tagName: 'main',
   classNameBindings: ['session.isAuthenticated:l-app-main:l-guest-main'],
 
-  layoutName: function() {
+  templateName: function() {
     var path = this.get('controller.currentPath');
 
     switch(path) {
@@ -25,7 +25,7 @@ App.ApplicationView = Ember.View.extend({
 
   updateLayout: function() {
     this.rerender();
-  }.observes('layoutName'),
+  }.observes('templateName'),
 
   bodyClass: function() {
     var isAuthenticated = this.get('session.isAuthenticated');
@@ -39,5 +39,5 @@ App.ApplicationView = Ember.View.extend({
       Ember.$(document.body)
         .addClass('dark');
     }
-  }.observes('layoutName').on('init')
+  }.observes('templateName').on('init')
 });

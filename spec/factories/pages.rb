@@ -10,6 +10,7 @@
 #  created_at  :datetime
 #  updated_at  :datetime
 #  deleted_at  :datetime
+#  position    :integer
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

@@ -38,13 +38,4 @@
   @include transition-timing-function(ease-in-out);
   @include backface-visibility(hidden);
   @include transform(translate3d(0, 0, 0));
-
-  .cssfilters & { @include transition-duration(400ms); }
-  .no-cssfilters & { @include transition-duration(800ms); }
-
-  &.is-blurred {
-    .cssfilters & {
-      @include filter(blur(40px));
-    }
-  }
 }

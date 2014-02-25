@@ -50,8 +50,11 @@ i[class^="i-"] {
 .i-evernote-white      { @include icon-with-retina(icon-evernote-white); }
 .i-live_connect-white  { @include icon-with-retina(icon-onenote-white); }
 .i-chevron-left        { @include icon-with-retina(icon-chevron-left); }
+.i-chevron-left-dark   { @include icon-with-retina(icon-chevron-left-dark); }
+.i-chevron-right-dark  { @include icon-with-retina(icon-chevron-right-dark); }
 .i-chevron-right-small { @include icon-with-retina(icon-chevron-right-small); }
 .i-chevron-left-xsmall { @include icon-with-retina(icon-chevron-left-xsmall); }
+.i-grid-dark           { @include icon-with-retina(icon-grid-dark); }
 
 
 
