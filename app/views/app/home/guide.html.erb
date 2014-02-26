@@ -8,7 +8,7 @@
   <%= stylesheet_link_tag "application", media: "all" %>
   <%= csrf_meta_tags %>
 </head>
-<body class="asleep">
+<body class="dark">
   <div style="padding: 100px;">
 
     <p>
@@ -105,6 +105,40 @@
       </div>
       <div class="form__actions">
         <button type="submit" class="button--form">Save</button>
+      </div>
+    </form>
+
+    <hr>
+
+    <form  class="form" style="max-width: 500px;">
+      <div class="form__radiogroup">
+        <div class="form__radio">
+          <label class="form__radio__labelwrap">
+            <input type="radio" name="handleMethod" class="form__radio__input" checked="checked">
+            <div class="form__radio__label">Send it back to me (+$10)</div>
+            <div class="form__radio__custominput">
+              <span></span>
+            </div>
+          </label>
+        </div>
+        <div class="form__radio">
+          <label class="form__radio__labelwrap">
+            <input type="radio" name="handleMethod" class="form__radio__input">
+            <div class="form__radio__label">Send it back to me (+$10)</div>
+            <div class="form__radio__custominput">
+              <span></span>
+            </div>
+          </label>
+        </div>
+        <div class="form__radio">
+          <label class="form__radio__labelwrap">
+            <input type="radio" name="handleMethod" class="form__radio__input">
+            <div class="form__radio__label">Send it back to me (+$10)</div>
+            <div class="form__radio__custominput">
+              <span></span>
+            </div>
+          </label>
+        </div>
       </div>
     </form>
 

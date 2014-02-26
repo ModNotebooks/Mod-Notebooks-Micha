@@ -1,5 +1,6 @@
 class Api::V1::NotebooksController < Api::BaseController
   before_filter :find_notebooks
+  before_filter :find_notebook_by_notebook_identifier, only: [:create, :exists]
   before_filter :find_notebook, only: [:show, :update, :share]
 
   doorkeeper_for :all
@@ -20,8 +21,12 @@ class Api::V1::NotebooksController < Api::BaseController
     respond_with @notebook.shares.create
   end
 
+  def exists
+    render json: { notebook: "exists" }
+  end
+
   def create
-    notebook = @notebooks.build(create_params)
+    @notebook.update(create_params.slice(:name, :handle_method))
 
     if notebook.save
       respond_with notebook, status: :created
@@ -50,6 +55,10 @@ class Api::V1::NotebooksController < Api::BaseController
 
     def find_notebooks
       @notebooks = @user.notebooks
+    end
+
+    def find_notebook_by_notebook_identifier
+      @notebook = Notebook.unreserved.find_by_notebook_identifier!(create_params.fetch(:notebook_identifier))
     end
 
     def find_notebook

@@ -2,34 +2,43 @@ App.ApplicationView = Ember.View.extend({
   tagName: 'main',
   classNameBindings: ['session.isAuthenticated:l-app-main:l-guest-main'],
 
-  layoutName: function() {
+  templateName: function() {
     var path = this.get('controller.currentPath');
 
     switch(path) {
       case "login":
       case "signup":
       case "password_reset":
+      case "digitize.index":
+      case "digitize.code":
+      case "digitize.scan":
+      case "digitize.address":
+      case "digitize.confirmation":
         return "application-guest";
       case "viewer":
       case "viewer.pages":
-        return "application-viewer";
+        return "application-blank";
       default:
         return "application";
     }
-
   }.property('controller.currentPath'),
 
   updateLayout: function() {
+    console.log('RERENDERING');
     this.rerender();
-  }.observes('layoutName'),
+  }.observes('templateName'),
 
-  isAuthenticated: function() {
-    if (this.get('session.isAuthenticated')) {
+  bodyClass: function() {
+    var isAuthenticated = this.get('session.isAuthenticated');
+    var path = this.get('controller.currentPath') || window.location.pathname;
+    var isDigitize = path && path.match(/digitize/i);
+
+    if (isAuthenticated && !isDigitize) {
       Ember.$(document.body)
-        .removeClass('asleep')
+        .removeClass('dark')
     } else {
       Ember.$(document.body)
-        .addClass('asleep');
+        .addClass('dark');
     }
-  }.observes('layoutName').on('init')
+  }.observes('templateName').on('init')
 });

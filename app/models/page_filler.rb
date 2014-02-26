@@ -32,8 +32,8 @@ class PageFiller
     notebook.pages.where('index > ?', pdf.count).map(&:destroy!)
 
     pdf.each do |page|
-      index = page.number - 1
-      page_model = notebook.pages.find_or_create_by(index: index)
+      index = page.number # we dont the 0 page. Which is the inner cover of the notebook
+      page_model = notebook.pages.find_or_create_by(index: index, position: index)
       filepath = "#{tmp_dir}/#{notebook.id}-p#{index}.png"
 
       pages << page_model

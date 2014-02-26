@@ -14,16 +14,17 @@
   height: 100%;
 }
 
-.viewer__page--left,
-.viewer__page--right {
-  @extend .viewer__page;
+.viewer__page:first-of-type:last-of-type {
+  margin: 0 auto;
+  text-align: center;
+  float: none;
 }
 
-.viewer__page--left {
+.viewer__page:first-of-type {
   text-align: right;
 }
 
-.viewer__page--right {
+.viewer__page:last-of-type {
   text-align: left;
 }
 
@@ -33,6 +34,11 @@
   width: auto;
   height: auto;
   vertical-align: bottom;
+
+  opacity: 1;
+  @include transition(opacity 300ms ease-out);
+
+  &.is-loading { opacity: 0; }
 }
 
 .viewer__nav {
@@ -54,6 +60,13 @@
 .viewer__navitem {
   display: table-cell;
   vertical-align: middle;
+
+  a {
+    @include transition(opacity 300ms ease-in-out);
+    opacity: .5;
+    &:hover  { opacity: .75; }
+    &:active { @include transform(translateY(1px)); }
+  }
 }
 
 .viewer__navitem--prev,

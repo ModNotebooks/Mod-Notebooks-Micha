@@ -14,7 +14,7 @@ gem 'resque-loner'
 gem 'resque-queue-priority'
 gem 'resque-sentry'
 gem 'resque-timeout'
-gem 'resque-scheduler', github: 'resque/resque-scheduler', require: 'resque_scheduler'
+gem 'resque-scheduler', require: 'resque_scheduler'
 gem 'resque_mailer'
 
 gem 'omniauth'
@@ -34,14 +34,16 @@ gem 'grim'
 gem 'mini_magick'
 gem 'doorkeeper', '~> 0.7.0'
 gem 'paranoia', '~> 2.0'
+gem 'acts_as_list'
 
 gem 'asset_sync'
 gem 'ember-rails'
-gem 'ember-source', '1.3.2' # or the version you need
+gem 'ember-source', '1.4.0' # or the version you need
 gem 'ember-data-source', '1.0.0.beta.6'
 
 gem 'compass-rails', '1.1.0.pre'
 gem 'sass-rails', '>= 4.0.0'
+
 
 gem 'rails_12factor', group: :production
 

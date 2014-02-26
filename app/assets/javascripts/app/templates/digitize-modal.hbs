@@ -1,7 +1,7 @@
-{{#modal-dialog action="close" change="modalChange" background="over" class="is-over"}}
+{{#modal-dialog close="close" digitize="digitize" change="modalChange" background="over" class="is-over"}}
   <div class="l-digitize-modal">
     <div class="l-digitize-modal-options">
-      <a class="digitize-modal-option" href="javascript:void(0);">
+      <a class="digitize-modal-option" href="javascript:void(0);" {{action 'doAction' 'digitize' target="view"}}>
         Digitize your notebook<i class="i-chevron-right-small"></i>
       </a>
       <hr/>

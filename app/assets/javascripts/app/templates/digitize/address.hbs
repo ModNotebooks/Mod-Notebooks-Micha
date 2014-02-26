@@ -1,0 +1,55 @@
+<h1 class="digitize-header">
+  Where should we return your notebook?<br>
+  <small>If it's blank please fill it in.</small>
+</h1>
+<div class="l-digitize-address">
+  <form class="form">
+    <div {{bind-attr class=":form__control errors.name:is-error"}}>
+      {{input type="text" value=name class="form__control__input"}}
+      <label class="form__control__label">Full Name</label>
+      {{#if errors.name }}
+        <span class="form__error">{{format-errors errors.name}}</span>
+      {{/if}}
+    </div>
+    <div {{bind-attr class=":form__control errors.line_1:is-error"}}>
+      {{input type="text" value=line_1 class="form__control__input"}}
+      <label class="form__control__label">Address</label>
+      {{#if errors.line_1 }}
+        <span class="form__error">{{format-errors errors.line_1}}</span>
+      {{/if}}
+    </div>
+    <div class="form__controlgroup">
+      <div {{bind-attr class=":form__control--onethird errors.city:is-error"}}>
+        {{input type="text" value=city class="form__control__input"}}
+        <label class="form__control__label">City</label>
+        {{#if errors.city }}
+          <span class="form__error">{{format-errors errors.city}}</span>
+        {{/if}}
+      </div>
+      <div {{bind-attr class=":form__control--onethird errors.region:is-error"}}>
+        {{input type="text" value=region class="form__control__input"}}
+        <label class="form__control__label">State</label>
+        {{#if errors.region }}
+          <span class="form__error">{{format-errors errors.region}}</span>
+        {{/if}}
+      </div>
+      <div {{bind-attr class=":form__control--onethird errors.postalCode:is-error"}}>
+        {{input type="text" value=postalCode class="form__control__input"}}
+        <label class="form__control__label">Postal Code</label>
+        {{#if errors.postalCode }}
+          <span class="form__error">{{format-errors errors.postalCode}}</span>
+        {{/if}}
+      </div>
+    </div>
+    <div {{bind-attr class=":form__control errors.country:is-error"}}>
+      {{input type="text" value=country class="form__control__input"}}
+      <label class="form__control__label">Country</label>
+      {{#if errors.country }}
+        <span class="form__error">{{format-errors errors.country}}</span>
+      {{/if}}
+    </div>
+    <div class="form__actions">
+      {{spin-button isLoading=isLoading isEnabled=isValid buttonText="Save" action="advance" buttonClass="button--form"}}
+    </div>
+  </form>
+</div>

@@ -35,3 +35,29 @@
     i { opacity: 1; }
   }
 }
+
+.digitize-header {
+  @include font-size(20px);
+  font-weight: 400;
+
+  small {
+    @include font-size(16px);
+    color: #99b3b5;
+  }
+}
+
+.l-digitize-step {
+  width: 100%;
+  max-width: 375px;
+  margin: 0 auto;
+}
+
+.l-digitize-address {
+  @extend .l-digitize-step;
+  max-width: 500px;
+}
+
+.l-digitize-confirmation {
+  @extend .l-digitize-step;
+  max-width: 530px;
+}

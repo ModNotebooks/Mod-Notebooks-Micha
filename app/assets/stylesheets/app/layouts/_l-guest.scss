@@ -1,24 +1,29 @@
 .l-guest-main {
-  min-height: 100%;
+  padding-top: 75px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .l-guest-header {
   width: 100%;
+  margin-top:-75px;
+  height:75px;
   display: table;
-  padding: 16px 24px;
-  position: relative;
-  z-index: $zindex-guest-header;
 }
 
 .l-guest-header-left,
 .l-guest-header-right {
+  width: 50%;
+  padding: 16px 24px;
   display: table-cell;
   vertical-align: middle;
 }
 
 .l-guest-header-right {
   text-align: right;
-
   .button { margin-left: 40px; }
 }
 
@@ -34,14 +39,10 @@
 }
 
 .l-guest-content {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  min-height: 100%;
+  height: 100%;
   display: table;
   padding: 130px 0 0;
-  z-index: $zindex-guest-content;
 
   @include media($screen-br-sm) {
     padding-bottom: 120px;
@@ -52,6 +53,7 @@
   display: table-cell;
   vertical-align: bottom;
   text-align: center;
+  width: 100%;
 
   @include media($screen-br-sm) {
     vertical-align: middle;

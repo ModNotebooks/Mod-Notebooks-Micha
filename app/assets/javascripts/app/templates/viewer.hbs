@@ -1,16 +1,20 @@
-<div class="viewer">
-  {{outlet}}
-  <nav class="viewer__nav">
-    <ul class="viewer__navlist">
-      <li class="viewer__navitem--prev">
-        <a href="javascript:void(0)">Prev</a>
-      </li>
-      <li class="viewer__navitem--back">
-        {{#link-to 'notebook' notebook}}Back{{/link-to}}
-      </li>
-      <li class="viewer__navitem--next">
-        <a href="javascript:void(0)">Next</a>
-      </li>
-    </ul>
-  </nav>
-</div>
+{{outlet}}
+<nav class="viewer__nav">
+  <ul class="viewer__navlist">
+    <li class="viewer__navitem--prev">
+      <a href="javascript:void(0)" {{action 'previous'}}>
+        <i class="i-chevron-left-dark"></i>
+      </a>
+    </li>
+    <li class="viewer__navitem--back">
+      {{#link-to 'notebook' notebook}}
+        <i class="i-grid-dark"></i>
+      {{/link-to}}
+    </li>
+    <li class="viewer__navitem--next">
+      <a href="javascript:void(0)" {{action 'next'}}>
+        <i class="i-chevron-right-dark"></i>
+      </a>
+    </li>
+  </ul>
+</nav>

@@ -5,7 +5,7 @@ App.NotebookRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin,
   },
 
   afterModel: function(model, transition) {
-    return model.get('pages')
+    return model.get('pages');
   },
 
   setupController: function(controller, model) {

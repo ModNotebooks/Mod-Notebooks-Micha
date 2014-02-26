@@ -17,6 +17,7 @@
 //= require ember-data
 //= require ember-simple-auth
 // require ember-animated-outlet
+//= require ember-radio-buttons
 //= require nprogress/nprogress
 //= require_self
 //= require core/core

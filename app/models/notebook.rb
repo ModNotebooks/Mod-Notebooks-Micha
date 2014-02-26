@@ -38,7 +38,7 @@ class Notebook < ActiveRecord::Base
 
   belongs_to :user
   has_many :events, -> { order 'created_at ASC' }, class_name: "NotebookEvent", dependent: :destroy
-  has_many :pages,  -> { order 'index ASC' }, dependent: :destroy
+  has_many :pages,  -> { order("position ASC") }, dependent: :destroy
   has_many :shares, as: :shareable
 
   #-----------------------------------------------------------------------------
@@ -65,6 +65,13 @@ class Notebook < ActiveRecord::Base
     format: { with: Patterns::NOTEBOOK_IDENTIFIER_PATTERN },
     presence: true,
     uniqueness: { case_sensitive: false }
+
+  #-----------------------------------------------------------------------------
+  # Scopes
+  #-----------------------------------------------------------------------------
+
+  scope :reserved, -> { where('user_id IS NOT ?', nil) }
+  scope :unreserved, -> { where('user_id IS ?', nil) }
 
   #-----------------------------------------------------------------------------
   # Uploaders

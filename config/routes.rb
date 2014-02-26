@@ -18,8 +18,12 @@ Mod::Application.routes.draw do
       get '/password_reset', to:'home#index'
       get '/notebooks', to: 'home#index'
       get '/notebooks/:id', to: 'home#index'
-      get '/notebooks/:id/pages', to: 'home#index'
       get '/notebooks/:id/view/:left_page_number/:right_page_number', to: 'home#index'
+      get '/digitize', to: 'home#index'
+      get '/digitize/code', to: 'home#index'
+      get '/digitize/scan', to: 'home#index'
+      get '/digitize/address', to: 'home#index'
+      get '/digitize/confirmation', to: 'home#index'
 
       get '/order', to: 'home#order'
       get '/store', to: 'home#store'
@@ -41,6 +45,7 @@ Mod::Application.routes.draw do
       resources :shares, param: :token, only: [:create, :show, :destroy]
       resources :notebooks, only: [:index, :create, :show, :update] do
         post 'upload', on: :collection
+        post 'exists', on: :collection
       end
       resources :services, only: [:index, :create, :show, :update, :destroy]
       resources :pages, only: [:index, :show]

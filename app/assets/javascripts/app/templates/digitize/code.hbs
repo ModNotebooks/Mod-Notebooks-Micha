@@ -1,0 +1,19 @@
+<h1 class="digitize-header">
+  Enter your notebooks code <br>
+  <small>Displayed in the back page of your notebook</small>
+</h1>
+<div class="l-digitize-step">
+  <form class="form">
+    <div {{bind-attr class=":form__control error:is-error"}}>
+      {{input type="text" valueBinding="code" autofocus="autofocus" class="form__control__input"}}
+      <label class="form__control__label">Type Code Here</label>
+      {{#if error }}
+        <span class="form__error">{{error}}</span>
+      {{/if}}
+    </div>
+    <div class="form__actions">
+      <button class="button--text" {{action 'advance'}}>Next</button>
+    </div>
+  </form>
+</div>
+

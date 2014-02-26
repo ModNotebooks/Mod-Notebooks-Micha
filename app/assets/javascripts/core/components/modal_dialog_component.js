@@ -3,7 +3,17 @@ Core.ModalDialogComponent = Ember.Component.extend({
 
   actions: {
     close: function() {
-      this.animateOut().then(this.sendAction.bind(this));
+      var _this = this;
+      this.animateOut().then(function() {
+        _this.sendAction('close');
+      });
+    },
+
+    doAction: function(action) {
+      var _this = this;
+      this.animateOut().then(function() {
+        _this.sendAction(action);
+      });
     }
   },
 
@@ -16,6 +26,8 @@ Core.ModalDialogComponent = Ember.Component.extend({
   }),
 
   didInsertElement: function() {
+    this._super();
+
     var _this = this;
     this.sendAction('change', true);
 
@@ -37,6 +49,7 @@ Core.ModalDialogComponent = Ember.Component.extend({
 
   willDestroyElement: function() {
     Ember.$(document.documentElement).removeClass('no-scroll');
+    this._super();
   },
 
   backgroundClass: function() {

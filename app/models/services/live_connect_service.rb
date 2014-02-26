@@ -10,9 +10,9 @@
 #  name            :string(255)
 #  email           :string(255)
 #  nickname        :string(255)
-#  token           :string(255)
-#  secret          :string(255)
-#  refresh_token   :string(255)
+#  token           :text
+#  secret          :text
+#  refresh_token   :text
 #  expires_at      :datetime
 #  checked_at      :datetime
 #  deleted_at      :datetime

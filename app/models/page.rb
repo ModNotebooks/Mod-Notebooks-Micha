@@ -10,10 +10,10 @@
 #  created_at  :datetime
 #  updated_at  :datetime
 #  deleted_at  :datetime
+#  position    :integer
 #
 
 class Page < ActiveRecord::Base
-  acts_as_paranoid
 
   store_accessor :meta, :image_secure_token
 
@@ -24,6 +24,9 @@ class Page < ActiveRecord::Base
   belongs_to :notebook, counter_cache: true
   has_one :user, through: :notebook
   has_many :shares, as: :shareable
+
+  acts_as_paranoid
+  acts_as_list scope: :notebook
 
   #-----------------------------------------------------------------------------
   # Validations
@@ -39,5 +42,4 @@ class Page < ActiveRecord::Base
   #-----------------------------------------------------------------------------
 
   mount_uploader :image, PageUploader
-
 end

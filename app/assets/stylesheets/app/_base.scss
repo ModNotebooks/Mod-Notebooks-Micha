@@ -28,7 +28,7 @@ body {
   background-color: #79989b;
   @include linear-gradient(145deg, #385158 0%, #88a9ab 50%, #99bcbe 100%);
 
-  &.asleep {
+  &.dark {
     background-color: #465d60;
     @include linear-gradient(145deg, #233236 0%, #658d8f 100%);
   }

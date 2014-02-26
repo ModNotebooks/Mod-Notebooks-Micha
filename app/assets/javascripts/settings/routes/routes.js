@@ -35,10 +35,6 @@ Settings.IndexRoute = Ember.Route.extend({
 Settings.SettingsAccountRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
   model: function() {
     return this.store.find('user', 'me');
-  },
-
-  setupController: function(controller, model) {
-    controller.set('model', model);
   }
 });
 
