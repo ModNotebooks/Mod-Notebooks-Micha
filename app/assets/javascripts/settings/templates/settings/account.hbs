@@ -7,7 +7,7 @@
     {{/if}}
   </div>
   <div {{bind-attr class=":form__control errors.currentPassword:is-error"}}>
-    {{input type="text" value=currentPassword class="form__control__input"}}
+    {{input type="password" value=currentPassword class="form__control__input"}}
     <label class="form__control__label">Current Password</label>
     {{#if errors.currentPassword }}
       <span class="form__error">{{{format-errors errors.currentPassword}}}</span>
@@ -15,14 +15,14 @@
   </div>
   <div class="form__controlgroup">
     <div {{bind-attr class=":form__control--onehalf errors.password:is-error"}}>
-      {{input type="text" value=password class="form__control__input"}}
+      {{input type="password" value=password class="form__control__input"}}
       <label class="form__control__label">New Password</label>
       {{#if errors.password }}
         <span class="form__error">{{{format-errors errors.password}}}</span>
       {{/if}}
     </div>
     <div {{bind-attr class=":form__control--onehalf errors.passwordConfirmation:is-error"}}>
-      {{input type="text" value=passwordConfirmation class="form__control__input"}}
+      {{input type="password" value=passwordConfirmation class="form__control__input"}}
       <label class="form__control__label">Verify New Password</label>
       {{#if errors.passwordConfirmation }}
         <span class="form__error">{{{format-errors errors.passwordConfirmation}}}</span>

@@ -3,11 +3,11 @@
     <span class="form__error">{{loginErrorMessage}}</span>
   {{/if}}
   <div class="form__control">
-    {{view Ember.TextField valueBinding="identification" class="form__control__input"}}
+    {{input type="text" valueBinding="identification" class="form__control__input"}}
     <label class="form__control__label">Email</label>
   </div>
   <div class="form__control">
-    {{view Ember.TextField valueBinding="password" class="form__control__input"}}
+    {{input type="password" valueBinding="password" class="form__control__input"}}
     <label class="form__control__label">Password</label>
     {{!-- {{#link-to 'password_reset' class="form__input__altaction"}}?{{/link-to}} --}}
   </div>
