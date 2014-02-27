@@ -1,6 +1,7 @@
 App.ViewerPageView = Ember.View.extend({
   isError: false,
   isLoading: true,
+  classNames: ['viewer__imagewrap'],
 
   didInsertElement: function() {
     this.$('img.viewer__image')
