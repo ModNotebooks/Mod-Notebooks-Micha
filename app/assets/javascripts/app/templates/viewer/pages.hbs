@@ -1,5 +1,7 @@
-{{#each arrangedContent}}
-  <div class="viewer__page">
-    {{render "viewerPage" this}}
-  </div>
-{{/each}}
+<div class="viewer">
+  {{#each arrangedContent}}
+    <div class="viewer__pane">
+      {{render "viewerPage" this}}
+    </div>
+  {{/each}}
+</div>

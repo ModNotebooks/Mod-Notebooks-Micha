@@ -1,5 +1,9 @@
-{{outlet}}
-<nav class="viewer__nav">
+<div class="l-viewer">
+  <div class="l-viewer-inner">
+    {{outlet}}
+  </div>
+</div>
+{{!-- <nav class="viewer__nav">
   <ul class="viewer__navlist">
     <li class="viewer__navitem--prev">
       <a href="javascript:void(0)" {{action 'previous'}}>
@@ -17,4 +21,4 @@
       </a>
     </li>
   </ul>
-</nav>
+</nav> --}}

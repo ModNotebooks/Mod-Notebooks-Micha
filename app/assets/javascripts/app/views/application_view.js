@@ -15,9 +15,6 @@ App.ApplicationView = Ember.View.extend({
       case "digitize.address":
       case "digitize.confirmation":
         return "application-guest";
-      case "viewer":
-      case "viewer.pages":
-        return "application-blank";
       default:
         return "application";
     }
