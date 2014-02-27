@@ -34,12 +34,14 @@ class PageFiller
     pdf.each do |page|
       index = page.number # we dont the 0 page. Which is the inner cover of the notebook
       page_model = notebook.pages.find_or_create_by(index: index, position: index)
-      filepath = "#{tmp_dir}/#{notebook.id}-p#{index}.png"
+      filepath = "#{tmp_dir}/#{notebook.id}-p#{index}.jpg"
 
       pages << page_model
 
+      save_options = { width: 3400, quality: 100 }
+
       begin
-        if (!page_model.image? || refill) && page.save(filepath)
+        if (!page_model.image? || refill) && page.save(filepath, save_options)
           page_model.update(image: File.open(filepath))
           File.delete(filepath)
         end

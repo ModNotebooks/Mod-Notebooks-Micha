@@ -4,12 +4,21 @@
   width: 100%;
   position: relative;
   text-align: center;
+  background: red;
+}
+
+.l-viewer:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -1em;
 }
 
 .l-viewer-inner {
-  padding: 0 40px;
+  padding: 0 40px 0 10px;
   width: 100%;
-  position: absolute;
-  top: 50%;
-  @include transform(translateY(-50%));
+  background: green;
+  display: inline-block;
+  vertical-align: middle;
 }
