@@ -21,7 +21,6 @@ App.ApplicationView = Ember.View.extend({
   }.property('controller.currentPath'),
 
   updateLayout: function() {
-    console.log('RERENDERING');
     this.rerender();
   }.observes('templateName'),
 

@@ -1,28 +1,61 @@
 .viewer {
+  position: relative;
   display: inline-block;
   vertical-align: middle;
   max-height: 100%;
   @include clearfix;
-  border: 1px solid yellow;
+  background: #ffffe7;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, .16);
+}
+
+.viewer__navitem {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  z-index: $zindex-viewer-navitem;
+  background: rgba(#fefee7, .84);
+  padding: 34px;
+
+  i {
+    @include transition(opacity 300ms ease-in-out);
+    opacity: .5;
+    @extend %absolute-center;
+  }
+
+  &:hover i { opacity: .75; }
+  &:active i { @include transform(translateY(1px)); }
+}
+
+.viewer__navitem--left, .viewer__navitem--right {
+  @extend .viewer__navitem;
+}
+
+.viewer__navitem--left {
+  left: 0;
+}
+
+.viewer__navitem--right {
+  right: 0;
 }
 
 .viewer__pane {
   float: left;
   width: 50%;
   max-height: 100%;
-  border: 1px solid red;
 
   &:first-of-type {
     text-align: right;
+    border-right: 1px solid rgba(0, 0, 0, .05);
   }
 
   &:last-of-type {
-     text-align: left;
+    text-align: left;
   }
 }
 
 .viewer__imagewrap {
-  background: blue;
   max-height: 100%;
   position: relative;
 }
@@ -45,5 +78,13 @@
   width: auto;
   height: auto;
   vertical-align: middle;
-  opacity: .5;
+  z-index: $zindex-viewer-image;
+  overflow: hidden;
+
+  opacity: 1;
+  @include transition(opacity 300ms ease-out);
+  &.is-loading { opacity: 0; }
+
+  .viewer__pane:first-of-type & { @include border-left-radius(20px); }
+  .viewer__pane:last-of-type  & { @include border-right-radius(20px); }
 }
