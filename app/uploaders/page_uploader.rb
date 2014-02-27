@@ -1,30 +1,37 @@
 class PageUploader < BaseUploader
   include CarrierWave::MiniMagick
+  include CarrierWave::ImageOptimizer
 
   after :store, :persist_secure_token
 
-  version :large do
-    process :resize_to_fit => [1000,1000]
+  version :xlarge do
+    process resize_to_fit: [3200,3200]
+    process :optimize
   end
 
-  version :medium do
-    process :resize_to_fit => [800,800]
+  version :large, from_version: :xlarge do
+    process resize_to_fit: [1600,1600]
   end
 
-  version :small do
-    process :resize_to_fit => [400,400]
+  version :medium, from_version: :large do
+    process resize_to_fit: [800,800]
   end
 
-  version :thumb do
-    process :resize_to_fit => [200,200]
+  version :small, from_version: :medium do
+    process resize_to_fit: [400,400]
   end
+
+  version :thumb, from_version: :small do
+    process resize_to_fit: [200,200]
+  end
+
 
   def filename
     "#{secure_token}.#{file.extension}" if original_filename.present?
   end
 
   def extension_white_list
-    %w(png)
+    %w(png jpg)
   end
 
   protected

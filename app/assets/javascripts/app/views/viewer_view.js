@@ -1,5 +1,5 @@
 App.ViewerView = Ember.View.extend({
-  classNames: ['viewer'],
+  classNames: ['l-viewer'],
 
   didInsertElement: function() {
     $(document).on('keyup', Ember.$.proxy(this.onKeyUp, this));

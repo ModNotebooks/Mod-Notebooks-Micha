@@ -15,16 +15,12 @@ App.ApplicationView = Ember.View.extend({
       case "digitize.address":
       case "digitize.confirmation":
         return "application-guest";
-      case "viewer":
-      case "viewer.pages":
-        return "application-blank";
       default:
         return "application";
     }
   }.property('controller.currentPath'),
 
   updateLayout: function() {
-    console.log('RERENDERING');
     this.rerender();
   }.observes('templateName'),
 

@@ -5,11 +5,15 @@
   // display: table;
 
   &:before {
-    content: "";
-    display: inline-block;
-    height: 100%;
-    vertical-align: middle;
-    margin-right: -1em; /* Adjusts for spacing */
+    // This veritical alignment stuff isnt working
+    // in firefox. Ignore it for now.
+    .no-firefox & {
+      content: "";
+      display: inline-block;
+      height: 100%;
+      vertical-align: middle;
+      margin-right: -1em; /* Adjusts for spacing */
+    }
   }
 }
 
