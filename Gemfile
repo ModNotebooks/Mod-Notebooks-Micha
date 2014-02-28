@@ -29,7 +29,7 @@ gem 'jquery-rails'
 gem 'rack-cors', require: 'rack/cors'
 
 gem 'carrierwave'
-gem 'carrierwave-imageoptimizer'
+# gem 'carrierwave-imageoptimizer'
 
 gem 'fog'
 gem 'grim'

@@ -1,12 +1,12 @@
 class PageUploader < BaseUploader
   include CarrierWave::MiniMagick
-  include CarrierWave::ImageOptimizer
+  # include CarrierWave::ImageOptimizer
 
   after :store, :persist_secure_token
 
   version :xlarge do
     process resize_to_fit: [3200,3200]
-    process :optimize
+    # process :optimize
   end
 
   version :large, from_version: :xlarge do
