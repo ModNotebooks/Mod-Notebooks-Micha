@@ -165,7 +165,14 @@ GEM
     hashie (2.0.5)
     hike (1.2.3)
     hirb (0.7.1)
+    httmultiparty (0.3.12)
+      httparty (>= 0.7.3)
+      mimemagic
+      multipart-post
     http_parser.rb (0.5.3)
+    httparty (0.13.0)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.6.9)
     jazz_hands (0.5.2)
       awesome_print (~> 1.2)
@@ -201,6 +208,7 @@ GEM
       treetop (~> 1.4.8)
     method_source (0.8.2)
     mime-types (1.25.1)
+    mimemagic (0.2.1)
     mini_magick (3.7.0)
       subexec (~> 0.2.1)
     mini_portile (0.5.2)
@@ -444,6 +452,8 @@ DEPENDENCIES
   fog
   grim
   guard-livereload
+  httmultiparty
+  httparty
   jazz_hands
   jquery-rails
   letter_opener

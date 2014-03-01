@@ -23,6 +23,10 @@ gem 'omniauth-evernote'
 gem 'omniauth-live-connect', github: 'erickreutz/omniauth-live_connect'
 
 gem 'transitions', require: ['transitions', 'active_model/transitions']
+
+gem 'httparty'
+gem 'httmultiparty'
+
 gem 'strip_attributes'
 gem 'active_model_serializers'
 
