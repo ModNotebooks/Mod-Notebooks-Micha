@@ -8,25 +8,28 @@ Core.Notebook = (function() {
     paperType:             attr('string'),
     carrierIdentifier:     attr('string'),
     notebookIdentifier:    attr('string'),
-    currState:             attr('string'), // currentState clashes with ember
-    currentStateAt:        attr('date'),
-    currentProcessState:   attr('string'),
-    currentProcessStateAt: attr('string'),
+    state:                 attr('string'),
     pagesCount:            attr('string'),
     createdAt:             attr('date'),
     updatedAt:             attr('date'),
+    submittedOn:           attr('date'),
+    receivedOn:            attr('date'),
+    uploadedOn:            attr('date'),
+    processedOn:           attr('date'),
+    returnedOn:            attr('date'),
+    recycledOn:            attr('date'),
+
 
     user: DS.belongsTo('user'),
     pages: DS.hasMany('page', { async: true }),
 
     processed: function() {
-      return this.get('currentProcessState') === "processed";
-    }.property('currentProcessState'),
+      return !Ember.isEmpty(this.get('processedOn'));
+    }.property('processedOn'),
 
     notProcessed: function() {
-      return !this.get('processed');
+      return Ember.isEmpty(this.get('processedOn'));
     }.property('processed')
   });
 
 }());
-

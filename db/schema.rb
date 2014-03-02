@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140302222245) do
+ActiveRecord::Schema.define(version: 20140302231108) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,12 @@ ActiveRecord::Schema.define(version: 20140302222245) do
     t.datetime "deleted_at"
     t.string   "handle_method"
     t.string   "state"
+    t.datetime "submitted_on"
+    t.datetime "received_on"
+    t.datetime "uploaded_on"
+    t.datetime "processed_on"
+    t.datetime "returned_on"
+    t.datetime "recycled_on"
   end
 
   add_index "notebooks", ["carrier_identifier"], name: "index_notebooks_on_carrier_identifier", using: :btree

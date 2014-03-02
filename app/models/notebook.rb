@@ -83,30 +83,30 @@ class Notebook < ActiveRecord::Base
     state :returned
     state :recycled
 
-    event :submit, success: :notebook_submitted do
+    event :submit, success: :notebook_submitted, timestamp: :submitted_on do
       transitions to: :submitted, from: :created
     end
 
-    event :receive, success: :notebook_received do
+    event :receive, success: :notebook_received, timestamp: :received_on do
       transitions to: :received, from: :submitted
     end
 
-    event :upload, success: :notebook_received do
+    event :upload, success: :notebook_received, timestamp: :uploaded_on do
       transitions to: :uploaded, from: [:uploaded, :received],
         on_transition: [:handle_upload]
     end
 
-    event :process, success: :notebook_processed do
+    event :process, success: :notebook_processed, timestamp: :processed_on do
       transitions to: :processed, from: [:processed, :uploaded],
         on_transition: [:process_notebook]
     end
 
-    event :return, success: :notebook_returned do
+    event :return, success: :notebook_returned, timestamp: :returned_on do
       transitions to: :returned, from: :processed,
         guard: lambda { |n| n.handle_method.inquiry.return? }
     end
 
-    event :recycle, success: :notebook_recycled do
+    event :recycle, success: :notebook_recycled, timestamp: :recycled_on do
       transitions to: :recycled, from: :processed,
         guard: lambda { |n| n.handle_method.inquiry.recycle? }
     end
