@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140225015025) do
+ActiveRecord::Schema.define(version: 20140302222245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,17 +33,6 @@ ActiveRecord::Schema.define(version: 20140225015025) do
 
   add_index "addresses", ["addressable_id", "addressable_type"], name: "index_addresses_on_addressable_id_and_addressable_type", using: :btree
 
-  create_table "notebook_events", force: true do |t|
-    t.integer  "notebook_id"
-    t.string   "state"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.datetime "deleted_at"
-    t.string   "scope"
-  end
-
-  add_index "notebook_events", ["notebook_id"], name: "index_notebook_events_on_notebook_id", using: :btree
-
   create_table "notebooks", force: true do |t|
     t.string   "name"
     t.string   "color"
@@ -58,6 +47,7 @@ ActiveRecord::Schema.define(version: 20140225015025) do
     t.integer  "pages_count",         default: 0
     t.datetime "deleted_at"
     t.string   "handle_method"
+    t.string   "state"
   end
 
   add_index "notebooks", ["carrier_identifier"], name: "index_notebooks_on_carrier_identifier", using: :btree

@@ -19,10 +19,10 @@
 #
 
 class Notebook < ActiveRecord::Base
+  include ActiveModel::Transitions
+
   # Resque needs a queue
   @queue = :default
-
-  acts_as_paranoid
 
   COLORS        = { "01" => "gray" }
   PAPER_TYPES   = { "01" => "plain", "02" => "lined", "03" => "dotgrid" }
@@ -36,6 +36,7 @@ class Notebook < ActiveRecord::Base
   has_many :events, -> { order 'created_at ASC' }, class_name: "NotebookEvent", dependent: :destroy
   has_many :pages,  -> { order("position ASC") }, dependent: :destroy
   has_many :shares, as: :shareable
+  acts_as_paranoid
 
   #-----------------------------------------------------------------------------
   # Validations
