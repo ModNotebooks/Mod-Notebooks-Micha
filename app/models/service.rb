@@ -30,12 +30,15 @@ class Service < ActiveRecord::Base
   PROVIDERS = %w(dropbox evernote live_connect)
   DISABLED_REASONS = []
 
-  acts_as_paranoid
+  Unconfigurable = Class.new(ModError)
+  InvalidRequest = Class.new(ModError)
+  Unauthorized   = Class.new(ModError)
 
   #-----------------------------------------------------------------------------
   # Relationships
   #-----------------------------------------------------------------------------
 
+  acts_as_paranoid
   belongs_to :user
 
   #-----------------------------------------------------------------------------

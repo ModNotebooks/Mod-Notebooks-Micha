@@ -5,11 +5,16 @@ class OneNoteApi
     @access_token = access_token
   end
 
-  def add_page(name, file)
-    url = URI.parse("#{base_uri}/pages");
+  def add_page(name, page)
+    presentation = page_presentation(page)
+    file         = page_file(page)
+    p_id         = page_id(page)
+
+    url = URI.parse("#{base_uri}/pages")
+
     req = Net::HTTP::Post::Multipart.new(url.path,
       Presentation: UploadIO.new(StringIO.new(presentation), "text/html", "Presentation"),
-      MyAppPictureId: UploadIO.new(file, "image/jpeg", "MyAppPictureId")
+      :"#{p_id}" => UploadIO.new(file, "image/jpeg", p_id)
     );
     request(url, req)
   end
@@ -25,6 +30,15 @@ class OneNoteApi
   end
 
   private
+    def page_file(page)
+      @page_file ||= Kernel.open(page.image.url(:large))
+    end
+
+    def page_title(page)
+      notebook = page.notebook
+      "Mod Notebook (#{notebook.name || "Untitled"}) - Page ##{page.index}"
+    end
+
     def base_uri
       'https://www.onenote.com/api/v1.0'
     end
@@ -33,18 +47,22 @@ class OneNoteApi
       "Bearer #{access_token}"
     end
 
-    def presentation
+    def page_id(page)
+      "PageImage#{page.id}"
+    end
+
+    def page_presentation(page)
       <<-EOF
-      <!DOCTYPE html>
-      <html>
-       <head>
-         <title>Title of the captured OneNote page</title>
-         <meta name="created" value="2013-06-11T12:45:00.000-8:00"/>
-       </head>
-       <body>
-          <img src="name:MyAppPictureId" alt="a cool image"/>
-       </body>
-      </html>
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <title>#{page_title(page)}</title>
+            <meta name="created" value="#{DateTime.now.to_s}"/>
+          </head>
+          <body>
+            <img src="name:#{page_id(page)}" alt="#{page_title(page)}"/>
+          </body>
+        </html>
       EOF
     end
 end
