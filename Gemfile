@@ -27,6 +27,8 @@ gem 'transitions', require: ['transitions', 'active_model/transitions']
 gem 'httparty'
 gem 'httmultiparty'
 
+gem 'multipart-post', github: 'nicksieger/multipart-post', require: 'net/http/post/multipart'
+
 gem 'strip_attributes'
 gem 'active_model_serializers'
 
