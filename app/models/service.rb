@@ -87,14 +87,47 @@ class Service < ActiveRecord::Base
   # Instance Methods
   #-----------------------------------------------------------------------------
 
+  def active_model_serializer
+    ServiceSerializer
+  end
+
+  def api(options={})
+    options.reverse_merge!(force: false)
+    @api = nil if options[:force]
+    @api ||= create_api
+  end
+
   PROVIDERS.each do |provider|
     define_method("#{provider}?") do
       self.provider == provider
     end
   end
 
+  # def error!(reason, data={})
+  #   period = 1.day
+  #   count  = 10
+  #
+  #   now    = Time.now.to_i
+  #   ago    = period.ago.to_i
+  #   key    = error_key(reason)
+  #
+  #   # Remove elements that are old than one period
+  #   REDIS.zremrangebyscore(key, 0, ago)
+  #   REDIS.zadd(key, now, {time: now, data: data}.to_json)
+  #   # Keep the key alive for one period from this error
+  #   # If we don't get another error in that period we'll remove the key
+  #   REDIS.expire(key, period)
+  #
+  #   # Disable if we have more than 10 errors for a reason in a given period
+  #   disable!(reason, data) if REDIS.zcount(key, ago, now) >= count
+  # end
+
   def destroy_cleanup
     update(token: nil, secret: nil, refresh_token: nil, expires_at: nil)
   end
+
+  # def error_key(reason)
+  #   ['services', self.id, 'errors', reason].join(':')
+  # end
 
 end

@@ -6,13 +6,13 @@ class Api::V1::ServicesController < Api::BaseController
 
   def index
     respond_with @user.services do |f|
-      f.json { render json: @user.services, each_serializer: ServiceSerializer}
+      f.json { render json: @user.services }
     end
   end
 
   def show
     respond_with @service do |f|
-      f.json { render json: @service, status: :unprocessable_entity, serializer: ServiceSerializer }
+      f.json { render json: @service, status: :unprocessable_entity }
     end
   end
 
@@ -36,7 +36,7 @@ class Api::V1::ServicesController < Api::BaseController
 
     if service.save
       respond_with service do |f|
-        f.json { render json: service, status: :created, serializer: ServiceSerializer }
+        f.json { render json: service, status: :created }
       end
     else
       respond_with service, status: :unprocessable_entity
@@ -46,7 +46,7 @@ class Api::V1::ServicesController < Api::BaseController
   def update
     @service.update(update_params)
     respond_with @service do |f|
-      f.json { render json: @service, serializer: ServiceSerializer }
+      f.json { render json: @service }
     end
   end
 

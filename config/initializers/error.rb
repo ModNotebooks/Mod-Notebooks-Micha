@@ -1,0 +1,1 @@
+ModError = Class.new(StandardError)
