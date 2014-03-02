@@ -22,6 +22,7 @@ gem 'omniauth-dropbox'
 gem 'omniauth-evernote'
 gem 'omniauth-live-connect', github: 'erickreutz/omniauth-live_connect'
 
+gem 'transitions', require: ['transitions', 'active_model/transitions']
 gem 'strip_attributes'
 gem 'active_model_serializers'
 

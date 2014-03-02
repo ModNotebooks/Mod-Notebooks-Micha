@@ -24,10 +24,6 @@ class Notebook < ActiveRecord::Base
 
   acts_as_paranoid
 
-  STATES = %w[submitted received uploaded processed returned recycled]
-  delegate :submitted?, :uploaded?, :returned?, :received?, :recycled?, to: :current_state
-  delegate :processed?, to: :current_process_state
-
   COLORS        = { "01" => "gray" }
   PAPER_TYPES   = { "01" => "plain", "02" => "lined", "03" => "dotgrid" }
   HANDLE_METHOD = ["return", "recycle"]
@@ -91,18 +87,6 @@ class Notebook < ActiveRecord::Base
   #-----------------------------------------------------------------------------
 
   class << self
-    def submitted_notebooks
-      join(:events).where state_query("submitted")
-    end
-
-    def uploaded_notebooks
-      joins(:events).where state_query('uploaded')
-    end
-
-    def processed_notebooks
-      joins(:events).where state_query('processed', :process)
-    end
-
     def parse_notebook_identifier(identifier = "")
       parts = identifier.split('-')
 
@@ -154,63 +138,13 @@ class Notebook < ActiveRecord::Base
   #-----------------------------------------------------------------------------
   # Instance Methods
   #-----------------------------------------------------------------------------
-
-  def ever_uploaded?
-    events.where(state: :uploaded).exists?
-  end
-
-  def ever_returned?
-    events.where(state: :returned).exists?
-  end
-
-  def ever_recycled?
-    events.where(state: :recycled).exists?
-  end
-
-  def current_state_at
-    events.last.try(:created_at) || created_at
-  end
-
-  def current_state
-    (events.last.try(:state) || STATES.first).inquiry
-  end
-
-  def current_process_state_at
-    events.where(scope: :process).last.try(:created_at)
-  end
-
-  def current_process_state
-    (events.where(scope: :process).last.try(:state) ||  STATES.first).inquiry
-  end
-
-  def upload
-    events.create! state: "uploaded" if submitted?
-  end
-
-  def return
-    # A notebook can be return only if it has been uploaded before
-    if ever_uploaded? && !ever_recycled? && handle_method == "return"
-      events.create! state: "returned"
-    end
-  end
-
-  def recycle
-    # A notebook can be recycled only if it has been uploaded before
-    if ever_uploaded? && !ever_returned? && handle_method == "recycle"
-      events.create! state: "recycled"
-    end
-  end
-
-  def process
-    events.create! state: "processed", scope: :process if uploaded?
-  end
-
-  def process!(reprocess=false)
-    PageFiller.new(self).fill_pages(reprocess) do |pages, filler|
-      process
-      pages
-    end
-  end
+  #
+  # def process!(reprocess=false)
+  #   PageFiller.new(self).fill_pages(reprocess) do |pages, filler|
+  #     process
+  #     pages
+  #   end
+  # end
 
   # Resque async helper
   # https://github.com/resque/resque/blob/1-x-stable/examples/async_helper.rb
