@@ -1,6 +1,8 @@
 # How to auto-generate passwords in Rails Devise?
 http://stackoverflow.com/questions/3681827/how-to-auto-generate-passwords-in-rails-devise
 
+Notebook.first.update(pdf: File.open("#{Rails.root}/spec/test_scan.pdf"))
+
 # AES KEYS
 salt=AB8477987439C08F
 key=A898B98ED48C10C3DFEBB5A46D259D895140F57BB800078C7561950FA24FFFF4

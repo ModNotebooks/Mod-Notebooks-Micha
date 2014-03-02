@@ -71,6 +71,48 @@ class Notebook < ActiveRecord::Base
   scope :unreserved, -> { where('user_id IS ?', nil) }
 
   #-----------------------------------------------------------------------------
+  # State Machine
+  #-----------------------------------------------------------------------------
+
+  state_machine auto_scopes: true, initial: :created do
+    state :created
+    state :submitted
+    state :received
+    state :uploaded
+    state :processed
+    state :returned
+    state :recycled
+
+    event :submit, success: :notebook_submitted do
+      transitions to: :submitted, from: :created
+    end
+
+    event :receive, success: :notebook_received do
+      transitions to: :received, from: :submitted
+    end
+
+    event :upload, success: :notebook_received do
+      transitions to: :uploaded, from: [:uploaded, :received],
+        on_transition: [:handle_upload]
+    end
+
+    event :process, success: :notebook_processed do
+      transitions to: :processed, from: [:processed, :uploaded],
+        on_transition: [:process_notebook]
+    end
+
+    event :return, success: :notebook_returned do
+      transitions to: :returned, from: :processed,
+        guard: lambda { |n| n.handle_method.inquiry.return? }
+    end
+
+    event :recycle, success: :notebook_recycled do
+      transitions to: :recycled, from: :processed,
+        guard: lambda { |n| n.handle_method.inquiry.recycle? }
+    end
+  end
+
+  #-----------------------------------------------------------------------------
   # Uploaders
   #-----------------------------------------------------------------------------
 
@@ -125,27 +167,43 @@ class Notebook < ActiveRecord::Base
         break identifier unless Notebook.exists?(carrier_identifier: identifier)
       end
     end
-
-    private
-      def state_query(name = "", scope = :default)
-        query = <<-SQL
-          notebook_events.id IN (SELECT MAX(id)
-            FROM notebook_events
-            GROUP BY notebook_id) AND state = '#{name}' AND scope = '#{scope}'
-        SQL
-      end
   end
 
   #-----------------------------------------------------------------------------
   # Instance Methods
   #-----------------------------------------------------------------------------
-  #
-  # def process!(reprocess=false)
-  #   PageFiller.new(self).fill_pages(reprocess) do |pages, filler|
-  #     process
-  #     pages
-  #   end
-  # end
+
+  def notebook_submitted
+
+  end
+
+  def notebook_received
+
+  end
+
+  def notebook_uploaded
+
+  end
+
+  def notebook_processed
+
+  end
+
+  def notebook_returned
+
+  end
+
+  def notebook_recycled
+
+  end
+
+  def handle_upload(upload)
+    update(pdf: upload)
+  end
+
+  def process_notebook(reprocess = false)
+    PageFiller.new(self).fill_pages(reprocess)
+  end
 
   # Resque async helper
   # https://github.com/resque/resque/blob/1-x-stable/examples/async_helper.rb
