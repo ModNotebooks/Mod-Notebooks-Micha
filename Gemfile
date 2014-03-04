@@ -10,11 +10,12 @@ gem 'devise'
 gem 'devise_invitable'
 
 gem 'resque', require: 'resque/server'
+gem 'resque-scheduler', require: 'resque_scheduler'
 gem 'resque-loner'
 gem 'resque-queue-priority'
 gem 'resque-sentry'
 gem 'resque-timeout'
-gem 'resque-scheduler', require: 'resque_scheduler'
+
 gem 'resque_mailer'
 
 gem 'omniauth'

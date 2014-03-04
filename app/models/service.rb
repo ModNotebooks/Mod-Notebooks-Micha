@@ -103,6 +103,10 @@ class Service < ActiveRecord::Base
     @api ||= create_api
   end
 
+  def syncer(notebook)
+    Syncer.new(self, notebook)
+  end
+
   PROVIDERS.each do |provider|
     define_method("#{provider}?") do
       self.provider == provider

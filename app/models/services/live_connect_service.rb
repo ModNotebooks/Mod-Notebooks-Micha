@@ -34,7 +34,7 @@ class LiveConnectService < Service
     # Raven.capture_exception(e, extra: { service_id: self.id })
     return options[:on_rescue]
   rescue Service::InvalidRequest => e
-    if e.message.match(/(credentials not recognized|access is denied)/)
+    if e.message.m atch(/(credentials not recognized|access is denied)/)
       #error!(:not_authorized)
     else
       # Raven.capture_exception(e, extra: {service_id: self.id})
@@ -43,6 +43,7 @@ class LiveConnectService < Service
   end
 
   def create_api
+    refresh_access_token! if self.expires_at <= Time.now
     OneNoteApi.new(self.token)
   end
 
@@ -92,7 +93,7 @@ class LiveConnectService < Service
       @access_token = access_token
     end
 
-    def add_page(page)
+    def add_page(page, &block)
       presentation = page_presentation(page)
       file         = page_file(page)
       p_id         = page_id(page)
@@ -103,7 +104,7 @@ class LiveConnectService < Service
         Presentation: UploadIO.new(StringIO.new(presentation), "text/html", "Presentation"),
         :"#{p_id}" => UploadIO.new(file, "image/jpeg", p_id)
 
-      request(url, req)
+      !!request(url, req)
     end
 
     def request(url, req)

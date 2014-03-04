@@ -1,5 +1,5 @@
 class LiveConnectSyncer < Syncer
-  def perform
+  def sync
     pages = notebook.pages.find_all { |p| needs_sync?(p) }
     pages.each do |page|
       sync_page(page)

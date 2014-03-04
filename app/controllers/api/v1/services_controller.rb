@@ -36,6 +36,10 @@ class Api::V1::ServicesController < Api::BaseController
     end
 
     if service.save
+      # When someone connects a service immediately start
+      # syncing it
+      Syncer.async(:sync, @user.id)
+
       respond_with service do |f|
         f.json { render json: service, status: :created }
       end
