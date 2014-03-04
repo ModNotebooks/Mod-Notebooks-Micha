@@ -11,11 +11,11 @@ class Syncer
   def sync; end
 
   def sync_key(resource)
-    self.class.sync_key(service.provider, resource)
+    self.class.sync_key(service.provider, service.uid, resource)
   end
 
   def mark_synced(resource)
-    self.class.mark_synced(service.provider, resource)
+    self.class.mark_synced(service.provider, service.uid, resource)
   end
 
   def mark_unsynced(resource)
@@ -23,8 +23,7 @@ class Syncer
   end
 
   def needs_sync?(resource)
-    true
-    self.class.needs_sync?(service.provider, resource)
+    self.class.needs_sync?(service.provider, service.uid, resource)
   end
 
   def redis
@@ -63,24 +62,26 @@ class Syncer
 
       resources.flatten.each do |r|
         service_names.each do |service|
-          key = sync_key(service, r)
-          redis.setbit(key, r.id, 0)
+          keys = redis.keys("#{service.provider}:*")
+          keys.each do |k|
+            redis.setbit(k, r.id, 0)
+          end
         end
       end
     end
 
-    def mark_synced(service_name, resource)
-      key = sync_key(service_name, resource)
+    def mark_synced(service_name, sid, resource)
+      key = sync_key(service_name, sid, resource)
       redis.setbit(key, resource.id, 1)
     end
 
-    def needs_sync?(service_name, resource)
-      key = sync_key(service_name, resource)
+    def needs_sync?(service_name, sid, resource)
+      key = sync_key(service_name, sid, resource)
       redis.getbit(key, resource.id) == 0 ? true : false
     end
 
-    def sync_key(service_name, resource)
-      "#{service_name}:#{resource.class.to_s.downcase.pluralize}"
+    def sync_key(service_name, sid, resource)
+      "#{service_name}:#{sid}:#{resource.class.to_s.downcase.pluralize}"
     end
   end
 
