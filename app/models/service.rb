@@ -91,6 +91,12 @@ class Service < ActiveRecord::Base
     ServiceSerializer
   end
 
+  def with_api(options, &block)
+    yield(api(options))
+  end
+
+  def create_api; end
+
   def api(options={})
     options.reverse_merge!(force: false)
     @api = nil if options[:force]
