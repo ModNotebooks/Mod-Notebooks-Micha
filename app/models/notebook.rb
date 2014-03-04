@@ -84,7 +84,9 @@ class Notebook < ActiveRecord::Base
     state :recycled
 
     event :submit, success: :notebook_submitted, timestamp: :submitted_on do
-      transitions to: :submitted, from: :created
+      transitions to: :submitted, from: :created,
+        on_transition: :handle_submission,
+        guard: lambda { |n| n.user.blank? }
     end
 
     event :receive, success: :notebook_received, timestamp: :received_on do
@@ -199,6 +201,11 @@ class Notebook < ActiveRecord::Base
 
   def handle_upload(upload)
     update(pdf: upload)
+  end
+
+  def handle_submission(user, options)
+    options.reverse_merge!(user: user)
+    update(options)
   end
 
   def process_notebook(reprocess = false)

@@ -26,9 +26,7 @@ class Api::V1::NotebooksController < Api::BaseController
   end
 
   def create
-    @notebook.update(create_params.slice(:name, :handle_method))
-
-    if notebook.save
+    if @notebook.submit!(@user, create_params.slice(:name, :handle_method))
       respond_with notebook, status: :created
     else
       respond_with notebook, status: :unprocessable_entity
