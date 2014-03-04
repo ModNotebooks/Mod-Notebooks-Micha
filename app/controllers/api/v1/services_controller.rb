@@ -6,13 +6,13 @@ class Api::V1::ServicesController < Api::BaseController
 
   def index
     respond_with @user.services do |f|
-      f.json { render json: @user.services, each_serializer: ServiceSerializer}
+      f.json { render json: @user.services }
     end
   end
 
   def show
     respond_with @service do |f|
-      f.json { render json: @service, status: :unprocessable_entity, serializer: ServiceSerializer }
+      f.json { render json: @service, status: :unprocessable_entity }
     end
   end
 
@@ -30,13 +30,18 @@ class Api::V1::ServicesController < Api::BaseController
       service.expires_at = expires_at
       service.restore! if service.deleted?
     elsif @user.services.provider(provider).blank?
-      service      = service_klass.new(create_params)
-      service.user = @user
+      service            = service_klass.new(create_params)
+      service.expires_at = expires_at
+      service.user       = @user
     end
 
     if service.save
+      # When someone connects a service immediately start
+      # syncing it
+      Syncer.async(:sync, @user.id)
+
       respond_with service do |f|
-        f.json { render json: service, status: :created, serializer: ServiceSerializer }
+        f.json { render json: service, status: :created }
       end
     else
       respond_with service, status: :unprocessable_entity
@@ -46,7 +51,7 @@ class Api::V1::ServicesController < Api::BaseController
   def update
     @service.update(update_params)
     respond_with @service do |f|
-      f.json { render json: @service, serializer: ServiceSerializer }
+      f.json { render json: @service }
     end
   end
 
@@ -82,12 +87,8 @@ class Api::V1::ServicesController < Api::BaseController
 
     def expires_at
       time = create_params.fetch(:expires_at)
-      if time.to_f.to_s === "0"
-        time
-      else
-        Time.zone = 'UTC'
-        Time.zone.at(time.to_i)
-      end
+      Time.zone = 'UTC'
+      Time.zone.at(time.to_i / 1000)
     rescue
       nil
     end

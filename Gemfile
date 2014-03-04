@@ -9,12 +9,15 @@ gem 'redis-rails'
 gem 'devise'
 gem 'devise_invitable'
 
+gem 'sentry-raven', git: 'https://github.com/getsentry/raven-ruby.git'
+
 gem 'resque', require: 'resque/server'
+gem 'resque-scheduler', require: 'resque_scheduler'
 gem 'resque-loner'
 gem 'resque-queue-priority'
 gem 'resque-sentry'
 gem 'resque-timeout'
-gem 'resque-scheduler', require: 'resque_scheduler'
+
 gem 'resque_mailer'
 
 gem 'omniauth'
@@ -23,6 +26,10 @@ gem 'omniauth-evernote'
 gem 'omniauth-live-connect', github: 'erickreutz/omniauth-live_connect'
 
 gem 'transitions', require: ['transitions', 'active_model/transitions']
+
+gem 'multipart-post', github: 'nicksieger/multipart-post', require: 'net/http/post/multipart'
+gem 'httparty'
+
 gem 'strip_attributes'
 gem 'active_model_serializers'
 

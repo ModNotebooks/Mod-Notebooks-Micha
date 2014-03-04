@@ -17,7 +17,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   provider :evernote, ENV['EVERNOTE_KEY'], ENV['EVERNOTE_SECRET'], client_options: EVERNOTE_OPTS
 
   provider :live_connect, ENV['LIVECONNECT_KEY'], ENV['LIVECONNECT_SECRET'],
-    client_options: CLIENT_OPTS, scope: 'wl.signin,wl.offline_access'
+    client_options: CLIENT_OPTS, scope: 'wl.signin,wl.offline_access,Office.OneNote_create'
 
   on_failure { |env| App::ServicesController.action(:failure).call(env) }
 end

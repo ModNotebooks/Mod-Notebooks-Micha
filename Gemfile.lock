@@ -6,6 +6,21 @@ GIT
       omniauth (~> 1.0)
       omniauth-oauth2
 
+GIT
+  remote: git://github.com/nicksieger/multipart-post.git
+  revision: 508087621bf41b3f711ad03a27a299f980820783
+  specs:
+    multipart-post (2.0.0)
+
+GIT
+  remote: https://github.com/getsentry/raven-ruby.git
+  revision: 0e4d21373b2ec40342a01245415f65fec5042762
+  specs:
+    sentry-raven (0.7.1)
+      faraday (>= 0.7.6)
+      hashie (>= 1.1.0)
+      uuidtools
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -166,6 +181,9 @@ GEM
     hike (1.2.3)
     hirb (0.7.1)
     http_parser.rb (0.5.3)
+    httparty (0.13.0)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.6.9)
     jazz_hands (0.5.2)
       awesome_print (~> 1.2)
@@ -208,7 +226,6 @@ GEM
     mono_logger (1.1.0)
     multi_json (1.8.4)
     multi_xml (0.5.5)
-    multipart-post (2.0.0)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.8.0)
@@ -367,10 +384,6 @@ GEM
       railties (>= 4.0.0, < 5.0)
       sass (>= 3.1.10)
       sprockets-rails (~> 2.0.0)
-    sentry-raven (0.7.1)
-      faraday (>= 0.7.6)
-      hashie (>= 1.1.0)
-      uuidtools
     shoulda (3.5.0)
       shoulda-context (~> 1.0, >= 1.0.1)
       shoulda-matchers (>= 1.4.1, < 3.0)
@@ -444,10 +457,12 @@ DEPENDENCIES
   fog
   grim
   guard-livereload
+  httparty
   jazz_hands
   jquery-rails
   letter_opener
   mini_magick
+  multipart-post!
   omniauth
   omniauth-dropbox
   omniauth-evernote
@@ -470,6 +485,7 @@ DEPENDENCIES
   resque_mailer
   rspec-rails (~> 3.0.0.beta)
   sass-rails (>= 4.0.0)
+  sentry-raven!
   shoulda
   strip_attributes
   transitions

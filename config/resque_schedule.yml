@@ -1,5 +1,10 @@
-refresh_configurations:
+process_notebooks:
   every:
     - "10m"
     - :first_in: "20s"
   class: NotebookProcessCheckWorker
+sync:
+  every:
+    - "30m"
+    - :first_in: "40s"
+  class: SyncWorker

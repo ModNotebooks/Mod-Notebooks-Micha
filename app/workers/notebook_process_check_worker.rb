@@ -3,7 +3,7 @@ class NotebookProcessCheckWorker < BaseWorker
 
   def self.perform
     Notebook.uploaded.each do |notebook|
-      Notebook.async(:process!, true)
+      notebook.async(:process!, true)
     end
   rescue Resque::TermException
     # Raven.capture_message("#{self.to_s} Resque Worker Timeout (#{ENV['RESQUE_TERM_TIMEOUT']}s)", logger: 'timeout')
