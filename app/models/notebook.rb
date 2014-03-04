@@ -218,7 +218,6 @@ class Notebook < ActiveRecord::Base
     Resque.enqueue(Notebook, id, method, *args)
   end
 
-
   private
     def default_handle_method
       self.handle_method ||= "recycle"
