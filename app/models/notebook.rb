@@ -19,14 +19,10 @@
 #
 
 class Notebook < ActiveRecord::Base
+  include ActiveModel::Transitions
+
   # Resque needs a queue
   @queue = :default
-
-  acts_as_paranoid
-
-  STATES = %w[submitted received uploaded processed returned recycled]
-  delegate :submitted?, :uploaded?, :returned?, :received?, :recycled?, to: :current_state
-  delegate :processed?, to: :current_process_state
 
   COLORS        = { "01" => "gray" }
   PAPER_TYPES   = { "01" => "plain", "02" => "lined", "03" => "dotgrid" }
@@ -40,6 +36,7 @@ class Notebook < ActiveRecord::Base
   has_many :events, -> { order 'created_at ASC' }, class_name: "NotebookEvent", dependent: :destroy
   has_many :pages,  -> { order("position ASC") }, dependent: :destroy
   has_many :shares, as: :shareable
+  acts_as_paranoid
 
   #-----------------------------------------------------------------------------
   # Validations
@@ -74,6 +71,50 @@ class Notebook < ActiveRecord::Base
   scope :unreserved, -> { where('user_id IS ?', nil) }
 
   #-----------------------------------------------------------------------------
+  # State Machine
+  #-----------------------------------------------------------------------------
+
+  state_machine auto_scopes: true, initial: :created do
+    state :created
+    state :submitted
+    state :received
+    state :uploaded
+    state :processed
+    state :returned
+    state :recycled
+
+    event :submit, success: :notebook_submitted, timestamp: :submitted_on do
+      transitions to: :submitted, from: :created,
+        on_transition: :handle_submission,
+        guard: lambda { |n| n.user.blank? }
+    end
+
+    event :receive, success: :notebook_received, timestamp: :received_on do
+      transitions to: :received, from: :submitted
+    end
+
+    event :upload, success: :notebook_received, timestamp: :uploaded_on do
+      transitions to: :uploaded, from: [:uploaded, :received],
+        on_transition: [:handle_upload]
+    end
+
+    event :process, success: :notebook_processed, timestamp: :processed_on do
+      transitions to: :processed, from: [:processed, :uploaded],
+        on_transition: [:process_notebook]
+    end
+
+    event :return, success: :notebook_returned, timestamp: :returned_on do
+      transitions to: :returned, from: :processed,
+        guard: lambda { |n| n.handle_method.inquiry.return? }
+    end
+
+    event :recycle, success: :notebook_recycled, timestamp: :recycled_on do
+      transitions to: :recycled, from: :processed,
+        guard: lambda { |n| n.handle_method.inquiry.recycle? }
+    end
+  end
+
+  #-----------------------------------------------------------------------------
   # Uploaders
   #-----------------------------------------------------------------------------
 
@@ -91,18 +132,6 @@ class Notebook < ActiveRecord::Base
   #-----------------------------------------------------------------------------
 
   class << self
-    def submitted_notebooks
-      join(:events).where state_query("submitted")
-    end
-
-    def uploaded_notebooks
-      joins(:events).where state_query('uploaded')
-    end
-
-    def processed_notebooks
-      joins(:events).where state_query('processed', :process)
-    end
-
     def parse_notebook_identifier(identifier = "")
       parts = identifier.split('-')
 
@@ -140,76 +169,47 @@ class Notebook < ActiveRecord::Base
         break identifier unless Notebook.exists?(carrier_identifier: identifier)
       end
     end
-
-    private
-      def state_query(name = "", scope = :default)
-        query = <<-SQL
-          notebook_events.id IN (SELECT MAX(id)
-            FROM notebook_events
-            GROUP BY notebook_id) AND state = '#{name}' AND scope = '#{scope}'
-        SQL
-      end
   end
 
   #-----------------------------------------------------------------------------
   # Instance Methods
   #-----------------------------------------------------------------------------
 
-  def ever_uploaded?
-    events.where(state: :uploaded).exists?
+  def notebook_submitted
+
   end
 
-  def ever_returned?
-    events.where(state: :returned).exists?
+  def notebook_received
+
   end
 
-  def ever_recycled?
-    events.where(state: :recycled).exists?
+  def notebook_uploaded
+
   end
 
-  def current_state_at
-    events.last.try(:created_at) || created_at
+  def notebook_processed
+
   end
 
-  def current_state
-    (events.last.try(:state) || STATES.first).inquiry
+  def notebook_returned
+
   end
 
-  def current_process_state_at
-    events.where(scope: :process).last.try(:created_at)
+  def notebook_recycled
+
   end
 
-  def current_process_state
-    (events.where(scope: :process).last.try(:state) ||  STATES.first).inquiry
+  def handle_upload(upload)
+    update(pdf: upload)
   end
 
-  def upload
-    events.create! state: "uploaded" if submitted?
+  def handle_submission(user, options)
+    options.reverse_merge!(user: user)
+    update(options)
   end
 
-  def return
-    # A notebook can be return only if it has been uploaded before
-    if ever_uploaded? && !ever_recycled? && handle_method == "return"
-      events.create! state: "returned"
-    end
-  end
-
-  def recycle
-    # A notebook can be recycled only if it has been uploaded before
-    if ever_uploaded? && !ever_returned? && handle_method == "recycle"
-      events.create! state: "recycled"
-    end
-  end
-
-  def process
-    events.create! state: "processed", scope: :process if uploaded?
-  end
-
-  def process!(reprocess=false)
-    PageFiller.new(self).fill_pages(reprocess) do |pages, filler|
-      process
-      pages
-    end
+  def process_notebook(reprocess = false)
+    PageFiller.new(self).fill_pages(reprocess)
   end
 
   # Resque async helper
@@ -217,7 +217,6 @@ class Notebook < ActiveRecord::Base
   def async(method, *args)
     Resque.enqueue(Notebook, id, method, *args)
   end
-
 
   private
     def default_handle_method
