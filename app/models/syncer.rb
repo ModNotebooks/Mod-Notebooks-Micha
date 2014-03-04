@@ -1,60 +1,70 @@
 class Syncer
-  OwnershipError = Class.new(ModError)
-  UnsubmittedNotebook = Class.new(ModError)
-
   attr_accessor :service, :notebook
 
   def initialize(service, notebook)
-    if service.user.id != notebook.try(:user).try(:id)
-      raise OwnershipError.new("service user is different from notebook user")
-    end
-    self.service = service
+    self.service  = service
     self.notebook = notebook
   end
 
-  def sync; end
+  def perform; end
+
+  def sync_key(resource)
+    self.class.sync_key(service.provider, resource)
+  end
+
+  def mark_synced(resource)
+    self.class.mark_synced(service.provider, resource)
+  end
+
+  def mark_unsynced(resource)
+    self.class.mark_unsynced(service.provider, *[resource])
+  end
+
+  def needs_sync?(resource)
+    self.class.needs_sync?(service.provider, resource)
+  end
+
+  def redis
+    self.class.redis
+  end
 
   class << self
-    def needs_sync(*resources)
-      resources.flatten.each do |r|
-        key = sync_key(r)
-        redis.setbit(key, r.id, 0)
+    def redis
+      @@redis ||= Redis::Namespace.new(:syncer, redis: $redis)
+    end
+
+    def sync(user)
+      user.notebooks.each do |notebook|
+        user.services.each do |service|
+          service.syncer(notebook).perform()
+        end
       end
     end
 
-    def sync_key(service, resource)
-      "#{service}:#{ActiveModel::Naming.plural(resource)}"
+    def mark_unsynced(service_names, *resources)
+      service_names = [service_names] unless service_names.is_a?(Array)
+
+      resources.flatten.each do |r|
+        service_names.each do |service|
+          key = sync_key(service, r)
+          redis.setbit(key, r.id, 0)
+        end
+      end
     end
 
-    def redis
-      @@redis ||= Redis::Namespace.new(:syncing, redis: $redis)
-    end
-
-    def mark_as_synced(service, resource)
-      key = sync_key(service, resource)
+    def mark_synced(service_name, resource)
+      key = sync_key(service_name, resource)
       redis.setbit(key, resource.id, 1)
     end
 
-    def needs_sync?(service, resource)
-      key = sync_key(service, resource)
+    def needs_sync?(service_name, resource)
+      key = sync_key(service_name, resource)
       redis.getbit(key, resource.id) === 0 ? true : false
+    end
+
+    def sync_key(service_name, resource)
+      "#{service_name}:#{ActiveModel::Naming.plural(resource)}"
     end
   end
 
-  protected
-    def redis
-      class.redis
-    end
-
-    def needs_sync?(resource)
-      class.needs_sync?(service, resource)
-    end
-
-    def mark_as_synced(resource)
-      class.mark_as_synced(service, resource)
-    end
-
-    def sync_key(resource)
-      class.sync_key(service, resource)
-    end
 end

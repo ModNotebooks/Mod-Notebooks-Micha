@@ -25,6 +25,7 @@ gem 'omniauth-live-connect', github: 'erickreutz/omniauth-live_connect'
 gem 'transitions', require: ['transitions', 'active_model/transitions']
 
 gem 'multipart-post', github: 'nicksieger/multipart-post', require: 'net/http/post/multipart'
+gem 'httparty'
 
 gem 'strip_attributes'
 gem 'active_model_serializers'

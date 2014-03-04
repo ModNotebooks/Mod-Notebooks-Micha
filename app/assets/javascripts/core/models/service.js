@@ -11,7 +11,7 @@ Core.Service = (function() {
     nickname:       attr('string'),
     token:          attr('string'),
     secret:         attr('string'),
-    refreshToken:   attr('date'),
+    refreshToken:   attr('string'),
     expiresAt:      attr('date'),
     meta:           attr(),
     disabledAt:     attr('date'),
@@ -36,4 +36,3 @@ Core.Service = (function() {
   });
 
 }());
-

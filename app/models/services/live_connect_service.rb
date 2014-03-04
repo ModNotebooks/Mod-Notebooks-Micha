@@ -27,7 +27,7 @@
 
 class LiveConnectService < Service
 
-  def with_api(options, &block)
+  def with_api(options = {},  &block)
     options.reverse_merge!(on_rescue: [])
     super
   rescue JSON::ParserError => e
@@ -44,6 +44,43 @@ class LiveConnectService < Service
 
   def create_api
     OneNoteApi.new(self.token)
+  end
+
+  def syncer(notebook)
+    LiveConnectSyncer.new(self, notebook)
+  end
+
+  def refresh_access_token!
+    response = HTTParty.post(
+      'https://login.live.com/oauth20_token.srf',
+      body: {
+        refresh_token: self.refresh_token,
+        client_id:     ENV['LIVECONNECT_KEY'],
+        client_secret: ENV['LIVECONNECT_SECRET'],
+        grant_type:    'refresh_token'
+      },
+      headers: {
+        'Content-Type' => 'application/x-www-form-urlencoded',
+        'Accept'       => 'application/json'
+      }
+    )
+
+    if response.code != 200
+      body = JSON.load(response.body)
+
+      if response.code.between?(400, 499)
+        error!(:not_authorized)
+      end
+
+      return false
+    end
+
+    credentials = JSON.load(response.body)
+
+    self.token         = credentials['access_token']
+    self.refresh_token = credentials['refresh_token']
+    self.expires_at    = Time.now.utc.advance(seconds: credentials['expires_in'].to_i)
+    self.save!
   end
 
   class OneNoteApi
@@ -78,7 +115,7 @@ class LiveConnectService < Service
         http.request(req)
       end
 
-      raise Service::InvalidRequest.new(build_error_message(response)) if ![200, 201].include?(response.code)
+      raise Service::InvalidRequest.new(build_error_message(response)) unless [200, 201].include?(response.code.to_i)
 
       JSON.load(response.body)
     end
@@ -89,7 +126,7 @@ class LiveConnectService < Service
       end
 
       def page_file(page)
-        @page_file ||= Kernel.open(page.image.url(:large))
+        Kernel.open(page.image.url(:large))
       end
 
       def page_title(page)

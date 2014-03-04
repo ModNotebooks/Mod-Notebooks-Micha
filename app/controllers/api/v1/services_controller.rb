@@ -30,8 +30,9 @@ class Api::V1::ServicesController < Api::BaseController
       service.expires_at = expires_at
       service.restore! if service.deleted?
     elsif @user.services.provider(provider).blank?
-      service      = service_klass.new(create_params)
-      service.user = @user
+      service            = service_klass.new(create_params)
+      service.expires_at = expires_at
+      service.user       = @user
     end
 
     if service.save
@@ -82,12 +83,8 @@ class Api::V1::ServicesController < Api::BaseController
 
     def expires_at
       time = create_params.fetch(:expires_at)
-      if time.to_f.to_s === "0"
-        time
-      else
-        Time.zone = 'UTC'
-        Time.zone.at(time.to_i)
-      end
+      Time.zone = 'UTC'
+      Time.zone.at(time.to_i / 1000)
     rescue
       nil
     end
