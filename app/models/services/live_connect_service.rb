@@ -31,13 +31,13 @@ class LiveConnectService < Service
     options.reverse_merge!(on_rescue: [])
     super
   rescue JSON::ParserError => e
-    # Raven.capture_exception(e, extra: { service_id: self.id })
+    Raven.capture_exception(e, extra: { service_id: self.id })
     return options[:on_rescue]
   rescue Service::InvalidRequest => e
     if e.message.m atch(/(credentials not recognized|access is denied)/)
       #error!(:not_authorized)
     else
-      # Raven.capture_exception(e, extra: {service_id: self.id})
+      Raven.capture_exception(e, extra: { service_id: self.id })
     end
     return options[:on_rescue]
   end

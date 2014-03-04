@@ -11,4 +11,4 @@ Resque::Failure::Multiple.classes = [Resque::Failure::Redis, Resque::Failure::Se
 Resque::Failure.backend = Resque::Failure::Multiple
 Resque.inline = ENV['RESQUE_INLINE'] || false
 
-Resque::Plugins::Timeout.timeout = ENV['RESQUE_TERM_TIMEOUT'].try(:to_i) || 1800
+Resque::Plugins::Timeout.timeout = ENV['RESQUE_TERM_TIMEOUT'].try(:to_i) || 600

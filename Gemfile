@@ -9,6 +9,8 @@ gem 'redis-rails'
 gem 'devise'
 gem 'devise_invitable'
 
+gem 'sentry-raven', git: 'https://github.com/getsentry/raven-ruby.git'
+
 gem 'resque', require: 'resque/server'
 gem 'resque-scheduler', require: 'resque_scheduler'
 gem 'resque-loner'
