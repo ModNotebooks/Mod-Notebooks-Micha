@@ -1,0 +1,56 @@
+.nbpreview {
+  padding: 6px;
+  background: #a2a2a2;
+  border-radius: 12px;
+  margin-right: -10px;
+  margin-left: -10px;
+}
+
+.nbpreview__spread {
+  border-radius: 8px;
+  width: 100%;
+  height: 0;
+  padding-bottom: 80%;
+  background: #f5ede7;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 3px rgba(0,0,0,.17);
+}
+
+.nbpreview__pane {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.nbpreview__pane--left {
+  @extend .nbpreview__pane;
+  left: 0;
+  @include background-image(linear-gradient(left, rgba(255,255,255,.07) 0%, rgba(255,255,255,.07) 82.32%, rgba(0,0,0,.07) 100%));
+
+  &:before, &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    @include border-left-radius(8px);
+    box-shadow: -1px 0 1px rgba(0,0,0,.06);
+  }
+
+  &:before {
+    margin-left: 5px;
+  }
+
+  &:after {
+    margin-left: 10px;
+  }
+}
+
+.nbpreview__pane--right {
+  @extend .nbpreview__pane;
+  left: 50%;
+}
