@@ -1,0 +1,12 @@
+<form class="l-guest-form">
+  {{#if formErrorMessage }}
+    <span class="form__error">{{formErrorMessage}}</span>
+  {{/if}}
+  <div class="form__control">
+    {{input type="text" value=emailAddress class="form__control__input"}}
+    <label class="form__control__label">Email Address</label>
+  </div>
+  <div class="form__actions">
+    {{spin-button isLoading=isLoading buttonText="Reset Password" action="resetPassword" buttonClass="button--form" }}
+  </div>
+</form>

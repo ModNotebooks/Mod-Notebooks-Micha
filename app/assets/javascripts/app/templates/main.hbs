@@ -1,0 +1,23 @@
+<div class="l-app-logo">
+  {{#link-to "main" class="logo--app"}}{{/link-to}}
+</div>
+
+<aside class="l-app-side">
+
+</aside>
+
+<div class="l-app-navtoggle">
+  {{#if session.isAuthenticated}}
+    <a href="javascript:void(0);"
+      {{action 'toggleSettings'}}
+      {{bind-attr class=":settingstoggle settingsVisible:is-close"}}>
+      <span class="settingstoggle__inner"></span>
+    </a>
+  {{/if}}
+</div>
+
+<section {{bind-attr class=":l-app-content modalVisible:is-blurred"}}>
+  {{outlet}}
+</section>
+
+{{outlet modal}}

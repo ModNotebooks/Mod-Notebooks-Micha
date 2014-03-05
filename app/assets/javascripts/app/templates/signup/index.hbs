@@ -1,0 +1,26 @@
+<form class="l-guest-form form">
+  <div {{bind-attr class=":form__control errors.email:is-error"}}>
+    {{input type="text" value=email class="form__control__input"}}
+    <label class="form__control__label">Email Address</label>
+    {{#if errors.email }}
+      <span class="form__error">{{format-errors errors.email}}</span>
+    {{/if}}
+  </div>
+  <div {{bind-attr class=":form__control errors.password:is-error"}}>
+    {{input type="password" value=password class="form__control__input"}}
+    <label class="form__control__label">Password</label>
+    {{#if errors.password }}
+      <span class="form__error">{{format-errors errors.password}}</span>
+    {{/if}}
+  </div>
+  <div {{bind-attr class=":form__control errors.passwordConfirmation:is-error"}}>
+    {{input type="password" value=passwordConfirmation class="form__control__input"}}
+    <label class="form__control__label">Verify Password</label>
+    {{#if errors.passwordConfirmation }}
+      <span class="form__error">{{format-errors errors.passwordConfirmation}}</span>
+    {{/if}}
+  </div>
+  <div class="form__actions">
+    {{spin-button isLoading=isLoading buttonText=buttonText action="submit" buttonClass="button--form"}}
+  </div>
+</form>
