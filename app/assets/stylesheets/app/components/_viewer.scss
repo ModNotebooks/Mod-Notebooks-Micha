@@ -16,8 +16,13 @@
   top: 0;
   height: 100%;
   z-index: $zindex-viewer-navitem;
-  background: rgba(#fefee7, .84);
+  background: rgba(#ffffff, .84);
   padding: 34px;
+
+  opacity: 0;
+  @include transition(opacity 300ms ease-in-out);
+
+  .is-interacted & { opacity: 1; }
 
   i {
     @include transition(opacity 300ms ease-in-out);
@@ -35,10 +40,12 @@
 
 .viewer__navitem--left {
   left: 0;
+  @include border-left-radius(20px);
 }
 
 .viewer__navitem--right {
   right: 0;
+  @include border-right-radius(20px);
 }
 
 .viewer__pane {
@@ -48,11 +55,12 @@
 
   &:first-of-type {
     text-align: right;
-    border-right: 1px solid rgba(0, 0, 0, .05);
+    @include linear-gradient(left, rgba(255,255,255,.05) 0%, rgba(255,255,255,.05) 85%, rgba(0,0,0,.05) 100%);
   }
 
   &:last-of-type {
     text-align: left;
+    @include linear-gradient(left, rgba(0,0,0,.01) 0%, rgba(255,255,255,.01) 9%, rgba(255,255,255,.01) 100%);
   }
 }
 

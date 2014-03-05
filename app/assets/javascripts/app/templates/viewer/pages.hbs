@@ -1,4 +1,4 @@
-<div class="viewer">
+{{#view App.NotebookViewerView}}
   <a href="javascript:void(0)" class="viewer__navitem--left" {{action 'previous'}}>
     <i class="i-chevron-left-dark"></i>
   </a>
@@ -10,4 +10,4 @@
       {{render "viewerPage" this}}
     </div>
   {{/each}}
-</div>
+{{/view}}
