@@ -22,7 +22,7 @@
 //= require_self
 //= require core/core
 //= require app/app
-// require settings/settings
+//= require settings/settings
 
 // for more details see: http://emberjs.com/guides/application/
 
@@ -58,22 +58,22 @@
     Resolver: Ember.DefaultResolver.extend()
   });
 
-  // var SettingsApp = Ember.Application.create({
-  //   name: 'settings',
-  //   rootElement: '#settings',
-  //   Resolver: Ember.DefaultResolver.extend()
-  // });
+  var SettingsApp = Ember.Application.create({
+    name: 'settings',
+    rootElement: '#settings',
+    Resolver: Ember.DefaultResolver.extend()
+  });
 
   MainApp.Router.reopen({
     location: 'history'
   });
 
-  // SettingsApp.Router.reopen({
-  //   location: 'none'
-  // });
+  SettingsApp.Router.reopen({
+    location: 'none'
+  });
 
   window.App = MainApp;
-  // window.Settings = SettingsApp;
+  window.Settings = SettingsApp;
 }());
 
 //= require_tree .

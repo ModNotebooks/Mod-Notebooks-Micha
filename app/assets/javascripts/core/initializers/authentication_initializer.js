@@ -14,9 +14,9 @@ Ember.Application.initializer({
     });
 
     Ember.SimpleAuth.setup(container, application, {
-      authenticationRoute: 'login.index',
-      routeAfterAuthentication: 'main.index',
-      routeAfterInvalidation: 'main.index',
+      authenticationRoute: 'login',
+      routeAfterAuthentication: 'main',
+      routeAfterInvalidation: 'main',
       crossOriginWhitelist: [loc.protocol + window.ENV.API_ENDPOINT],
       store: window.ENV.IE ? Ember.SimpleAuth.Stores.Cookie : Ember.SimpleAuth.Stores.LocalStorage
     });

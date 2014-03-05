@@ -11,6 +11,7 @@ Ember.Application.initializer({
         },
 
         error: function() {
+          console.log("ERROR", arguments);
           NProgress.done();
           return this._super.apply(this, Array.prototype.slice.apply(arguments));
         }

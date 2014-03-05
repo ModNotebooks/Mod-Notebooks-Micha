@@ -8,14 +8,14 @@ App.ApplicationRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRouteMixin
 
   actions: {
     sessionAuthenticationFailed: function(error) {
-      this.controllerFor('login').set('isLoading', false);
-      this.controllerFor('login').set('loginErrorMessage', "Invalid username or password");
+      this.controllerFor('login.index').set('isLoading', false);
+      this.controllerFor('login.index').set('loginErrorMessage', "Invalid username or password");
     },
 
     sessionAuthenticationSucceeded: function() {
-      this.controllerFor('login').set('isLoading', false);
       this._super();
       Ember.instrument("sessionAuthenticationSucceeded", {}, Ember.K)
+      this.controllerFor('login.index').set('isLoading', false);
     },
 
     sessionInvalidationSucceeded: function() {
@@ -23,19 +23,8 @@ App.ApplicationRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRouteMixin
       this._super();
     },
 
-    // This is not getting called for some reason so lets do it ourselves
-    // https://github.com/simplabs/ember-simple-auth/blob/master/packages/ember-simple-auth/lib/mixins/application_route_mixin.js#L160
-    error: function(reason) {
-      var _this = this;
-      if (reason.status === 401) {
-        this.get('session').invalidate().then(function() {
-          _this.transitionTo(Ember.SimpleAuth.routeAfterInvalidation);
-        });
-      }
-    },
-
     modalChange: function(visible) {
-      this.controller.set('modalVisible', visible);
+      this.controllerFor('main').set('modalVisible', visible);
     },
 
     openModal: function(name) {
@@ -53,17 +42,17 @@ App.ApplicationRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRouteMixin
     },
 
     openSettings: function() {
-      this.controller.set('modalVisible', true);
-      this.controller.set('settingsVisible', true);
+      this.controllerFor('main').set('modalVisible', true);
+      this.controllerFor('main').set('settingsVisible', true);
     },
 
     closeSettings: function() {
-      this.controller.set('modalVisible', false);
-      this.controller.set('settingsVisible', false);
+      this.controllerFor('main').set('modalVisible', false);
+      this.controllerFor('main').set('settingsVisible', false);
     },
 
     toggleSettings: function() {
-      if (this.controller.get('modalVisible')) {
+      if (this.controllerFor('main').get('modalVisible')) {
         Ember.instrument("closeSettings", {}, Ember.K);
       } else {
         Ember.instrument("openSettings", {}, Ember.K);
