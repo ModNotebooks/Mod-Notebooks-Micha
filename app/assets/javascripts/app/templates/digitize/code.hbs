@@ -3,10 +3,20 @@
   <small>Displayed in the back page of your notebook</small>
 </h1>
 <div class="l-digitize-step">
+  <div class="nbpreview">
+    <div class="nbpreview__spread">
+      <div class="nbpreview__pane--left">Left</div>
+      <div class="nbpreview__pane--right">Right</div>
+    </div>
+  </div>
   <form class="form">
+    <div {{bind-attr class=":form__control"}}>
+      {{input type="text" valueBinding="name" autofocus="autofocus" class="form__control__input"}}
+      <label class="form__control__label">Your Notebooks Name</label>
+    </div>
     <div {{bind-attr class=":form__control error:is-error"}}>
-      {{input type="text" valueBinding="code" autofocus="autofocus" class="form__control__input"}}
-      <label class="form__control__label">Type Code Here</label>
+      {{input type="text" valueBinding="code" class="form__control__input"}}
+      <label class="form__control__label">Your Notebooks Code</label>
       {{#if error }}
         <span class="form__error">{{error}}</span>
       {{/if}}
@@ -16,4 +26,3 @@
     </div>
   </form>
 </div>
-

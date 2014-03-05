@@ -36,6 +36,18 @@
   }
 }
 
+.l-digitize {
+  min-height: 100%;
+  display: table;
+  width: 100%;
+}
+
+.l-digitize-inner {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
 .digitize-header {
   @include font-size(20px);
   font-weight: 400;

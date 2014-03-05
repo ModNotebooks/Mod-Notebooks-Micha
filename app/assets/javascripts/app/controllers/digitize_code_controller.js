@@ -2,6 +2,7 @@ App.DigitizeCodeController = Ember.Controller.extend({
   needs: ['digitize', 'digitizeIndex'],
 
   code: null,
+  name: null,
   error: null,
   completed: false,
 
