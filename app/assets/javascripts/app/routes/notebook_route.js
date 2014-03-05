@@ -8,6 +8,13 @@ App.NotebookRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin,
     return model.get('pages');
   },
 
+  renderTemplate: function(controller, model) {
+    this._super(controller, model);
+    this.render('notebookSide', {
+      outlet: 'side'
+    });
+  },
+
   setupController: function(controller, model) {
     controller.set('model', model);
     controller.set('pages', model.get('pages'));

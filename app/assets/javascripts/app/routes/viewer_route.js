@@ -2,6 +2,13 @@ App.ViewerRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
   model: function(params) {
     return this.store.find('page', { notebook_id: params.notebook_id });
   },
+
+  renderTemplate: function(controller, model) {
+    this._super(controller, model);
+    this.render('viewerSide', {
+      outlet: 'side'
+    });
+  }
 });
 
 App.ViewerPagesRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
