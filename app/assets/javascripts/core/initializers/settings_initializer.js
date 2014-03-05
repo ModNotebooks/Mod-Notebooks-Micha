@@ -31,13 +31,13 @@ Ember.Application.initializer({
     }
 
     if (application.name === "main") {
-      var invalidationSubscriber = application.get('invalidationSubscriber');
+      var logoutSubscriber = application.get('logoutSubscriber');
 
-      if (!Ember.isEmpty(invalidationSubscriber)) {
-        Ember.Instrumentation.unsubscribe(invalidationSubscriber);
+      if (!Ember.isEmpty(logoutSubscriber)) {
+        Ember.Instrumentation.unsubscribe(logoutSubscriber);
       }
 
-      invalidationSubscriber = Ember.subscribe('sessionInvalidationSucceeded', {
+      logoutSubscriber = Ember.subscribe('logout', {
         before: function(name, timestamp, payload) {
           container.lookup('route:application').send('invalidateSession');
         }, after: Ember.K
