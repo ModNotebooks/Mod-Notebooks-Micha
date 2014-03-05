@@ -16,6 +16,7 @@ App.ApplicationRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRouteMixin
       this._super();
       Ember.instrument("sessionAuthenticationSucceeded", {}, Ember.K)
       this.controllerFor('login.index').set('isLoading', false);
+      this.controllerFor('login.index').set('loginErrorMessage', null);
     },
 
     sessionInvalidationSucceeded: function() {
