@@ -3,10 +3,10 @@
   <small>Displayed in the back page of your notebook</small>
 </h1>
 <div class="l-digitize-step">
-  <div class="nbpreview">
+  <div class="nbpreview l-digitize-preview" {{bind-attr data-paper="paperType" data-color="color"}}>
     <div class="nbpreview__spread">
-      <div class="nbpreview__pane--left">Left</div>
-      <div class="nbpreview__pane--right">Right</div>
+      <div class="nbpreview__pane--left"></div>
+      <div class="nbpreview__pane--right"></div>
     </div>
   </div>
   <form class="form">
@@ -21,7 +21,7 @@
         <span class="form__error">{{error}}</span>
       {{/if}}
     </div>
-    <div class="form__actions">
+    <div class="form__actions--digitize">
       <button class="button--text" {{action 'advance'}}>Next</button>
     </div>
   </form>

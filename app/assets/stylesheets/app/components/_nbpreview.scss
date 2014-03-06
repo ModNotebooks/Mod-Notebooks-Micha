@@ -4,17 +4,29 @@
   border-radius: 12px;
   margin-right: -10px;
   margin-left: -10px;
+
+  [data-color="grey"] & {
+    background: #a2a2a2;
+  }
 }
 
 .nbpreview__spread {
   border-radius: 8px;
   width: 100%;
   height: 0;
-  padding-bottom: 80%;
-  background: #f5ede7;
+  padding-bottom: 71%;
+  background-color: #f5ede7;
   position: relative;
   overflow: hidden;
   box-shadow: 0 2px 3px rgba(0,0,0,.17);
+
+  [data-paper="lined"] & {
+    @include retina-image(nb-preview-lined-bg, 20px 13px, $asset-pipeline: true);
+  }
+
+  [data-paper="dotgrid"] & {
+    @include retina-image(nb-preview-dotgrid-bg, 24px 24px, $asset-pipeline: true);
+  }
 }
 
 .nbpreview__pane {
@@ -53,4 +65,8 @@
 .nbpreview__pane--right {
   @extend .nbpreview__pane;
   left: 50%;
+  background-color: #f5ede7;
+  @include retina-image(nb-preview-backpage, 152px 188px, $asset-pipeline: true);
+  background-repeat: no-repeat;
+  background-position: center center;
 }

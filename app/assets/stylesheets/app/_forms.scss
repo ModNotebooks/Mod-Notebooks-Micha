@@ -168,6 +168,7 @@ input.form__control__input:focus + .form__control__label {
 
 .form__radiogroup {
   width: 100%;
+  margin-bottom: 30px;
 }
 
 .form__radio {
@@ -241,3 +242,8 @@ input.form__control__input:focus + .form__control__label {
 }
 
 .form__actions { margin-top: 3px; }
+
+.form__actions--digitize {
+  @extend .form__actions;
+  text-align: right;
+}
