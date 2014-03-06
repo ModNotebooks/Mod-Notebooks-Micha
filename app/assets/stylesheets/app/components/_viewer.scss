@@ -9,6 +9,8 @@
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 2px 3px rgba(0, 0, 0, .16);
+  @include transform(translate3d(0,0,0));
+  @include animation(popIn 300ms $ease-out-circ);
 }
 
 .viewer__navitem {
