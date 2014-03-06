@@ -29,6 +29,7 @@
   .is-interacted & { opacity: 1; }
 
   i {
+    @include backface-visibility(hidden);
     @include transition(opacity 300ms ease-in-out);
     opacity: .5;
     @extend %absolute-center;
@@ -105,6 +106,7 @@
   overflow: hidden;
 
   opacity: 1;
+  @include backface-visibility(hidden);
   @include transition(opacity 300ms ease-out);
   &.is-loading { opacity: 0; }
 
