@@ -20,8 +20,10 @@
   z-index: $zindex-viewer-navitem;
   background: rgba(#ffffff, .84);
   padding: 34px;
+  z-index: 3000;
 
   opacity: 0;
+  @include transform(translate3d(0,0,0));
   @include transition(opacity 300ms ease-in-out);
 
   .is-interacted & { opacity: 1; }
@@ -57,12 +59,10 @@
 
   &:first-of-type {
     text-align: right;
-    @include linear-gradient(left, rgba(255,255,255,.05) 0%, rgba(255,255,255,.05) 85%, rgba(0,0,0,.05) 100%);
   }
 
   &:last-of-type {
     text-align: left;
-    border-left: 1px solid rgba(#000, .04);
   }
 }
 
@@ -78,12 +78,23 @@
   width: auto;
   height: auto;
   vertical-align: bottom;
+  position: relative;
+  z-index: 2000;
+
+  .viewer__pane:first-of-type & {
+    @include background-image(linear-gradient(left, rgba(255,255,255,.05) 0%, rgba(255,255,255,.05) 85%, rgba(0,0,0,.05) 100%));
+  }
+
+  .viewer__pane:last-of-type & {
+    @include background-image(linear-gradient(left, rgba(0,0,0,.01) 0%, rgba(255,255,255,.0) 10%, rgba(255,255,255,.0) 100%));
+  }
 }
 
 .viewer__image {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 1000;
   display: inline-block;
   max-height: 100%;
   max-width: 100%;
