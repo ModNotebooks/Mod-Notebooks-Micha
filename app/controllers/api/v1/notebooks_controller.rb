@@ -27,9 +27,9 @@ class Api::V1::NotebooksController < Api::BaseController
 
   def create
     if @notebook.submit!(@user, create_params.slice(:name, :handle_method))
-      respond_with notebook, status: :created
+      respond_with @notebook, status: :created
     else
-      respond_with notebook, status: :unprocessable_entity
+      respond_with @notebook, status: :unprocessable_entity
     end
   end
 
@@ -48,7 +48,7 @@ class Api::V1::NotebooksController < Api::BaseController
     end
 
     def create_params
-      params.require(:notebook).permit(:notebook_identifier, :name, :handle_method)
+      params.require(:notebook).permit(:notebook_identifier, :name, :handle_method, :user_id)
     end
 
     def find_notebooks
