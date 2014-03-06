@@ -2,25 +2,28 @@ App.DigitizeConfirmationController = Ember.ObjectController.extend({
   needs: ['digitize', 'digitizeCode', 'digitizeScan'],
 
   isLoading: false,
-  handleMethod: null,
 
   actions: {
     submit: function() {
+      var _this = this;
       var notebookIdentifier = this.get('controllers.digitizeCode.code');
+      var notebookName       = this.get('controllers.digitizeCode.name');
       var handleMethod       = this.get('controllers.digitizeScan.handleMethodName');
 
       if (notebookIdentifier && handleMethod) {
-        var notebook = thie.get('content');
+        var notebook = this.get('content');
 
         notebook.setProperties({
           'notebookIdentifier': notebookIdentifier,
-          'handleMethod': handleMethod
+          'handleMethod': handleMethod,
+          'name': notebookName
         });
 
         notebook.save().then(function() {
-          alert('SAVED!');
+          _this.set('isLoading', false);
+          _this.transitionToRoute('notebooks');
         }, function(err) {
-          alert("FAILED!");
+          _this.set('isLoading', false);
         });
       } else {
         Ember.run.later(this, function() {

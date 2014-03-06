@@ -1,5 +1,5 @@
 App.NotebooksController = Ember.ArrayController.extend({
-  sortProperties: ['createdAt'],
+  sortProperties: ['submittedOn'],
   sortAscending: false,
 
   actions: {
@@ -7,4 +7,3 @@ App.NotebooksController = Ember.ArrayController.extend({
   }
 
 });
-

@@ -30,7 +30,7 @@ App.ApplicationRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRouteMixin
 
     openModal: function(name) {
       return this.render(name, {
-        into: 'application',
+        into: 'main',
         outlet: 'modal'
       });
     },
@@ -49,7 +49,7 @@ App.ApplicationRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRouteMixin
     closeModal: function() {
       return this.disconnectOutlet({
         outlet: 'modal',
-        parentView: 'application'
+        parentView: 'main'
       });
     },
 

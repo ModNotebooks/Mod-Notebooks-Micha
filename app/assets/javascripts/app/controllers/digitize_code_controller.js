@@ -2,8 +2,11 @@ App.DigitizeCodeController = Ember.Controller.extend({
   needs: ['digitize', 'digitizeIndex'],
 
   code: null,
+  name: null,
   error: null,
   completed: false,
+  paperTypes: ["blank", "lined", "dotgrid"],
+  colors: ["grey"],
 
   actions: {
     advance: function() {
@@ -41,6 +44,41 @@ App.DigitizeCodeController = Ember.Controller.extend({
 
   codeChanged: function() {
     this.set('error', null);
-  }.observes('code')
+  }.observes('code'),
+
+  paper: function() {
+    var code, papers, paperCode;
+
+    papers = this.get('paperTypes');
+    code = this.get('code');
+
+    if (!Ember.isEmpty(code)) {
+      paperCode = parseInt(code.split("-")[1], 10);
+
+      if (!!paperCode && paperCode <= papers.get('length')) {
+        return papers[paperCode - 1];
+      }
+    }
+
+    return "blank";
+  }.property('code'),
+
+  color: function() {
+    var code, colors, colorCode;
+
+    colors = this.get('colors');
+    code = this.get('code');
+
+    if (!Ember.isEmpty(code)) {
+      colorCode = parseInt(code.split("-")[0], 10);
+      if (!!colorCode && colorCode <= colors.get('length')) {
+        return colors[colorCode - 1];
+      }
+    }
+
+    return "grey";
+  }.property('code')
+
+
 
 });

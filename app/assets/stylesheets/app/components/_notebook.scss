@@ -11,7 +11,7 @@
   @extend %roman-font;
   color: #fff;
   text-align: left;
-  @include animation(notebookIn 500ms $ease-out-circ);
+  @include animation(popIn 500ms $ease-out-circ);
 
   &:after {
     content: "";

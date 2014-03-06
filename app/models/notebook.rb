@@ -25,7 +25,7 @@ class Notebook < ActiveRecord::Base
   @queue = :default
 
   COLORS        = { "01" => "gray" }
-  PAPER_TYPES   = { "01" => "plain", "02" => "lined", "03" => "dotgrid" }
+  PAPER_TYPES   = { "01" => "blank", "02" => "lined", "03" => "dotgrid" }
   HANDLE_METHOD = ["return", "recycle"]
 
   #-----------------------------------------------------------------------------
@@ -85,7 +85,7 @@ class Notebook < ActiveRecord::Base
     event :submit, success: :notebook_submitted, timestamp: :submitted_on do
       transitions to: :submitted, from: :created,
         on_transition: :handle_submission,
-        guard: lambda { |n| n.user.blank? }
+        guard: lambda { |n, user, options| n.user.blank? }
     end
 
     event :receive, success: :notebook_received, timestamp: :received_on do
@@ -202,7 +202,7 @@ class Notebook < ActiveRecord::Base
     update(pdf: upload)
   end
 
-  def handle_submission(user, options)
+  def handle_submission(user, options = {})
     options.reverse_merge!(user: user)
     update(options)
   end

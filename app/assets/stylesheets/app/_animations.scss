@@ -1,4 +1,4 @@
-@include keyframes(notebookIn) {
+@include keyframes(popIn) {
   from {
     @include transform(scale(.75));
     opacity: 0;
