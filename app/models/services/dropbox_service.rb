@@ -34,13 +34,20 @@ class DropboxService < Service
   def with_api(options={}, &block)
     options.reverse_merge!(on_rescue: [])
     yield(api)
-  rescue Dropbox::API::Error::Unauthorized
+  rescue Dropbox::API::Error::Unauthorized => e
+    Raven.capture_exception(e, extra: { service_id: self.id })
     return options[:on_rescue]
-  rescue Dropbox::API::Error::StorageQuote
+  rescue Dropbox::API::Error::StorageQuote => e
+    Raven.capture_exception(e, extra: { service_id: self.id })
     return options[:on_rescue]
-  rescue Dropbox::API::Error::BadInput
+  rescue Dropbox::API::Error::BadInput => e
+    Raven.capture_exception(e, extra: { service_id: self.id })
     return options[:on_rescue]
-  rescue Dropbox::API::Error::ConnectionFailed
+  rescue Dropbox::API::Error::ConnectionFailed => e
+    Raven.capture_exception(e, extra: { service_id: self.id })
+    return options[:on_rescue]
+  rescue ModError => e
+    Raven.capture_exception(e, extra: { service_id: self.id })
     return options[:on_rescue]
   end
 

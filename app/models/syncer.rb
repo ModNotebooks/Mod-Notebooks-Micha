@@ -47,6 +47,15 @@ class Syncer
       end
     end
 
+    def sync_service(user_id, service_id)
+      user = User.find(user_id)
+      service = user.services.find(service_id)
+
+      user.notebooks.each do |notebook|
+        service.syncer(notebook).sync()
+      end
+    end
+
     # Resque async helper
     # https://github.com/resque/resque/blob/1-x-stable/examples/async_helper.rb
     def async(method, *args)

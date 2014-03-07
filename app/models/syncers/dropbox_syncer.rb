@@ -29,7 +29,7 @@ class DropboxSyncer < Syncer
       name     = notebook.name
       date     = notebook.submitted_on || notebook.created_at
 
-      name << " #{date.strftime('%b %e, %Y')}" if existing.include?(name.downcase)
+      name << " - #{date.strftime('%b %-d, %Y')}" if existing.include?(name.downcase)
       name
     end
 

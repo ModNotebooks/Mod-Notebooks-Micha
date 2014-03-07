@@ -44,6 +44,9 @@ class LiveConnectService < Service
       Raven.capture_exception(e, extra: { service_id: self.id })
     end
     return options[:on_rescue]
+  rescue ModError => e
+    Raven.capture_exception(e, extra: { service_id: self.id })
+    return options[:on_rescue]
   end
 
   def create_api
