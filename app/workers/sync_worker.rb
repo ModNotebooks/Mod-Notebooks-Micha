@@ -4,7 +4,8 @@ class SyncWorker < BaseWorker
   def self.perform
     User.find_in_batches do |user_batch|
       user_batch.each do |user|
-        Syncer.async(:sync, user.id)
+        services = user.services.pluck('id')
+        services.each { |s| Syncer.async(:sync_service, user.id, s) }
       end
     end
   rescue Resque::TermException

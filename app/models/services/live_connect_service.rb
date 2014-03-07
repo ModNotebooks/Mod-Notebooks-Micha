@@ -27,9 +27,13 @@
 
 class LiveConnectService < Service
 
+  #-----------------------------------------------------------------------------
+  # Instance Methods
+  #-----------------------------------------------------------------------------
+
   def with_api(options = {},  &block)
     options.reverse_merge!(on_rescue: [])
-    super
+    yield(api)
   rescue JSON::ParserError => e
     Raven.capture_exception(e, extra: { service_id: self.id })
     return options[:on_rescue]
@@ -39,6 +43,9 @@ class LiveConnectService < Service
     else
       Raven.capture_exception(e, extra: { service_id: self.id })
     end
+    return options[:on_rescue]
+  rescue ModError => e
+    Raven.capture_exception(e, extra: { service_id: self.id })
     return options[:on_rescue]
   end
 
@@ -83,6 +90,10 @@ class LiveConnectService < Service
     self.expires_at    = Time.now.utc.advance(seconds: credentials['expires_in'].to_i)
     self.save!
   end
+
+  #-----------------------------------------------------------------------------
+  # Classes
+  #-----------------------------------------------------------------------------
 
   class OneNoteApi
     URL = 'https://www.onenote.com/api/v1.0'

@@ -39,6 +39,8 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'carrierwave'
 # gem 'carrierwave-imageoptimizer'
 
+gem 'dropbox-api'
+
 gem 'fog'
 gem 'grim'
 gem 'mini_magick'

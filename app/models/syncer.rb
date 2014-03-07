@@ -8,7 +8,9 @@ class Syncer
     self.notebook = notebook
   end
 
-  def sync; end
+  def sync
+    raise NotImplementedError.new("You must implement #sync")
+  end
 
   def sync_key(resource)
     self.class.sync_key(service.provider, service.uid, resource)
@@ -42,6 +44,15 @@ class Syncer
         user.notebooks.each do |notebook|
           service.syncer(notebook).sync()
         end
+      end
+    end
+
+    def sync_service(user_id, service_id)
+      user = User.find(user_id)
+      service = user.services.find(service_id)
+
+      user.notebooks.each do |notebook|
+        service.syncer(notebook).sync()
       end
     end
 
