@@ -92,10 +92,12 @@ class Service < ActiveRecord::Base
   end
 
   def with_api(options, &block)
-    yield(api(options))
+    raise NotImplementedError.new("You must implement #with_api")
   end
 
-  def create_api; end
+  def create_api
+    raise NotImplementedError.new("You must implement #create_api")
+  end
 
   def api(options={})
     options.reverse_merge!(force: false)
@@ -104,7 +106,7 @@ class Service < ActiveRecord::Base
   end
 
   def syncer(notebook)
-    Syncer.new(self, notebook)
+    raise NotImplementedError.new("You must implement #syncer")
   end
 
   PROVIDERS.each do |provider|

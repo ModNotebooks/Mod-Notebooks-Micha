@@ -26,10 +26,9 @@
 #
 
 class LiveConnectService < Service
-
   def with_api(options = {},  &block)
     options.reverse_merge!(on_rescue: [])
-    super
+    yield(api)
   rescue JSON::ParserError => e
     Raven.capture_exception(e, extra: { service_id: self.id })
     return options[:on_rescue]

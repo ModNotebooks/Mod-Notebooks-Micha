@@ -7,9 +7,7 @@ class LiveConnectSyncer < Syncer
   end
 
   def sync_page(page)
-    service.api.add_page(page)
-    mark_synced(page)
-  rescue Service::InvalidRequest => e
-    mark_unsynced(page)
+    success = service.with_api(on_rescue: false) { |api| api.add_page(page) }
+    !!success ? mark_synced(page) : mark_unsynced(page)
   end
 end

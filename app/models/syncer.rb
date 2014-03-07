@@ -8,7 +8,9 @@ class Syncer
     self.notebook = notebook
   end
 
-  def sync; end
+  def sync
+    raise NotImplementedError.new("You must implement #sync")
+  end
 
   def sync_key(resource)
     self.class.sync_key(service.provider, service.uid, resource)
