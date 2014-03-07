@@ -26,6 +26,11 @@
 #
 
 class LiveConnectService < Service
+
+  #-----------------------------------------------------------------------------
+  # Instance Methods
+  #-----------------------------------------------------------------------------
+
   def with_api(options = {},  &block)
     options.reverse_merge!(on_rescue: [])
     yield(api)
@@ -82,6 +87,10 @@ class LiveConnectService < Service
     self.expires_at    = Time.now.utc.advance(seconds: credentials['expires_in'].to_i)
     self.save!
   end
+
+  #-----------------------------------------------------------------------------
+  # Classes
+  #-----------------------------------------------------------------------------
 
   class OneNoteApi
     URL = 'https://www.onenote.com/api/v1.0'

@@ -27,4 +27,28 @@
 
 class DropboxService < Service
 
+  #-----------------------------------------------------------------------------
+  # Instance Methods
+  #-----------------------------------------------------------------------------
+
+  def with_api(options={}, &block)
+    options.reverse_merge!(on_rescue: [])
+    yield(api)
+  rescue Dropbox::API::Error::Unauthorized
+    return options[:on_rescue]
+  rescue Dropbox::API::Error::StorageQuote
+    return options[:on_rescue]
+  rescue Dropbox::API::Error::BadInput
+    return options[:on_rescue]
+  rescue Dropbox::API::Error::ConnectionFailed
+    return options[:on_rescue]
+  end
+
+  def create_api
+    Dropbox::API::Client.new(token: token, secret: secret)
+  end
+
+  def syncer(notebook)
+    DropboxSyncer.new(self, notebook)
+  end
 end

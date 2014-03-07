@@ -119,6 +119,10 @@ GEM
     doorkeeper (0.7.4)
       jquery-rails (>= 2.0.2)
       railties (>= 3.1)
+    dropbox-api (0.4.2)
+      hashie
+      multi_json
+      oauth
     em-websocket (0.5.0)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.5.3)
@@ -449,6 +453,7 @@ DEPENDENCIES
   devise
   devise_invitable
   doorkeeper (~> 0.7.0)
+  dropbox-api
   ember-data-source (= 1.0.0.beta.6)
   ember-rails
   ember-source (= 1.4.0)
