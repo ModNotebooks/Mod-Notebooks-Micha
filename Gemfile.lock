@@ -142,6 +142,9 @@ GEM
     erubis (2.7.0)
     eventmachine (1.0.3)
     evernote-thrift (1.25.1)
+    evernote_oauth (0.2.3)
+      evernote-thrift
+      oauth (>= 0.4.1)
     excon (0.31.0)
     execjs (2.0.2)
     factory_girl (4.4.0)
@@ -457,6 +460,7 @@ DEPENDENCIES
   ember-data-source (= 1.0.0.beta.6)
   ember-rails
   ember-source (= 1.4.0)
+  evernote_oauth
   factory_girl_rails
   faker
   fog

@@ -27,4 +27,38 @@
 
 class EvernoteService < Service
 
+  #-----------------------------------------------------------------------------
+  # Instance Methods
+  #-----------------------------------------------------------------------------
+
+  def with_api(options={}, &block)
+    options.reverse_merge!(on_rescue: [])
+    yield(api)
+  rescue Evernote::EDAM::Error::EDAMUserException => e
+    Raven.capture_exception(e, extra: { service_id: self.id })
+    puts e.inspect
+    return options[:on_rescue]
+  rescue Evernote::EDAM::Error::EDAMNotFoundException => e
+    Raven.capture_exception(e, extra: { service_id: self.id })
+    puts e.inspect
+    return options[:on_rescue]
+  rescue Evernote::EDAM::Error::EDAMSystemException => e
+    Raven.capture_exception(e, extra: { service_id: self.id })
+    puts e.inspect
+    return options[:on_rescue]
+  end
+
+  def create_api
+    EvernoteOAuth::Client.new(
+      token: token,
+      consumer_key: ENV['EVERNOTE_KEY'],
+      consumer_secret: ENV['EVERNOTE_SECRET'],
+      sandbox: !(Rails.env.production? || Rails.env .staging?)
+    )
+  end
+
+  def syncer(notebook)
+    EvernoteSyncer.new(self, notebook)
+  end
+
 end

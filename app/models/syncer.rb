@@ -73,7 +73,7 @@ class Syncer
 
       resources.flatten.each do |r|
         service_names.each do |service|
-          keys = redis.keys("#{service.provider}:*")
+          keys = redis.keys("#{service}:*")
           keys.each do |k|
             redis.setbit(k, r.id, 0)
           end

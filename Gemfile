@@ -40,6 +40,7 @@ gem 'carrierwave'
 # gem 'carrierwave-imageoptimizer'
 
 gem 'dropbox-api'
+gem 'evernote_oauth' # This include the SDK
 
 gem 'fog'
 gem 'grim'
