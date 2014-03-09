@@ -41,7 +41,7 @@ class Syncer
       user = User.find(user_id)
 
       user.services.each do |service|
-        user.notebooks.each do |notebook|
+        user.notebooks.processed.each do |notebook|
           service.syncer(notebook).sync()
         end
       end
@@ -51,7 +51,7 @@ class Syncer
       user = User.find(user_id)
       service = user.services.find(service_id)
 
-      user.notebooks.each do |notebook|
+      user.notebooks.processed.each do |notebook|
         service.syncer(notebook).sync()
       end
     end
