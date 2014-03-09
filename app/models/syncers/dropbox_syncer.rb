@@ -4,13 +4,16 @@ class DropboxSyncer < Syncer
     pages = notebook.pages.find_all { |p| needs_sync?(p) }
 
     unless pages.empty?
-      folder = folder_name(notebook)
+      db_folder = folder(notebook)
 
-      pages.each do |page|
-        file = filename(page)
-        path = "#{folder}/#{file}"
+      db_folder.try do |dbf|
+        notebook.update(dropbox_folder_rev: dbf.rev)
+        pages.each do |page|
+          file = filename(page)
+          path = "#{dbf.path}/#{file}"
 
-        sync_page(path, page)
+          sync_page(path, page)
+        end
       end
     end
   end
@@ -24,13 +27,33 @@ class DropboxSyncer < Syncer
   end
 
   private
-    def folder_name(notebook)
+    def folder(notebook)
+      dropbox_folder = nil
       existing = existing_folders
+
+      # First try an grad the existing folder
+
+      notebook_rev = notebook.dropbox_folder_rev
+      dropbox_folder = notebook_rev.try do |rev|
+        existing.detect { |folder| folder.rev == rev }
+      end
+
+      return dropbox_folder if dropbox_folder
+
+      # If the existing folder does not exsist
+      # make a new one
+      
+      existing_names = existing.collect { |f| f.downcase.sub(/^\//i, '') }
       name     = notebook.name
       date     = notebook.submitted_on || notebook.created_at
 
-      name << " - #{date.strftime('%b %-d, %Y')}" if existing.include?(name.downcase)
-      name
+      if existing_names.include?(name.downcase)
+        name << " - #{date.strftime('%b %-d, %Y')}"
+      end
+
+      service.with_api(on_rescue: nil) do |api|
+        api.mkdir(name)
+      end
     end
 
     def filename(page)
@@ -40,9 +63,6 @@ class DropboxSyncer < Syncer
     def existing_folders
       listing = service.with_api(on_rescue: []) { |api| api.ls }
 
-      folders = listing.inject([]) { |memo, l|
-        memo << l['path'] if l['is_dir']; memo }
-
-      folders.collect { |f| f.downcase.sub(/^\//i, '') }
+      folders = listing.find_all { |l| l['is_dir'] }
     end
 end
