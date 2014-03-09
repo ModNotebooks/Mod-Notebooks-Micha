@@ -176,6 +176,10 @@ class Notebook < ActiveRecord::Base
   # Instance Methods
   #-----------------------------------------------------------------------------
 
+  def name
+    super || "Untitled"
+  end
+
   def notebook_submitted
 
   end
