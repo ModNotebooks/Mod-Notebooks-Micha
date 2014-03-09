@@ -46,6 +46,9 @@ class DropboxService < Service
   rescue Dropbox::API::Error::ConnectionFailed => e
     Raven.capture_exception(e, extra: { service_id: self.id })
     return options[:on_rescue]
+  rescue Dropbox::API::Error::Forbidden => e
+    Raven.capture_exception(e, extra: { service_id: self.id })
+    return options[:on_rescue]
   rescue ModError => e
     Raven.capture_exception(e, extra: { service_id: self.id })
     return options[:on_rescue]
