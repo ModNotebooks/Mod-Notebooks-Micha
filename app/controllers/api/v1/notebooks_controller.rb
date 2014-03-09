@@ -56,7 +56,7 @@ class Api::V1::NotebooksController < Api::BaseController
     end
 
     def find_notebook_by_notebook_identifier
-      @notebook = Notebook.created.unreserved.find_by_notebook_identifier!(create_params.fetch(:notebook_identifier))
+      @notebook = Notebook.unreserved.find_by_notebook_identifier!(create_params.fetch(:notebook_identifier))
     end
 
     def find_notebook
