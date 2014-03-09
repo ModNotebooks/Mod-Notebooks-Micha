@@ -36,15 +36,12 @@ class EvernoteService < Service
     yield(api)
   rescue Evernote::EDAM::Error::EDAMUserException => e
     Raven.capture_exception(e, extra: { service_id: self.id })
-    puts e.inspect
     return options[:on_rescue]
   rescue Evernote::EDAM::Error::EDAMNotFoundException => e
     Raven.capture_exception(e, extra: { service_id: self.id })
-    puts e.inspect
     return options[:on_rescue]
   rescue Evernote::EDAM::Error::EDAMSystemException => e
     Raven.capture_exception(e, extra: { service_id: self.id })
-    puts e.inspect
     return options[:on_rescue]
   end
 
