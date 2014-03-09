@@ -81,8 +81,6 @@ class Notebook < ActiveRecord::Base
     state :received
     state :uploaded
     state :processed
-    state :returned
-    state :recycled
 
     event :submit, success: :notebook_submitted, timestamp: :submitted_on do
       transitions to: :submitted, from: :created,
@@ -102,16 +100,6 @@ class Notebook < ActiveRecord::Base
     event :process, success: :notebook_processed, timestamp: :processed_on do
       transitions to: :processed, from: [:processed, :uploaded],
         on_transition: [:process_notebook]
-    end
-
-    event :return, success: :notebook_returned, timestamp: :returned_on do
-      transitions to: :returned, from: :processed,
-        guard: lambda { |n| n.handle_method.inquiry.return? }
-    end
-
-    event :recycle, success: :notebook_recycled, timestamp: :recycled_on do
-      transitions to: :recycled, from: :processed,
-        guard: lambda { |n| n.handle_method.inquiry.recycle? }
     end
   end
 
@@ -178,6 +166,24 @@ class Notebook < ActiveRecord::Base
 
   def name
     super || "Untitled"
+  end
+
+  def return!
+    update(returned_on: DateTime.now) if n.handle_method.inquiry.return?
+    notebook_returned
+  end
+
+  def returned?
+    returned_on.present?
+  end
+
+  def recycle!
+    update(recycled_on: DateTime.now) if n.handle_method.inquiry.recycle?
+    notebook_recycled
+  end
+
+  def recycled?
+    recycled_on.present?
   end
 
   def notebook_submitted
