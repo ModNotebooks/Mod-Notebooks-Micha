@@ -28,6 +28,8 @@ class Notebook < ActiveRecord::Base
   PAPER_TYPES   = { "01" => "blank", "02" => "lined", "03" => "dotgrid" }
   HANDLE_METHOD = ["return", "recycle"]
 
+  store_accessor :meta, :evernote_guid, :dropbox_rev
+
   #-----------------------------------------------------------------------------
   # Relationships
   #-----------------------------------------------------------------------------
