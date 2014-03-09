@@ -42,7 +42,7 @@ class DropboxSyncer < Syncer
 
       # If the existing folder does not exsist
       # make a new one
-      
+
       existing_names = existing.collect { |f| f.downcase.sub(/^\//i, '') }
       name     = notebook.name
       date     = notebook.submitted_on || notebook.created_at
@@ -62,7 +62,6 @@ class DropboxSyncer < Syncer
 
     def existing_folders
       listing = service.with_api(on_rescue: []) { |api| api.ls }
-
       folders = listing.find_all { |l| l['is_dir'] }
     end
 end
