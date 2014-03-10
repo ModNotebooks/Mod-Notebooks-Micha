@@ -113,3 +113,15 @@
   .viewer__pane:first-of-type & { @include border-left-radius(20px); }
   .viewer__pane:last-of-type  & { @include border-right-radius(20px); }
 }
+
+.viewer__blank {
+  $size: 63px 78px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  @include retina-image("logo-viewer-blank", $size, $asset-pipeline: true);
+}

@@ -102,4 +102,11 @@ g03YhW3Yh43Yia3Yi83Yje3Yjw3ZkS3Zk03ZlW3Zl43Zma3Zm83Zne3Znw3aoS3a
 o03apW3ap43aqa3aq83are3arw3bsS3bs03btW3bt43bua3bu83bve3bvw3cwS3c
 w03cxW3cx43cya3cy83cze3czw3d0S3d003d1W3d143d2a3d283d3e3d3w3e4S3e
 403e5W3e543e6a3e683e7e3e7w3f8S3f8wVN34xTAAA7">
+{{#if blank}}
+<div class="viewer__blank"></div>
+{{else}}
+<div {{bind-attr class=":spinner--viewer-page view.isLoading::is-hidden"}}>
+  <div class="spinner__icon"></div>
+</div>
 <img {{bind-attr src="image.xlarge" class=":viewer__image view.isLoading view.isError"}}>
+{{/if}}

@@ -16,8 +16,8 @@ App.ViewerPagesRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMix
     var pages = this.modelFor('viewer');
 
     return [
-      pages.findBy('index', parseInt(params.left_page_index, 10)) || Ember.Object.create({ index: Number.MIN_VALUE }),
-      pages.findBy('index', parseInt(params.right_page_index, 10)) || Ember.Object.create({ index: Number.MAX_VALUE })
+      pages.findBy('index', parseInt(params.left_page_index, 10)) || Ember.Object.create({ index: Number.MIN_VALUE, blank: true }),
+      pages.findBy('index', parseInt(params.right_page_index, 10)) || Ember.Object.create({ index: Number.MAX_VALUE, blank: true })
     ].compact();
   },
 

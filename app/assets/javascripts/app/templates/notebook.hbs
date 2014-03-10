@@ -11,6 +11,9 @@
         <div class="l-grid-item--page js-grid-item">
           {{#view App.GridPageView contentBinding="this"}}
             {{#link-to 'viewer.pages' notebook.id this class="page--grid" classNameBindings="view.isLoading view.isError"}}
+              <div {{bind-attr class=":spinner--grid-page view.isLoading::is-hidden"}}>
+                <div class="spinner__icon"></div>
+              </div>
               <img {{bind-attr src="image.small"}} class="page__image">
             {{/link-to}}
           {{/view}}
