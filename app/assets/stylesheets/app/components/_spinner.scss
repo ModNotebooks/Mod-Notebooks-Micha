@@ -28,6 +28,14 @@
   margin-top: -15px;
 }
 
+.spinner--button {
+  @extend .spinner;
+  width: 16px;
+  height: 16px;
+  position: static;
+  display: inline-block;
+}
+
 .spinner__icon {
   width: 100%;
   height: 100%;
@@ -38,4 +46,10 @@
   border-radius: 50%;
 
   @include animation(spin 400ms linear infinite);
+
+  .spinner--button & {
+    border-top-color: #466265;
+    border-left-color: #466265;
+    border-width: 2px;
+  }
 }

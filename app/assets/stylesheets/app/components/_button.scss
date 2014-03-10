@@ -9,6 +9,7 @@
   padding: 4px 23px;
   border-radius: 3px;
   color: #466265;
+  position: relative;
   @include transition(150ms ease);
   @include box-sizing(border-box);
 

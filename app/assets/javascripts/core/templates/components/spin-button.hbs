@@ -1,6 +1,8 @@
 <button {{bind-attr id=id class="buttonClass isEnabled::is-disabled"}} {{action 'showLoading'}}>
   {{#if isLoading}}
-    <img src="http://i639.photobucket.com/albums/uu116/pksjce/spiffygif_18x18.gif">
+    <div class="spinner--button">
+      <div class="spinner__icon"></div>
+    </div>
   {{else}}
     {{buttonText}}
   {{/if}}
