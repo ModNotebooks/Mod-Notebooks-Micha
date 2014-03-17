@@ -25,9 +25,6 @@ Mod::Application.routes.draw do
       get '/digitize/address', to: 'home#index'
       get '/digitize/confirmation', to: 'home#index'
 
-      get '/order', to: 'home#order'
-      get '/store', to: 'home#store'
-
       get '/styleguide', to: "home#guide"
       get '/layout', to: "home#layout"
 
