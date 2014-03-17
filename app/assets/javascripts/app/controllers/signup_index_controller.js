@@ -14,8 +14,7 @@ App.SignupIndexController = Ember.ObjectController.extend({
 
       model.save()
         .then(function() {
-
-          options = {
+          var options = {
             identification: identification,
             password: password
           };
