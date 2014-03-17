@@ -28,12 +28,19 @@ Mod::Application.configure do
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
+  config.assets.enabled = true
 
   # Generate digests for assets URLs.
   config.assets.digest = true
 
-  # Version of your assets, change this if you want to expire all your assets.
-  config.assets.version = '1.0'
+  config.assets.prefix = '/assets'
+
+  # Enable serving of images, stylesheets, and JavaScripts from an asset server
+  config.action_controller.asset_host = if ENV['ASSET_HOST'].present?
+    ENV['ASSET_HOST']
+  else
+    "//#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
+  end
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
@@ -43,19 +50,33 @@ Mod::Application.configure do
   # config.force_ssl = true
 
   # Set to :debug to see everything in the log.
-  config.log_level = :info
+  # config.log_level = :debug
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
 
   # Use a different logger for distributed setups.
-  # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
+  config.logger       = Logger.new(STDOUT)
+  config.logger.level = Logger.const_get(ENV['LOG_LEVEL'] ? ENV['LOG_LEVEL'].upcase : 'INFO')
+
+  config.action_mailer.smtp_settings = {
+    :port           => ENV['MAILGUN_SMTP_PORT'],
+    :address        => ENV['MAILGUN_SMTP_SERVER'],
+    :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
+    :password       => ENV['MAILGUN_SMTP_PASSWORD'],
+    :domain         => 'modnotebooks.com',
+    :authentication => :plain
+  }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { host: 'modnotebooks.com' }
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = "http://assets.example.com"
+
+  config.ember.variant = :production
 
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
