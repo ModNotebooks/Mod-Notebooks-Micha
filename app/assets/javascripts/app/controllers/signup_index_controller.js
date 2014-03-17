@@ -2,7 +2,7 @@ App.SignupIndexController = Ember.ObjectController.extend({
   buttonText: "Sign Up",
   isLoading: false,
 
-  authenticator: Ember.SimpleAuth.Authenticators.OAuth2,
+  authenticatorFactory: 'ember-simple-auth:authenticators:oauth2',
 
   actions: {
     submit: function() {
@@ -20,10 +20,11 @@ App.SignupIndexController = Ember.ObjectController.extend({
             password: password
           };
 
-          _this.get('session').authenticate(_this.get('authenticator').create(), options).then(function() {
+          _this.get('session').authenticate(_this.get('authenticatorFactory'), options).then(function() {
             _this.set('isLoading', false);
             _this.send('sessionAuthenticationSucceeded');
           }, function(error) {
+            _this.set('isLoading', false);
             _this.transitionTo(Ember.SimpleAuth.authenticationRoute);
           });
         }, function() {
