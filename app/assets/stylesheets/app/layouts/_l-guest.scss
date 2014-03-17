@@ -17,14 +17,23 @@
 .l-guest-header-left,
 .l-guest-header-right {
   width: 50%;
-  padding: 16px 24px;
+  padding: 12px;
   display: table-cell;
   vertical-align: middle;
+
+  @include media($screen-br-sm) {
+    padding: 16px 24px;
+  }
 }
 
 .l-guest-header-right {
   text-align: right;
+  padding-left: 0;
   .button { margin-left: 40px; }
+}
+
+.l-guest-header-left {
+  padding-right: 0;
 }
 
 .l-guest-header-back {
