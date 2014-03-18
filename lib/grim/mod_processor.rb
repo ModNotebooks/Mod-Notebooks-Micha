@@ -11,7 +11,7 @@ module Grim
       command = [@imagemagick_path, "-resize", width.to_s, "-antialias", "-render",
         "-quality", quality.to_s, "-colorspace", "sRGB",
         "-interlace", "none", "-density", density.to_s,
-        "-background white -alpha remove",
+        "-background white",
         "#{Shellwords.shellescape(pdf.path)}[#{index}]", path]
       command.unshift("PATH=#{File.dirname(@ghostscript_path)}:#{ENV['PATH']}") if @ghostscript_path
 
