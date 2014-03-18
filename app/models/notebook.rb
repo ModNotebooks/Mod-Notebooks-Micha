@@ -93,7 +93,7 @@ class Notebook < ActiveRecord::Base
     end
 
     event :upload, success: :notebook_received, timestamp: :uploaded_on do
-      transitions to: :uploaded, from: [:uploaded, :received],
+      transitions to: :uploaded, from: [:uploaded, :received, :processed],
         on_transition: [:handle_upload]
     end
 
