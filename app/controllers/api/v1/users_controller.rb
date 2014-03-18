@@ -20,7 +20,7 @@ class Api::V1::UsersController < Api::BaseController
   def update
     method = update_params.has_key?(:current_password) ? :update_with_password : :update_without_password
 
-    if @user.send(method, update_params)
+    if @user.email != 'demo@modnotebooks.com' && @user.send(method, update_params)
       head :no_content
     else
       respond_with @user, status: :unprocessable_entity
