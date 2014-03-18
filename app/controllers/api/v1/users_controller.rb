@@ -34,6 +34,7 @@ class Api::V1::UsersController < Api::BaseController
   end
 
   private
+    # TODO: WTF? Move this!
     def block_demo_user
       if @user && @user.email == 'demo@modnotebooks.com'
         @user.errors.add(:email, "Can't do it.")
