@@ -1,5 +1,6 @@
 class Api::V1::UsersController < Api::BaseController
   doorkeeper_for :all, except: [:create]
+  before_filter :block_demo_user, only: [:update, :destroy]
 
   def create
     user = User.new(create_params)
@@ -20,7 +21,7 @@ class Api::V1::UsersController < Api::BaseController
   def update
     method = update_params.has_key?(:current_password) ? :update_with_password : :update_without_password
 
-    if @user.email != 'demo@modnotebooks.com' && @user.send(method, update_params)
+    if @user.send(method, update_params)
       head :no_content
     else
       respond_with @user, status: :unprocessable_entity
@@ -33,6 +34,13 @@ class Api::V1::UsersController < Api::BaseController
   end
 
   private
+    def block_demo_user
+      if @user && @user.email == 'demo@modnotebooks.com'
+        @user.errors.add(:email, "Can't do it.")
+        respond_with @user, status: :unprocessable_entity
+        false
+      end
+    end
 
     def create_params
       params.require(:user).permit(:email, :password, :password_confirmation)
