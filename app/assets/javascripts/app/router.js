@@ -1,6 +1,8 @@
 // For more information see: http://emberjs.com/guides/routing/
 
 App.Router.map(function() {
+  this.route('demo');
+  
   this.resource('login', function() {
     this.route('index', { path: '/' });
   });
