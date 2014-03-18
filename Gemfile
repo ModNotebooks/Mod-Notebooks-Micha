@@ -45,7 +45,7 @@ gem 'evernote_oauth' # This include the SDK
 gem 'fog'
 gem 'grim'
 gem 'mini_magick'
-gem 'doorkeeper', '~> 0.7.0'
+gem 'doorkeeper', '~> 1.0.0'
 gem 'paranoia', '~> 2.0'
 gem 'acts_as_list'
 

@@ -4,13 +4,7 @@ Ember.Application.initializer({
     var loc = window.location;
 
     Ember.SimpleAuth.Authenticators.OAuth2.reopen({
-      serverTokenEndpoint: window.ENV.API_ENDPOINT + '/oauth/token',
-
-      makeRequest: function(data) {
-        data.client_id     = window.ENV.OAUTH_ID;
-        data.client_secret = window.ENV.OAUTH_SECRET;
-        return this._super(data);
-      }
+      serverTokenEndpoint: window.ENV.API_ENDPOINT + '/oauth/token'
     });
 
     Ember.SimpleAuth.setup(container, application, {

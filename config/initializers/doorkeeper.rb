@@ -14,9 +14,7 @@ Doorkeeper.configure do
 
   resource_owner_from_credentials do |routes|
     user = User.find_for_database_authentication(email: params[:username])
-    if user && user.valid_password?(params[:password])
-      user
-    end
+    user if user.try(:valid_password?, params[:password])
   end
 
   # If you want to restrict access to the web interface for adding oauth authorized applications, you need to declare the block below.
@@ -68,7 +66,7 @@ Doorkeeper.configure do
   # Under some circumstances you might want to have applications auto-approved,
   # so that the user skips the authorization step.
   # For example if dealing with trusted a application.
-  skip_authorization do |resource_owner, client|
-    # resource_owner.admin?
-  end
+  # skip_authorization do |resource_owner, client|
+  #   # resource_owner.admin?
+  # end
 end
