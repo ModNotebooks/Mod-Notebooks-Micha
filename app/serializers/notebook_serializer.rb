@@ -14,7 +14,8 @@ class NotebookSerializer < ActiveModel::Serializer
     :uploaded_on,
     :processed_on,
     :returned_on,
-    :recycled_on
+    :recycled_on,
+    :available_on
 
   has_one :user, embed: :ids, include: true
   has_many :pages, embed: :ids

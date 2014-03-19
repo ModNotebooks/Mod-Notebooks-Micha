@@ -20,6 +20,7 @@
 
 class Notebook < ActiveRecord::Base
   include ActiveModel::Transitions
+  include Blitline::NotebookHelper
 
   # Resque needs a queue
   @queue = :default
@@ -35,7 +36,7 @@ class Notebook < ActiveRecord::Base
   #-----------------------------------------------------------------------------
 
   belongs_to :user
-  has_many :pages,  -> { order("position ASC") }, dependent: :destroy
+  has_many :pages, -> { order("position ASC") }, dependent: :destroy
   has_many :shares, as: :shareable
   acts_as_paranoid
 
@@ -81,6 +82,7 @@ class Notebook < ActiveRecord::Base
     state :received
     state :uploaded
     state :processed
+    state :available
 
     event :submit, success: :notebook_submitted, timestamp: :submitted_on do
       transitions to: :submitted, from: :created,
@@ -93,13 +95,21 @@ class Notebook < ActiveRecord::Base
     end
 
     event :upload, success: :notebook_received, timestamp: :uploaded_on do
-      transitions to: :uploaded, from: [:uploaded, :received, :processed],
+      transitions to: :uploaded, from: [:uploaded, :received, :processed, :available],
         on_transition: [:handle_upload]
     end
 
     event :process, success: :notebook_processed, timestamp: :processed_on do
-      transitions to: :processed, from: [:processed, :uploaded],
+      transitions to: :processed, from: [:processed, :uploaded, :available],
         on_transition: [:process_notebook]
+    end
+
+    event :process_failed do
+      transitions to: :upload, from: :processed
+    end
+
+    event :available, success: :notebook_available, timestamp: :available_on do
+      transitions to: :available, from: :processed
     end
   end
 
@@ -177,6 +187,8 @@ class Notebook < ActiveRecord::Base
     returned_on.present?
   end
 
+  def notebook_returned; end
+
   def recycle!
     update(recycled_on: DateTime.now) if n.handle_method.inquiry.recycle?
     notebook_recycled
@@ -186,28 +198,18 @@ class Notebook < ActiveRecord::Base
     recycled_on.present?
   end
 
-  def notebook_submitted
+  def notebook_recycled; end
 
-  end
+  def notebook_submitted; end
 
-  def notebook_received
+  def notebook_received; end
 
-  end
+  def notebook_uploaded; end
 
-  def notebook_uploaded
+  def notebook_processed; end
 
-  end
-
-  def notebook_processed
-
-  end
-
-  def notebook_returned
-
-  end
-
-  def notebook_recycled
-
+  def notebook_available
+    # TODO: Send email that a notebook is complete
   end
 
   def handle_upload(upload)
@@ -219,8 +221,8 @@ class Notebook < ActiveRecord::Base
     update(options)
   end
 
-  def process_notebook(reprocess = false)
-    PageFiller.new(self).fill_pages(reprocess)
+  def process_notebook
+    Blitline::NotebookPDF.process(self)
   end
 
   # Resque async helper

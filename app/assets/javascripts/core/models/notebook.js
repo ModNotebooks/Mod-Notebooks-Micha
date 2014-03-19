@@ -16,20 +16,20 @@ Core.Notebook = (function() {
     receivedOn:            attr('date'),
     uploadedOn:            attr('date'),
     processedOn:           attr('date'),
+    availableOn:           attr('date'),
     returnedOn:            attr('date'),
     recycledOn:            attr('date'),
-
 
     user: DS.belongsTo('user'),
     pages: DS.hasMany('page', { async: true }),
 
-    processed: function() {
-      return !Ember.isEmpty(this.get('processedOn'));
-    }.property('processedOn'),
+    available: function() {
+      return this.get('state') === "available";
+    }.property(),
 
-    notProcessed: function() {
-      return Ember.isEmpty(this.get('processedOn'));
-    }.property('processed')
+    unavailable: function() {
+      return this.get('state') !== "available";
+    }.property()
   });
 
 }());

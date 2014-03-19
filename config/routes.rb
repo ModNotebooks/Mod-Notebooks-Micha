@@ -1,5 +1,11 @@
 Mod::Application.routes.draw do
 
+  constraints subdomain: 'callback' do
+    scope module: 'blitline' do
+      post '/notebooks/:id/blitline', to: 'notebooks#blitline', as: :notebook_processed
+    end
+  end
+
   constraints subdomain: 'app' do
     use_doorkeeper
 

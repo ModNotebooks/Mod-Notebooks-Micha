@@ -1,12 +1,10 @@
 class PageUploader < BaseUploader
   include CarrierWave::MiniMagick
-  # include CarrierWave::ImageOptimizer
 
-  after :store, :persist_secure_token
+  STORE_DIR = "uploads/page/image"
 
   version :xlarge do
     process resize_to_fit: [3200,3200]
-    # process :optimize
   end
 
   version :large, from_version: :xlarge do
@@ -25,6 +23,9 @@ class PageUploader < BaseUploader
     process resize_to_fit: [200,200]
   end
 
+  def store_dir
+    STORE_DIR
+  end
 
   def filename
     "#{secure_token}.#{file.extension}" if original_filename.present?
@@ -33,18 +34,4 @@ class PageUploader < BaseUploader
   def extension_white_list
     %w(png jpg)
   end
-
-  protected
-    def secure_token
-      var = :"#{mounted_as}_secure_token"
-      unless model.try(var).present?
-        model.send(:"#{var}=", super)
-      end
-
-      model.try(var)
-    end
-
-    def persist_secure_token(file)
-      model.save
-    end
 end
