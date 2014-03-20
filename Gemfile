@@ -39,6 +39,7 @@ gem 'rack-cors', require: 'rack/cors'
 
 gem 'carrierwave'
 # gem 'carrierwave-imageoptimizer'
+gem 'blitline', github: 'erickreutz/blitline', branch: 'group_completion_job_id'
 
 gem 'dropbox-api'
 gem 'evernote_oauth' # This include the SDK

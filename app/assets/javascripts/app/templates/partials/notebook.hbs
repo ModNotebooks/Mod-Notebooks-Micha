@@ -8,8 +8,8 @@
           Untitled
         {{/if}}
       </h2>
-      {{#if processed}}
-        <span class="notebook__date">{{format-date processedOn 'MMM. D, YYYY'}}</span>
+      {{#if available}}
+        <span class="notebook__date">{{format-date submittedOn 'MMM. D, YYYY'}}</span>
       {{else}}
         <span class="notebook__status">{{humanize state}}</span>
       {{/if}}
