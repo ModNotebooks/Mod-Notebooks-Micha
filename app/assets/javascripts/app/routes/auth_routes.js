@@ -19,12 +19,3 @@ App.SignupIndexRoute = Ember.Route.extend(Core.RequireUnauthenticatedRouteMixin,
     this.render('signupHeader', { outlet: 'header' });
   }
 });
-
-App.PasswordResetRoute = Ember.Route.extend(Core.RequireUnauthenticatedRouteMixin, {});
-
-App.PasswordResetIndexRoute = Ember.Route.extend(Core.RequireUnauthenticatedRouteMixin, {
-  renderTemplate: function(controller, model) {
-    this._super(controller, model);
-    this.render('signupHeader', { outlet: 'header' });
-  }
-});

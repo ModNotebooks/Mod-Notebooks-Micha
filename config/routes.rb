@@ -57,8 +57,6 @@ Mod::Application.routes.draw do
       resources :users, only: [:show, :update, :destroy], constraints: { id: 'me' }, as: 'me'
       resources :preferences, only: [:show, :update], constraints: { id: 'me' }, as: 'me'
       resources :addresses, only: [:show, :update], constraints: { id: 'me' }, as: 'me'
-
-      post 'passwords/reset', to: 'passwords#reset'
     end
 
   end

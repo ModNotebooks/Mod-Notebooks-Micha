@@ -1,5 +1,4 @@
 .l-guest-main {
-  padding-top: 75px;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -9,7 +8,6 @@
 
 .l-guest-header {
   width: 100%;
-  margin-top:-75px;
   height:75px;
   display: table;
 }
@@ -22,14 +20,13 @@
   vertical-align: middle;
 
   @include media($screen-br-sm) {
-    padding: 16px 24px;
+    padding: 16px;
   }
 }
 
 .l-guest-header-right {
   text-align: right;
-  padding-left: 0;
-  .button { margin-left: 40px; }
+  .button { margin-left: 16px; }
 }
 
 .l-guest-header-left {
@@ -76,4 +73,9 @@
   @include media($screen-br-sm) {
     max-width: 300px;
   }
+}
+
+.l-guest-extra-links {
+  @include font-size(14px);
+  margin-top: 18px;
 }

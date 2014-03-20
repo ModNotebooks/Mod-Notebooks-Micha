@@ -14,7 +14,7 @@ select {
 label {
   font-weight: bold;
   margin-bottom: $base-line-height / 4;
-  @include transition(100ms ease);
+  @include transition(140ms ease);
 
   &.required:after {
     content: "*";
@@ -32,7 +32,7 @@ button {
   @include appearance(none);
   border: none;
   outline: none;
-  @include transition(100ms ease);
+  @include transition(140ms ease);
 }
 
 textarea,
@@ -144,6 +144,26 @@ input.form__control__input:focus + .form__control__label {
   color: #384e52;
   .is-error & { color: #cdadad; }
   .form--flush & { color: #788f92; }
+}
+
+.form__control__altaction {
+  position: absolute;
+  height: 28px;
+  background: rgba(255, 255, 255, .18);
+  right: 12px;
+  top: 50%;
+  margin-top: -14px;
+  padding: 0 12px;
+  border-radius: 3px;
+  color: #40595c;
+  @include transition(140ms ease);
+
+  &:hover { background: rgba(255, 255, 255, .3); }
+  &:active { @include transform(translateY(1px)); }
+}
+
+input.form__control__input:focus + .form__control__label + .form__control__altaction {
+  opacity: 0;
 }
 
 .form__error {

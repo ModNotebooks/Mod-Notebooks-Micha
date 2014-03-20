@@ -2,16 +2,12 @@
 
 App.Router.map(function() {
   this.route('demo');
-  
+
   this.resource('login', function() {
     this.route('index', { path: '/' });
   });
 
   this.resource('signup', function() {
-    this.route('index', { path: '/' });
-  });
-
-  this.resource('password_reset', function() {
     this.route('index', { path: '/' });
   });
 
