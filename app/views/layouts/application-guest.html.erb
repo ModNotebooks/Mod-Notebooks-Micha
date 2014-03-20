@@ -24,6 +24,15 @@
   </div>
 
   <main id="l-guest-main">
+    <header class="l-guest-header">
+      <div class="l-guest-header-left">
+        <a class="l-guest-header-back" href="http://modnotebooks.com"><i class="i-chevron-left-xsmall"></i> Back to store</a>
+      </div>
+      <div class="l-guest-header-right">
+        <span class="hidden-inline-xs">Member?</span>
+        <%= link_to 'Login', '/login', class: 'button--guest' %>
+      </div>
+    </header>
     <section class="l-guest-content">
       <section class="l-guest-innercontent" colspan="2">
         <a class="logo--guest" href="/"></a>

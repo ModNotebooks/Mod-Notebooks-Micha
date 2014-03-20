@@ -9,7 +9,7 @@
   <div class="form__control">
     {{input type="password" valueBinding="password" class="form__control__input"}}
     <label class="form__control__label">Password</label>
-    {{!-- {{#link-to 'password_reset' class="form__input__altaction"}}?{{/link-to}} --}}
+    <a href="/users/password/new" class="form__control__altaction">?</a>
   </div>
   <div class="form__actions">
     {{spin-button isLoading=isLoading buttonText=buttonText action="authenticate" buttonClass="button--form" }}

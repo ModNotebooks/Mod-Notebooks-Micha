@@ -1,12 +1,16 @@
-<h2>Resend confirmation instructions</h2>
+<%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post, class: 'l-guest-form form' }) do |f| %>
+  <% if resource.errors.count > 0 %>
+    <span class="form__error"><%= resource.errors.full_messages.first %></span>
+  <% end %>
 
-<%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
-  <%= devise_error_messages! %>
+  <div class="form__control">
+    <%= f.email_field :email, autofocus: true, class: "form__control__input" %>
+    <%= f.label :email, class: "form__control__label" %>
+  </div>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
-
-  <div><%= f.submit "Resend confirmation instructions" %></div>
+  <div class="form__actions">
+    <%= f.submit "Resend confirmation instructions", class: "button--form" %>
+  </div>
 <% end %>
 
 <%= render "devise/shared/links" %>
