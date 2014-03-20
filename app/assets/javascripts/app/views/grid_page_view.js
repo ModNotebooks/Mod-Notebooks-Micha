@@ -3,6 +3,10 @@ App.GridPageView = Ember.View.extend({
   isLoading: true,
 
   didInsertElement: function() {
+    this.watchLoad();
+  },
+
+  watchLoad: function() {
     this.$('img')
       .one('load', this.imageLoaded.bind(this))
       .one('error', this.imageError.bind(this));
@@ -15,5 +19,10 @@ App.GridPageView = Ember.View.extend({
   imageError: function() {
     this.set('isLoading', false);
     this.set('isError', true);
-  }
+  },
+
+  imageSrc: function() {
+    var images = this.get('context.image');
+    return window.devicePixelRatio > 1 ? images.small : images.thumb;
+  }.property()
 });
