@@ -49,6 +49,7 @@
   height: 100%;
   display: table;
   padding: 130px 0 0;
+  margin-top: -75px;
 
   @include media($screen-br-sm) {
     padding-bottom: 120px;
