@@ -1,15 +1,23 @@
 .l-notebooks {
   width: 100%;
   height: 100%;
-  padding: 100px 85px 100px 0;
+  padding: 40px 20px;
 
-  &:before {
-    .no-firefox & {
-      content: "";
-      display: inline-block;
-      height: 100%;
-      vertical-align: middle;
-      margin-right: -1em; /* Adjusts for spacing */
+  @include media($screen-br-sm) {
+    padding: 40px;
+  }
+
+  @include media($screen-br-lg) {
+    padding: 100px 85px 100px 0;
+
+    &:before {
+      .no-firefox & {
+        content: "";
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+        margin-right: -1em; /* Adjusts for spacing */
+      }
     }
   }
 }
