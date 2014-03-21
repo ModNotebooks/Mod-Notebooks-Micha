@@ -5,18 +5,23 @@
   @include with-flex {
     @include display(flex);
     @include align-items(center);
-    min-height: 100vh;
+
+    @include media($screen-br-md) {
+      min-height: 100vh;
+    }
   }
 
   @include with-no-flex {
     height: 100%;
 
-    &:before {
-      content: "";
-      display: inline-block;
-      height: 100%;
-      vertical-align: middle;
-      margin-right: -1em; /* Adjusts for spacing */
+    @include media($screen-br-md) {
+      &:before {
+        content: "";
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+        margin-right: -1em; /* Adjusts for spacing */
+      }
     }
   }
 

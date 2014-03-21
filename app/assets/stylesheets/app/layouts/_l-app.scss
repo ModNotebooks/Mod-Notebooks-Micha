@@ -12,6 +12,7 @@
 
   @include with-no-flex {
     @include media($screen-br-md) {
+      height: 100%;
       padding-left: 100px;
     }
   }
@@ -41,6 +42,7 @@
     max-height: 100vh;
 
     @include media(max-width $screen-sm-max) {
+      max-height: auto;
       @include display(flex);
       @include align-items(center);
     }

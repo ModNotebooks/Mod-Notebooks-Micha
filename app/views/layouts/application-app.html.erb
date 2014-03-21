@@ -22,71 +22,10 @@
   <%= javascript_include_tag "head" %>
 </head>
 <body>
-  <div id="main" class="l-app-main">
-    <header class="l-app-header">
-      <div class="l-app-logo">
-        <a href="/" class="logo--app"></a>
-      </div>
-      <aside class="l-app-side-nav">
-        <div class="l-app-side-nav-item">
-          Item
-        </div>
-      </aside>
-      <div class="l-app-navtoggle">
-        <a href="" class="settingstoggle">
-          <span class="settingstoggle__inner"></span>
-        </a>
-      </div>
-    </header>
-    <section class="l-app-content">
-
-      <div class="l-notebooks">
-        <div class="l-notebooks-wrap">
-
-          <div class="l-grid-wrap">
-            <div class="l-grid">
-
-<!--               <div class="l-grid-item--notebook js-grid-item">
-                <a href="javascript:void(0);" data-ember-action="12" class="notebook--standin">
-                  <span class="notebook--standin__plus"></span>
-                </a>
-              </div> -->
-
-              <div class="l-grid-item--notebook js-grid-item">
-                <a id="ember816" class="ember-view notebook gray" href="/notebooks/1">
-                  <div class="notebook__inner">
-                    <div class="notebook__sleevewrap">
-                      <div class="notebook__sleeve">
-                        <h2 class="notebook__title">Video Sketches</h2>
-                          <span class="notebook__date">Mar. 18, 2014</span>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-
-              <div class="l-grid-item--page js-grid-item" style="">
-                <div id="ember1201" class="ember-view">
-                  <a id="ember1202" class="ember-view page--grid" href="/notebooks/1/view/2/3">
-                    <div class="spinner--grid-page is-hidden" data-bindattr-46="46">
-                      <div class="spinner__icon"></div>
-                    </div>
-                    <img src="https://mod-production.s3.amazonaws.com/uploads/page/image/thumb_951c641252d487735a9b9c1e5decebb6fc792a17__1.jpg?AWSAccessKeyId=AKIAIVXNWOJJVNRDU44Q&amp;Signature=csETS/NV959%2Bl1b94U9sbNorH7o%3D&amp;Expires=1395437303" data-bindattr-47="47" class="page__image">
-                  </a>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-    </section>
-  </div>
-<!--   <div id="settings"></div> -->
+  <div id="main"></div>
+  <div id="settings"></div>
 
   <%= cdn_jquery %>
-  <%#= javascript_include_tag "application" %>
+  <%= javascript_include_tag "application" %>
 </body>
 </html>
