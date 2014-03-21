@@ -61,7 +61,6 @@ gem 'compass', '1.0.0.alpha.18'
 gem 'sass-rails', '>= 4.0.0'
 gem 'sass', '~> 3.3.3'
 
-
 gem 'rails_12factor', group: :production
 
 group :assets do
