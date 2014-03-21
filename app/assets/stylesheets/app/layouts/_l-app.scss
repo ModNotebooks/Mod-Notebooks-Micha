@@ -1,81 +1,83 @@
 .l-app-main {
-  min-height: 100%;
-  height: 100%;
-}
+  @include display(flex);
+  min-height: 100vh;
+  @include flex-direction(column);
 
-.l-app-side {
-  width: 100%;
-  height: 89px;
-  background: blue;
-
-  @include media($screen-br-lg) {
-    height: 100%;
-    width: 108px;
-    padding: 30px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: $zindex-app-side;
-  }
-}
-
-.l-app-logo {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 24px;
-  z-index: $zindex-app-logo;
-
-  @include media($screen-br-lg) {
-    position: fixed;
-    padding: 30px 24px;
-  }
-}
-
-.l-app-navtoggle {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 35px 24px;
-  text-align: center;
-  z-index: $zindex-app-logo;
-
-  @include media($screen-br-lg) {
-    padding: 40px 24px;
-  }
-
-  @include media($screen-br-lg) {
-    padding: 36px 43px;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    top: auto;
+  @include media($screen-br-md) {
+    @include flex-direction(row);
   }
 }
 
 .l-app-content {
-  @include transition-property(all);
-  @include transition-timing-function(ease-in-out);
-  @include backface-visibility(hidden);
-  @include transform(translate3d(0, 0, 0));
+  @include flex(1);
+  background: red;
+}
 
-  @include media($screen-br-lg) {
-    padding-left: 108px;
-    height: 100%;
+.l-app-header {
+  background: blue;
+  max-height: 100vh;
+  position: relative;
+  width: 100%;
+  padding: 25px;
+
+  @include media(max-width $screen-sm-max) {
+    @include display(flex);
+    @include align-items(center);
+  }
+
+  @include media($screen-br-md) {
+    width: 100px;
+    padding: 0;
+  }
+}
+
+.l-app-logo {
+  position: relative;
+  z-index: $zindex-app-logo;
+
+  @include media($screen-br-md) {
+    position: fixed;
+    padding: 30px 25px;
+    top: 0;
+    left: 0;
+  }
+}
+
+.l-app-navtoggle {
+  position: relative;
+  text-align: center;
+  z-index: $zindex-app-logo;
+
+  @include media($screen-br-md) {
+    position: fixed;
+    padding: 30px 25px;
+    bottom: 0;
+    left: 0;
+    background: green;
+    width: 100px;
   }
 }
 
 .l-side-nav {
-  width: 100%;
-  height: 100%;
-  display: table;
+  text-align: center;
+  @include media(max-width $screen-sm-max) {
+    @include flex(1);
+  }
+
+  @include media($screen-br-md) {
+    position: fixed;
+    width: 100px;
+    height: 100%;
+    background: orange;
+    display: table;
+  }
 }
 
 .l-side-nav-item {
-  display: table-cell;
-  vertical-align: middle;
-  width: 100%;
-  text-align: center;
+  @include media($screen-br-md) {
+    display: table-cell;
+    vertical-align: middle;
+  }
 
   a {
     @include transform(translate3d(0,0,0));

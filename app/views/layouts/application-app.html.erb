@@ -22,10 +22,29 @@
   <%= javascript_include_tag "head" %>
 </head>
 <body>
-  <div id="main"></div>
-  <div id="settings"></div>
+  <div id="main" class="l-app-main">
+    <header class="l-app-header">
+      <div class="l-app-logo">
+        <a href="/" class="logo--app"></a>
+      </div>
+      <aside class="l-side-nav">
+        <div class="l-side-nav-item">
+          Item
+        </div>
+      </aside>
+      <div class="l-app-navtoggle">
+        <a class="settingstoggle">
+          <span class="settingstoggle__inner"></span>
+        </a>
+      </div>
+    </header>
+    <section class="l-app-content">
+      <div style="width: 200px; height: 2000px;"></div>
+    </section>
+  </div>
+<!--   <div id="settings"></div> -->
 
   <%= cdn_jquery %>
-  <%= javascript_include_tag "application" %>
+  <%#= javascript_include_tag "application" %>
 </body>
 </html>
