@@ -27,19 +27,52 @@
       <div class="l-app-logo">
         <a href="/" class="logo--app"></a>
       </div>
-      <aside class="l-side-nav">
-        <div class="l-side-nav-item">
+      <aside class="l-app-side-nav">
+        <div class="l-app-side-nav-item">
           Item
         </div>
       </aside>
       <div class="l-app-navtoggle">
-        <a class="settingstoggle">
+        <a href="" class="settingstoggle">
           <span class="settingstoggle__inner"></span>
         </a>
       </div>
     </header>
     <section class="l-app-content">
-      <div style="width: 200px; height: 2000px;"></div>
+
+      <div class="l-notebooks">
+        <div class="l-notebooks-wrap">
+
+          <div class="l-grid-wrap">
+            <div class="l-grid">
+
+              <div class="l-grid-item--notebook js-grid-item">
+                <a href="javascript:void(0);" data-ember-action="12" class="notebook--standin">
+                  <span class="notebook--standin__plus"></span>
+                </a>
+              </div>
+
+              <% 2.times do %>
+              <div class="l-grid-item--notebook js-grid-item">
+                <a id="ember816" class="ember-view notebook gray" href="/notebooks/1">
+                  <div class="notebook__inner">
+                    <div class="notebook__sleevewrap">
+                      <div class="notebook__sleeve">
+                        <h2 class="notebook__title">Video Sketches</h2>
+                          <span class="notebook__date">Mar. 18, 2014</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <% end %>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
     </section>
   </div>
 <!--   <div id="settings"></div> -->

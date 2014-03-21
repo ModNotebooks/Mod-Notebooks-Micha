@@ -1,28 +1,55 @@
+////////////////////////////////////////
 .l-app-main {
-  @include display(flex);
-  min-height: 100vh;
-  @include flex-direction(column);
+  @include with-flex {
+    @include display(flex);
+    min-height: 100vh;
+    @include flex-direction(column);
 
-  @include media($screen-br-md) {
-    @include flex-direction(row);
+    @include media($screen-br-md) {
+      @include flex-direction(row);
+    }
+  }
+
+  @include with-no-flex {
+    @include media($screen-br-md) {
+      padding-left: 100px;
+    }
   }
 }
 
+////////////////////////////////////////
 .l-app-content {
-  @include flex(1);
   background: red;
+
+  @include with-flex {
+    @include flex(1);
+  }
+
+  @include with-no-flex {
+    height: 100%;
+  }
 }
 
+////////////////////////////////////////
 .l-app-header {
   background: blue;
-  max-height: 100vh;
   position: relative;
   width: 100%;
   padding: 25px;
 
-  @include media(max-width $screen-sm-max) {
-    @include display(flex);
-    @include align-items(center);
+  @include with-flex {
+    max-height: 100vh;
+
+    @include media(max-width $screen-sm-max) {
+      @include display(flex);
+      @include align-items(center);
+    }
+  }
+
+  @include with-no-flex {
+    @include media(max-width $screen-sm-max) {
+      display: table;
+    }
   }
 
   @include media($screen-br-md) {
@@ -31,6 +58,21 @@
   }
 }
 
+////////////////////////////////////////
+.l-app-logo, .l-app-navtoggle, .l-app-side-nav {
+  @include media(max-width $screen-sm-max) {
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
+
+.l-app-side-nav {
+  @include media(max-width $screen-sm-max) {
+    width: 100%;
+  }
+}
+
+////////////////////////////////////////
 .l-app-logo {
   position: relative;
   z-index: $zindex-app-logo;
@@ -43,10 +85,12 @@
   }
 }
 
+////////////////////////////////////////
 .l-app-navtoggle {
   position: relative;
   text-align: center;
   z-index: $zindex-app-logo;
+  background: red;
 
   @include media($screen-br-md) {
     position: fixed;
@@ -58,22 +102,27 @@
   }
 }
 
-.l-side-nav {
+////////////////////////////////////////
+.l-app-side-nav {
   text-align: center;
-  @include media(max-width $screen-sm-max) {
-    @include flex(1);
+
+  @include with-flex {
+    @include media(max-width $screen-sm-max) {
+      @include flex(1);
+    }
   }
 
   @include media($screen-br-md) {
     position: fixed;
+    left: 0;
     width: 100px;
     height: 100%;
-    background: orange;
     display: table;
   }
 }
 
-.l-side-nav-item {
+////////////////////////////////////////
+.l-app-side-nav-item {
   @include media($screen-br-md) {
     display: table-cell;
     vertical-align: middle;

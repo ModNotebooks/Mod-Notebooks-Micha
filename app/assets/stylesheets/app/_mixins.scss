@@ -17,6 +17,18 @@
   @include prefixer(font-smoothing, $smoothing, webkit moz spec);
 }
 
+@mixin with-flex() {
+  html.flexbox &, html.flexboxlegacy & {
+    @content;
+  }
+}
+
+@mixin with-no-flex() {
+  html.no-flexbox.no-flexboxlegacy & {
+    @content;
+  }
+}
+
 %font-smoothing {
   @include font-smoothing;
 }
