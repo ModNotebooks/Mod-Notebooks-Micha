@@ -261,7 +261,11 @@ input.form__control__input:focus + .form__control__label + .form__control__altac
   span:after { opacity: 1; }
 }
 
-.form__actions { margin-top: 3px; }
+.form__actions {
+  @include media($screen-br-sm) {
+    margin-top: 3px;    
+  }
+}
 
 .form__actions--digitize {
   @extend .form__actions;

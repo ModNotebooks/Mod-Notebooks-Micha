@@ -7,9 +7,9 @@
   border: none;
   outline: none;
   padding: 4px 23px;
-  border-radius: 3px;
   color: #466265;
   position: relative;
+  border-radius: 3px;
   @include transition(150ms ease);
   @include box-sizing(border-box);
 
@@ -22,6 +22,10 @@
     opacity: .2;
     pointer-events: none;
   }
+
+  @include media($screen-br-sm) {
+    border-radius: 3px;
+  }
 }
 
 .button--form {
@@ -29,7 +33,13 @@
   width: 100%;
   @include font-size(17px);
   font-weight: 400;
-  padding: 8px 23px;
+  padding: 20px;
+  border-radius: 0;
+
+  @include media($screen-br-sm) {
+    padding: 8px 23px;
+    border-radius: 3px;
+  }
 }
 
 .button--guest {

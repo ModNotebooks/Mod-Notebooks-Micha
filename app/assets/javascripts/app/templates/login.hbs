@@ -2,8 +2,10 @@
   {{ outlet header }}
 </header>
 <section class="l-guest-content">
-  <div class="l-guest-innercontent">
+  <div class="l-guest-logowrap">
     {{#link-to 'main.index' class="logo--guest"}}{{/link-to}}
+  </div>
+  <div class="l-guest-innercontent">
     {{ outlet }}
   </div>
 </main>

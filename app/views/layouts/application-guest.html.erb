@@ -14,15 +14,6 @@
   <%= javascript_include_tag "head" %>
 </head>
 <body class="dark">
-  <div class="coming-soon-overlay">
-    <div class="cs-center">
-      <a class="logo--guest" href="/"></a>
-      Coming in 2 weeks. Access from desktop to view your notes.
-      <br>
-      <a href="http://modnotebooks.com" class="store-link">Go back to store.</a>
-    </div>
-  </div>
-
   <main class="l-guest-main">
     <header class="l-guest-header">
       <div class="l-guest-header-left">
@@ -34,8 +25,10 @@
       </div>
     </header>
     <section class="l-guest-content">
-      <section class="l-guest-innercontent">
+      <div class="l-guest-logowrap">
         <a class="logo--guest" href="/"></a>
+      </div>
+      <section class="l-guest-innercontent">
         <%= yield %>
       </section>
     </section>
