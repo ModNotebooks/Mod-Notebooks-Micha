@@ -1,39 +1,42 @@
 @import "neat/app/assets/stylesheets/neat-helpers";
 
 .l-settings {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: $zindex-modal-over;
+  min-height: 100vh;
+  z-index: $zindex-settings-mobile;
+  overflow-y: scroll;
   @include transition(all 500ms $ease-in-out-circ);
 
   @include media($screen-br-sm) {
+    position: fixed;
     z-index: $zindex-modal;
 
     @include with-flex {
-      min-height: 100vh;
       @include display(flex);
       @include align-items(center);
     }
 
     @include with-no-flex {
-      height: 100%;
       display: table;
     }
-
-    opacity: 0;
-    &.is-visible { opacity: 1; }
   }
 
   visibility: hidden;
-  &.is-visible { visibility: visible; }
+  opacity: 0;
+
+  &.is-visible {
+    visibility: visible;
+    opacity: 1;
+  }
 }
 
 .l-settings-inner {
   position: relative;
   z-index: $zindex-modal-over;
-  background: blue;
+  // background: blue;
   width: 100%;
   @include transition(all 500ms $ease-in-out-circ);
 
@@ -71,11 +74,13 @@
 }
 
 .l-settings-menu {
-  padding: 0 23px;
-  background: green;
-  max-height: 315px;
+  padding: 18px;
+  // background: green;
 
   @include media($screen-br-sm) {
+    max-height: 315px;
+    padding: 0 23px;
+
     @include with-no-flex {
       min-width: 290px;
     }
@@ -87,10 +92,11 @@
 }
 
 .l-settings-content {
-  padding: 0px 20px;
-  background: purple;
+  // background: purple;
 
   @include media($screen-br-sm) {
+    padding: 0px 20px;
+
     @include with-flex {
       @include flex(1);
       @include display(flex);
@@ -105,21 +111,40 @@
 }
 
 .l-settings-pane {
-  max-width: 500px;
   width: 100%;
 
   @include media($screen-br-sm) {
+    max-width: 500px;
     @include with-no-flex {
       margin: 0 auto;
     }
   }
 }
 
+.l-settings-pane-header {
+  padding: 12px 22px;
+}
+
+.settings-pane-title {
+  margin: 0;
+  @include font-size(12px);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
 .l-sync-service {
-  padding: 20px 10px;
+  padding: 20px;
   border-bottom: 1px solid rgba(#ebebe9, .11);
   color: rgba(#fff, .47);
   width: 100%;
+
+  @include media($screen-br-sm) {
+    padding: 20px 10px;
+  }
+
+  @include media(max-width $screen-xs-max) {
+    &:first-of-type { border-top: 1px solid rgba(#ebebe9, .11); }
+  }
 
   @include with-flex {
     @include display(flex);

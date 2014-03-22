@@ -1,3 +1,6 @@
+<header class="l-settings-pane-header visible-block-xs">
+  <h3 class="settings-pane-title">Account</h1>
+</header>
 <form class="form">
   <div {{bind-attr class=":form__control errors.email:is-error"}}>
     {{input type="text" value=email class="form__control__input"}}
@@ -33,4 +36,3 @@
     {{spin-button isLoading=isLoading isEnabled=isValid buttonText="Save" action="save" buttonClass="button--form"}}
   </div>
 </form>
-

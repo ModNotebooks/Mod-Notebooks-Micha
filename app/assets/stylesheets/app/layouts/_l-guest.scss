@@ -10,7 +10,7 @@
 
   @include with-no-flex {
     height: 100%;
-    background: red;
+    // background: red;
   }
 }
 
@@ -79,7 +79,7 @@
 
   @include with-no-flex {
     position: absolute;
-    background: green;
+    // background: green;
     height: auto;
     bottom: 0;
     top: 68px;

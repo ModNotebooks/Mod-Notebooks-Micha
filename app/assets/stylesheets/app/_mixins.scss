@@ -17,13 +17,13 @@
   @include prefixer(font-smoothing, $smoothing, webkit moz spec);
 }
 
-@mixin with-no-flex() {
+@mixin with-flex() {
   .flexbox &, .flexboxlegacy & {
     @content;
   }
 }
 
-@mixin with-flex() {
+@mixin with-no-flex() {
   .no-flexbox.no-flexboxlegacy & {
     @content;
   }

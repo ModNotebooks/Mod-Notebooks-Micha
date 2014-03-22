@@ -89,7 +89,7 @@
 .l-app-navtoggle {
   position: relative;
   text-align: center;
-  z-index: $zindex-app-logo;
+  z-index: $zindex-settings-toggle;
   // background: red;
 
   @include media($screen-br-md) {

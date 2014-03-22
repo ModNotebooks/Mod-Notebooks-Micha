@@ -7,6 +7,37 @@
   list-style: none;
   margin: 0;
   padding: 0;
+
+  @include media(max-width $screen-xs-max) {
+    padding: 7px 0;
+    border-right: 1px solid rgba(#fff, .11);
+
+    @include with-flex {
+      @include display(flex);
+      margin-right: 50px;
+      @include flex-direction(row);
+      @include align-content(center);
+    }
+
+    @include with-no-flex {
+      display: table;
+    }
+  }
+}
+
+.settingsnav__item {
+  @include media(max-width $screen-xs-max) {
+    padding-right: 28px;
+
+    @include with-flex {
+      @include flex(1);
+    }
+
+    @include with-no-flex {
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
 }
 
 .settingsnav__link {
@@ -41,9 +72,11 @@
 }
 
 .settingsnav__linkicon {
-  text-align: center;
-  padding-right: 24px;
-  width: 100px;
+  @include media($screen-br-sm) {
+    text-align: center;
+    width: 100px;
+    padding-right: 24px;
+  }
 
   i { opacity: .2; }
 
@@ -59,6 +92,11 @@
   border-bottom: 1px solid rgba(255, 255, 255, .05);
   border-color: red;
   width: 100%;
+  display: none;
 
-  .setttingsnav__item:last-of-type & { border-bottom: none; }
+  .settingsnav__item:last-of-type & { border-bottom: none; }
+
+  @include media($screen-br-sm) {
+    display: table-cell;
+  }
 }
