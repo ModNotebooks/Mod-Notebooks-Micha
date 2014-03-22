@@ -46,7 +46,7 @@
   @extend .button;
   color: rgba(#fff, .8);
   font-weight: 800;
-  border: 2px solid rgba(#fff, .5);
+  border: 1px solid rgba(#fff, .5);
   background: none;
 
   &:hover {
@@ -57,6 +57,10 @@
 
   &:active {
     background: rgba(#000, .2);
+  }
+
+  @include media($screen-br-sm) {
+    border-width: 2px;
   }
 }
 

@@ -96,11 +96,13 @@
     @include display(flex);
     @include align-items(center);
     @include justify-content(center);
-    padding-bottom: 120px;
+    @include flex(1);
+    padding-bottom: 0;
 
-    @include media(max-width $screen-sm-max) {
-      @include flex(1);
-      padding-bottom: 0;
+
+    @include media($screen-br-sm) {
+      @include flex(none);
+      padding-bottom: 120px;
       min-height: 160px;
     }
   }

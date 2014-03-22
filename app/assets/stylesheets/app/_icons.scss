@@ -12,11 +12,7 @@ $sprites2x: sprite-map("icons-2x/*.png", $spacing: 2px);
 @mixin icon-with-retina($name, $images: $sprites, $retinaimages: $sprites2x) {
   @include icon($name, $images);
 
-  @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
-  only screen and (min--moz-device-pixel-ratio: 1.5),
-  only screen and (-o-min-device-pixel-ratio: 1.5/1),
-  only screen and (min-resolution: 144dpi),
-  only screen and (min-resolution: 1.5dppx) {
+  @include hidpi {
     $pos: sprite-position($retinaimages, $name);
     background-position: nth($pos, 1) / 2 nth($pos, 2) / 2;
     @include background-size(ceil(image-width(sprite-path($retinaimages)) / 2) auto);
@@ -24,15 +20,11 @@ $sprites2x: sprite-map("icons-2x/*.png", $spacing: 2px);
 }
 
 .i-base {
-  background-image: inline-sprite($sprites);
+  background-image: sprite-url($sprites);
   background-repeat: no-repeat;
 
-  @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
-  only screen and (min--moz-device-pixel-ratio: 1.5),
-  only screen and (-o-min-device-pixel-ratio: 1.5/1),
-  only screen and (min-resolution: 144dpi),
-  only screen and (min-resolution: 1.5dppx) {
-    background-image: inline-sprite($sprites2x);
+  @include hidpi {
+    background-image: sprite-url($sprites2x);
   }
 }
 
