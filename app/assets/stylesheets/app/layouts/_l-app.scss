@@ -20,8 +20,6 @@
 
 ////////////////////////////////////////
 .l-app-content {
-  background: red;
-
   @include with-flex {
     @include flex(1);
   }
