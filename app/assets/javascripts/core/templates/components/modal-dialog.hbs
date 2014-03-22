@@ -1,5 +1,8 @@
 <div class="modal">
-  <a href="javascript:void(0);" {{action 'close'}} class="modal__close"></a>
+  <a href="javascript:void(0);" {{action 'close'}} class="modal__close">
+    <i class="i-close visible-inline-block-xs"></i>
+    <i class="i-chevron-left hidden-inline-block-xs"></i>
+  </a>
   <div class="modal__content">
     {{yield}}
   </div>

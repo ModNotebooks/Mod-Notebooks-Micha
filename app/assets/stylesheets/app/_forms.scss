@@ -110,6 +110,7 @@ input.form__control__input {
   background: none;
   border-top: 1px solid rgba(#ebebe9, .08);
   height: 80px;
+  border-radius: 0;
 
   .form--flush & {
     padding-left: 0;
@@ -263,7 +264,7 @@ input.form__control__input:focus + .form__control__label + .form__control__altac
 
 .form__actions {
   @include media($screen-br-sm) {
-    margin-top: 3px;    
+    margin-top: 3px;
   }
 }
 
