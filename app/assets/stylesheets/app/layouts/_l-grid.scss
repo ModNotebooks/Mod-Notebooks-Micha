@@ -4,18 +4,32 @@
   display: inline-block;
   text-align: left;
   vertical-align: middle;
+
+  @include media(max-width 320px) {
+    width: 100% !important;
+    padding: 0 23px;
+  }
 }
 
 .l-grid-item {
   display: inline-block;
   text-align: left;
   position: relative;
+
+  @include media(max-width 320px) {
+    display: block;
+    float: left;
+  }
 }
 
 .l-grid-item--notebook {
   @extend .l-grid-item;
   padding-right: 20px;
   margin-bottom: 20px;
+
+  @include media(max-width 320px) {
+    padding-right: 24px
+  }
 
   @include media($screen-br-md) {
     padding-right: 60px;
@@ -27,6 +41,10 @@
   @extend .l-grid-item;
   padding-right: 20px;
   margin-bottom: 20px;
+
+  @include media(max-width 320px) {
+    padding-right: 24px
+  }
 
   @include media($screen-br-md) {
     padding-right: 44px;

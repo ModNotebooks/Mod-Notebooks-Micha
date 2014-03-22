@@ -3,14 +3,14 @@
 
   @include with-flex {
     @include display(flex);
-    min-height: 100vh;
-    max-height: 100vh;
     @include flex-direction(columns);
     @include align-items(center);
     @include justify-content(center);
 
     @include media($screen-br-md) {
       padding-right: 20px;
+      min-height: 100vh;
+      max-height: 100vh;
     }
   }
 

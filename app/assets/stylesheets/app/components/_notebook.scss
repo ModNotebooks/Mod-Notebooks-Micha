@@ -135,7 +135,8 @@ a.notebook:not(.is-disabled) {
 .notebook__title {
   margin: 0;
   @extend %roman-font;
-  @include font-size(15px);
+  @include font-size(15px, $line-height: false);
+  line-height: 1.2;
 
   @include media($screen-br-sm) {
     @include font-size(21px);

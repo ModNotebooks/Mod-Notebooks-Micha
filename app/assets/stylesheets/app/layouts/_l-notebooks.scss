@@ -1,6 +1,6 @@
 .l-notebooks {
   // background: purple;
-  padding: 20px 0;
+  padding: 0 0 20px;
 
   @include with-flex {
     @include display(flex);

@@ -34,7 +34,7 @@
   // background: blue;
   position: relative;
   width: 100%;
-  padding: 25px;
+  padding: 23px 23px 40px 23px;
 
   @include with-flex {
     max-height: 100vh;
