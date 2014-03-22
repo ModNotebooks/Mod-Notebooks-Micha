@@ -1,5 +1,5 @@
 .l-notebooks {
-  background: purple;
+  // background: purple;
   padding: 20px 0;
 
   @include with-flex {
@@ -27,7 +27,7 @@
 
   @include media($screen-br-md) {
     padding: 40px;
-    background: red;
+    // background: red;
   }
 }
 
@@ -35,6 +35,6 @@
   display: inline-block;
   vertical-align: middle;
   width: 100%;
-  background: orange;
+  // background: orange;
   text-align: center;
 }
