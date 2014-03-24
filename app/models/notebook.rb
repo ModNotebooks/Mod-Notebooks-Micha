@@ -105,7 +105,7 @@ class Notebook < ActiveRecord::Base
     end
 
     event :process_failed do
-      transitions to: :upload, from: :processed
+      transitions to: :uploaded, from: :processed
     end
 
     event :available, success: :notebook_available, timestamp: :available_on do
