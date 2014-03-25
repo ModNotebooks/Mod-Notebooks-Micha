@@ -70,6 +70,12 @@
   margin: 50px auto 0;
 }
 
+.l-digitize-auth {
+  @extend .l-digitize-step;
+  max-width: 550px;
+  @extend .clearfix;
+}
+
 .l-digitize-address {
   @extend .l-digitize-step;
   max-width: 500px;
@@ -78,4 +84,17 @@
 .l-digitize-confirmation {
   @extend .l-digitize-step;
   max-width: 530px;
+}
+
+.l-digitize-authcol {
+  margin-bottom: 50px;
+
+  @include media($screen-br-sm) {
+    margin-bottom: 0;
+    width: 50%;
+    float: left;
+
+    &:first-of-type { padding-right: 35px; }
+    &:last-of-type { padding-left: 35px; }
+  }
 }

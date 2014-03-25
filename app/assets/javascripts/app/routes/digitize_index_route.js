@@ -4,5 +4,9 @@ App.DigitizeIndexRoute = Ember.Route.extend({
       this.controllerFor('digitize.index').set('completed', true);
       this.transitionTo('digitize.code');
     }
+  },
+
+  model: function() {
+    return this.store.createRecord('user');
   }
 });

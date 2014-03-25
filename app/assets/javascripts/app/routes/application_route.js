@@ -9,12 +9,12 @@ App.ApplicationRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRouteMixin
   actions: {
     sessionAuthenticationFailed: function(error) {
       this.controllerFor('login.index').set('isLoading', false);
-      this.controllerFor('login.index').set('loginErrorMessage', "Invalid username or password");
+      this.controllerFor('login.index').set('loginErrorMessage', "Invalid email or password");
     },
 
     sessionAuthenticationSucceeded: function() {
       this._super();
-      Ember.instrument("sessionAuthenticationSucceeded", {}, Ember.K)
+      Ember.instrument("sessionAuthenticationSucceeded", {}, Ember.K);
       this.controllerFor('login.index').set('isLoading', false);
       this.controllerFor('login.index').set('loginErrorMessage', null);
     },
