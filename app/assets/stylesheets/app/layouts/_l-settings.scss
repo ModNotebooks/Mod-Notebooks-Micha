@@ -1,11 +1,12 @@
 @import "neat/app/assets/stylesheets/neat-helpers";
 
 .l-settings {
-  position: absolute;
+  position: fixed;
   top: 0;
+  right: 0;
+  bottom: 0;
   left: 0;
-  width: 100%;
-  min-height: 100vh;
+  -webkit-overflow-scrolling: touch;
   z-index: $zindex-settings-mobile;
   overflow-y: scroll;
   @include transition(all 500ms $ease-in-out-circ);
@@ -24,12 +25,12 @@
     }
   }
 
-  visibility: hidden;
   opacity: 0;
+  visibility: hidden;
 
   &.is-visible {
-    visibility: visible;
     opacity: 1;
+    visibility: visible;
   }
 }
 
@@ -74,7 +75,7 @@
 }
 
 .l-settings-menu {
-  padding: 25px 18px 18px;
+  padding: 23px 18px 18px;
   // background: green;
 
   @include media($screen-br-sm) {

@@ -8,7 +8,7 @@
           <span class="form__error">{{loginErrorMessage}}</span>
         {{/if}}
         <div class="form__control">
-          {{input type="text" valueBinding="loginIdentification" class="form__control__input"}}
+          {{input type="email" valueBinding="loginIdentification" class="form__control__input"}}
           <label class="form__control__label">Email Address</label>
         </div>
         <div class="form__control">
@@ -24,7 +24,7 @@
     <div class="l-digitize-authcol">
       <form class="form">
         <div {{bind-attr class=":form__control errors.email:is-error"}}>
-          {{input type="text" value=email class="form__control__input"}}
+          {{input type="email" value=email class="form__control__input"}}
           <label class="form__control__label">Email Address</label>
           {{#if errors.email }}
             <span class="form__error">{{format-errors errors.email}}</span>

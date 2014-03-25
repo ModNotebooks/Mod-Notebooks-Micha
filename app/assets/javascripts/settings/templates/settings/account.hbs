@@ -3,7 +3,7 @@
 </header>
 <form class="form">
   <div {{bind-attr class=":form__control errors.email:is-error"}}>
-    {{input type="text" value=email class="form__control__input"}}
+    {{input type="email" value=email class="form__control__input"}}
     <label class="form__control__label">Email Address</label>
     {{#if errors.email }}
       <span class="form__error">{{{format-errors errors.email}}}</span>

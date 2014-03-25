@@ -1,17 +1,22 @@
 .modal-background {
   position: fixed;
   top: 0;
+  right: 0;
+  bottom: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
   background-color: #465d60;
-  @include linear-gradient(145deg, #233236 0%, #658d8f 100%);
+  @include background-image(linear-gradient(145deg, #233236 0%, #658d8f 100%));
+  background-attachment: fixed;
   z-index: $zindex-modal-background;
   @include transition(all 500ms $ease-in-out-circ);
   opacity: 0;
 
   &.is-visible,
   .is-visible & { opacity: .98; }
+}
+
+.modal-background--settings {
+  @extend .modal-background;
 }
 
 // Display over the logo and settings menu

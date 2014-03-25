@@ -2,7 +2,7 @@
   @include transition(opacity 200ms);
   display: block;
   position: absolute;
-  z-index: 9999;
+  z-index: $zindex-spinner;
   top: 50%;
   left: 50%;
 
