@@ -43,6 +43,7 @@
 .settingsnav__link {
   color: inherit;
   text-decoration: none;
+  display: inline-block;
 
   @include media($screen-br-sm) {
     @include with-flex {
@@ -90,7 +91,6 @@
 .settingsnav__linklabel {
   padding: 24px 24px 24px 0;
   border-bottom: 1px solid rgba(255, 255, 255, .05);
-  border-color: red;
   width: 100%;
   display: none;
 

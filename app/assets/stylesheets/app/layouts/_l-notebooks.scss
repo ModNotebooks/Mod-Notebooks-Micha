@@ -1,5 +1,4 @@
 .l-notebooks {
-  // background: purple;
   padding: 0 0 20px;
 
   @include with-flex {
@@ -26,8 +25,7 @@
   }
 
   @include media($screen-br-md) {
-    padding: 40px;
-    // background: red;
+    padding: 40px 40px 40px 0;
   }
 }
 

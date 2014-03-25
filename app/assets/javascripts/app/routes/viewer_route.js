@@ -1,4 +1,4 @@
-App.ViewerRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
+App.ViewerRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, Core.ResetScrollMixin, {
   model: function(params) {
     return this.store.find('page', { notebook_id: params.notebook_id });
   },

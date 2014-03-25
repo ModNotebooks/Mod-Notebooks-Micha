@@ -28,19 +28,19 @@ Settings.MainRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin
   }
 });
 
-Settings.SettingsAccountRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
+Settings.SettingsAccountRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, Core.ResetScrollMixin, {
   model: function() {
     return this.store.find('user', 'me');
   }
 });
 
-Settings.SettingsAddressRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
+Settings.SettingsAddressRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, Core.ResetScrollMixin, {
   model: function() {
     return this.store.find('address', 'me');
   }
 });
 
-Settings.SettingsSyncRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
+Settings.SettingsSyncRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, Core.ResetScrollMixin, {
   model: function() {
     var store = this.store;
 

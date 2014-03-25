@@ -1,4 +1,4 @@
-App.NotebooksRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
+App.NotebooksRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, Core.ResetScrollMixin, {
   model: function() {
     return this.store.find('notebook');
   },

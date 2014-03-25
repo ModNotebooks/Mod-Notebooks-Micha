@@ -1,4 +1,4 @@
-App.LoginRoute = Ember.Route.extend(Core.RequireUnauthenticatedRouteMixin, {});
+App.LoginRoute = Ember.Route.extend(Core.RequireUnauthenticatedRouteMixin, Core.ResetScrollMixin);
 
 App.LoginIndexRoute = Ember.Route.extend(Core.RequireUnauthenticatedRouteMixin, {
   renderTemplate: function(controller, model) {
