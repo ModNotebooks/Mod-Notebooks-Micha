@@ -30,7 +30,7 @@ App.ViewerPagesRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMix
   },
 
   setupController: function(controller, model) {
-    console.log('setupController', model);
+
   },
 
   serialize: function(model) {

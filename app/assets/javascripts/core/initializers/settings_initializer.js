@@ -23,7 +23,6 @@ Ember.Application.initializer({
 
       authenticationSubscriber = Ember.subscribe('sessionAuthenticationSucceeded', {
         before: function(name, timestamp, payload) {
-          console.log("GOT HERE AND WE ARE FUCKED");
           Ember.run.next(application, application.reset);
         }, after: Ember.K
       });
