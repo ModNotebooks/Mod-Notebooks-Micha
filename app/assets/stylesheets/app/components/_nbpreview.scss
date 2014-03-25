@@ -66,7 +66,7 @@
   @extend .nbpreview__pane;
   left: 50%;
   background-color: #f5ede7;
-  @include retina-image(nb-preview-backpage, 152px 188px, $asset-pipeline: true);
+  @include retina-image(nb-preview-backpage, 75%, $asset-pipeline: true);
   background-repeat: no-repeat;
   background-position: center center;
 }
