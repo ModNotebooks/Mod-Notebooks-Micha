@@ -10,7 +10,7 @@
     "modernizr": "~2.7.1",
     "nprogress": "~0.1.2",
     "ember-animated-outlet": "~1.0.0-beta",
-    "swipe": "~2.0.0",
+    "swipe": "https://github.com/erickreutz/Swipe.git#slide_selector",
     "viewport-units-buggyfill": "~0.2.3"
   }
 }

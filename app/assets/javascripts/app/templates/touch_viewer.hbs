@@ -1,0 +1,17 @@
+<div class="l-touch-viewer touchviewer">
+  <div class="touchviewer__pages">
+    <div class="touchviewer__panewrap">
+      {{#each}}
+        {{view App.TouchViewerPaneView contentBinding="this"}}
+      {{/each}}
+    </div>
+  </div>
+
+  <div class="l-touch-viewer-menu">
+    <nav class="touchviewer__nav">
+      <a href="" class="touchviewer__navitem">1</a>
+      <a href="" class="touchviewer__navitem--middle">2</a>
+      <a href="" class="touchviewer__navitem">3</a>
+    </nav>
+  </div>
+</div>
