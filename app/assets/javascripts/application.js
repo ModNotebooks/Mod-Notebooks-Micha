@@ -13,7 +13,7 @@
 //= require env
 //= require handlebars
 //= require momentjs/moment
-//= require viewport-units-buggyfill
+//= require vh-units
 //= require ember
 //= require ember-data
 //= require ember-simple-auth
@@ -28,7 +28,7 @@
 // for more details see: http://emberjs.com/guides/application/
 
 (function() {
-  viewportUnitsBuggyfill.init(Modernizr.touch);
+  // viewportUnitsBuggyfill.init(Modernizr.touch);
 
   window.Core = Ember.Namespace.create({});
 
