@@ -109,6 +109,7 @@
     forEach.call(document.styleSheets, function(s) {
       var url = s.href;
 
+      // Too specific
       if (!url.match(/\/assets\//i)) return;
 
       SheetFetcher.fetch(s.href, function(css) {

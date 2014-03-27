@@ -13,7 +13,6 @@
 //= require env
 //= require handlebars
 //= require momentjs/moment
-//= require vh-units
 //= require ember
 //= require ember-data
 //= require ember-simple-auth
