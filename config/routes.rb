@@ -26,6 +26,8 @@ Mod::Application.routes.draw do
       get '/notebooks', to: 'home#index'
       get '/notebooks/:id', to: 'home#index'
       get '/notebooks/:id/view/:left_page_number/:right_page_number', to: 'home#index'
+      get '/notebooks/:id/touchview', to: 'home#index'
+      get '/notebooks/:id/touchview/:index', to: 'home#index'
       get '/digitize', to: 'home#index'
       get '/digitize/code', to: 'home#index'
       get '/digitize/scan', to: 'home#index'

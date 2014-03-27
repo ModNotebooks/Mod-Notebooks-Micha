@@ -1,0 +1,23 @@
+<div class="l-touch-viewer touchviewer">
+  <div class="touchviewer__pages">
+    <div class="touchviewer__panewrap">
+      {{#each}}
+        {{view App.TouchViewerPaneView contentBinding="this"}}
+      {{/each}}
+    </div>
+  </div>
+
+  <div class="l-touch-viewer-menu">
+    <nav {{bind-attr class=":touchviewer__nav view.menuHidden:is-hidden"}}>
+      <a href="javascript:void(0);" {{action 'previous' target="view"}} class="touchviewer__navitem">
+        <i class="i-chevron-left-dark"></i>
+      </a>
+      {{#link-to 'notebook' notebook class="touchviewer__navitem--middle"}}
+        <i class="i-grid-dark"></i>
+      {{/link-to}}
+      <a href="javascript:void(0);" {{action 'next' target="view"}} class="touchviewer__navitem">
+        <i class="i-chevron-right-dark"></i>
+      </a>
+    </nav>
+  </div>
+</div>

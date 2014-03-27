@@ -26,6 +26,10 @@
   ////////////////////////////////////////////
 
   var SheetFetcher = {
+    stamp: function(url) {
+      return url + "?timestamp=" + Date.now();
+    },
+
     fetch: function(url, done) {
       var _this = this;
       var callback = done;
@@ -45,7 +49,7 @@
       };
 
       try {
-        xhr.open('GET', url);
+        xhr.open('GET', SheetFetcher.stamp(url));
         xhr.send(null);
       } catch (e) {
         // Fallback to XDomainRequest if available

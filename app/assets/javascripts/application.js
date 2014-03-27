@@ -13,9 +13,11 @@
 //= require env
 //= require handlebars
 //= require momentjs/moment
+//= require swipe
 //= require ember
 //= require ember-data
 //= require ember-simple-auth
+//= require emberjs-touch/lib/ember-fastclick
 // require ember-animated-outlet
 //= require ember-radio-buttons
 //= require nprogress/nprogress

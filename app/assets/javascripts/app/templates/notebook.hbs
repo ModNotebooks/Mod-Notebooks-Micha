@@ -10,12 +10,21 @@
       {{#each pages}}
         <div class="l-grid-item--page js-grid-item">
           {{#view App.GridPageView contentBinding="this"}}
-            {{#link-to 'viewer.pages' notebook.id this class="page--grid" classNameBindings="view.isLoading view.isError"}}
-              <div {{bind-attr class=":spinner--grid-page view.isLoading::is-hidden"}}>
-                <div class="spinner__icon"></div>
-              </div>
-              <img {{bind-attr src="view.imageSrc"}} class="page__image">
-            {{/link-to}}
+            {{#if controller.touch}}
+              {{#link-to 'touch_viewer.page' notebook.id index class="page--grid" classNameBindings="view.isLoading view.isError"}}
+                <div {{bind-attr class=":spinner--grid-page view.isLoading::is-hidden"}}>
+                  <div class="spinner__icon"></div>
+                </div>
+                <img {{bind-attr src="view.imageSrc"}} class="page__image">
+              {{/link-to}}
+            {{else}}
+              {{#link-to 'viewer.pages' notebook.id this class="page--grid" classNameBindings="view.isLoading view.isError"}}
+                <div {{bind-attr class=":spinner--grid-page view.isLoading::is-hidden"}}>
+                  <div class="spinner__icon"></div>
+                </div>
+                <img {{bind-attr src="view.imageSrc"}} class="page__image">
+              {{/link-to}}
+            {{/if}}
           {{/view}}
         </div>
       {{/each}}

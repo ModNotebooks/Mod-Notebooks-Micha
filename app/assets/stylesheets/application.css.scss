@@ -1,7 +1,6 @@
 @import "normalize-scss/normalize.scss";
 @import "bourbon/dist/bourbon";
 @import "neat/app/assets/stylesheets/neat";
-// @import "ember-animated-outlet/dist/ember-animated-outlet";
 @import "app/variables";
 @import "app/mixins";
 
@@ -21,12 +20,14 @@
 @import "app/layouts/l-viewer";
 @import "app/layouts/l-settings";
 @import "app/layouts/l-digitize";
+@import "app/layouts/l-touch-viewer";
 
 @import "app/components/logo";
 @import "app/components/button";
 @import "app/components/notebook";
 @import "app/components/page";
 @import "app/components/viewer";
+@import "app/components/touchviewer";
 @import "app/components/modal";
 @import "app/components/settingsnav";
 @import "app/components/switch";
