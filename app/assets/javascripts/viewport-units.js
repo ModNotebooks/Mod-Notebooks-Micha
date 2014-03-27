@@ -27,7 +27,7 @@
 
   var SheetFetcher = {
     stamp: function(url) {
-      return url + "?timestamp=" + Date.now()
+      return url + "?timestamp=" + Date.now();
     },
 
     fetch: function(url, done) {
