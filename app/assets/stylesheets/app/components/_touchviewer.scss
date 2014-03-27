@@ -1,5 +1,5 @@
 .touchviewer {
-  background: #fffee9;
+  background: #fff;
 }
 
 .touchviewer__pages {
@@ -17,7 +17,7 @@
   float:left;
   width:100%;
   position: relative;
-  background: red;
+  background: #fff;
   height: 100vh;
 }
 
@@ -27,6 +27,11 @@
   vertical-align: middle;
   position: relative;
   top: -1px;
+
+  opacity: 1;
+  @include backface-visibility(hidden);
+  @include transition(opacity 300ms ease-out);
+  &.is-loading { opacity: 0; }
 }
 
 .touchviewer__pane__image + .touchviewer__pane__image {
@@ -35,12 +40,17 @@
 
 .touchviewer__nav {
   width: 100%;
-  background: rgba(#fffee9, .95);
+  background: rgba(#fff, .95);
 
   @include with-flex {
     @include display(flex);
     @include flex-direction(row);
     @include align-content(center);
+  }
+
+  &.is-hidden {
+    opacity: 0;
+    visibility: hidden;
   }
 }
 
@@ -48,8 +58,9 @@
   display: block;
   padding: 22px 30px;
   text-align: center;
-  background: purple;
-  
+  color: #7b7b70;
+  opacity: .5;
+
   @include with-flex {
     @include flex(1);
   }

@@ -4,6 +4,7 @@ App.TouchViewerPaneController = Ember.ObjectController.extend({
 
   shouldLoad: function() {
     var curIndex = this.get('controllers.touchViewer.currentSlide') + 1;
-    this.set('load', curIndex >= this.get('model.index'));
+    var isCurrentOrNext = curIndex >= (this.get('model.index') - 1);
+    this.set('load', isCurrentOrNext);
   }.observes('controllers.touchViewer.currentSlide').on('init')
 });

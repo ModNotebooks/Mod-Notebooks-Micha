@@ -20,9 +20,7 @@ App.Router.map(function() {
     });
   });
 
-  this.resource('touch_viewer', { path: '/notebooks/:notebook_id/touchview' }, function() {
-    this.route('page', { path: ':index' });
-  });
+  this.resource('touch_viewer', { path: '/notebooks/:notebook_id/touchview' });
 
   this.resource('digitize', { path: '/digitize' }, function() {
     this.route('code');

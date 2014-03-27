@@ -1,1 +1,4 @@
-<img class="touchviewer__pane__image" {{bind-attr src="view.imageSrc"}}>
+<div {{bind-attr class=":spinner--viewer-page view.isLoading::is-hidden"}}>
+  <div class="spinner__icon"></div>
+</div>
+<img {{bind-attr src="view.imageSrc" class=":touchviewer__pane__image view.isLoading view.isError"}}>
