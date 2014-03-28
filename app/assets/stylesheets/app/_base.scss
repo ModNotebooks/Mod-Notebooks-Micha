@@ -7,13 +7,9 @@ html {
   background: none;
 }
 
-html, body {
+html,
+body {
   min-height: 100%;
-}
-
-html.no-scroll {
-  overflow: hidden !important;
-  body { overflow: hidden !important; }
 }
 
 body {
