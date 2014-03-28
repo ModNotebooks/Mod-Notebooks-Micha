@@ -8,9 +8,12 @@ html {
 }
 
 html, body {
-  // height: 100%;
   min-height: 100%;
-  &.no-scroll { overflow: hidden !important; }
+}
+
+html.no-scroll {
+  overflow: hidden !important;
+  body { overflow: hidden !important; }
 }
 
 body {

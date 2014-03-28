@@ -1,3 +1,3 @@
 Settings.ApplicationController = Ember.Controller.extend({
-  isVisible: false
+  isVisible: true
 });

@@ -145,7 +145,7 @@ a.notebook:not(.is-disabled) {
 
 .notebook__status {
   @include font-size(11px);
-  color: #444444;
+  color: lighten(#444, 16%);
   position: relative;
   bottom: 10px;
 
@@ -157,5 +157,4 @@ a.notebook:not(.is-disabled) {
 
 .notebook__date {
   @extend .notebook__status;
-  color: #fff;
 }

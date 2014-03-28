@@ -1,38 +1,40 @@
 <header class="l-settings-pane-header visible-block-xs">
   <h3 class="settings-pane-title">Account</h1>
 </header>
-<form class="form">
-  <div {{bind-attr class=":form__control errors.email:is-error"}}>
-    {{input type="email" value=email class="form__control__input"}}
-    <label class="form__control__label">Email Address</label>
-    {{#if errors.email }}
-      <span class="form__error">{{{format-errors errors.email}}}</span>
-    {{/if}}
-  </div>
-  <div {{bind-attr class=":form__control errors.currentPassword:is-error"}}>
-    {{input type="password" value=currentPassword class="form__control__input"}}
-    <label class="form__control__label">Current Password</label>
-    {{#if errors.currentPassword }}
-      <span class="form__error">{{{format-errors errors.currentPassword}}}</span>
-    {{/if}}
-  </div>
-  <div class="form__controlgroup">
-    <div {{bind-attr class=":form__control--onehalf errors.password:is-error"}}>
-      {{input type="password" value=password class="form__control__input"}}
-      <label class="form__control__label">New Password</label>
-      {{#if errors.password }}
-        <span class="form__error">{{{format-errors errors.password}}}</span>
+<form class="form l-settings-form">
+  <div class="l-settings-formbody">
+    <div {{bind-attr class=":form__control errors.email:is-error"}}>
+      {{input type="email" value=email class="form__control__input"}}
+      <label class="form__control__label">Email Address</label>
+      {{#if errors.email }}
+        <span class="form__error">{{{format-errors errors.email}}}</span>
       {{/if}}
     </div>
-    <div {{bind-attr class=":form__control--onehalf errors.passwordConfirmation:is-error"}}>
-      {{input type="password" value=passwordConfirmation class="form__control__input"}}
-      <label class="form__control__label">Verify New Password</label>
-      {{#if errors.passwordConfirmation }}
-        <span class="form__error">{{{format-errors errors.passwordConfirmation}}}</span>
+    <div {{bind-attr class=":form__control errors.currentPassword:is-error"}}>
+      {{input type="password" value=currentPassword class="form__control__input"}}
+      <label class="form__control__label">Current Password</label>
+      {{#if errors.currentPassword }}
+        <span class="form__error">{{{format-errors errors.currentPassword}}}</span>
       {{/if}}
     </div>
+    <div class="form__controlgroup">
+      <div {{bind-attr class=":form__control--onehalf errors.password:is-error"}}>
+        {{input type="password" value=password class="form__control__input"}}
+        <label class="form__control__label">New Password</label>
+        {{#if errors.password }}
+          <span class="form__error">{{{format-errors errors.password}}}</span>
+        {{/if}}
+      </div>
+      <div {{bind-attr class=":form__control--onehalf errors.passwordConfirmation:is-error"}}>
+        {{input type="password" value=passwordConfirmation class="form__control__input"}}
+        <label class="form__control__label">Verify New Password</label>
+        {{#if errors.passwordConfirmation }}
+          <span class="form__error">{{{format-errors errors.passwordConfirmation}}}</span>
+        {{/if}}
+      </div>
+    </div>
   </div>
-  <div class="form__actions">
+  <div class="form__actions l-settings-formactions">
     {{spin-button isLoading=isLoading isEnabled=isValid buttonText="Save" action="save" buttonClass="button--form"}}
   </div>
 </form>

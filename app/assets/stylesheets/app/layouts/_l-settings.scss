@@ -41,6 +41,16 @@
   width: 100%;
   @include transition(all 500ms $ease-in-out-circ);
 
+  min-height: 100vh;
+
+  @include with-flex {
+    @include display(flex);
+  }
+
+  @include media(max-width $screen-sm-max) {
+    @include flex-direction(column);
+  }
+
   @include media($screen-br-sm) {
     position: relative;
     z-index: $zindex-modal;
@@ -48,7 +58,6 @@
     @include transform(translateY(20px));
 
     @include with-flex {
-      @include display(flex);
       @include flex-direction(row);
       @include align-items(center);
     }
@@ -69,8 +78,10 @@
 .l-settings-menu,
 .l-settings-content {
   @include media($screen-br-sm) {
-    display: table-cell;
-    vertical-align: middle;
+    @include with-no-flex {
+      display: table-cell;
+      vertical-align: middle;
+    }
   }
 }
 
@@ -95,12 +106,22 @@
 .l-settings-content {
   // background: purple;
 
+  @include with-flex {
+    @include display(flex);
+    @include flex(1);
+  }
+
+  @include media(max-width $screen-sm-max) {
+    @include with-flex {
+      @include align-items(bottom);
+      @include justify-content(center);
+    }
+  }
+
   @include media($screen-br-sm) {
     padding: 0px 20px;
 
     @include with-flex {
-      @include flex(1);
-      @include display(flex);
       @include align-items(center);
       @include justify-content(center);
     }
@@ -113,6 +134,14 @@
 
 .l-settings-pane {
   width: 100%;
+  // background: red;
+
+  @include media(max-width $screen-sm-max) {
+    @include with-flex {
+      @include display(flex);
+      @include flex-direction(column);
+    }
+  }
 
   @include media($screen-br-sm) {
     max-width: 500px;
@@ -123,7 +152,7 @@
 }
 
 .l-settings-pane-header {
-  padding: 12px 22px;
+  padding: 10px;
 }
 
 .settings-pane-title {
@@ -131,6 +160,28 @@
   @include font-size(12px);
   font-weight: 800;
   text-transform: uppercase;
+}
+
+.l-settings-form {
+  // background: orange;
+
+  @include media(max-width $screen-sm-max) {
+    @include with-flex {
+      @include flex(1);
+      @include display(flex);
+      @include flex-direction(column);
+    }
+  }
+}
+
+.l-settings-formbody {
+  // background: blue;
+
+  @include media(max-width $screen-sm-max) {
+    @include with-flex {
+      @include flex(1);
+    }
+  }
 }
 
 .l-sync-service {
