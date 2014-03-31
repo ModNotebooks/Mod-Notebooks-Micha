@@ -1,57 +1,136 @@
+////////////////////////////////////////
 .l-app-main {
-  min-height: 100%;
-  height: 100%;
+  @include with-flex {
+    @include display(flex);
+    min-height: 100vh;
+    @include flex-direction(column);
+
+    @include media($screen-br-md) {
+      @include flex-direction(row);
+    }
+  }
+
+  @include with-no-flex {
+    @include media($screen-br-md) {
+      height: 100%;
+      padding-left: 100px;
+    }
+  }
 }
 
-.l-app-side {
-  height: 100%;
-  width: 108px;
-  padding: 30px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: $zindex-app-side;
-}
-
-.l-app-logo {
-  position: fixed;
-  top: 0;
-  left: 0;
-  padding: 30px;
-  z-index: $zindex-app-logo;
-}
-
-.l-app-navtoggle {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  padding: 36px 43px;
-  text-align: center;
-  z-index: $zindex-app-logo;
-}
-
+////////////////////////////////////////
 .l-app-content {
-  height: 100%;
-  padding-left: 108px;
-  @include transition-property(all);
-  @include transition-timing-function(ease-in-out);
-  @include backface-visibility(hidden);
-  @include transform(translate3d(0, 0, 0));
+  @include with-flex {
+    @include flex(1);
+  }
+
+  @include with-no-flex {
+    height: 100%;
+  }
 }
 
-.l-side-nav {
+////////////////////////////////////////
+.l-app-header {
+  // background: blue;
+  position: relative;
   width: 100%;
-  height: 100%;
-  display: table;
+  padding: 20px 23px 40px 23px;
+
+  @include with-flex {
+    max-height: 100vh;
+
+    @include media(max-width $screen-sm-max) {
+      max-height: auto;
+      @include display(flex);
+      @include align-items(center);
+    }
+  }
+
+  @include with-no-flex {
+    @include media(max-width $screen-sm-max) {
+      display: table;
+    }
+  }
+
+  @include media($screen-br-md) {
+    width: 100px;
+    padding: 0;
+  }
 }
 
-.l-side-nav-item {
-  display: table-cell;
-  vertical-align: middle;
-  width: 100%;
+////////////////////////////////////////
+.l-app-logo, .l-app-navtoggle, .l-app-side-nav {
+  @include media(max-width $screen-sm-max) {
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
+
+.l-app-side-nav {
+  @include media(max-width $screen-sm-max) {
+    width: 100%;
+  }
+}
+
+////////////////////////////////////////
+.l-app-logo {
+  position: relative;
+  z-index: $zindex-app-logo;
+
+  @include media($screen-br-md) {
+    position: fixed;
+    padding: 30px 25px;
+    top: 0;
+    left: 0;
+  }
+}
+
+////////////////////////////////////////
+.l-app-navtoggle {
+  position: relative;
   text-align: center;
+  z-index: $zindex-settings-toggle;
+  // background: red;
+
+  @include media($screen-br-md) {
+    position: fixed;
+    padding: 30px 25px;
+    bottom: 0;
+    left: 0;
+    // background: green;
+    width: 100px;
+  }
+}
+
+////////////////////////////////////////
+.l-app-side-nav {
+  text-align: center;
+
+  @include with-flex {
+    @include media(max-width $screen-sm-max) {
+      @include flex(1);
+    }
+  }
+
+  @include media($screen-br-md) {
+    position: fixed;
+    left: 0;
+    width: 100px;
+    height: 100%;
+    display: table;
+  }
+}
+
+////////////////////////////////////////
+.l-app-side-nav-item {
+  @include media($screen-br-md) {
+    display: table-cell;
+    vertical-align: middle;
+  }
 
   a {
+    display: inline-block;
+    padding: 10px;
     @include transform(translate3d(0,0,0));
     @include animation(popIn 500ms $ease-out-circ);
   }

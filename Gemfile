@@ -56,9 +56,10 @@ gem 'ember-rails'
 gem 'ember-source', '1.4.0' # or the version you need
 gem 'ember-data-source', '1.0.0.beta.6'
 
-gem 'compass-rails', '1.1.0.pre'
+gem 'compass-rails', '1.1.7'
+gem 'compass', '1.0.0.alpha.18'
 gem 'sass-rails', '>= 4.0.0'
-
+gem 'sass', '~> 3.3.3'
 
 gem 'rails_12factor', group: :production
 

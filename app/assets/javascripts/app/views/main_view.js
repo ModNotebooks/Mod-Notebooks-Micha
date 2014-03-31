@@ -1,3 +1,3 @@
 App.MainView = Ember.View.extend({
-  classNames: ['l-app-main'],
+  classNames: ['l-app-main']
 });

@@ -3,90 +3,212 @@
 .l-settings {
   position: fixed;
   top: 0;
+  right: 0;
+  bottom: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  display: table;
-  z-index: $zindex-modal;
-  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  z-index: $zindex-settings-mobile;
   overflow-y: scroll;
+  @include transition(opacity 500ms $ease-in-out-circ, height 0 500ms);
+  height: 0;
+  // background: red;
 
-  @include transition(all 500ms $ease-in-out-circ);
+  @include media($screen-br-sm) {
+    position: fixed;
+    z-index: $zindex-modal;
+
+    @include with-flex {
+      @include display(flex);
+      @include align-items(center);
+    }
+
+    @include with-no-flex {
+      display: table;
+    }
+  }
+
   opacity: 0;
-  @include transform(translateY(20px));
-  visibility: hidden;
 
   &.is-visible {
     opacity: 1;
-    @include transform(translateY(0px));
-    visibility: visible;
+    height: 100%;
+    @include transition(opacity 500ms $ease-in-out-circ, height 0);
   }
 }
 
 .l-settings-inner {
-  width: 100%;
-  height: 100%;
-  display: table-cell;
-  vertical-align: middle;
   position: relative;
-  z-index: $zindex-modal;
-
+  z-index: $zindex-modal-over;
+  // background: blue;
+  width: 100%;
   @include transition(all 500ms $ease-in-out-circ);
-  opacity: 0;
-  @include transform(translateY(20px));
 
-  .is-visible & {
-    opacity: 1;
-    @include transform(translateY(0px));
+  min-height: 100vh;
+
+  @include with-flex {
+    @include display(flex);
+  }
+
+  @include media(max-width $screen-sm-max) {
+    @include flex-direction(column);
+  }
+
+  @include media($screen-br-sm) {
+    position: relative;
+    z-index: $zindex-modal;
+    opacity: 0;
+    @include transform(translateY(20px));
+
+    @include with-flex {
+      @include flex-direction(row);
+      @include align-items(center);
+    }
+
+    @include with-no-flex {
+      display: table-cell;
+      vertical-align: middle;
+      height: 100%;
+    }
+
+    .is-visible & {
+      opacity: 1;
+      @include transform(translateY(0px));
+    }
   }
 }
 
-.l-settings-menu, .l-settings-content {
-  display: table-cell;
-  vertical-align: middle;
+.l-settings-menu,
+.l-settings-content {
+  @include media($screen-br-sm) {
+    @include with-no-flex {
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
 }
 
 .l-settings-menu {
-  padding: 0 36px;
-  min-width: 290px;
-}
+  padding: 23px 18px 18px;
+  // background: green;
 
-.l-settings-content {
-  text-align: center;
-  width: 100%;
-  padding: 0px 20px;
-}
+  @include media($screen-br-sm) {
+    max-height: 315px;
+    padding: 0 23px;
 
-.l-settings-pane {
-  margin: 0 auto;
-  display: inline-block;
-  // background: blue;
-  width: 100%;
-  max-width: 500px;
-  text-align: left;
+    @include with-no-flex {
+      min-width: 290px;
+    }
+  }
 
-  @include media(new-breakpoint(min-width 1060px)) {
-    margin-left: -230px;
+  @include media($screen-br-md) {
+    padding: 0 36px;
   }
 }
 
-.l-settings-tab {
-  opacity: 0;
-  display: none;
-  @include transition(all 400ms ease-in-out);
+.l-settings-content {
+  // background: purple;
 
-  &.is-active {
-    opacity: 1;
-    display: block;
+  @include with-flex {
+    @include display(flex);
+    @include flex(1);
+  }
+
+  @include media(max-width $screen-sm-max) {
+    @include with-flex {
+      @include align-items(bottom);
+      @include justify-content(center);
+    }
+  }
+
+  @include media($screen-br-sm) {
+    padding: 0px 20px;
+
+    @include with-flex {
+      @include align-items(center);
+      @include justify-content(center);
+    }
+
+    @include with-no-flex {
+      width: 100%;
+    }
+  }
+}
+
+.l-settings-pane {
+  width: 100%;
+  // background: red;
+
+  @include media(max-width $screen-sm-max) {
+    @include with-flex {
+      @include display(flex);
+      @include flex-direction(column);
+    }
+  }
+
+  @include media($screen-br-sm) {
+    max-width: 500px;
+    @include with-no-flex {
+      margin: 0 auto;
+    }
+  }
+}
+
+.l-settings-pane-header {
+  padding: 10px;
+}
+
+.settings-pane-title {
+  margin: 0;
+  @include font-size(12px);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.l-settings-form {
+  // background: orange;
+
+  @include media(max-width $screen-sm-max) {
+    @include with-flex {
+      @include flex(1);
+      @include display(flex);
+      @include flex-direction(column);
+    }
+  }
+}
+
+.l-settings-formbody {
+  // background: blue;
+
+  @include media(max-width $screen-sm-max) {
+    @include with-flex {
+      @include flex(1);
+    }
   }
 }
 
 .l-sync-service {
-  display: table;
-  width: 100%;
-  padding: 20px 10px;
+  padding: 20px;
   border-bottom: 1px solid rgba(#ebebe9, .11);
   color: rgba(#fff, .47);
+  width: 100%;
+
+  @include media($screen-br-sm) {
+    padding: 20px 10px;
+  }
+
+  @include media(max-width $screen-xs-max) {
+    &:first-of-type { border-top: 1px solid rgba(#ebebe9, .11); }
+  }
+
+  @include with-flex {
+    @include display(flex);
+    @include flex-direction(row);
+    @include align-items(center);
+  }
+
+  @include with-no-flex {
+    display: table;
+  }
 
   &:last-of-type { border-bottom: none; }
 
@@ -95,15 +217,13 @@
   }
 }
 
-.l-sync-service-col {
-  display: table-cell;
-  vertical-align: middle;
-}
-
 .l-sync-service-left,
 .l-sync-service-center,
 .l-sync-service-right {
-  @extend .l-sync-service-col;
+  @include with-no-flex {
+    display: table-cell;
+    vertical-align: middle;
+  }
 }
 
 .l-sync-service-left {
@@ -116,6 +236,14 @@
 }
 
 .l-sync-service-center {
-  width: 100%;
   padding: 0 20px;
+  text-align: left;
+
+  @include with-flex {
+    @include flex(1);
+  }
+
+  @include with-no-flex {
+    width: 100%;
+  }
 }

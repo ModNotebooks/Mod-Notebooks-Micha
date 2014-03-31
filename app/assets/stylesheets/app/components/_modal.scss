@@ -1,17 +1,27 @@
 .modal-background {
   position: fixed;
   top: 0;
+  right: 0;
+  bottom: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
   background-color: #465d60;
-  @include linear-gradient(145deg, #233236 0%, #658d8f 100%);
+  @include background-image(linear-gradient(145deg, #233236 0%, #658d8f 100%));
+  background-attachment: fixed;
   z-index: $zindex-modal-background;
-  @include transition(all 500ms $ease-in-out-circ);
+  @include transition(opacity 500ms $ease-in-out-circ, height 0 500ms);
+  height: 0;
   opacity: 0;
 
   &.is-visible,
-  .is-visible & { opacity: .98; }
+  .is-visible & {
+    height: 100%;
+    opacity: .98;
+    @include transition(opacity 500ms $ease-in-out-circ, height 0);
+  }
+}
+
+.modal-background--settings {
+  @extend .modal-background;
 }
 
 // Display over the logo and settings menu
@@ -31,7 +41,7 @@
   overflow-x: auto;
   overflow-y: scroll;
 
-  @include transition(all 700ms $ease-in-out-circ);
+  @include transition(all 500ms $ease-in-out-circ);
   opacity: 0;
   @include transform(translateY(20px));
 
@@ -48,20 +58,25 @@
 }
 
 .modal__close {
-  @extend .i-base;
-  @extend .i-chevron-left;
+  width: 40px;
+  height: 40px;
   display: inline-block;
   vertical-align: middle;
   position: absolute;
-  margin: auto 0;
-  top: 0;
-  left: 40px;
-  bottom: 0;
-  right: 0;
+  top: 24px;
+  left: 24px;
   z-index: $zindex-modal-close;
 
   .is-over & {
     z-index: $zindex-modal-close-over;
+  }
+
+  @include media($screen-br-sm) {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 40px;
+    margin: auto 0;
   }
 }
 
