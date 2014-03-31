@@ -8,11 +8,16 @@
   @include background-image(linear-gradient(145deg, #233236 0%, #658d8f 100%));
   background-attachment: fixed;
   z-index: $zindex-modal-background;
-  @include transition(all 500ms $ease-in-out-circ);
+  @include transition(opacity 500ms $ease-in-out-circ, height 0 500ms);
+  height: 0;
   opacity: 0;
 
   &.is-visible,
-  .is-visible & { opacity: .98; }
+  .is-visible & {
+    height: 100%;
+    opacity: .98;
+    @include transition(opacity 500ms $ease-in-out-circ, height 0);
+  }
 }
 
 .modal-background--settings {

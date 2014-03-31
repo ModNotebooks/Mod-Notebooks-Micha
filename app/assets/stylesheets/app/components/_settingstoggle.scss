@@ -3,7 +3,7 @@
   vertical-align: middle;
   width: 23px;
   position: relative;
-  padding: 10px 0;
+  padding: 10px;
   @include transition(all 300ms ease-in-out);
   @include box-sizing(content-box);
 }

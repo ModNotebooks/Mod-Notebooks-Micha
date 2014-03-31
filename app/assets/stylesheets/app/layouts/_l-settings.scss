@@ -9,7 +9,9 @@
   -webkit-overflow-scrolling: touch;
   z-index: $zindex-settings-mobile;
   overflow-y: scroll;
-  @include transition(all 500ms $ease-in-out-circ);
+  @include transition(opacity 500ms $ease-in-out-circ, height 0 500ms);
+  height: 0;
+  // background: red;
 
   @include media($screen-br-sm) {
     position: fixed;
@@ -26,11 +28,11 @@
   }
 
   opacity: 0;
-  visibility: hidden;
 
   &.is-visible {
     opacity: 1;
-    visibility: visible;
+    height: 100%;
+    @include transition(opacity 500ms $ease-in-out-circ, height 0);
   }
 }
 
