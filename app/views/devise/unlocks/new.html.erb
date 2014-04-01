@@ -1,3 +1,5 @@
+<% title "Unlock Account" %>
+
 <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post, class: 'l-guest-form form' }) do |f| %>
   <% if resource.errors.count > 0 %>
     <span class="form__error"><%= resource.errors.full_messages.first %></span>

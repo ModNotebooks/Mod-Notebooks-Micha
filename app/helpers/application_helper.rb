@@ -4,4 +4,8 @@ module ApplicationHelper
       javascript_tag("window.jQuery || document.write(unescape('#{javascript_include_tag(:jquery).gsub('<','%3C')}'))")
     ].join("\n").html_safe
   end
+
+  def title(page_title)
+    content_for(:title) { "Mod: #{page_title}" }
+  end
 end
