@@ -33,7 +33,7 @@ module Mod
     config.handlebars.templates_root = ['app/templates', 'settings/templates', 'core/templates']
 
     # Add extra manifests for precompilation
-    config.assets.precompile += %w(head.js jquery.js .svg .eot .woff .ttf)
+    config.assets.precompile += %w(head.js jquery.js)
 
     # include Bower components in compiled assets
     config.assets.paths << Rails.root.join('vendor', 'assets', 'bower')
@@ -47,9 +47,9 @@ module Mod
     # Explicitly register the extensions we are interested in compiling
     config.assets.precompile.push(Proc.new do |path|
       File.extname(path).in? [
-        '.html', '.erb', '.haml',                 # Templates
-        '.png',  '.gif', '.jpg', '.jpeg', '.svg', # Images
-        '.eot',  '.otf', '.svc', '.woff', '.ttf', # Fonts
+        '.html', '.erb',                                  # Templates
+        '.png',  '.gif', '.jpg', '.jpeg', '.svg', '.ico', # Images
+        '.eot',  '.otf', '.svc', '.woff', '.ttf',         # Fonts
       ]
     end)
 
