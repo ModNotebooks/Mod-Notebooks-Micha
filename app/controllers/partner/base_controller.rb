@@ -1,3 +1,9 @@
 class Partner::BaseController < ApplicationController
-  layout 'application-partner'
+  respond_to :json
+
+  skip_before_filter :verify_authenticity_token
+
+  rescue_from ActiveRecord::RecordNotFound do
+    head :not_found
+  end
 end

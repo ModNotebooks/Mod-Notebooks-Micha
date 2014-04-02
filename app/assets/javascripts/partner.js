@@ -17,6 +17,7 @@
 //= require ember-data
 //= require ember-simple-auth
 //= require_self
+//= require partner/app
 
 (function() {
 
@@ -24,7 +25,7 @@
     activeClass: "is-active",
     disabledClass: "is-disabled"
   });
-  
-  var App = Ember.Application.create(window.ENV.APPLICATION_OPTIONS || {});
+
+  window.App = Ember.Application.create(window.ENV.APPLICATION_OPTIONS || {});
 
 }());

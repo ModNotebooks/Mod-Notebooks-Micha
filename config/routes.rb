@@ -84,11 +84,11 @@ Mod::Application.routes.draw do
   # Partner Section
   #-----------------------------------------------------------------------------
 
-  constraints subdomain: 'partners' do
-    scope module: 'partner' do
+  constraints subdomain: 'partners', defaults: { format: 'json' } do
+    scope module: 'partner', constraints: ApiConstraints.new(version: 1, default: :true) do
       resources :notebooks, only: [:index, :update]
       
-      get '/', to: 'notebooks#index'
+      get '/', to: 'home#index'
     end
   end
 
