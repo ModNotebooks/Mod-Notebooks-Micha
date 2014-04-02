@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+    Designed/Developed by 3DROPS
+    w: http://3dro.ps
+    e: hello@3dro.ps
+    t: @3drops
+  -->
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title><%= content_for?(:title) ? yield(:title) : "Mod: Partners" %></title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui">
+
+  <%= favicon_link_tag 'favicon.ico', type: 'image/x-icon' %>
+  <%= csrf_meta_tags %>
+
+  <%= stylesheet_link_tag "http://fast.fonts.net/cssapi/7650c855-f883-471e-97df-c7366fa30f5d.css" %>
+  <%= stylesheet_link_tag "partner", media: "all" %>
+  <%= javascript_include_tag "head" %>
+</head>
+<body>
+  <%= yield %>
+</body>
+</html>

@@ -2,11 +2,19 @@ require "resque_web"
 
 Mod::Application.routes.draw do
 
+  #-----------------------------------------------------------------------------
+  # Callbacks / Webhooks
+  #-----------------------------------------------------------------------------
+
   constraints subdomain: 'callback' do
     scope module: 'blitline' do
       post '/notebooks/:id/blitline', to: 'notebooks#blitline', as: :notebook_processed
     end
   end
+
+  #-----------------------------------------------------------------------------
+  # Client Application
+  #-----------------------------------------------------------------------------
 
   constraints subdomain: 'app' do
     use_doorkeeper
@@ -48,6 +56,10 @@ Mod::Application.routes.draw do
     end
   end
 
+  #-----------------------------------------------------------------------------
+  # API
+  #-----------------------------------------------------------------------------
+
   constraints subdomain: 'api', defaults: { format: 'json' } do
     use_doorkeeper do
       # The only thing allowed through the API oauth wise is requesting access tokens
@@ -57,7 +69,6 @@ Mod::Application.routes.draw do
     scope module: 'api/v1', constraints: ApiConstraints.new(version: 1, default: :true) do
       resources :shares, param: :token, only: [:create, :show, :destroy]
       resources :notebooks, only: [:index, :create, :show, :update] do
-        post 'upload', on: :collection
         post 'exists', on: :collection
       end
       resources :services, only: [:index, :create, :show, :update, :destroy]
@@ -67,7 +78,18 @@ Mod::Application.routes.draw do
       resources :preferences, only: [:show, :update], constraints: { id: 'me' }, as: 'me'
       resources :addresses, only: [:show, :update], constraints: { id: 'me' }, as: 'me'
     end
+  end
 
+  #-----------------------------------------------------------------------------
+  # Partner Section
+  #-----------------------------------------------------------------------------
+
+  constraints subdomain: 'partners' do
+    scope module: 'partner' do
+      resources :notebooks, only: [:index, :update]
+      
+      get '/', to: 'notebooks#index'
+    end
   end
 
 end
