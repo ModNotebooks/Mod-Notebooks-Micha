@@ -24,7 +24,7 @@
 //= require_self
 //= require core/core
 //= require app/app
-//= require settings/settings
+//= require settings/app
 
 // for more details see: http://emberjs.com/guides/application/
 
