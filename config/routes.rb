@@ -3,6 +3,14 @@ require "resque_web"
 Mod::Application.routes.draw do
 
   #-----------------------------------------------------------------------------
+  # AUTH
+  #-----------------------------------------------------------------------------
+
+  constraints subdomain: 'auth' do
+    use_doorkeeper
+  end
+
+  #-----------------------------------------------------------------------------
   # Callbacks / Webhooks
   #-----------------------------------------------------------------------------
 
@@ -17,8 +25,6 @@ Mod::Application.routes.draw do
   #-----------------------------------------------------------------------------
 
   constraints subdomain: 'app' do
-    use_doorkeeper
-
     # Login, signup, and settings are all handled through the API so ignore those controllers
     # the only things that happens outside of the API are confirming, unlocking,
     # and resetting passwords on accounts
@@ -61,11 +67,6 @@ Mod::Application.routes.draw do
   #-----------------------------------------------------------------------------
 
   constraints subdomain: 'api', defaults: { format: 'json' } do
-    use_doorkeeper do
-      # The only thing allowed through the API oauth wise is requesting access tokens
-      skip_controllers :applications, :authorized_applications, :authorizations
-    end
-
     scope module: 'api/v1', constraints: ApiConstraints.new(version: 1, default: :true) do
       resources :shares, param: :token, only: [:create, :show, :destroy]
       resources :notebooks, only: [:index, :create, :show, :update] do
@@ -87,7 +88,7 @@ Mod::Application.routes.draw do
   constraints subdomain: 'partners', defaults: { format: 'json' } do
     scope module: 'partner', constraints: ApiConstraints.new(version: 1, default: :true) do
       resources :notebooks, only: [:index, :update]
-      
+
       get '/', to: 'home#index'
     end
   end
