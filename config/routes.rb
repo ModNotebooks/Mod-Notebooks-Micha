@@ -1,3 +1,5 @@
+require "resque_web"
+
 Mod::Application.routes.draw do
 
   constraints subdomain: 'callback' do
@@ -14,6 +16,11 @@ Mod::Application.routes.draw do
     # and resetting passwords on accounts
     devise_for :users,
       skip: [:sessions, :registrations]
+
+    # Resque Web Interface
+    # https://github.com/resque/resque-web/issues/29
+    ResqueWeb::Engine.eager_load!
+    mount ResqueWeb::Engine => "/resque_web"
 
     scope module: 'app' do
       match 'auth/:provider/callback', to: 'services#success', via: [:get, :post]

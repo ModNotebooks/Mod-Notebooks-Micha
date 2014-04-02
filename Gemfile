@@ -18,7 +18,7 @@ gem 'resque-loner'
 gem 'resque-queue-priority'
 gem 'resque-sentry'
 gem 'resque-timeout'
-
+gem 'resque-web', require: 'resque_web'
 gem 'resque_mailer'
 
 gem 'omniauth'
