@@ -1,0 +1,7 @@
+<tr class="data-table__row" data-id="<%= notebook.id %>">
+  <td class="data-table__data"><%= notebook.id %></td>
+  <td class="data-table__data"><%= notebook.user.try(:email) %></td>
+  <td class="data-table__data"><%= notebook.notebook_identifier.upcase %></td>
+  <td class="data-table__data"><%= humanize(notebook.current_state) %></td>
+  <td class="data-table__data"><%= nice_date_for(notebook.try(:"#{notebook.current_state}_on")) %></td>
+</tr>

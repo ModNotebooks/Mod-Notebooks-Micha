@@ -17,7 +17,7 @@ body {
   font-weight: $base-font-weight;
   font-size:   $base-font-size;
   line-height: $base-line-height;
-  color:       $base-text-color;
+  color:       #fff;
   text-rendering: optimizeLegibility;
   @include font-smoothing;
   background-color: $color-partner-background;

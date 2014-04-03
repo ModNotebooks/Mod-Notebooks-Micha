@@ -1,0 +1,29 @@
+.l-header {
+  display: table;
+  width: 100%;
+  background: #2e2e2e;
+  height: 69px;
+}
+
+.l-header-part {
+  display: table-cell;
+  vertical-align: middle;
+  height: 100;
+  border-right: 1px solid #272727;
+
+  &:last-of-type { border-right: 0; }
+}
+
+.l-header-logo,
+.l-header-body,
+.l-header-button {
+  @extend .l-header-part;
+}
+
+.l-header-logo {
+  padding: 14px;
+}
+
+.l-header-body {
+  width: 100%;
+}

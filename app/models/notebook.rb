@@ -38,7 +38,10 @@ class Notebook < ActiveRecord::Base
   belongs_to :user
   has_many :pages, -> { order("position ASC") }, dependent: :destroy
   has_many :shares, as: :shareable
+
   acts_as_paranoid
+  paginates_per 50
+  max_paginates_per 100
 
   #-----------------------------------------------------------------------------
   # Validations
