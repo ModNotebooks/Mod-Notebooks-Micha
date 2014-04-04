@@ -1,9 +1,29 @@
 <% content_for(:header) do %>
-  <% form_tag partner_notebooks_path, method: 'get', html: { class: 'searchform' } do |f| %>
-    <%= text_field_tag :q, params[:q], placeholder: "Search", class: "searchform__input" %>
-    <button class="searchform__button">GO</button>
-  <% end %>
+  <div class="l-search-form js-search-tool">
+    <%= form_tag partner_notebooks_path, method: 'get', class: 'search-form' do |f| %>
+      <%= text_field_tag :q, params[:q], placeholder: "Search", class: "search-form__input" %>
+      <button class="search-form__button">
+        <i class="i-search"></i>
+      </button>
+    <% end %>
+  </div>
+
+  <div class="l-upload-form js-upload-tool" style="display: none;">
+    <form id="fileupload" class="upload-form" action="/notebooks/upload" method="POST" enctype="multipart/form-data">
+      <div class="upload-form__part">
+        <input type="text" class="upload-form__code" name="notebook[notebook_identifier]" placeholder="Notebook Code">
+      </div>
+      <div class="upload-form__filewrap">
+        <span class="upload-form__fakefile">Select a file</span>
+        <input type="file" name="notebook[pdf]" accept="application/pdf"/>
+      </div>
+    </form>
+  </div>
 <% end %>
+
+<div id="files">
+
+</div>
 
 <div class="l-notebooks">
   <table class="data-table">
@@ -23,3 +43,14 @@
 </div>
 
 <%= paginate @notebooks %>
+
+<script id="tmpl-upload" type="text/x-tmpl">
+  {% for (var i=0, file; file=o.files[i]; i++) { %}
+    <div class="pdf-upload">
+      <button class="pdf-upload__button js-cancel-button">&#10008;</button>
+      <span class="pdf-upload__name">{%= o.notebookIdentifier %} - {%= file.name %}</span>
+      <span class="pdf-upload__progress js-upload-progress">0%</span>
+      <div class="pdf-upload__progressbar js-upload-progressbar" width="0%"></div>
+    </div>
+  {% } %}
+</script>

@@ -1,10 +1,21 @@
 <header class="l-header">
   <div class="l-header-logo">
-    <a href="/">Logo</a>
+    <a href="/" class="logo"></a>
   </div>
   <div class="l-header-body">
     <%= yield(:header) %>
   </div>
-  <div class="l-header-button">Upload</div>
-  <div class="l-header-button">Logout</div>
+  <div class="l-header-button">
+    <a href="javascript:void(0);" class="js-search-toggle header-button" style="display: none;">
+      <i class="i-close"></i>
+    </a>
+    <a href="javascript:void(0);" class="js-upload-toggle header-button">
+      <i class="i-plus"></i>
+    </a>
+  </div>
+  <div class="l-header-button">
+    <a href="javascript:void(0);" class="header-button">
+      <i class="i-logout"></i>
+    </a>
+  </div>
 </header>

@@ -1,0 +1,73 @@
+.upload-form {
+  background: red;
+  @extend .clearfix;
+  position: relative;
+
+  input {
+    @include appearance(none);
+    border: none;
+    outline: none;
+    @extend %font-smoothing;
+  }
+}
+
+.upload-form__part {
+  float: left;
+  width: 50%;
+  height: 69px;
+  border-right: 1px solid #232323;
+
+  &:last-of-type { border-right: 0; }
+}
+
+.upload-form__filewrap {
+  @extend .upload-form__part;
+  position: relative;
+  overflow: hidden;
+
+  input[type="file"] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    opacity: 0;
+    direction: ltr;
+    font-size: 200px;
+    cursor: pointer;
+  }
+}
+
+.upload-form__code,
+.upload-form__fakefile {
+  background: #3b6069;
+  color: #86b0b9;
+  padding: 20px;
+  height: 100%;
+}
+
+.upload-form__code {
+  width: 100%;
+  color: #fff;
+
+  @include placeholder {
+    color: #86b0b9;
+  }
+}
+
+.upload-form__fakefile {
+  display: block;
+}
+
+.upload-form__submit {
+  @include appearance(none);
+  @extend %font-smoothing;
+  border: none;
+  outline: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding: 0 16px;
+  background: none;
+  color: #fff;
+}

@@ -21,9 +21,23 @@
 }
 
 .l-header-logo {
-  padding: 14px;
+  padding: 12px 14px;
 }
 
 .l-header-body {
   width: 100%;
+}
+
+.header-button {
+  display: block;
+  height: 69px;
+  padding: 0 40px;
+  position: relative;
+
+  i {
+    @extend %absolute-center;
+    opacity: .26;
+  }
+
+  &:hover { i { opacity: .5; } }
 }

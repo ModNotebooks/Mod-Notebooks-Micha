@@ -22,3 +22,11 @@ body {
   @include font-smoothing;
   background-color: $color-partner-background;
 }
+
+.logo {
+  display: block;
+  width: 35px;
+  height: 44px;
+  @include retina-image('partner-logo', 35px 44px, $asset-pipeline: true);
+  margin: 0 6px;
+}

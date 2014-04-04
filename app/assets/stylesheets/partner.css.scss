@@ -7,8 +7,12 @@
 @import "shared/utils/responsive-utils";
 
 @import "partner/base";
+@import "partner/icons";
 
 @import "partner/layouts/l-notebooks";
 @import "partner/layouts/l-header";
 
 @import "partner/components/data-table";
+@import "partner/components/pdf-upload";
+@import "partner/components/search-form";
+@import "partner/components/upload-form";
