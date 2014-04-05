@@ -78,7 +78,7 @@
 
       setTimeout(function() {
         data.context.remove();
-      }, 2000);
+      }, 4000);
     });
 
     $upload.on('fileuploadfail', function(e, data) {
@@ -104,5 +104,5 @@
     });
 
   });
-  
+
 }());

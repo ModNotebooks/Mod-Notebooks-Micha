@@ -85,7 +85,7 @@ Mod::Application.routes.draw do
   # Partner Section
   #-----------------------------------------------------------------------------
 
-  constraints subdomain: 'partners', defaults: { format: 'json' } do
+  constraints subdomain: 'management', defaults: { format: 'json' } do
     scope module: 'partner' do
       resources :notebooks, only: [:index, :update], as: :partner_notebooks do
         post 'upload', on: :collection
