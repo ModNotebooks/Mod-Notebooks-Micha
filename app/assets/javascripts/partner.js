@@ -91,7 +91,7 @@
         error = "Notebook could not be found or has not been submitted by a user.";
         break;
       case 422:
-        error = "Something is wrong with the PDF";
+        error = "Something is wrong with the PDF or the notebook has not been submitted by a user.";
         break;
       case 500:
         error = "Something is wrong on our end. Let us know.";

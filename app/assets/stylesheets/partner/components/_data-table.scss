@@ -19,8 +19,18 @@
   text-align: left;
 }
 
+.data-table__heading--right {
+  @extend .data-table__heading;
+  text-align: right;
+}
+
 .data-table__data {
   padding: 20px 14px;
   background: #272727;
   color: #808080;
+}
+
+.data-table__data--right {
+  @extend .data-table__data;
+  text-align: right;
 }

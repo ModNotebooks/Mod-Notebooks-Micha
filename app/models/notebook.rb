@@ -181,9 +181,18 @@ class Notebook < ActiveRecord::Base
     super || "Untitled"
   end
 
+  def can_return_or_recycle?
+    !available_transitions.include?(:submit)
+  end
+
   def return!
-    update(returned_on: DateTime.now) if n.handle_method.inquiry.return?
-    notebook_returned
+    if !returned? && !recycled? && handle_method.inquiry.return?
+      update(returned_on: DateTime.now)
+      notebook_returned
+      true
+    else
+      false
+    end
   end
 
   def returned?
@@ -193,8 +202,13 @@ class Notebook < ActiveRecord::Base
   def notebook_returned; end
 
   def recycle!
-    update(recycled_on: DateTime.now) if n.handle_method.inquiry.recycle?
-    notebook_recycled
+    if !returned? && !recycled? && handle_method.inquiry.recycle?
+      update(recycled_on: DateTime.now)
+      notebook_recycled
+      true
+    else
+      false
+    end
   end
 
   def recycled?

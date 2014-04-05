@@ -89,6 +89,8 @@ Mod::Application.routes.draw do
     scope module: 'partner' do
       resources :notebooks, only: [:index, :update], as: :partner_notebooks do
         post 'upload', on: :collection
+        post 'recycle', on: :member
+        post 'return', on: :member
       end
 
       get '/', to: 'notebooks#index'

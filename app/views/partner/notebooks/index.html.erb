@@ -25,6 +25,8 @@
 
 </div>
 
+<%= paginate @notebooks %>
+
 <div class="l-notebooks">
   <table class="data-table">
     <thead class="data-table__head">
@@ -34,6 +36,7 @@
         <th class="data-table__heading">Identifier</th>
         <th class="data-table__heading">Status</th>
         <th class="data-table__heading">Status Date</th>
+        <th class="data-table__heading--right">Return/Recycle</th>
       </tr>
     </thead>
     <tbody>
