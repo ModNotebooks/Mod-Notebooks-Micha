@@ -82,7 +82,6 @@ class Notebook < ActiveRecord::Base
   state_machine auto_scopes: true, initial: :created do
     state :created
     state :submitted
-    state :received
     state :uploaded
     state :processed
     state :available
@@ -93,12 +92,8 @@ class Notebook < ActiveRecord::Base
         guard: lambda { |n, user, options| n.user.blank? }
     end
 
-    event :receive, success: :notebook_received, timestamp: :received_on do
-      transitions to: :received, from: :submitted
-    end
-
-    event :upload, success: :notebook_received, timestamp: :uploaded_on do
-      transitions to: :uploaded, from: [:uploaded, :received, :processed, :available],
+    event :upload, success: :notebook_uploaded, timestamp: :uploaded_on do
+      transitions to: :uploaded, from: [:uploaded, :submitted, :processed, :available],
         on_transition: [:handle_upload]
     end
 
@@ -218,8 +213,6 @@ class Notebook < ActiveRecord::Base
   def notebook_recycled; end
 
   def notebook_submitted; end
-
-  def notebook_received; end
 
   def notebook_uploaded; end
 

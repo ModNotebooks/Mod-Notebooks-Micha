@@ -3,12 +3,12 @@ class Partner::NotebooksController < Partner::BaseController
   before_filter :find_notebook, only: [:return, :recycle]
 
   def index
-    @notebooks = (index_params.has_key?(:q) ? search(index_params.fetch(:q)) : Notebook).page(params[:page])
+    @notebooks = (index_params.has_key?(:q) ? search(index_params.fetch(:q)) : Notebook.order('updated_at DESC')).page(params[:page])
   end
 
   def upload
     begin
-      if @notebook.upload(upload_params.fetch(:pdf).tempfile)
+      if @notebook.upload!(upload_params.fetch(:pdf))
         head :ok
       else
         head :unprocessable_entity
@@ -44,7 +44,7 @@ class Partner::NotebooksController < Partner::BaseController
     end
 
     def upload_params
-      params.require(:notebook).permit(:notebook_identifier, :pdf)
+      params.require(:notebook).permit(:notebook_identifier, pdf: {})
     end
 
     def handle_params
