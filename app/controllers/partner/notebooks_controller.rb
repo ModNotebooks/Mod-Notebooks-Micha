@@ -8,7 +8,7 @@ class Partner::NotebooksController < Partner::BaseController
 
   def upload
     begin
-      if @notebook.upload!(upload_params.fetch(:pdf))
+      if @notebook.update(pdf: upload_params.fetch(:pdf))
         head :ok
       else
         head :unprocessable_entity
@@ -44,7 +44,7 @@ class Partner::NotebooksController < Partner::BaseController
     end
 
     def upload_params
-      params.require(:notebook).permit(:notebook_identifier, pdf: {})
+      params.require(:notebook).permit(:notebook_identifier, :pdf)
     end
 
     def handle_params
