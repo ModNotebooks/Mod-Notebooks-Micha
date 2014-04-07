@@ -25,11 +25,11 @@ Core.Notebook = (function() {
 
     available: function() {
       return this.get('state') === "available";
-    }.property(),
+    }.property('state'),
 
     unavailable: function() {
       return this.get('state') !== "available";
-    }.property()
+    }.property('state')
   });
 
 }());

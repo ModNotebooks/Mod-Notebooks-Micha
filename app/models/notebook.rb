@@ -16,6 +16,14 @@
 #  pages_count         :integer          default(0)
 #  deleted_at          :datetime
 #  handle_method       :string(255)
+#  state               :string(255)
+#  submitted_on        :datetime
+#  received_on         :datetime
+#  uploaded_on         :datetime
+#  processed_on        :datetime
+#  returned_on         :datetime
+#  recycled_on         :datetime
+#  available_on        :datetime
 #
 
 class Notebook < ActiveRecord::Base
@@ -79,7 +87,7 @@ class Notebook < ActiveRecord::Base
   # State Machine
   #-----------------------------------------------------------------------------
 
-  state_machine auto_scopes: true, initial: :created do
+  state_machine initial: :created, auto_scopes: true do
     state :created
     state :submitted
     state :uploaded

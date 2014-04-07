@@ -9,7 +9,7 @@
       </div>
       {{#each arrangedContent}}
         <div class="l-grid-item--notebook js-grid-item">
-          {{#link-to 'notebook' this class="notebook" classNameBindings="color" disabled=notProcessed}}
+          {{#link-to 'notebook' this class="notebook" classNameBindings="color" disabled=unavailable}}
             {{partial 'partials/notebook'}}
           {{/link-to}}
         </div>
