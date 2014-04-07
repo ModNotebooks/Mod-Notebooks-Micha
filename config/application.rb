@@ -33,7 +33,7 @@ module Mod
     config.handlebars.templates_root = ['app/templates', 'settings/templates', 'core/templates', 'partner/templates']
 
     # Add extra manifests for precompilation
-    config.assets.precompile += %w(head.js partner.js jquery.js)
+    config.assets.precompile += %w(head.js partner.js partner.css jquery.js)
 
     # include Bower components in compiled assets
     config.assets.paths << Rails.root.join('vendor', 'assets', 'bower')
