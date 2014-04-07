@@ -2,15 +2,29 @@ require "resque_web"
 
 Mod::Application.routes.draw do
 
+  #-----------------------------------------------------------------------------
+  # AUTH
+  #-----------------------------------------------------------------------------
+
+  constraints subdomain: 'auth' do
+    use_doorkeeper
+  end
+
+  #-----------------------------------------------------------------------------
+  # Callbacks / Webhooks
+  #-----------------------------------------------------------------------------
+
   constraints subdomain: 'callback' do
     scope module: 'blitline' do
       post '/notebooks/:id/blitline', to: 'notebooks#blitline', as: :notebook_processed
     end
   end
 
-  constraints subdomain: 'app' do
-    use_doorkeeper
+  #-----------------------------------------------------------------------------
+  # Client Application
+  #-----------------------------------------------------------------------------
 
+  constraints subdomain: 'app' do
     # Login, signup, and settings are all handled through the API so ignore those controllers
     # the only things that happens outside of the API are confirming, unlocking,
     # and resetting passwords on accounts
@@ -48,16 +62,14 @@ Mod::Application.routes.draw do
     end
   end
 
-  constraints subdomain: 'api', defaults: { format: 'json' } do
-    use_doorkeeper do
-      # The only thing allowed through the API oauth wise is requesting access tokens
-      skip_controllers :applications, :authorized_applications, :authorizations
-    end
+  #-----------------------------------------------------------------------------
+  # API
+  #-----------------------------------------------------------------------------
 
+  constraints subdomain: 'api', defaults: { format: 'json' } do
     scope module: 'api/v1', constraints: ApiConstraints.new(version: 1, default: :true) do
       resources :shares, param: :token, only: [:create, :show, :destroy]
       resources :notebooks, only: [:index, :create, :show, :update] do
-        post 'upload', on: :collection
         post 'exists', on: :collection
       end
       resources :services, only: [:index, :create, :show, :update, :destroy]
@@ -67,7 +79,22 @@ Mod::Application.routes.draw do
       resources :preferences, only: [:show, :update], constraints: { id: 'me' }, as: 'me'
       resources :addresses, only: [:show, :update], constraints: { id: 'me' }, as: 'me'
     end
+  end
 
+  #-----------------------------------------------------------------------------
+  # Partner Section
+  #-----------------------------------------------------------------------------
+
+  constraints subdomain: 'manage', defaults: { format: 'json' } do
+    scope module: 'partner' do
+      resources :notebooks, only: [:index, :update], as: :partner_notebooks do
+        post 'upload', on: :collection
+        post 'recycle', on: :member
+        post 'return', on: :member
+      end
+
+      get '/', to: 'notebooks#index'
+    end
   end
 
 end

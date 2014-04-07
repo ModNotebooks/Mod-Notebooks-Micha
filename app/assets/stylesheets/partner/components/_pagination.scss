@@ -1,0 +1,15 @@
+.pagination {
+  padding: 7px 14px;
+  background: #2e2e2e;
+  text-align: center;
+  font-weight: 500;
+  border-top: 1px solid #232323;
+
+  a {
+    color: #a5a5a5;
+    text-decoration: none;
+    padding: 0 14px;
+
+    &:hover { color: #fff; }
+  }
+}

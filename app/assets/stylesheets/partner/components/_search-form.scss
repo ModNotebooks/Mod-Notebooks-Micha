@@ -1,0 +1,41 @@
+.search-form {
+  background: red;
+  height: 69px;
+  position: relative;
+}
+
+.search-form__input {
+  @include appearance(none);
+  border: none;
+  outline: none;
+  vertical-align: middle;
+  height: 100%;
+  width: 100%;
+  padding: 0 16px;
+  background: #2e2e2e;
+  @extend %font-smoothing;
+  color: #fff;
+  @include font-size(18px);
+
+  &:focus { background: #353535; }
+}
+
+.search-form__button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding: 0 30px;
+  @include appearance(none);
+  border: none;
+  outline: none;
+  background: none;
+  color: #fff;
+  @extend %font-smoothing;
+
+  i { opacity: .26; }
+
+  &:hover {
+    i { opacity: .5; }
+  }
+}

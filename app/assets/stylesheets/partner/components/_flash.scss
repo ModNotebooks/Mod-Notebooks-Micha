@@ -1,0 +1,29 @@
+.flash {
+  padding: 15px;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+}
+
+.flash--success,
+.flash--warning,
+.flash--error {
+  @extend .flash;
+}
+
+.flash--warning {
+  background: #fcf8e3;
+  border-color: #faebcc;
+  color: #8a6d3b;
+}
+
+.flash--success {
+  background: #dff0d8;
+  border-color: #d6e9c6;
+  color: #3c763d;
+}
+
+.flash--error {
+  background: #f2dede;
+  border-color: #ebccd1;
+  color: #a94442;
+}

@@ -19,15 +19,7 @@ Core.ApplicationSerializer = DS.ActiveModelSerializer.extend({
   }
 });
 
-Core.NotebookSerializer = Core.ApplicationSerializer.extend({
-  normalizeHash: {
-    notebooks: function(hash) {
-      hash.currState = hash.current_state;
-      delete hash.current_state;
-      return hash;
-    }
-  }
-});
+Core.NotebookSerializer = Core.ApplicationSerializer.extend({});
 
 Core.PreferencesSerializer = Core.ApplicationSerializer.extend({
   normalizeId: function(hash) {

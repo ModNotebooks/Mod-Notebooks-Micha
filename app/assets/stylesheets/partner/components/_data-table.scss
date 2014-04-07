@@ -1,0 +1,36 @@
+.data-table {
+  background: red;
+  width: 100%;
+}
+
+.data-table__row {
+  border-top: 1px solid #232323;
+  border-bottom: 1px solid #232323;
+}
+
+.data-table__head {
+  background: #2e2e2e;
+  color: #a5a5a5;
+}
+
+.data-table__heading {
+  padding: 7px 14px;
+  font-weight: 500;
+  text-align: left;
+}
+
+.data-table__heading--right {
+  @extend .data-table__heading;
+  text-align: right;
+}
+
+.data-table__data {
+  padding: 20px 14px;
+  background: #272727;
+  color: #808080;
+}
+
+.data-table__data--right {
+  @extend .data-table__data;
+  text-align: right;
+}

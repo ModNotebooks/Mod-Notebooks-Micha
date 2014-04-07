@@ -29,6 +29,8 @@
   }
 }
 
+.clearfix { @include clearfix; }
+
 %font-smoothing {
   @include font-smoothing;
 }

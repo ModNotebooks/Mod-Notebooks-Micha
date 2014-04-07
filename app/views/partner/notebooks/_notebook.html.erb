@@ -1,0 +1,20 @@
+<tr class="data-table__row" data-id="<%= notebook.id %>">
+  <td class="data-table__data"><%= notebook.id %></td>
+  <td class="data-table__data"><%= notebook.user.try(:email) %></td>
+  <td class="data-table__data"><%= notebook.notebook_identifier.upcase %></td>
+  <td class="data-table__data"><%= humanize(notebook.current_state) %></td>
+  <td class="data-table__data"><%= nice_date_for(notebook.try(:"#{notebook.current_state}_on") || notebook.created_at) %></td>
+  <td class="data-table__data--right">
+    <% if notebook.returned? %>
+      Returned on: <%= nice_date_for(notebook.returned_on) %>
+    <% elsif notebook.recycled? %>
+      Recycled on: <%= nice_date_for(notebook.recycled_on) %>
+    <% elsif notebook.can_return_or_recycle? %>
+      <% if notebook.handle_method.inquiry.return? %>
+        <%= link_to "Return", return_partner_notebook_path(notebook), class: 'button--tableaction', method: 'post' %>
+      <% else %>
+        <%= link_to "Recycle", recycle_partner_notebook_path(notebook), class: 'button--tableaction', method: 'post' %>
+      <% end %>
+    <% end %>
+  </td>
+</tr>

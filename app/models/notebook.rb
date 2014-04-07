@@ -16,6 +16,14 @@
 #  pages_count         :integer          default(0)
 #  deleted_at          :datetime
 #  handle_method       :string(255)
+#  state               :string(255)
+#  submitted_on        :datetime
+#  received_on         :datetime
+#  uploaded_on         :datetime
+#  processed_on        :datetime
+#  returned_on         :datetime
+#  recycled_on         :datetime
+#  available_on        :datetime
 #
 
 class Notebook < ActiveRecord::Base
@@ -38,7 +46,10 @@ class Notebook < ActiveRecord::Base
   belongs_to :user
   has_many :pages, -> { order("position ASC") }, dependent: :destroy
   has_many :shares, as: :shareable
+
   acts_as_paranoid
+  paginates_per 50
+  max_paginates_per 100
 
   #-----------------------------------------------------------------------------
   # Validations
@@ -76,10 +87,9 @@ class Notebook < ActiveRecord::Base
   # State Machine
   #-----------------------------------------------------------------------------
 
-  state_machine auto_scopes: true, initial: :created do
+  state_machine initial: :created, auto_scopes: true do
     state :created
     state :submitted
-    state :received
     state :uploaded
     state :processed
     state :available
@@ -90,12 +100,8 @@ class Notebook < ActiveRecord::Base
         guard: lambda { |n, user, options| n.user.blank? }
     end
 
-    event :receive, success: :notebook_received, timestamp: :received_on do
-      transitions to: :received, from: :submitted
-    end
-
-    event :upload, success: :notebook_received, timestamp: :uploaded_on do
-      transitions to: :uploaded, from: [:uploaded, :received, :processed, :available],
+    event :upload, success: :notebook_uploaded, timestamp: :uploaded_on do
+      transitions to: :uploaded, from: [:uploaded, :submitted, :processed, :available],
         on_transition: [:handle_upload]
     end
 
@@ -178,9 +184,18 @@ class Notebook < ActiveRecord::Base
     super || "Untitled"
   end
 
+  def can_return_or_recycle?
+    !available_transitions.include?(:submit)
+  end
+
   def return!
-    update(returned_on: DateTime.now) if n.handle_method.inquiry.return?
-    notebook_returned
+    if !returned? && !recycled? && handle_method.inquiry.return?
+      update(returned_on: DateTime.now)
+      notebook_returned
+      true
+    else
+      false
+    end
   end
 
   def returned?
@@ -190,8 +205,13 @@ class Notebook < ActiveRecord::Base
   def notebook_returned; end
 
   def recycle!
-    update(recycled_on: DateTime.now) if n.handle_method.inquiry.recycle?
-    notebook_recycled
+    if !returned? && !recycled? && handle_method.inquiry.recycle?
+      update(recycled_on: DateTime.now)
+      notebook_recycled
+      true
+    else
+      false
+    end
   end
 
   def recycled?
@@ -201,8 +221,6 @@ class Notebook < ActiveRecord::Base
   def notebook_recycled; end
 
   def notebook_submitted; end
-
-  def notebook_received; end
 
   def notebook_uploaded; end
 

@@ -1,0 +1,26 @@
+.button {
+  display: inline-block;
+  vertical-align: middle;
+  text-decoration: none;
+  color: #fff;
+  background: #f2c21a;
+  color: #9f9f9f;
+  font-weight: 800;
+  padding: 0 12px;
+  color: #423400;
+  border-radius: 2px;
+
+  &:hover {
+    background: lighten(#f2c21a, 5%);
+  }
+
+  &:active {
+    @include transform(translateY(1px));
+  }
+}
+
+.button--tableaction {
+  @extend .button;
+  @include font-size(12px);
+  text-transform: uppercase;
+}
