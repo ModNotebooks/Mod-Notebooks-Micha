@@ -1,12 +1,11 @@
-class NotebookPDFUploader < PDFUploader
+class NotebookPDFUploader < CarrierWave::Uploader::Base
+  include CarrierWaveDirect::Uploader
 
-  def filename
-    "#{secure_token}.#{file.extension}" if original_filename.present?
+  def store_dir
+    "uploads/#{model.class.to_s.underscore}/#{mounted_as}"
   end
 
-  protected
-    def secure_token
-      var = :"@#{mounted_as}_secure_token"
-      model.instance_variable_get(var) or model.instance_variable_set(var, super)
-    end
+  def extension_white_list
+    %w(pdf)
+  end
 end

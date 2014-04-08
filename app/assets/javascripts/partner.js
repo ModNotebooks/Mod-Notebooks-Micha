@@ -37,13 +37,32 @@
 
   $(document).ready(function() {
 
-    var $upload = $('#fileupload').fileupload({
+    var $upload = $('.js-pdf-upload').fileupload({
       acceptFileTypes: /(\.|\/)(pdf)$/i,
+
+
+
+      submit: function(e, data) {
+        var $this = $(this);
+
+        $.get('/uploads/form', {
+          dataType: 'json',
+          cache: false
+        }).done(function(resp) {
+          data.url = resp.action;
+          delete resp.action
+          // console.log(data);
+          data.formData = resp;
+          $this.fileupload('send', data);
+        });
+
+        return false;
+      }
     });
 
     $upload.on('fileuploadadd', function (e, data) {
       var $form = data.form;
-      data.notebookIdentifier = $.trim( $form.find("[name='notebook[notebook_identifier]']").val() );
+      // data.notebookIdentifier = $.trim( $form.find("[name='notebook[notebook_identifier]']").val() );
       data.context = $(tmpl("tmpl-upload", data)).appendTo('#files')
 
       $('.js-cancel-button').on('click', function() {
@@ -53,16 +72,7 @@
     });
 
     $upload.bind('fileuploadsubmit', function(e, data) {
-      data.formData = data.form.serializeArray();
-      data.form.get(0).reset();
 
-      if (data.notebookIdentifier === "") {
-        data.abort();
-        data.context.remove();
-        return false;
-      } else {
-        return true;
-      }
     });
 
     $upload.on('fileuploadprogress', function(e, data) {
@@ -76,6 +86,8 @@
       $('.js-upload-progressbar', data.context).css('width', '100%');
       data.context.addClass('is-done');
 
+      console.log($(data.result).find('Key').text());
+
       setTimeout(function() {
         data.context.remove();
       }, 4000);
@@ -85,6 +97,7 @@
       var error = "Error occurred",
           status = data.jqXHR ? data.jqXHR.status : 404;
 
+      console.log("ERROR", e, data);
 
       switch(status) {
       case 404:

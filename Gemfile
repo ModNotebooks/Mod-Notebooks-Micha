@@ -41,6 +41,7 @@ gem 'jquery-rails'
 gem 'rack-cors', require: 'rack/cors'
 
 gem 'carrierwave'
+gem 'carrierwave_direct'
 # gem 'carrierwave-imageoptimizer'
 gem 'blitline', github: 'erickreutz/blitline', branch: 'group_completion_job_id'
 

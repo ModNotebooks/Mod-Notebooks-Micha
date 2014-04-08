@@ -3,6 +3,9 @@ class Partner::NotebooksController < Partner::BaseController
   before_filter :find_notebook, only: [:return, :recycle]
 
   def index
+    @uploader = Notebook.new.pdf
+    @uploader.success_action_redirect = '201'
+
     @notebooks = (index_params.has_key?(:q) ? search(index_params.fetch(:q)) : Notebook.order('updated_at DESC')).page(params[:page])
   end
 

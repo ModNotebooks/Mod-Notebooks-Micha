@@ -93,6 +93,8 @@ Mod::Application.routes.draw do
         post 'return', on: :member
       end
 
+      get '/uploads/form', to: 'uploads#form'
+
       get '/', to: 'notebooks#index'
     end
   end
