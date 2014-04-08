@@ -15,6 +15,8 @@
 //= require jquery-file-upload/js/jquery.iframe-transport
 //= require jquery-file-upload/js/jquery.fileupload
 //= require jquery_ujs
+//= require underscore/underscore
+//= require_tree ./partner
 //= require_self
 
 (function() {
@@ -40,20 +42,12 @@
     var $upload = $('.js-pdf-upload').fileupload({
       acceptFileTypes: /(\.|\/)(pdf)$/i,
 
-
-
       submit: function(e, data) {
         var $this = $(this);
 
-        $.get('/uploads/form', {
-          dataType: 'json',
-          cache: false
-        }).done(function(resp) {
-          data.url = resp.action;
-          delete resp.action
-          // console.log(data);
-          data.formData = resp;
-          $this.fileupload('send', data);
+        var upload = new NotebookUpload(data, $this);        
+        upload.submit().fail(function() {
+          upload.abort();
         });
 
         return false;
@@ -62,17 +56,13 @@
 
     $upload.on('fileuploadadd', function (e, data) {
       var $form = data.form;
-      // data.notebookIdentifier = $.trim( $form.find("[name='notebook[notebook_identifier]']").val() );
+      data.notebookIdentifier = $.trim( $form.find("[name=notebook_identifier]").val() );
       data.context = $(tmpl("tmpl-upload", data)).appendTo('#files')
 
       $('.js-cancel-button').on('click', function() {
         data.abort();
         data.context.remove();
       });
-    });
-
-    $upload.bind('fileuploadsubmit', function(e, data) {
-
     });
 
     $upload.on('fileuploadprogress', function(e, data) {
@@ -86,8 +76,6 @@
       $('.js-upload-progressbar', data.context).css('width', '100%');
       data.context.addClass('is-done');
 
-      console.log($(data.result).find('Key').text());
-
       setTimeout(function() {
         data.context.remove();
       }, 4000);
@@ -96,8 +84,6 @@
     $upload.on('fileuploadfail', function(e, data) {
       var error = "Error occurred",
           status = data.jqXHR ? data.jqXHR.status : 404;
-
-      console.log("ERROR", e, data);
 
       switch(status) {
       case 404:
