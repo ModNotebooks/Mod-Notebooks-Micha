@@ -231,7 +231,8 @@ class Notebook < ActiveRecord::Base
   end
 
   def handle_upload(upload)
-    update(pdf: upload)
+    Rails.logger.info "HANDLE UPLOAD #{upload}"
+    upload.is_a?(String) ? update_columns(pdf: upload) : update(pdf: upload)
   end
 
   def handle_submission(user, options = {})

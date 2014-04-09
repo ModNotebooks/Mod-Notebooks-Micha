@@ -87,11 +87,13 @@ Mod::Application.routes.draw do
 
   constraints subdomain: 'manage', defaults: { format: 'json' } do
     scope module: 'partner' do
-      resources :notebooks, only: [:index, :update], as: :partner_notebooks do
-        post 'upload', on: :collection
+      resources :notebooks, only: [:index, :update, :show], as: :partner_notebooks do
+        post 'upload', on: :member
         post 'recycle', on: :member
         post 'return', on: :member
       end
+
+      get '/uploads/form', to: 'uploads#form'
 
       get '/', to: 'notebooks#index'
     end

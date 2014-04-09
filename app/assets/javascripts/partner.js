@@ -15,6 +15,8 @@
 //= require jquery-file-upload/js/jquery.iframe-transport
 //= require jquery-file-upload/js/jquery.fileupload
 //= require jquery_ujs
+//= require underscore/underscore
+//= require_tree ./partner
 //= require_self
 
 (function() {
@@ -37,32 +39,30 @@
 
   $(document).ready(function() {
 
-    var $upload = $('#fileupload').fileupload({
+    var $upload = $('.js-pdf-upload').fileupload({
       acceptFileTypes: /(\.|\/)(pdf)$/i,
+
+      submit: function(e, data) {
+        var $this = $(this);
+
+        var upload = new NotebookUpload(data, $this);        
+        upload.submit().fail(function() {
+          upload.abort();
+        });
+
+        return false;
+      }
     });
 
     $upload.on('fileuploadadd', function (e, data) {
       var $form = data.form;
-      data.notebookIdentifier = $.trim( $form.find("[name='notebook[notebook_identifier]']").val() );
+      data.notebookIdentifier = $.trim( $form.find("[name=notebook_identifier]").val() );
       data.context = $(tmpl("tmpl-upload", data)).appendTo('#files')
 
       $('.js-cancel-button').on('click', function() {
         data.abort();
         data.context.remove();
       });
-    });
-
-    $upload.bind('fileuploadsubmit', function(e, data) {
-      data.formData = data.form.serializeArray();
-      data.form.get(0).reset();
-
-      if (data.notebookIdentifier === "") {
-        data.abort();
-        data.context.remove();
-        return false;
-      } else {
-        return true;
-      }
     });
 
     $upload.on('fileuploadprogress', function(e, data) {
@@ -84,7 +84,6 @@
     $upload.on('fileuploadfail', function(e, data) {
       var error = "Error occurred",
           status = data.jqXHR ? data.jqXHR.status : 404;
-
 
       switch(status) {
       case 404:

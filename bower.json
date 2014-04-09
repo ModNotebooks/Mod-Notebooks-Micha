@@ -13,6 +13,7 @@
     "emberjs-touch": "https://github.com/JamesHight/emberjs-touch.git",
     "swipe": "https://github.com/erickreutz/Swipe.git#slide_selector",
     "viewport-units-buggyfill": "~0.2.3",
-    "jquery-file-upload": "~9.5.7"
+    "jquery-file-upload": "~9.5.7",
+    "underscore": "~1.6.0"
   }
 }

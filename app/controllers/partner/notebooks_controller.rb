@@ -1,20 +1,35 @@
 class Partner::NotebooksController < Partner::BaseController
-  before_filter :find_notebook_by_notebook_identifier, only: [:upload]
-  before_filter :find_notebook, only: [:return, :recycle]
+
+  before_filter :find_notebook, only: [:return, :recycle, :upload]
+
+  respond_to :html, :json
 
   def index
-    @notebooks = (index_params.has_key?(:q) ? search(index_params.fetch(:q)) : Notebook.order('updated_at DESC')).page(params[:page])
+    @notebooks = (index_params.has_key?(:q) ? search(index_params.fetch(:q))
+                                            : Notebook.order('updated_at DESC')).page(params[:page])
+  end
+
+  def show
+    id = show_params.fetch(:id).downcase
+
+    if id.match(Patterns::NOTEBOOK_IDENTIFIER_PATTERN)
+      @notebook = Notebook.find_by_notebook_identifier!(id.downcase)
+    else
+      @notebook = Notebook.find(id)
+    end
+
+    respond_with @notebook
   end
 
   def upload
     begin
-      if @notebook.update(pdf: upload_params.fetch(:pdf))
-        head :ok
+      if @notebook.upload!(upload_params.fetch(:pdf))
+        respond_with @notebook, status: :ok
       else
-        head :unprocessable_entity
+        respond_with @notebook, status: :unprocessable_entity
       end
     rescue Transitions::InvalidTransition => e
-      head :unprocessable_entity
+      respond_with @notebook, status: :unprocessable_entity
     end
   end
 
@@ -43,16 +58,16 @@ class Partner::NotebooksController < Partner::BaseController
       params.permit(:page, :utf8, :q)
     end
 
-    def upload_params
-      params.require(:notebook).permit(:notebook_identifier, :pdf)
-    end
-
-    def handle_params
+    def show_params
       params.permit(:id)
     end
 
+    def upload_params
+      params.require(:notebook).permit(:pdf)
+    end
+
     def find_notebook
-      @notebook = Notebook.reserved.find(handle_params.fetch(:id))
+      @notebook = Notebook.reserved.find(params[:id])
     end
 
     def find_notebook_by_notebook_identifier
