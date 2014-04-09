@@ -62,11 +62,6 @@ class Service < ActiveRecord::Base
     allow_nil: true,
     allow_blank: true
 
-  validates :uid,
-    presence: true,
-    uniqueness: { case_sensitive: false }
-
-
   #-----------------------------------------------------------------------------
   # Scopes
   #-----------------------------------------------------------------------------

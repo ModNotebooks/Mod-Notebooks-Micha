@@ -43,7 +43,7 @@ class DropboxSyncer < Syncer
       # If the existing folder does not exsist
       # make a new one
 
-      existing_names = existing.collect { |f| f.downcase.sub(/^\//i, '') }
+      existing_names = existing.collect { |f| f.path.downcase.sub(/^\//i, '') }
       name     = notebook.name
       date     = notebook.submitted_on || notebook.created_at
 
