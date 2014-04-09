@@ -3,7 +3,7 @@
 <body>
   <script>
     try {
-      window.opener.Core.ServiceConnector.serviceConnectionSucceeded(<%= raw @auth_hash.to_json %>);
+      window.opener.Core.ServiceConnector.serviceConnectionSucceeded(<%= raw ActiveSupport::JSON.encode(@auth_hash) %>);
     } catch(e) { window.opener.console.error(e); }
     finally { window.close(); }
   </script>
