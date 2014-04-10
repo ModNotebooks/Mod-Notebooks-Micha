@@ -202,7 +202,9 @@ class Notebook < ActiveRecord::Base
     returned_on.present?
   end
 
-  def notebook_returned; end
+  def notebook_returned
+    NotebooksMailer.notebook_returned(user.id, id).deliver
+  end
 
   def recycle!
     if !returned? && !recycled? && handle_method.inquiry.recycle?
@@ -227,11 +229,10 @@ class Notebook < ActiveRecord::Base
   def notebook_processed; end
 
   def notebook_available
-    # TODO: Send email that a notebook is complete
+    NotebooksMailer.notebook_available(user.id, id).deliver
   end
 
   def handle_upload(upload)
-    Rails.logger.info "HANDLE UPLOAD #{upload}"
     upload.is_a?(String) ? update_columns(pdf: upload) : update(pdf: upload)
   end
 
