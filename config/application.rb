@@ -8,6 +8,7 @@ Bundler.require(:default, Rails.env)
 
 module Mod
   class Application < Rails::Application
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -52,6 +53,10 @@ module Mod
         '.eot',  '.otf', '.svc', '.woff', '.ttf',         # Fonts
       ]
     end)
+
+    # Skylight
+    config.skylight.environments << 'staging'
+    config.skylight.probes = %w(net_http excon)
 
     config.to_prepare do
       DeviseController.respond_to :json
