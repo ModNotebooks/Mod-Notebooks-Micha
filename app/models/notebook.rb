@@ -33,8 +33,8 @@ class Notebook < ActiveRecord::Base
   # Resque needs a queue
   @queue = :default
 
-  COLORS        = { "01" => "gray" }
-  PAPER_TYPES   = { "01" => "blank", "02" => "lined", "03" => "dotgrid" }
+  COLORS        = { "01" => "gray", "02" => "red", "03" => "black" }
+  PAPER_TYPES   = { "01" => "plain", "02" => "lined", "03" => "dotgrid" }
   HANDLE_METHOD = ["return", "recycle"]
 
   store_accessor :meta, :evernote_guid, :dropbox_folder_rev
