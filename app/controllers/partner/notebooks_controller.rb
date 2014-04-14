@@ -1,4 +1,5 @@
 class Partner::NotebooksController < Partner::BaseController
+  helper_method :sort_column, :sort_direction, :query
 
   before_filter :find_notebook, only: [:return, :recycle, :upload]
 
@@ -6,7 +7,10 @@ class Partner::NotebooksController < Partner::BaseController
 
   def index
     @notebooks = (index_params.has_key?(:q) ? search(index_params.fetch(:q))
-                                            : Notebook.order('updated_at DESC')).page(params[:page])
+                                            : Notebook)
+
+    @notebooks = @notebooks.order(sort_column + " " + sort_direction)
+    @notebooks = @notebooks.page(params[:page])
   end
 
   def show
@@ -54,6 +58,18 @@ class Partner::NotebooksController < Partner::BaseController
   end
 
   private
+    def sort_column
+      Notebook.column_names.include?(params[:sort]) ? params[:sort] : "updated_at"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
+    end
+
+    def query
+      params[:q]
+    end
+
     def index_params
       params.permit(:page, :utf8, :q)
     end
@@ -74,7 +90,11 @@ class Partner::NotebooksController < Partner::BaseController
       @notebook = Notebook.find_by_notebook_identifier!(upload_params.fetch(:notebook_identifier).downcase)
     end
 
-    def search(query)
-      Notebook.reserved.fuzzy_search(query)
+    def search(q)
+      if q["@"]
+        Notebook.joins(:user).reserved.fuzzy_search({ users: { email: q.downcase }})
+      else
+        Notebook.includes(:user).reserved.fuzzy_search(q.downcase)
+      end
     end
 end

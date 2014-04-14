@@ -23,10 +23,10 @@
   <table class="data-table">
     <thead class="data-table__head">
       <tr class="data-table__row">
-        <th class="data-table__heading">ID</th>
+        <th class="data-table__heading"><%= sortable "id", "ID" %></th>
         <th class="data-table__heading">User</th>
-        <th class="data-table__heading">Identifier</th>
-        <th class="data-table__heading">Status</th>
+        <th class="data-table__heading"><%= sortable "notebook_identifier", "Identifier" %></th>
+        <th class="data-table__heading"><%= sortable "state", "Status" %></th>
         <th class="data-table__heading">Status Date</th>
         <th class="data-table__heading--right">Return/Recycle</th>
       </tr>
