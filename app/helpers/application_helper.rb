@@ -8,4 +8,14 @@ module ApplicationHelper
   def title(page_title)
     content_for(:title) { "Mod: #{page_title}" }
   end
+
+  def sortable(column, title=nil)
+    title ||= column.titleize
+    css_class = column == sort_column ? "current #{sort_direction}" : nil
+    direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
+    options   = { sort: column, direction: direction }
+    options[:q] = query if query
+
+    link_to title, options, { class: css_class }
+  end
 end
