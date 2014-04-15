@@ -1,6 +1,6 @@
 class Partner::NotebooksController < Partner::BaseController
 
-  before_filter :find_notebook, only: [:return, :recycle, :upload]
+  before_filter :find_notebook, only: [:return, :recycle, :upload, :pend]
 
   respond_to :html, :json
 
@@ -53,9 +53,19 @@ class Partner::NotebooksController < Partner::BaseController
     redirect_to request.referer
   end
 
+  def pend
+    if @notebook.pend!
+      flash[:success] = "Notebook pended."
+    else
+      flash[:warning] = "Notebook could not be pended."
+    end
+
+    redirect_to request.referer
+  end
+
   private
     def index_params
-      params.permit(:page, :utf8, :q)
+      params.permit(:page, :utf8, :q, :direction, :sort)
     end
 
     def show_params
