@@ -3,15 +3,14 @@
   vertical-align: middle;
   text-decoration: none;
   color: #fff;
-  background: #f2c21a;
-  color: #9f9f9f;
+  background: #65aaac;
   font-weight: 800;
   padding: 0 12px;
-  color: #423400;
+  color: #272727;
   border-radius: 2px;
 
   &:hover {
-    background: lighten(#f2c21a, 5%);
+    background: lighten(#65aaac, 10%);
   }
 
   &:active {
