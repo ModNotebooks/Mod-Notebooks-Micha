@@ -8,20 +8,27 @@ App.DigitizeConfirmationController = Ember.ObjectController.extend({
       var _this = this;
       var notebookIdentifier = this.get('controllers.digitizeCode.code');
       var notebookName       = this.get('controllers.digitizeCode.name');
-      var handleMethod       = this.get('controllers.digitizeScan.handleMethodName');
+      var handleMethodName   = this.get('controllers.digitizeScan.handleMethodName');
+      var handleMethod       = this.get('controllers.digitizeScan.handleMethod');
 
       if (notebookIdentifier && handleMethod) {
         var notebook = this.get('content');
 
         notebook.setProperties({
           'notebookIdentifier': notebookIdentifier,
-          'handleMethod': handleMethod,
+          'handleMethod': handleMethodName,
           'name': notebookName
         });
 
         notebook.save().then(function() {
           _this.set('isLoading', false);
           _this.transitionToRoute('notebooks');
+
+          if (notebook.get('handleMethod') === 'return') {
+            Core.NotebookReturn.create().submit();
+          } else if (handleMethod === "2") {
+            window.open(window.ENV.STORE_ENDPOINT + '#order');
+          }
         }, function(err) {
           _this.set('isLoading', false);
         });
