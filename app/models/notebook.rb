@@ -220,6 +220,14 @@ class Notebook < ActiveRecord::Base
     recycled_on.present?
   end
 
+  def pend!
+    if returned? || recycled?
+      !!update(recycled_on: nil, returned_on: nil)
+    else
+      false
+    end
+  end
+
   def notebook_recycled; end
 
   def notebook_submitted; end

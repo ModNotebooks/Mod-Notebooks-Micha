@@ -5,10 +5,8 @@
   <td class="data-table__data"><%= humanize(notebook.current_state) %></td>
   <td class="data-table__data"><%= nice_date_for(notebook.try(:"#{notebook.current_state}_on") || notebook.created_at) %></td>
   <td class="data-table__data--right">
-    <% if notebook.returned? %>
-      Returned on: <%= nice_date_for(notebook.returned_on) %>
-    <% elsif notebook.recycled? %>
-      Recycled on: <%= nice_date_for(notebook.recycled_on) %>
+    <% if notebook.returned? || notebook.recycled? %>
+      <%= link_to "Pend", pend_partner_notebook_path(notebook), class: 'button--tableaction', method: 'post' %>
     <% elsif notebook.can_return_or_recycle? %>
       <% if notebook.handle_method.inquiry.return? %>
         <%= link_to "Return", return_partner_notebook_path(notebook), class: 'button--tableaction', method: 'post' %>

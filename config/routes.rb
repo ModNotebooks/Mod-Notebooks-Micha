@@ -91,6 +91,7 @@ Mod::Application.routes.draw do
         post 'upload', on: :member
         post 'recycle', on: :member
         post 'return', on: :member
+        post 'pend', on: :member
       end
 
       get '/uploads/form', to: 'uploads#form'

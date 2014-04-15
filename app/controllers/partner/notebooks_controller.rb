@@ -1,7 +1,7 @@
 class Partner::NotebooksController < Partner::BaseController
   helper_method :sort_column, :sort_direction, :query
 
-  before_filter :find_notebook, only: [:return, :recycle, :upload]
+  before_filter :find_notebook, only: [:return, :recycle, :upload, :pend]
 
   respond_to :html, :json
 
@@ -57,6 +57,16 @@ class Partner::NotebooksController < Partner::BaseController
     redirect_to request.referer
   end
 
+  def pend
+    if @notebook.pend!
+      flash[:success] = "Notebook pended."
+    else
+      flash[:warning] = "Notebook could not be pended."
+    end
+
+    redirect_to request.referer
+  end
+
   private
     def sort_column
       Notebook.column_names.include?(params[:sort]) ? params[:sort] : "updated_at"
@@ -71,7 +81,7 @@ class Partner::NotebooksController < Partner::BaseController
     end
 
     def index_params
-      params.permit(:page, :utf8, :q)
+      params.permit(:page, :utf8, :q, :direction, :sort)
     end
 
     def show_params
