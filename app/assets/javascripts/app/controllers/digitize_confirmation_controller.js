@@ -22,12 +22,14 @@ App.DigitizeConfirmationController = Ember.ObjectController.extend({
 
         notebook.save().then(function() {
           _this.set('isLoading', false);
-          _this.transitionToRoute('notebooks');
 
           if (notebook.get('handleMethod') === 'return') {
             Core.NotebookReturn.create().submit();
+            _this.transitionToRoute('notebooks');
           } else if (handleMethod === "2") {
             window.location = window.ENV.STORE_ENDPOINT + '#order';
+          } else {
+            _this.transitionToRoute('notebooks');
           }
         }, function(err) {
           _this.set('isLoading', false);
