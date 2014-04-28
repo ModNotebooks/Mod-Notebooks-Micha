@@ -27,7 +27,7 @@ App.DigitizeConfirmationController = Ember.ObjectController.extend({
           if (notebook.get('handleMethod') === 'return') {
             Core.NotebookReturn.create().submit();
           } else if (handleMethod === "2") {
-            window.open(window.ENV.STORE_ENDPOINT + '#order');
+            window.location = window.ENV.STORE_ENDPOINT + '#order';
           }
         }, function(err) {
           _this.set('isLoading', false);
