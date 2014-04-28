@@ -40,23 +40,21 @@ App.DigitizeConfirmationController = Ember.ObjectController.extend({
     }
   },
 
-  heading: function() {
+  buttonText: function() {
     var handleMethod = this.get('controllers.digitizeScan.handleMethod');
 
-    switch (handleMethod) {
-      case "1":
-        return "Recycle my notebook";
-      case "2":
-        return "Recycle & send me a new one";
-      case "3":
-        return "Send it back to me";
-      default:
-        return "Confirmation";
+    if (handleMethod === "1") {
+      return "OK, take me to the app";
+    } else if (handleMethod === "2") {
+      return "OK, take me to buy my next notebook";
+    } else if (handleMethod === "3") {
+      return "OK, take me to the checkout";
     }
-  }.property('controllers.digitizeScan.handleMethod'),
+
+  }.property(),
 
   stepOne: function() {
-    return "Place your notebook inside the envelope that's inside the backpage flap, and mail it back to us using the pre-paid label";
+    return "Place your notebook inside the envelope that's inside the pocket in the back page, and mail it back to us.";
   }.property(),
 
   stepTwo: function() {
@@ -64,11 +62,17 @@ App.DigitizeConfirmationController = Ember.ObjectController.extend({
   }.property(),
 
   stepThree: function() {
-    return "Our team will scan, digitize, and upload your notebook file to your account. We'll notify you then when it's read";
+    return "Our team will scan, digitize, and upload your digitized notebook to your account. We'll notify you then when it's ready";
   }.property(),
 
   stepFour: function() {
     var handleMethod = this.get('controllers.digitizeScan.handleMethod');
-    return "Copy for handle method #" + handleMethod;
+
+    if (handleMethod === "3") {
+      return "We'll ship you your notebook back to the address you provided. It should arrive 5 - 7 days after your notebook has been digitized.";
+    } else {
+      return "We'll promptly recycle your notebook after it's been digitized. Don't worry, it will live forever digitally.";
+    }
+
   }.property('controllers.digitizeScan.handleMethod')
 });
