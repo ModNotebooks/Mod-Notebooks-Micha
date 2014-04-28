@@ -5,7 +5,7 @@ App.DigitizeScanController = Ember.Controller.extend({
   completed: false,
 
   radioContent: [
-    { label: 'Recycle my notebook', value: '1' },
+    { label: 'Recycle my notebook (free)', value: '1' },
     { label: 'Recycle & send me a new one', value: '2' },
     { label: 'Send it back to me (+$10)', value: '3' },
   ],
