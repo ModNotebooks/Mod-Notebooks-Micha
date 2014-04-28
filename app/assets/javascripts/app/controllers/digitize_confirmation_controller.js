@@ -24,8 +24,7 @@ App.DigitizeConfirmationController = Ember.ObjectController.extend({
           _this.set('isLoading', false);
 
           if (notebook.get('handleMethod') === 'return') {
-            Core.NotebookReturn.create().submit();
-            _this.transitionToRoute('notebooks');
+            window.location = window.ENV.STORE_ENDPOINT + '/pages/return-notebook';
           } else if (handleMethod === "2") {
             window.location = window.ENV.STORE_ENDPOINT + '#order';
           } else {
@@ -53,7 +52,7 @@ App.DigitizeConfirmationController = Ember.ObjectController.extend({
       return "OK, take me to the checkout";
     }
 
-  }.property(),
+  }.property('controllers.digitizeScan.handleMethod'),
 
   stepOne: function() {
     return "Place your notebook inside the envelope that's inside the pocket in the back page, and mail it back to us.";
