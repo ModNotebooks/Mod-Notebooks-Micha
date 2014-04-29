@@ -104,7 +104,7 @@ class Partner::NotebooksController < Partner::BaseController
       if q["@"]
         Notebook.joins(:user).reserved.fuzzy_search({ users: { email: q.downcase }})
       else
-        Notebook.includes(:user).reserved.fuzzy_search(q.downcase)
+        Notebook.fuzzy_search(q.downcase)
       end
     end
 end

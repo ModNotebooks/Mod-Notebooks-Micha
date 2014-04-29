@@ -171,7 +171,7 @@ class Notebook < ActiveRecord::Base
     def generate_carrier_identifier
       loop do
         identifier = SecureRandom.hex(3)
-        break identifier unless Notebook.exists?(carrier_identifier: identifier)
+        break identifier unless Notebook.with_deleted.exists?(carrier_identifier: identifier)
       end
     end
   end

@@ -14,4 +14,25 @@ namespace :notebooks do
     end
   end
 
+  desc "Import existing notebook identifiers from STDIN"
+  task :import, [:url] => [:environment] do |t, args|
+    url = args[:url]
+    abort("No URL given") if url.blank?
+
+    response = HTTParty.get(url)
+
+    abort("Bad request") if response.code != 200
+
+    codes = response.body.split( /\r?\n/ )
+
+    notebooks = codes.map do |code|
+      begin
+        Notebook.create!(notebook_identifier: code)
+      rescue StandardError => e
+        puts "Notebook with code #{code} could not be created. #{e.message}"
+      end
+    end.compact
+
+    puts "Created #{notebooks.count} notebooks"
+  end
 end
