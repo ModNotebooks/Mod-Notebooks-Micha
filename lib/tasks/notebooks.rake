@@ -14,6 +14,13 @@ namespace :notebooks do
     end
   end
 
+
+  # This taks is ran with
+  # rake notebooks:import[http://somurltocodes.com/codes]
+  # it expects the url to return a lists of codes with each code
+  # being on a new line
+  # See as example: http://f.cl.ly/items/0p453Z282A2n433B3b0Q/codes.txt
+
   desc "Import existing notebook identifiers from STDIN"
   task :import, [:url] => [:environment] do |t, args|
     url = args[:url]
