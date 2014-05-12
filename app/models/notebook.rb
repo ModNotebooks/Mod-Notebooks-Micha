@@ -230,7 +230,9 @@ class Notebook < ActiveRecord::Base
 
   def notebook_recycled; end
 
-  def notebook_submitted; end
+  def notebook_submitted
+    NotebooksMailer.notebook_submitted(id).deliver
+  end
 
   def notebook_uploaded; end
 

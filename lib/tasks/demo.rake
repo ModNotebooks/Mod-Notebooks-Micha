@@ -1,4 +1,4 @@
-#http://itshouldbeuseful.wordpress.com/2011/11/07/passing-parameters-to-a-rake-task/
+# http://itshouldbeuseful.wordpress.com/2011/11/07/passing-parameters-to-a-rake-task/
 
 namespace :demo do
 

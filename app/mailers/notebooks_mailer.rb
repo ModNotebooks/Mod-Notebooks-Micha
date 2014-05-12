@@ -1,7 +1,15 @@
 class NotebooksMailer < ActionMailer::Base
   include Resque::Mailer
 
-  default from: "Mod Notebooks <noreply@modnotebooks.com>"
+  default from: 'Mod Notebooks <noreply@modnotebooks.com>'
+
+  def notebook_submitted(notebook_id)
+    @notebook = Notebook.find(notebook_id)
+    subject = 'New notebook submitted for digitization'
+    recipients = ['jonwheatley@gmail.com', 'marshall@needwant.com']
+
+    mail(to: recipients , subject: subject)
+  end
 
   def notebook_available(user_id, notebook_id)
     @user = User.find(user_id)
