@@ -10,16 +10,16 @@
     </div>
   </div>
   <form class="form">
-    <div {{bind-attr class=":form__control"}}>
-      {{input type="text" valueBinding="name" autofocus="autofocus" class="form__control__input"}}
-      <label class="form__control__label">Your Notebooks Name</label>
-    </div>
     <div {{bind-attr class=":form__control error:is-error"}}>
-      {{input type="text" valueBinding="code" class="form__control__input"}}
+      {{input type="text" valueBinding="code" autofocus="autofocus" class="form__control__input"}}
       <label class="form__control__label">Your Notebooks Code</label>
       {{#if error }}
         <span class="form__error">{{error}}</span>
       {{/if}}
+    </div>
+    <div {{bind-attr class=":form__control"}}>
+      {{input type="text" valueBinding="name" class="form__control__input"}}
+      <label class="form__control__label">Your Notebooks Name</label>
     </div>
     <div class="form__actions--digitize">
       <button class="button--text" {{action 'advance'}}>Next</button>
