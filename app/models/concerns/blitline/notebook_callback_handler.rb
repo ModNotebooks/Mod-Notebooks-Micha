@@ -28,7 +28,7 @@ class Blitline::NotebookCallbackHandler
   end
 
   def populate_pages(data)
-    images = data['images']['image_results'].uniq { |img| img['image_identifier'] }
+    images = data['results']['images']['image_results'].uniq { |img| img['image_identifier'] }
 
     # Delete pages that already exsist that are higher then the page number
     # of the current PDF
