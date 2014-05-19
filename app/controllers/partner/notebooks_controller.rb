@@ -17,7 +17,7 @@ class Partner::NotebooksController < Partner::BaseController
     id = show_params.fetch(:id).downcase
 
     if id.match(Patterns::NOTEBOOK_IDENTIFIER_PATTERN)
-      @notebook = Notebook.find_by_notebook_identifier!(id.downcase)
+      @notebook = Notebook.find_by!("lower(notebook_identifier) = ?", id)
     else
       @notebook = Notebook.find(id)
     end
@@ -94,11 +94,6 @@ class Partner::NotebooksController < Partner::BaseController
 
     def find_notebook
       @notebook = Notebook.reserved.find(params[:id])
-    end
-
-    def find_notebook_by_notebook_identifier
-      notebook_identifier = upload_params.fetch(:notebook_identifier).downcase
-      @notebook = Notebook.find_by!("lower(notebook_identifier) = ?", notebook_identifier)
     end
 
     def search(q)
