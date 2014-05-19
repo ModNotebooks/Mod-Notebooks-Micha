@@ -97,7 +97,8 @@ class Partner::NotebooksController < Partner::BaseController
     end
 
     def find_notebook_by_notebook_identifier
-      @notebook = Notebook.find_by_notebook_identifier!(upload_params.fetch(:notebook_identifier).downcase)
+      notebook_identifier = upload_params.fetch(:notebook_identifier).downcase
+      @notebook = Notebook.find_by!("lower(notebook_identifier) = ?", notebook_identifier)
     end
 
     def search(q)
