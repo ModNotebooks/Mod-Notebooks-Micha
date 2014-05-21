@@ -1,15 +1,31 @@
 <% content_for(:header) do %>
-  <div class="l-search-form js-search-tool">
-    <%= form_tag partner_notebooks_path, method: 'get', class: 'search-form' do |f| %>
-      <%= text_field_tag :q, params[:q], placeholder: "Search", class: "search-form__input" %>
-      <button class="search-form__button">
-        <i class="i-search"></i>
-      </button>
-    <% end %>
+  <div class="l-header-button">
+    <a href="<%= notebook_settings_path %>" class="header-button">
+      <i class="i-picker"></i>
+    </a>
   </div>
+  <div class="l-header-body">
+    <div class="l-search-form js-search-tool">
+      <%= form_tag partner_notebooks_path, method: 'get', class: 'search-form' do |f| %>
+        <%= text_field_tag :q, params[:q], placeholder: "Search", class: "search-form__input" %>
+        <button class="search-form__button">
+          <i class="i-search"></i>
+        </button>
+      <% end %>
+    </div>
 
-  <div class="l-upload-form js-upload-tool" style="display: none;">
-    <%= render 'upload_form' %>
+    <div class="l-upload-form js-upload-tool" style="display: none;">
+      <%= render 'upload_form' %>
+    </div>
+  </div>
+  <div class="l-header-button">
+    <a href="javascript:void(0);" class="js-search-toggle header-button" style="display: none;">
+      <i class="i-close"></i>
+    </a>
+
+    <a href="javascript:void(0);" class="js-upload-toggle header-button">
+      <i class="i-plus"></i>
+    </a>
   </div>
 <% end %>
 

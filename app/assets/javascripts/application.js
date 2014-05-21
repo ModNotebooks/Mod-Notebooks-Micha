@@ -35,7 +35,8 @@
 
   Ember.LinkView.reopen({
     activeClass: "is-active",
-    disabledClass: "is-disabled"
+    disabledClass: "is-disabled",
+    attributeBindings: ["style"]
   });
 
   Ember.DefaultResolver.reopen({

@@ -4,8 +4,6 @@
 #
 #  id                  :integer          not null, primary key
 #  name                :string(255)
-#  color               :string(255)
-#  paper_type          :string(255)
 #  carrier_identifier  :string(255)
 #  user_id             :integer
 #  meta                :hstore           default({}), not null
@@ -33,8 +31,6 @@ class Notebook < ActiveRecord::Base
   # Resque needs a queue
   @queue = :default
 
-  COLORS        = { "01" => "gray", "02" => "red", "03" => "black" }
-  PAPER_TYPES   = { "01" => "plain", "02" => "lined", "03" => "dotgrid" }
   HANDLE_METHOD = ["return", "recycle"]
 
   store_accessor :meta, :evernote_guid, :dropbox_folder_rev
@@ -55,14 +51,6 @@ class Notebook < ActiveRecord::Base
   # Validations
   #-----------------------------------------------------------------------------
 
-  validates :color,
-    presence: true,
-    inclusion: { in: COLORS.values }
-
-  validates :paper_type,
-    presence: true,
-    inclusion: { in: PAPER_TYPES.values }
-
   validates :carrier_identifier,
     presence: true,
     uniqueness: { case_sensitive: false }
@@ -72,9 +60,10 @@ class Notebook < ActiveRecord::Base
     inclusion: { in: HANDLE_METHOD }
 
   validates :notebook_identifier,
-    format: { with: Patterns::NOTEBOOK_IDENTIFIER_PATTERN },
     presence: true,
     uniqueness: { case_sensitive: false }
+
+  validate :notebook_identifier_is_valid
 
   #-----------------------------------------------------------------------------
   # Scopes
@@ -137,48 +126,32 @@ class Notebook < ActiveRecord::Base
   #-----------------------------------------------------------------------------
 
   class << self
-    def parse_notebook_identifier(identifier = "")
-      parts = identifier.split('-')
-
-      if parts.count == 3
-        { color: parts[0], paper_type: parts[1], carrier_identifier: parts[2] }
-      else
-        {}
-      end
-    end
-
-    def generate(color, paper, count=100)
-      color = COLORS.invert[color.to_s]
-      paper = PAPER_TYPES.invert[paper.to_s]
-
-      if paper && color
-        notebook_identifiers = (0...count).collect { generate_notebook_identifier(color, paper) }
-        create(notebook_identifiers.collect { |nid| { notebook_identifier: nid } })
-        notebook_identifiers
-      end
-    end
-
     # Resque async helper
     # https://github.com/resque/resque/blob/1-x-stable/examples/async_helper.rb
     def perform(id, method, *args)
       find(id).send(method, *args)
-    end
-
-    def generate_notebook_identifier(color, paper)
-      "#{color}-#{paper}-#{generate_carrier_identifier}"
-    end
-
-    def generate_carrier_identifier
-      loop do
-        identifier = SecureRandom.hex(3)
-        break identifier unless Notebook.with_deleted.exists?(carrier_identifier: identifier)
-      end
     end
   end
 
   #-----------------------------------------------------------------------------
   # Instance Methods
   #-----------------------------------------------------------------------------
+
+  def code
+    NotebookCode.new(notebook_identifier)
+  end
+
+  def color
+    code.color
+  end
+
+  def paper
+    code.paper
+  end
+
+  def cover_image
+    code.cover_image
+  end
 
   def name
     super || "Untitled"
@@ -262,14 +235,15 @@ class Notebook < ActiveRecord::Base
   end
 
   private
-    def default_handle_method
-      self.handle_method ||= "recycle"
+    def attributes_from_notebook_identifier
+      self.carrier_identifier = code.identifier
     end
 
-    def attributes_from_notebook_identifier
-      parts = self.class.parse_notebook_identifier(self.notebook_identifier || "")
-      self.color              = COLORS[parts[:color]]
-      self.paper_type         = PAPER_TYPES[parts[:paper_type]]
-      self.carrier_identifier = parts[:carrier_identifier]
+    def notebook_identifier_is_valid
+      errors.add(:notebook_identifier, "is in wrong format") unless code.valid?
+    end
+
+    def default_handle_method
+      self.handle_method ||= "recycle"
     end
 end

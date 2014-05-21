@@ -1,0 +1,20 @@
+<%= render 'header' %>
+<div class="l-notebook-settings">
+  <table class="data-table">
+    <thead class="data-table__head">
+      <tr class="data-table__row">
+        <th class="data-table__heading">Name</th>
+        <th class="data-table__heading">Color Code</th>
+        <th class="data-table__heading">Color</th>
+        <th class="data-table__heading">Cover Image</th>
+        <th class="data-table__heading"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="data-table__row--form">
+        <%= render partial: 'form', locals: { notebook_setting: @notebook_setting } %>
+      </tr>
+      <%= render @notebook_settings %>
+    </tbody>
+  </table>
+</div>

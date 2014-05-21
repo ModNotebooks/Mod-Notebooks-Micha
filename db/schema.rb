@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140403000813) do
+ActiveRecord::Schema.define(version: 20140524000723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,10 +34,18 @@ ActiveRecord::Schema.define(version: 20140403000813) do
 
   add_index "addresses", ["addressable_id", "addressable_type"], name: "index_addresses_on_addressable_id_and_addressable_type", using: :btree
 
+  create_table "notebook_settings", force: true do |t|
+    t.string   "name"
+    t.string   "color_code"
+    t.string   "color"
+    t.string   "cover_image"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.hstore   "meta"
+  end
+
   create_table "notebooks", force: true do |t|
     t.string   "name"
-    t.string   "color"
-    t.string   "paper_type"
     t.string   "carrier_identifier"
     t.integer  "user_id"
     t.hstore   "meta",                default: {}, null: false

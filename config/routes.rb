@@ -72,6 +72,7 @@ Mod::Application.routes.draw do
       resources :notebooks, only: [:index, :create, :show, :update] do
         post 'exists', on: :collection
       end
+      resources :notebook_settings, only: [:index]
       resources :services, only: [:index, :create, :show, :update, :destroy]
       resources :pages, only: [:index, :show]
       resources :users, only: [:create]
@@ -93,6 +94,8 @@ Mod::Application.routes.draw do
         post 'return', on: :member
         post 'pend', on: :member
       end
+
+      resources :notebook_settings, only: [:index, :create, :edit, :update, :destroy], as: :partner_notebook_settings
 
       get '/uploads/form', to: 'uploads#form'
 

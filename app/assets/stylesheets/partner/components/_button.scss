@@ -18,8 +18,32 @@
   }
 }
 
+button.button,
+input[type="submit"].button {
+  border: none;
+  outline: none;
+  @include appearance(none);
+  @extend %font-smoothing;
+}
+
 .button--tableaction {
   @extend .button;
   @include font-size(12px);
   text-transform: uppercase;
+  display: inline-block;
+}
+
+.button--tableaction-destructive {
+  @extend .button--tableaction;
+  background: #ca3b3e;
+  color: #fff;
+
+  &:hover {
+    background: darken(#ca3b3e, 10%);
+  }
+}
+
+form.button_to {
+  display: inline-block;
+  div { display: inline-block; }
 }

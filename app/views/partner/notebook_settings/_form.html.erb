@@ -1,0 +1,7 @@
+<%= form_for notebook_setting, url: { action: "create" }, html: { multipart: true } do |f| %>
+  <td class="data-table__data"><%= f.text_field :name %></td>
+  <td class="data-table__data"><%= f.text_field :color_code %></td>
+  <td class="data-table__data"><%= f.color_field :color %></td>
+  <td class="data-table__data"><%= f.file_field :cover_image %></td>
+  <td class="data-table__data"><button class="button--tableaction">Save</button></td>
+<% end %>

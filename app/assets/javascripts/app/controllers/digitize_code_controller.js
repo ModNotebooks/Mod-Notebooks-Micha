@@ -6,7 +6,6 @@ App.DigitizeCodeController = Ember.Controller.extend({
   error: null,
   completed: false,
   paperTypes: ["blank", "lined", "dotgrid"],
-  colors: ["grey"],
 
   actions: {
     advance: function() {
@@ -64,21 +63,21 @@ App.DigitizeCodeController = Ember.Controller.extend({
   }.property('code'),
 
   color: function() {
-    var code, colors, colorCode;
+    var code, colorCode, setting;
 
-    colors = this.get('colors');
     code = this.get('code');
 
     if (!Ember.isEmpty(code)) {
-      colorCode = parseInt(code.split("-")[0], 10);
-      if (!!colorCode && colorCode <= colors.get('length')) {
-        return colors[colorCode - 1];
-      }
+      colorCode = code.split("-")[0].toUpperCase();
+      setting = this.get('settings').findBy('colorCode', colorCode) || this.get('settings').get('firstObject');
+      return setting.get('color');
     }
 
-    return "grey";
-  }.property('code')
+    return "#a2a2a2";
+  }.property('code'),
 
-
+  style: function() {
+    return "background-color: " + this.get('color') + ";";
+  }.property('color')
 
 });

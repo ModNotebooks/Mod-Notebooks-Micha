@@ -2,7 +2,7 @@
   <td class="data-table__data"><%= notebook.id %></td>
   <td class="data-table__data"><%= notebook.user.try(:email) %></td>
   <td class="data-table__data">
-    <span class="color-badge--<%= notebook.color %>"></span>
+    <span class="color-badge" style="background: <%= notebook.color %>;"></span>
     <%= notebook.notebook_identifier.upcase %>
   </td>
   <td class="data-table__data"><%= humanize(notebook.current_state) %></td>

@@ -1,0 +1,16 @@
+<tr class="data-table__row">
+  <td class="data-table__data"><%= notebook_setting.name %></td>
+  <td class="data-table__data"><%= notebook_setting.color_code.upcase %></td>
+  <td class="data-table__data">
+    <span class="color-badge--large" style="background: <%= notebook_setting.color %>;"></span>
+    <%= notebook_setting.color.upcase %>
+  </td>
+  <td class="data-table__data"><%= link_to("View Image", notebook_setting.cover_image_url, target: '_blank') if notebook_setting.cover_image? %></td>
+  <td class="data-table__data">
+    <%= link_to "Edit", edit_partner_notebook_setting_path(notebook_setting), class: 'button--tableaction' %>
+
+    <%= button_to partner_notebook_setting_path(notebook_setting), method: :delete, class:  'button--tableaction-destructive' do %>
+      Delete
+    <% end %>
+  </td>
+</tr>

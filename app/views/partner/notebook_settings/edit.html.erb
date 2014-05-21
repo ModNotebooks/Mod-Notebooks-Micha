@@ -1,0 +1,37 @@
+<%= render 'header' %>
+
+<div class="l-notebook-settings">
+  <table class="data-table">
+    <thead class="data-table__head">
+      <tr class="data-table__row">
+        <th class="data-table__heading">Name</th>
+        <th class="data-table__heading">Color Code</th>
+        <th class="data-table__heading">Color</th>
+        <th class="data-table__heading">Cover Image</th>
+        <th class="data-table__heading"></th>
+        <th class="data-table__heading"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="data-table__row--form">
+        <%= form_for @notebook_setting, url: { action: "update" }, html: { multipart: true } do |f| %>
+          <td class="data-table__data"><%= f.text_field :name %></td>
+          <td class="data-table__data"><%= f.text_field :color_code %></td>
+          <td class="data-table__data"><%= f.color_field :color %></td>
+          <td class="data-table__data">
+            <%= f.file_field :cover_image %>
+          </td>
+          <td class="data-table__data">
+            <% if @notebook_setting.cover_image? %>
+              <%= link_to("View Image", @notebook_setting.cover_image_url, target: '_blank') %>
+              <br>
+              <%= f.check_box :remove_cover_image %>
+              Remove Image
+            <% end %>
+          </td>
+          <td class="data-table__data"><button class="button--tableaction">Save</button></td>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+</div>

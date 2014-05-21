@@ -16,10 +16,17 @@
 //= require jquery-file-upload/js/jquery.fileupload
 //= require jquery_ujs
 //= require underscore/underscore
+//= require spectrum/spectrum
 //= require_tree ./partner
 //= require_self
 
 (function() {
+
+  // Setup Color Inputs
+  $('input[type=color]').spectrum({
+    showInput: true,
+    allowEmpty:true
+  });
 
   $(document).ready(function() {
     $('.js-search-toggle').on('click', function() {
@@ -45,7 +52,7 @@
       submit: function(e, data) {
         var $this = $(this);
 
-        var upload = new NotebookUpload(data, $this);        
+        var upload = new NotebookUpload(data, $this);
         upload.submit().fail(function() {
           upload.abort();
         });

@@ -1,7 +1,10 @@
 .notebook {
   width: 125px;
   height: 180px;
-  background: #212222;
+  background-color: #212222;
+  background-repeat: no-repeat;
+  background-position: top center;
+  @include background-size(100%);
   @include border-left-radius(1px);
   @include border-right-radius(8px);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 2px 3px rgba(0,0,0,.16);
@@ -12,6 +15,7 @@
   color: #fff;
   text-align: left;
   @include animation(popIn 500ms $ease-out-circ);
+
 
   &:after {
     content: "";
@@ -94,12 +98,6 @@ a.notebook:not(.is-disabled) {
   }
 }
 
-/* COLORS */
-.notebook.sea   { background: #508d97; }
-.notebook.red   { background: #ca3b3e; }
-.notebook.black { background: #212222; }
-.notebook.gold  { background: #9b884b; }
-.notebook.gray  { background: #545454; }
 
 .notebook__inner {
   display: table;

@@ -1,11 +1,32 @@
 .data-table {
-  background: red;
   width: 100%;
+  background: #272727;
 }
 
 .data-table__row {
   border-top: 1px solid #232323;
   border-bottom: 1px solid #232323;
+}
+
+.data-table__row--form {
+  @extend .data-table__row;
+}
+
+.data-table__row--form {
+  #{$all-text-inputs} {
+    width: 100%;
+    @include appearance(none);
+    outline: none;
+    border: 1px solid #232323;
+    @include font-size(14px);
+    padding: 2px 10px;
+    border-radius: 4px;
+  }
+
+  #{$all-text-inputs-focus} {
+    border-color: #68afb1;
+    box-shadow: 0px 0px 4px #68afb1;
+  }
 }
 
 .data-table__head {
@@ -50,7 +71,12 @@
   padding: 20px 14px;
   background: #272727;
   color: #808080;
+
+  .data-table__row--form & {
+    background: #232323;
+  }
 }
+
 
 .data-table__data--right {
   @extend .data-table__data;
