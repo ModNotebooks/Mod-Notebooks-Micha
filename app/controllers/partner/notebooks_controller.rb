@@ -9,7 +9,7 @@ class Partner::NotebooksController < Partner::BaseController
     @notebooks = (index_params.has_key?(:q) ? search(index_params.fetch(:q))
                                             : Notebook)
 
-    @notebooks = @notebooks.order(sort_column + " " + sort_direction)
+    @notebooks = @notebooks.order("submitted_on ASC, " + sort_column + " " + sort_direction)
     @notebooks = @notebooks.page(params[:page])
   end
 

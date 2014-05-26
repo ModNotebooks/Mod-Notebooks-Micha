@@ -5,7 +5,7 @@ class Partner::NotebookSettingsController < Partner::BaseController
 
   def index
     @notebook_setting = NotebookSetting.new
-    @notebook_settings = NotebookSetting.all
+    @notebook_settings = NotebookSetting.order('created_at DESC').all
     respond_with @notebook_settings
   end
 
