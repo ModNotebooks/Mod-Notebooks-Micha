@@ -8,6 +8,7 @@ class NotebookSerializer < ActiveModel::Serializer
     :updated_at,
     :state,
     :notebook_identifier,
+    :handle_method,
     :pages_count,
     :submitted_on,
     :received_on,

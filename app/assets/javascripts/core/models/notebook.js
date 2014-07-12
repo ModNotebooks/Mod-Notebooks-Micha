@@ -10,6 +10,7 @@ Core.Notebook = (function() {
     notebookIdentifier:    attr('string'),
     state:                 attr('string'),
     pagesCount:            attr('string'),
+    handleMethod:          attr('string'),
     createdAt:             attr('date'),
     updatedAt:             attr('date'),
     submittedOn:           attr('date'),
