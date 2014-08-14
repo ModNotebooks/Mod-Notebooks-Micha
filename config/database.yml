@@ -2,13 +2,13 @@ development:
   adapter: postgresql
   encoding: unicode
   host: localhost
-  database: modnotebooks_development
+  database: mod_development
 
 test:
   adapter: postgresql
   encoding: unicode
   host: localhost
-  database: modnotebooks_test
+  database: mod_test
 
 # staging:
 # https://postgres.heroku.com/databases/heroku-postgres-73fb7fda-copper
