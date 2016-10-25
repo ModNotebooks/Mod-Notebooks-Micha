@@ -68,6 +68,8 @@ gem 'sass', '~> 3.3.3'
 
 gem 'rails_12factor', group: :production
 
+gem 'dotenv-rails', '~> 2.1', :groups => [:development, :test]
+
 group :assets do
   # gem 'sass-rails', '>= 4.0.0'
   gem 'uglifier', '>= 1.3.0'
