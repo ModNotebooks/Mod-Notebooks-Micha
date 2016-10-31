@@ -12,7 +12,7 @@
 //
 //= require env
 //= require handlebars
-// require momentjs/moment
+//= require momentjs/moment
 //= require swipe
 //= require ember
 //= require ember-data
