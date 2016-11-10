@@ -19,6 +19,7 @@ class Blitline::NotebookCallbackHandler
 
   def handle(data)
     p "*" * 100
+    p "notebook_callback_handler"
     p data
     populate_pages(data)
     notebook.available!
