@@ -18,6 +18,8 @@ class Blitline::NotebookCallbackHandler
   end
 
   def handle(data)
+    p "*" * 100
+    p data
     populate_pages(data)
     notebook.available!
   rescue ProcessingError => e
