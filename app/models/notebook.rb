@@ -156,6 +156,10 @@ class Notebook < ActiveRecord::Base
   def name
     super || "Untitled"
   end
+  
+  def pdf_url
+    pdf.url
+  end
 
   def can_return_or_recycle?
     !available_transitions.include?(:submit)
