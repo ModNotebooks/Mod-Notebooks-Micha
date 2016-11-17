@@ -158,7 +158,7 @@ class Notebook < ActiveRecord::Base
   end
   
   def pdf_url
-    pdf.url
+    Bitly.client.shorten(pdf.url).short_url
   end
 
   def can_return_or_recycle?
