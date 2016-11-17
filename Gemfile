@@ -72,6 +72,8 @@ gem 'unf'
 
 gem 'dotenv-rails', '~> 2.1', :groups => [:development, :test]
 
+gem 'bitly'
+
 group :assets do
   # gem 'sass-rails', '>= 4.0.0'
   gem 'uglifier', '>= 1.3.0'

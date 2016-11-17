@@ -18,7 +18,8 @@ class NotebookSerializer < ActiveModel::Serializer
     :recycled_on,
     :available_on,
     :cover_image,
-    :cover_image_retina
+    :cover_image_retina,
+    :pdf_url
 
   has_one :user, embed: :ids, include: true
   has_many :pages, embed: :ids
@@ -29,5 +30,9 @@ class NotebookSerializer < ActiveModel::Serializer
 
   def cover_image_retina
     object.cover_image.try(:url)
+  end
+
+  def pdf_url
+    '<a href="' + object.pdf_url + '">Download as PDF</a>'
   end
 end
