@@ -156,11 +156,14 @@ class Notebook < ActiveRecord::Base
   def name
     super || "Untitled"
   end
+<<<<<<< HEAD
   
   def pdf_url
     #Bitly.client.shorten(pdf.url).short_url
     pdf.url
   end
+=======
+>>>>>>> parent of 07b11d7... Merge pull request #1 from micahsherman/pdf_download
 
   def can_return_or_recycle?
     !available_transitions.include?(:submit)
