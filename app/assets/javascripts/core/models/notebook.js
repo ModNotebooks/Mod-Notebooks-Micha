@@ -22,6 +22,7 @@ Core.Notebook = (function() {
     recycledOn:            attr('date'),
     coverImage:            attr('string'),
     coverImageRetina:      attr('string'),
+    pdfUrl:                attr('string'),
 
     user: DS.belongsTo('user'),
     pages: DS.hasMany('page', { async: true }),

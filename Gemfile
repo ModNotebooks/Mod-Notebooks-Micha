@@ -71,6 +71,8 @@ gem 'rails_12factor', group: :production
 
 gem 'unf'
 
+gem 'bitly'
+
 gem 'dotenv-rails', '~> 2.1', :groups => [:development, :test]
 
 group :assets do
