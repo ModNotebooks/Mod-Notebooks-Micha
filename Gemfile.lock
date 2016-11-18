@@ -92,6 +92,10 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bitly (1.0.2)
+      httparty (>= 0.7.6)
+      multi_json (~> 1.3)
+      oauth2 (>= 0.5.0, < 2.0)
     builder (3.1.4)
     bullet (4.8.0)
       activesupport
@@ -528,6 +532,7 @@ DEPENDENCIES
   asset_sync
   better_errors
   binding_of_caller
+  bitly
   blitline!
   bullet
   carrierwave
