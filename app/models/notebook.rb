@@ -158,7 +158,6 @@ class Notebook < ActiveRecord::Base
   end
   
   def pdf_url
-    binding.pry
     Bitly.client.shorten(pdf.url).short_url
   end
 
