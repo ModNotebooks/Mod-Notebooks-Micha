@@ -64,11 +64,11 @@ Mod::Application.configure do
     :address        => ENV['MAILGUN_SMTP_SERVER'],
     :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
     :password       => ENV['MAILGUN_SMTP_PASSWORD'],
-    :domain         => 'artsy.io',
+    :domain         => 'draftnotebooks.com',
     :authentication => :plain
   }
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { host: 'artsy.io' }
+  config.action_mailer.default_url_options = { host: 'draftnotebooks.com' }
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store

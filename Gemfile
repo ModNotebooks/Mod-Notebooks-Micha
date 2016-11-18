@@ -46,6 +46,7 @@ gem 'carrierwave_direct', github: 'erickreutz/carrierwave_direct'
 # gem 'carrierwave-imageoptimizer'
 gem 'blitline', github: 'erickreutz/blitline', branch: 'group_completion_job_id'
 
+gem 'google-api-client'
 gem 'dropbox-api'
 gem 'evernote_oauth' # This include the SDK
 
