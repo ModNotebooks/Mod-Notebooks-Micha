@@ -33,6 +33,10 @@ class NotebookSerializer < ActiveModel::Serializer
   end
 
   def pdf_url
-    '<a href="' + object.pdf_url + '">Download as PDF</a>'
+    if object.pdf_url == nil
+      '<div></div>'
+    else
+      '<a href="' + object.pdf_url + '">Download as PDF</a>'
+    end
   end
 end
