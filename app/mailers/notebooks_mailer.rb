@@ -6,7 +6,7 @@ class NotebooksMailer < ActionMailer::Base
   def notebook_submitted(notebook_id)
     @notebook = Notebook.find(notebook_id)
     subject = 'New notebook submitted for digitization'
-    recipients = ['jonwheatley@gmail.com', 'marshall@needwant.com']
+    recipients = ['charles@modnotebooks.com', 'will.bowersox@gmail.com']
 
     mail(to: recipients , subject: subject)
   end
